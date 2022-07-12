@@ -1,8 +1,8 @@
-# r-bootcamp-fall-2022
+# UC Berkeley R Bootcamp, August 2022
 
 This is the website for the tenth annual R bootcamp at Berkeley. The bootcamp will be an intensive two-day introduction to R using RStudio, held all day on Saturday August 20 and Sunday August 21, 2022
 
-See below for information on registration, logistics, workshop content, and preparing for the workshop (primarily installing software in advance.
+See below for information on [registration](#registration), [logistics](#logistics-when-where-and-how), [workshop content](#preparing-for-the-course-course-content), and [preparing for the workshop](#preparing-for-the-course-software-installation) (primarily installing software in advance.
 
 Sponsored by: UC Berkeley Statistics
 
@@ -22,13 +22,15 @@ The workshop doesn't assume any specific R knowledge and starts from the very ba
 
  - Those with some (but not necessarily a lot of) R experience who want a refresher, want to take their skills to the next level, or want to see a holistic presntation of what's possible in R.
  - Those with some experience in another language (e.g., Python, MATLAB, C/C++, Java) who would like an introduction to R.
- - Those will little or no R experience (or other programming experience) who think they are likely to be able to keep up with the pace. If so, you should look through the first few modules (Modules 1-3, to be presented Saturday morning) to get a feel for the nature of the bootcamp. If you decide to sign up and then decide (even up to a few days before the event) 
+ - Those will little or no R experience (or other programming experience) who think they are likely to be able to keep up with the pace. If so, you should look through the first few modules (Modules 1-3, to be presented Saturday morning) to get a feel for the nature of the bootcamp. And you should play around with R some in advance as discussed [below](#preparing-for-the-course-course-content).
 
 In prior years, we've had two tracks, with one track serving to provide a slower pace for those with no experience with R or other programming languages. Unfortunately, this year we do not have staffing to support two tracks.
 
-If you have no R experience and little programming experience in other languages, you are likely to find the pace too quick. Therefore we recommend that you attend on of the D-Lab's R Fundamentals workshops. In particular there will be [a workshop the week of August 15]https://dlab.berkeley.edu/events/more-d-lab-events-and-workshops-coming-soon/2022-08-15) (the week before classes start). 
+If you have no R experience and little programming experience in other languages, you are likely to find the pace too quick. Therefore we recommend that you attend on of the D-Lab's R Fundamentals workshops. In particular there will be [a workshop the week of August 15](https://dlab.berkeley.edu/events/more-d-lab-events-and-workshops-coming-soon/2022-08-15) (the week before classes start). 
 
 ## Registration
+
+Before registering, please check the [prerequisite information](#prerequisites).
 
 To attend you must [submit a registration request](https://forms.gle/pzhSxhc3rCgqubdE7). Submitting the request does not guarantee as spot. Priority will be given to Berkeley grad students, postdocs, staff, and faculty, followed by those affiliated with another university or government agency, then Berkeley undergrads, and finally participants from for-profit organizations. Undergraduates interested in R should consider taking Statistics 133 or Statistics 132. 
 
@@ -40,7 +42,7 @@ If you have registered and realize you cannot attend, PLEASE [cancel your regist
 
 ## Logistics - when, where, and how
 
-Physical location:  TBD.
+Physical location: UC Berkeley campus, building and room TBD.
 
 Time: 
   - Saturday, August 20, 8:15 am - 5 pm
@@ -68,7 +70,7 @@ Course content is available through GitHub. Please download a copy of the course
 
 Here is the [schedule for the bootcamp](https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/schedule/schedule.pdf). 
 
-We recommend that you take a look at the syllabus and the background module (https://htmlpreview.github.io/?https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/modules/module0_induction.html) in advance to get a sense for what we'll cover. And for those of you with absolutely no experience with R, it will help with your learning curve if you try to play around with R using the material in (https://htmlpreview.github.io/?https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/modules/module1_basics.html) beforehand. Alternatively, if you have absolutely no experience with R or similar languages (e.g., Python, MATLAB), you might check out [Swirl](https://swirlstats.com).
+We recommend that you take a look at the syllabus and the [background module](https://htmlpreview.github.io/?https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/modules/module0_induction.html) in advance to get a sense for what we'll cover. And for those of you with absolutely no experience with R, it will help with your learning curve if you try to play around with R using the material in [Module 1](https://htmlpreview.github.io/?https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/modules/module1_basics.html) beforehand. Alternatively, if you have absolutely no experience with R or similar languages (e.g., Python, MATLAB), you might check out [Swirl](https://swirlstats.com).
 
 For the presentation materials (including embedded demo code), see the html files in *modules*. The *_slides_* files have individual pages, while the other html files are one continuous page per module. To run the demo code, open the .Rmd file for the module in RStudio. You can then run individual chunks of code.
 
@@ -86,7 +88,7 @@ To install the software, it's best if you can install software directly on your 
 
 Alternatively, IF INSTALLING ON YOUR LAPTOP FAILS, the following is an alternative way to access R and RStudio through a browser:
 
-  - Please use your CalNet ID and password to login [here](https://r.datahub.berkeley.edu). Once logged in, you should be in an RStudio session in the browser. At this point you can get a copy of the bootcamp files that your RStudio session can access by following instruction #1 above under the section "Preparing for the course - course content".
+  - Please use your CalNet ID and password to [login to the Berkeley DataHub](https://r.datahub.berkeley.edu). Once logged in, you should be in an RStudio session in the browser. At this point you can get a copy of the bootcamp files that your RStudio session can access by following instruction #1 above under the section "Preparing for the course - course content".
 
 Note that our ability to troubleshoot R or RStudio installed directly on your machine is limited (particularly in Windows). We'll try to help, but if we run into roadblocks, we'll direct you to the browser option.
 
