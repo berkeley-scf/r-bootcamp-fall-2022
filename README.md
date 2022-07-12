@@ -7,7 +7,7 @@ WARNING: This material is under construction, with some information to be added 
 
 All content is available here, though we'll be making edits through the start of the event.
 
-Co-trainers: UC Berkeley Statistics and the D-Lab.
+Sponsored by: UC Berkeley Statistics
 
 ## Description
 
@@ -36,17 +36,13 @@ Note that street parking in Berkeley near campus on Saturdays is generally subje
 
 You will probably want to [make sure you can use the campus WiFi (EduRoam)](https://berkeley.service-now.com/kb_view.do?sysparm_article=KB0013807) in advance of the event. But if you need wireless access as a guest (i.e., you don't have a CalNet ID), connect to 'CalVisitor'.
 
-## Track 2 information
-
-In the middle of each morning session, the workshop will split into two separate tracks, to accommodate those interested in going at either a faster or slower pace. You DO NOT need to decide in advance which track you will participate in. Both Saturday and Sunday morning we will all start in the main room as a single group.
-
 ## Health information
 
 Vaccination requirements will follow [campus requirements](https://uhs.berkeley.edu/requirements/covid19), so essentially everyone should be vaccinated. In particular, those of you arriving from another country should carefully examine these requirements, which will determine if you can attend the bootcamp in person.
 
 ## Preparing for the course - course content
 
-Course content is available through Github. Please download a copy of the course materials before arriving at the bootcamp using one of the two options below (if you're familiar with Git you'll also know how to do this by cloning the repository):
+Course content is available through GitHub. Please download a copy of the course materials before arriving at the bootcamp using one of the two options below (if you're familiar with Git you'll also know how to do this by cloning the repository):
 
   1) open RStudio. Go to “File→New Project” and select “Version Control” and “Git”. Enter 'https://github.com/berkeley-scf/r-bootcamp-fall-2022' as the “Repository URL” and click “Create Project” (you can choose the directory in which to place the project with the “Create project as subdirectory of” option). It should create a “r-bootcamp-fall-2022” directory with all of the materials within whichever directory you chose. To open one of the R Markdown files, go to the lower right panel, click on 'Files', then 'r-bootcamp-fall-2022', then 'modules' and finally click on the .Rmd file of interest. It will open in the upper left panel.
 
@@ -80,8 +76,8 @@ Note that our ability to troubleshoot R or RStudio installed directly on your ma
 
 Please ask questions both during the presentations and during the breakout sessions. 
 
-- Questions from those attending in person can be asked to the presenter or to the circulating bootcamp assistants.
-- The online discussion forum TBD for discussion and answering questions during (and before) the bootcamp.
+- Questions can be asked to the presenter or to the circulating bootcamp assistants.
+- We'll have an online discussion forum through Ed Discussion for online discussion and answering questions during (and before) the bootcamp.
 
 
 If you need to contact us directly with an administrative question you can email r-bootcamp@lists.berkeley.edu.

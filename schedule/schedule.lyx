@@ -129,8 +129,8 @@ The bootcamp will be held August 20-21, so Day 1 is August 20 and Day 2
 \end_layout
 
 \begin_layout Standard
-Unless otherwise noted, modules are about 75 minutes long: 45 minutes for
- presentation, 20 minutes for breakout and 10 minutes for discussion of
+Unless otherwise noted, modules are about 75 minutes long: 40 minutes for
+ presentation, 25 minutes for breakout and 10 minutes for discussion of
  solutions.
 \end_layout
 
@@ -275,12 +275,6 @@ breakout problems
 \end_layout
 
 \end_deeper
-\begin_layout Standard
-
-\series bold
-TRACK 2 splits from TRACK 1
-\end_layout
-
 \begin_layout Itemize
 Module 3: Working with data (TBD) (45 minutes)
 \begin_inset Separator latexpar
@@ -515,14 +509,8 @@ status open
 \end_layout
 
 \end_deeper
-\begin_layout Standard
-
-\series bold
-TRACK 2 splits from TRACK 1
-\end_layout
-
 \begin_layout Itemize
-Module 8: Data analysis (Chris) 
+Module 8: Data analysis (TBD) 
 \begin_inset Separator latexpar
 \end_inset
 
