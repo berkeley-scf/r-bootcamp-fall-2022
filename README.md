@@ -20,9 +20,9 @@ The bootcamp will be an intensive two-day introduction to R using RStudio. Topic
 
 The workshop doesn't assume any specific R knowledge and starts from the very basics, but it goes at a fairly quick pace (hence *bootcamp*). This is appropriate for:
 
- - Those with some (but not necessarily a lot of) R experience who want a refresher, want to take their skills to the next level, or want to see a holistic presntation of what's possible in R.
+ - Those with some (but not necessarily much) R experience who want a refresher, want to take their skills to the next level, or want to see a holistic presntation of what's possible in R.
  - Those with some experience in another language (e.g., Python, MATLAB, C/C++, Java) who would like an introduction to R.
- - Those will little or no R experience (or other programming experience) who think they are likely to be able to keep up with the pace. If so, you should look through the first few modules (Modules 1-3, to be presented Saturday morning) to get a feel for the nature of the bootcamp. And you should play around with R some in advance as discussed [below](#preparing-for-the-course-course-content).
+ - Those will little or no R experience (or other programming experience) who think they are likely to be able to keep up with the pace. If so, you should look through the first few modules (Modules 1-3, to be presented Saturday morning) to get a feel for the nature of the bootcamp. You should play around with R some in advance of the workshop, as discussed [below](#preparing-for-the-course-course-content).
 
 In prior years, we've had two tracks, with one track serving to provide a slower pace for those with no experience with R or other programming languages. Unfortunately, this year we do not have staffing to support two tracks.
 
