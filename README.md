@@ -1,26 +1,42 @@
 # r-bootcamp-fall-2022
-Materials for the August 2022 R bootcamp at UC Berkeley.
 
-See here for information about the bootcamp, including logistics, how to get the course content, and how to install the software you need for the bootcamp on your laptop.
+This is the website for the tenth annual R bootcamp at Berkeley. The bootcamp will be an intensive two-day introduction to R using RStudio, held all day on Saturday August 20 and Sunday August 21, 2022
 
-WARNING: This material is under construction, with some information to be added to the logistics and some edits to the content expected.
-
-All content is available here, though we'll be making edits through the start of the event.
+See below for information on registration, logistics, workshop content, and preparing for the workshop (primarily installing software in advance.
 
 Sponsored by: UC Berkeley Statistics
 
-## Description
+## Overview
 
-### Overview
+The bootcamp will be an intensive two-day introduction to R using RStudio. Topics will include:
 
-This is the website for the ninth annual R bootcamp at Berkeley. The bootcamp will be an intensive two-day introduction to R using RStudio. Topics will include:
-
- * R basics - reading and manipulating data, working with R data objects, doing calculations, making plots
+ * R basics - reading and manipulating data, working with R data objects, doing calculations
+ * R graphics, focused on ggplot
  * programming in R
  * doing data analysis / data science / statistical work in R
-  * more advanced topics: efficiency, object-oriented programming, advanced graphics, batch jobs, parallel processing
+ * more advanced topics: efficiency, object-oriented programming, batch jobs, parallel processing
 
-No prior experience with R is expected, but some familiarity with programming concepts such as variables, loops, if-then-else statements, functions, etc. will be helpful.
+## Prerequisites
+
+The workshop doesn't assume any specific R knowledge and starts from the very basics, but it goes at a fairly quick pace (hence *bootcamp*). This is appropriate for:
+
+ - Those with some (but not necessarily a lot of) R experience who want a refresher, want to take their skills to the next level, or want to see a holistic presntation of what's possible in R.
+ - Those with some experience in another language (e.g., Python, MATLAB, C/C++, Java) who would like an introduction to R.
+ - Those will little or no R experience (or other programming experience) who think they are likely to be able to keep up with the pace. If so, you should look through the first few modules (Modules 1-3, to be presented Saturday morning) to get a feel for the nature of the bootcamp. If you decide to sign up and then decide (even up to a few days before the event) 
+
+In prior years, we've had two tracks, with one track serving to provide a slower pace for those with no experience with R or other programming languages. Unfortunately, this year we do not have staffing to support two tracks.
+
+If you have no R experience and little programming experience in other languages, you are likely to find the pace too quick. Therefore we recommend that you attend on of the D-Lab's R Fundamentals workshops. In particular there will be [a workshop the week of August 15]https://dlab.berkeley.edu/events/more-d-lab-events-and-workshops-coming-soon/2022-08-15) (the week before classes start). 
+
+## Registration
+
+To attend you must [submit a registration request](https://forms.gle/pzhSxhc3rCgqubdE7). Submitting the request does not guarantee as spot. Priority will be given to Berkeley grad students, postdocs, staff, and faculty, followed by those affiliated with another university or government agency, then Berkeley undergrads, and finally participants from for-profit organizations. Undergraduates interested in R should consider taking Statistics 133 or Statistics 132. 
+
+NOTE: registrations will only be processed periodically so there may be a delay in hearing back from us about whether you are registered or on the waitlist.
+
+## Cancellation
+
+If you have registered and realize you cannot attend, PLEASE [cancel your registration](https://forms.gle/Q75qCFDqygL8oY3D6) so that we can let people on the wait-list attend. If you don't cancel, you'll deprive someone else of a spot, as we always have a wait-list for this event.
 
 ## Logistics - when, where, and how
 
@@ -42,13 +58,15 @@ Vaccination requirements will follow [campus requirements](https://uhs.berkeley.
 
 ## Preparing for the course - course content
 
+WARNING: This material is under construction, with various (but not huge) edits to the content expected. We'll be making edits up until a few days before the event.
+
 Course content is available through GitHub. Please download a copy of the course materials before arriving at the bootcamp using one of the two options below (if you're familiar with Git you'll also know how to do this by cloning the repository):
 
   1) open RStudio. Go to “File→New Project” and select “Version Control” and “Git”. Enter 'https://github.com/berkeley-scf/r-bootcamp-fall-2022' as the “Repository URL” and click “Create Project” (you can choose the directory in which to place the project with the “Create project as subdirectory of” option). It should create a “r-bootcamp-fall-2022” directory with all of the materials within whichever directory you chose. To open one of the R Markdown files, go to the lower right panel, click on 'Files', then 'r-bootcamp-fall-2022', then 'modules' and finally click on the .Rmd file of interest. It will open in the upper left panel.
 
   2) Alternatively, simply download a zip file containing all the content at https://github.com/berkeley-scf/r-bootcamp-fall-2022/archive/main.zip.
 
-Here is the [schedule for the main track of the bootcamp](https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/schedule/schedule.pdf). We will also offer a second track that allows those first encountering R or programming to have time for more intensive practice with the initial material. Here is the [schedule for the second track](https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/schedule/schedule-track2.pdf). After lunch on the first day you'll have the opportunity to decide whether you want to stay with the main track or attend the second track. You do NOT need to decide in advance.
+Here is the [schedule for the bootcamp](https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/schedule/schedule.pdf). 
 
 We recommend that you take a look at the syllabus and the background module (https://htmlpreview.github.io/?https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/modules/module0_induction.html) in advance to get a sense for what we'll cover. And for those of you with absolutely no experience with R, it will help with your learning curve if you try to play around with R using the material in (https://htmlpreview.github.io/?https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/modules/module1_basics.html) beforehand. Alternatively, if you have absolutely no experience with R or similar languages (e.g., Python, MATLAB), you might check out [Swirl](https://swirlstats.com).
 
@@ -72,12 +90,13 @@ Alternatively, IF INSTALLING ON YOUR LAPTOP FAILS, the following is an alternati
 
 Note that our ability to troubleshoot R or RStudio installed directly on your machine is limited (particularly in Windows). We'll try to help, but if we run into roadblocks, we'll direct you to the browser option.
 
-## Course Discussion and Questions
+## Course Discussion
 
 Please ask questions both during the presentations and during the breakout sessions. 
 
 - Questions can be asked to the presenter or to the circulating bootcamp assistants.
 - We'll have an online discussion forum through Ed Discussion for online discussion and answering questions during (and before) the bootcamp.
 
+## Logistical Questions
 
-If you need to contact us directly with an administrative question you can email r-bootcamp@lists.berkeley.edu.
+If you need to contact us directly with an administrative question, you can email r-bootcamp@lists.berkeley.edu.
