@@ -4,7 +4,7 @@ This is the website for the tenth annual R bootcamp at Berkeley. The bootcamp wi
 
 See below for information on [registration](#registration), [logistics](#logistics---when-where-and-how), [workshop content](#preparing-for-the-course---course-content), and [preparing for the workshop](#preparing-for-the-course---software-installation) (primarily installing software in advance.
 
-Sponsored by: UC Berkeley Statistics
+Sponsored by: UC Berkeley Statistics and the Statewide Database at Berkeley Law
 
 ## Overview
 
@@ -27,7 +27,7 @@ The workshop doesn't assume any specific R knowledge and starts from the very ba
 
 In prior years, we've had two tracks, with one track serving to provide a slower pace for those with no experience with R or other programming languages. Unfortunately, this year we do not have staffing to support two tracks.
 
-If you have no R experience and little programming experience in other languages, you are likely to find the pace too quick. Therefore we recommend that you attend on of the D-Lab's R Fundamentals workshops. In particular there will be [a workshop the week of August 15](https://dlab.berkeley.edu/events/more-d-lab-events-and-workshops-coming-soon/2022-08-15) (the week before classes start). 
+If you have no R experience and little programming experience in other languages, you are likely to find the pace too quick. Therefore we recommend that you attend one of the [D-Lab](https://dlab.berkeley.edu)'s R Fundamentals workshops. In particular there will be [a workshop the week of August 15](https://dlab.berkeley.edu/events/more-d-lab-events-and-workshops-coming-soon/2022-08-15) (the week before classes start) as well as workshops later in the semester. 
 
 ## Registration
 
@@ -35,7 +35,7 @@ Before registering, please check the [prerequisite information](#prerequisites).
 
 To attend you must [submit a registration request](https://forms.gle/pzhSxhc3rCgqubdE7). Submitting the request does not guarantee as spot. Priority will be given to Berkeley grad students, postdocs, staff, and faculty, followed by those affiliated with another university or government agency, then Berkeley undergrads, and finally participants from for-profit organizations. Undergraduates interested in R should consider taking Statistics 133 or Statistics 132. 
 
-NOTE: registrations will only be processed periodically so there may be a delay in hearing back from us about whether you are registered or on the waitlist.
+NOTE: registrations will only be processed periodically, so there may be a delay in hearing back from us about whether you are registered or on the waitlist.
 
 ## Cancellation
 
@@ -65,15 +65,20 @@ WARNING: This material is under construction, with various (but not huge) edits 
 
 Course content is available through GitHub. Please download a copy of the course materials before arriving at the bootcamp using one of the two options below (if you're familiar with Git you'll also know how to do this by cloning the repository):
 
-  1) open RStudio. Go to “File→New Project” and select “Version Control” and “Git”. Enter 'https://github.com/berkeley-scf/r-bootcamp-fall-2022' as the “Repository URL” and click “Create Project” (you can choose the directory in which to place the project with the “Create project as subdirectory of” option). It should create a “r-bootcamp-fall-2022” directory with all of the materials within whichever directory you chose. To open one of the R Markdown files, go to the lower right panel, click on 'Files', then 'r-bootcamp-fall-2022', then 'modules' and finally click on the .Rmd file of interest. It will open in the upper left panel.
+ - 1. Via GitHub in RStudio:
+    - Open RStudio. 
+    - Go to “File→New Project” and select “Version Control” and “Git”. 
+    - Enter 'https://github.com/berkeley-scf/r-bootcamp-fall-2022' as the “Repository URL” and click “Create Project” (you can choose the directory in which to place the project with the “Create project as subdirectory of” option). 
+    - It should create a “r-bootcamp-fall-2022” directory with all of the materials within whichever directory you chose. 
+    - To open one of the R Markdown files, go to the lower right panel, click on 'Files', then 'r-bootcamp-fall-2022', then 'modules' and finally click on the .Rmd file of interest. It will open in the upper left panel.
 
-  2) Alternatively, simply download a zip file containing all the content at https://github.com/berkeley-scf/r-bootcamp-fall-2022/archive/main.zip.
+  - 2. Alternatively, simply download a zip file containing all the content at https://github.com/berkeley-scf/r-bootcamp-fall-2022/archive/main.zip.
 
 Here is the [schedule for the bootcamp](https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/schedule/schedule.pdf). 
 
 We recommend that you take a look at the syllabus and the [background module](https://htmlpreview.github.io/?https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/modules/module0_induction.html) in advance to get a sense for what we'll cover. And for those of you with no experience with R, it will help with your learning curve if you play around some with R using the material in [Module 1](https://htmlpreview.github.io/?https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/modules/module1_basics.html) beforehand. Alternatively, if you have absolutely no experience with R or similar languages (e.g., Python, MATLAB), you might check out [Swirl](https://swirlstats.com).
 
-For the presentation materials (including embedded demo code), see the html files in *modules*. The *_slides_* files have individual pages, while the other html files are one continuous page per module. To run the demo code, open the .Rmd file for the module in RStudio. You can then run individual chunks of code.
+For the presentation materials (including embedded demo code), see the html files in *modules*. The main files have individual pages/slides, while the *_onepage_* html files are one continuous page per module. To run the demo code, open the .Rmd file for the module in RStudio. You can then run individual chunks of code.
 
 ## Preparing for the course - software installation
 
