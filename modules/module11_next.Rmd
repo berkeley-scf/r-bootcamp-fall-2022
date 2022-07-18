@@ -60,6 +60,6 @@ Specific aspects of R:
 
 # Thanks!  
 
-* To all of the Stats and D-Lab presenters and assistants.
-* To D-Lab and the Statistics Department for sponsorship and logistical support.
+* To all of the Statistics presenters and assistants.
+* To the Statistics Department and the Statewide Database at Berkeley Law for sponsorship and logistical support.
 
