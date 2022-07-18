@@ -51,9 +51,12 @@ Time:
 
 We'll start formally on Saturday morning at 8:30 am, but please plan to get here by 8:15 so you can sign in and get settled. And if you need help with any software installation please come at 8 am.
 
+Here is the [schedule for the bootcamp](https://berkeley-scf.github.io/r-bootcamp-fall-2022/schedule) including links to all the modules.
+
 Note that street parking in Berkeley near campus on Saturdays is generally subject to two hour limits.
 
 You will probably want to [make sure you can use the campus WiFi (EduRoam)](https://berkeley.service-now.com/kb_view.do?sysparm_article=KB0013807) in advance of the event. But if you need wireless access as a guest (i.e., you don't have a CalNet ID), connect to 'CalVisitor'.
+
 
 ## Health information
 
@@ -74,9 +77,7 @@ Course content is available through GitHub. Please download a copy of the course
 
   - 2. Alternatively, simply download a zip file containing all the content at https://github.com/berkeley-scf/r-bootcamp-fall-2022/archive/main.zip.
 
-Here is the [schedule for the bootcamp](https://berkeley-scf.github.io/r-bootcamp-fall-2022/schedule), including links to all the modules. 
-
-We recommend that you take a look at the syllabus and the [background module](https://htmlpreview.github.io/?https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/modules/module0_induction.html) in advance to get a sense for what we'll cover. And for those of you with no experience with R, it will help with your learning curve if you play around some with R using the material in [Module 1](https://htmlpreview.github.io/?https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/modules/module1_basics.html) beforehand. Alternatively, if you have absolutely no experience with R or similar languages (e.g., Python, MATLAB), you might check out [Swirl](https://swirlstats.com).
+We recommend that you take a look at the [schedule for the bootcamp](https://berkeley-scf.github.io/r-bootcamp-fall-2022/schedule) and the [background module](https://htmlpreview.github.io/?https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/modules/module0_induction.html) in advance to get a sense for what we'll cover. And for those of you with no experience with R, it will help with your learning curve if you play around some with R using the material in [Module 1](https://htmlpreview.github.io/?https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/modules/module1_basics.html) beforehand. Alternatively, if you have absolutely no experience with R or similar languages (e.g., Python, MATLAB), you might check out [Swirl](https://swirlstats.com).
 
 For the presentation materials (including embedded demo code), see the html files in *modules*. The main files have individual pages/slides, while the *_onepage_* html files are one continuous page per module. To run the demo code, open the .Rmd file for the module in RStudio. You can then run individual chunks of code.
 
