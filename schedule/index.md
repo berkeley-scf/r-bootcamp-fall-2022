@@ -8,9 +8,11 @@ Unless otherwise noted, modules are about 75 minutes long: 40
 minutes for presentation, 25 minutes for breakout and 10 minutes 
 for discussion of solutions.
 
+## Day 1
+ 
 - Day 1 morning (8:30-12:15) (learning R)
 
-  - [Module 0]((https://htmlpreview.github.io/?https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/modules/module0_induction.html): Introduction, what is R, starting R, why R? (Chris) (15 minutes)
+  - [Module 0](https://htmlpreview.github.io/?https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/modules/module0_induction.html): Introduction, what is R, starting R, why R? (Chris) (15 minutes)
   - [Module 1](https://htmlpreview.github.io/?https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/modules/module1_basics.html): Basics of R, with RStudio (Chris)
     * R as a calculator
     * helpful shortcuts: tab-complete, up arrow, Ctrl-{up arrow}
@@ -51,6 +53,8 @@ for discussion of solutions.
     * writing your own functions, function arguments, functions as objects
     * basic scoping and environments
     * breakout problems/homework
+
+## Day 2
 
 - Day 2 morning (9-12:45) (programming and data analysis)
 

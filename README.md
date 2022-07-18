@@ -74,7 +74,7 @@ Course content is available through GitHub. Please download a copy of the course
 
   - 2. Alternatively, simply download a zip file containing all the content at https://github.com/berkeley-scf/r-bootcamp-fall-2022/archive/main.zip.
 
-Here is the [schedule for the bootcamp](https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/schedule/schedule.pdf). 
+Here is the [schedule for the bootcamp](https://berkeley-scf.github.io/r-bootcamp-fall-2022/schedule), including links to all the modules. 
 
 We recommend that you take a look at the syllabus and the [background module](https://htmlpreview.github.io/?https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/modules/module0_induction.html) in advance to get a sense for what we'll cover. And for those of you with no experience with R, it will help with your learning curve if you play around some with R using the material in [Module 1](https://htmlpreview.github.io/?https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/modules/module1_basics.html) beforehand. Alternatively, if you have absolutely no experience with R or similar languages (e.g., Python, MATLAB), you might check out [Swirl](https://swirlstats.com).
 
