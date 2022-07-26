@@ -51,7 +51,7 @@ Time:
 
 We'll start formally on Saturday morning at 8:30 am, but please plan to get here by 8:15 so you can sign in and get settled. And if you need help with any software installation please come at 8 am.
 
-Here is the [schedule for the bootcamp](https://berkeley-scf.github.io/r-bootcamp-fall-2022/schedule) including links to all the modules.
+Here is the [schedule for the bootcamp](schedule) including links to all the modules.
 
 Note that street parking in Berkeley near campus on Saturdays is generally subject to two hour limits.
 
@@ -89,7 +89,7 @@ To install the software, it's best if you can install software directly on your 
 
   - Install the following directly on your laptop:
   
-      - R [(details here)](https://htmlpreview.github.io/?https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/install/RandRStudioInstall.html)
+      - R [(details here)](https://github.com/berkeley-scf/r-bootcamp-fall-2022/install/RandRStudioInstall)
       - RStudio (optional but highly recommended) [(details here)](https://htmlpreview.github.io/?https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/install/RandRStudioInstall.html)
       - Git (optional but recommended for obtaining course content) [(details here)](https://htmlpreview.github.io/?https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/install/gitInstall.html)
 

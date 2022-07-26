@@ -1,5 +1,5 @@
 % R Bootcamp, Module 8: Graphics
-% August 2021, UC Berkeley
+% August 2022, UC Berkeley
 % Chris Paciorek
 
 ```{r chunksetup, include=FALSE}

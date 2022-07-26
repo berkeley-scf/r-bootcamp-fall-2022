@@ -1,5 +1,5 @@
 % R bootcamp, Module 3: Working with objects and data
-% August 2021, UC Berkeley
+% August 2022, UC Berkeley
 % Chris Paciorek
 
 ```{r chunksetup, include=FALSE} 

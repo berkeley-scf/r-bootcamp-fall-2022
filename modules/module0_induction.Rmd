@@ -1,5 +1,5 @@
 % R bootcamp, Module 0: Recruit processing
-% August 2021, UC Berkeley
+% August 2022, UC Berkeley
 % Chris Paciorek
 
 # A few administrative things

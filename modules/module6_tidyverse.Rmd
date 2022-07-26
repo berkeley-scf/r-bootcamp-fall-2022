@@ -1,5 +1,5 @@
 % R Bootcamp, Module 6: Data manipulation with the `tidyverse`
-% August 2021, UC Berkeley
+% August 2022, UC Berkeley
 % Chris Paciorek
 
 
