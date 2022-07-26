@@ -68,14 +68,14 @@ WARNING: This material is under construction, with various (but not huge) edits 
 
 Course content is available through GitHub. Please download a copy of the course materials before arriving at the bootcamp using one of the two options below (if you're familiar with Git you'll also know how to do this by cloning the repository):
 
- - 1. Via GitHub in RStudio:
+ 1. Via GitHub in RStudio:
     - Open RStudio. 
     - Go to “File→New Project” and select “Version Control” and “Git”. 
     - Enter 'https://github.com/berkeley-scf/r-bootcamp-fall-2022' as the “Repository URL” and click “Create Project” (you can choose the directory in which to place the project with the “Create project as subdirectory of” option). 
     - It should create a “r-bootcamp-fall-2022” directory with all of the materials within whichever directory you chose. 
     - To open one of the R Markdown files, go to the lower right panel, click on 'Files', then 'r-bootcamp-fall-2022', then 'modules' and finally click on the .Rmd file of interest. It will open in the upper left panel.
 
-  - 2. Alternatively, simply download a zip file containing all the content at https://github.com/berkeley-scf/r-bootcamp-fall-2022/archive/main.zip.
+  2. Alternatively, simply download a zip file containing all the content at https://github.com/berkeley-scf/r-bootcamp-fall-2022/archive/main.zip.
 
 We recommend that you take a look at the [schedule for the bootcamp](schedule) and the [background module](modules/module0_induction) in advance to get a sense for what we'll cover. And for those of you with no experience with R, it will help with your learning curve if you play around some with R using the material in [Module 1](modules/module1_basics) beforehand. Alternatively, if you have absolutely no experience with R or similar languages (e.g., Python, MATLAB), you might check out [Swirl](https://swirlstats.com).
 
