@@ -77,7 +77,7 @@ Course content is available through GitHub. Please download a copy of the course
 
   - 2. Alternatively, simply download a zip file containing all the content at https://github.com/berkeley-scf/r-bootcamp-fall-2022/archive/main.zip.
 
-We recommend that you take a look at the [schedule for the bootcamp](https://berkeley-scf.github.io/r-bootcamp-fall-2022/schedule) and the [background module](https://htmlpreview.github.io/?https://github.com/berkeley-scf/r-bootcamp-fall-202/modules/module0_induction) in advance to get a sense for what we'll cover. And for those of you with no experience with R, it will help with your learning curve if you play around some with R using the material in [Module 1](https://htmlpreview.github.io/?https://github.com/berkeley-scf/r-bootcamp-fall-2022/modules/module1_basics) beforehand. Alternatively, if you have absolutely no experience with R or similar languages (e.g., Python, MATLAB), you might check out [Swirl](https://swirlstats.com).
+We recommend that you take a look at the [schedule for the bootcamp](schedule) and the [background module](modules/module0_induction) in advance to get a sense for what we'll cover. And for those of you with no experience with R, it will help with your learning curve if you play around some with R using the material in [Module 1](modules/module1_basics) beforehand. Alternatively, if you have absolutely no experience with R or similar languages (e.g., Python, MATLAB), you might check out [Swirl](https://swirlstats.com).
 
 For the presentation materials (including embedded demo code), see the html files in *modules*. The main files have individual pages/slides, while the *_onepage_* html files are one continuous page per module. To run the demo code, open the .Rmd file for the module in RStudio. You can then run individual chunks of code.
 
@@ -89,9 +89,9 @@ To install the software, it's best if you can install software directly on your 
 
   - Install the following directly on your laptop:
   
-      - R [(details here)](https://github.com/berkeley-scf/r-bootcamp-fall-2022/install/RandRStudioInstall)
-      - RStudio (optional but highly recommended) [(details here)](https://htmlpreview.github.io/?https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/install/RandRStudioInstall.html)
-      - Git (optional but recommended for obtaining course content) [(details here)](https://htmlpreview.github.io/?https://github.com/berkeley-scf/r-bootcamp-fall-2022/blob/main/install/gitInstall.html)
+      - R [(details here)](install/RandRStudioInstall)
+      - RStudio (optional but highly recommended) [(details here)](install/RandRStudioInstall)
+      - Git (optional but recommended for obtaining course content) [(details here)](install/gitInstall)
 
 Alternatively, IF INSTALLING ON YOUR LAPTOP FAILS, the following is an alternative way to access R and RStudio through a browser:
 
