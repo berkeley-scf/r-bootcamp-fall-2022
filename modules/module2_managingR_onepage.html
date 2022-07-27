@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Managing your objects</title>
+<title>How to be <a href="http://dilbert.com/strips/comic/2005-05-29/">lazy</a></title>
 
 <script type="text/javascript">
 window.onload = function() {
@@ -201,6 +201,28 @@ hr {
 </head>
 
 <body>
+<h1>How to be <a href="http://dilbert.com/strips/comic/2005-05-29/">lazy</a></h1>
+
+<p>If you&#39;re starting to type something you&#39;ve typed before, or the long name of an R object or function, STOP!  You likely don&#39;t need to type all of that.</p>
+
+<ul>
+<li>Tab completion</li>
+<li>Command history 
+
+<ul>
+<li>up/down arrows</li>
+<li>Ctrl-{up arrow} or Command-{up arrow}</li>
+</ul></li>
+<li>RStudio: select a line or block for execution</li>
+<li>For keyboard shortcuts in RStudio see <code>Tools -&gt; Keyboard Shortcuts Help</code> or <a href="https://www.r-bloggers.com/rstudio-shortcuts-and-tips">this online tip page</a>.</li>
+<li><a href="https://www.r-bloggers.com/tips-and-tricks-in-rstudio-and-r-markdown">Other tips</a> for saving time in RStudio and R Markdown</li>
+<li>Put your code in a file and use <code>source()</code>. For example: <code>source(&#39;myRcodeFile.R&#39;)</code></li>
+</ul>
+
+<p><strong>Question</strong>: Are there other tricks that anyone knows of? Please share in Piazza.</p>
+
+<p>RStudio has lots of shortcuts. See <a href="https://appsilon.com/r-studio-shortcuts-and-tips/">here</a> and <a href="https://www.r-bloggers.com/r-studio-shortcuts-and-tips-part-2">here</a>.</p>
+
 <h1>Managing your objects</h1>
 
 <p>R has a number of functions for getting metadata about your objects. Some of this is built in to RStudio.</p>
@@ -365,13 +387,13 @@ ls()
 ## [21] &quot;f.matern.ang&quot;     &quot;f.matern.ang.cov&quot; &quot;f.matern.euc&quot;     &quot;f.merge&quot;         
 ## [25] &quot;f.rdist.earth&quot;    &quot;f.sort&quot;           &quot;f.sort2&quot;          &quot;f.squexp&quot;        
 ## [29] &quot;f.trimat&quot;         &quot;f.vecrep&quot;         &quot;format_bytes&quot;     &quot;getNcdf&quot;         
-## [33] &quot;im&quot;               &quot;indices&quot;          &quot;ln&quot;               &quot;ls_sizes&quot;        
-## [37] &quot;machineName&quot;      &quot;makePoly&quot;         &quot;module&quot;           &quot;plot.ell&quot;        
-## [41] &quot;pmap&quot;             &quot;pmap2&quot;            &quot;pointsInPoly&quot;     &quot;pplot&quot;           
-## [45] &quot;pretty_size&quot;      &quot;print.closeR&quot;     &quot;q&quot;                &quot;R2&quot;              
-## [49] &quot;R2D&quot;              &quot;rcsv&quot;             &quot;rotate&quot;           &quot;sizes&quot;           
-## [53] &quot;source&quot;           &quot;temp.colors&quot;      &quot;thresh&quot;           &quot;tplot&quot;           
-## [57] &quot;tsplot&quot;           &quot;wcsv&quot;
+## [33] &quot;im&quot;               &quot;indices&quot;          &quot;ln&quot;               &quot;lnm&quot;             
+## [37] &quot;ls_sizes&quot;         &quot;machineName&quot;      &quot;makePoly&quot;         &quot;module&quot;          
+## [41] &quot;plot.ell&quot;         &quot;pmap&quot;             &quot;pmap2&quot;            &quot;pointsInPoly&quot;    
+## [45] &quot;pplot&quot;            &quot;pretty_size&quot;      &quot;print.closeR&quot;     &quot;q&quot;               
+## [49] &quot;R2&quot;               &quot;R2D&quot;              &quot;rcsv&quot;             &quot;rotate&quot;          
+## [53] &quot;sizes&quot;            &quot;source&quot;           &quot;temp.colors&quot;      &quot;thresh&quot;          
+## [57] &quot;time_chol&quot;        &quot;tplot&quot;            &quot;tsplot&quot;           &quot;wcsv&quot;
 </code></pre>
 
 <p><strong>Challenge</strong>: how would I find all of my objects that have &#39;x&#39; in their names?</p>
@@ -389,8 +411,16 @@ ls()
 <p>Two steps:</p>
 
 <ol>
-<li>Install the package on your machine</li>
-<li>Load the package</li>
+<li>Install the package on your machine
+
+<ul>
+<li>one-time only - the package will be a set of files in the filesystem</li>
+</ul></li>
+<li>Load the package
+
+<ul>
+<li>every time you start R and need to use a given package - the package will be loaded into memory</li>
+</ul></li>
 </ol>
 
 <p>To install a package, in RStudio, just do <code>Packages-&gt;Install Packages</code>.</p>
@@ -474,7 +504,7 @@ lm(7)
 </code></pre>
 
 <pre><code>## gapminder$lifeExp ~ gapminder$gdpPercap
-## &lt;environment: 0x55dfb6d82c18&gt;
+## &lt;environment: 0x55a04e0f9520&gt;
 </code></pre>
 
 <pre><code class="r">stats::lm(gapminder$lifeExp ~ gapminder$gdpPercap)
@@ -494,7 +524,9 @@ lm(7)
 
 <p>Can you explain what is going on? Consider the results of <code>search()</code>.</p>
 
-<h3>Looking inside a package</h3>
+<h1>More on packages, part 2 (optional)</h1>
+
+<h3>(Advanced) Looking inside a package</h3>
 
 <p>Packages are available as &ldquo;Package source&rdquo;, namely the raw code and help files, and &ldquo;binaries&rdquo;, where stuff is packaged up for R to use efficiently. </p>
 
@@ -510,7 +542,7 @@ ls man
 ls data
 </code></pre>
 
-<h3>Creating your own R package</h3>
+<h3>(Advanced) Creating your own R package</h3>
 
 <p>R is do-it-yourself - you can write your own package. At its most basic this is just some R scripts that are packaged together in a convenient format. And if giving it to someone else, it&#39;s best to have some documentation in the form of function help files. </p>
 
@@ -532,24 +564,26 @@ ls data
 
 <pre><code class="r">getwd()  # what directory will R look in?
 # Linux/Mac specific
-setwd(&#39;~/Desktop/r-bootcamp-fall-2021&#39;) # change the working directory
+setwd(&#39;~/Desktop/r-bootcamp-fall-2022&#39;) # change the working directory
 setwd(&#39;/Users/paciorek/Desktop&#39;) # absolute path
 getwd()
-setwd(&#39;r-bootcamp-fall-2021/modules&#39;) # relative path
+setwd(&#39;r-bootcamp-fall-2022/modules&#39;) # relative path
 setwd(&#39;../tmp&#39;) # relative path, up and back down the tree
 
 # Windows - use either \\ or / to indicate directories
-# setwd(&#39;C:\\Users\\Your_username\\Desktop\\r-bootcamp-fall-2021&#39;)
-# setwd(&#39;..\\r-bootcamp-fall-2021&#39;)
+# setwd(&#39;C:\\Users\\Your_username\\Desktop\\r-bootcamp-fall-2022&#39;)
+# setwd(&#39;..\\r-bootcamp-fall-2022&#39;)
 
 # platform-agnostic
-setwd(file.path(&#39;~&#39;, &#39;Desktop&#39;, &#39;r-bootcamp-fall-2021&#39;, &#39;modules&#39;)) # change the working directory
-setwd(file.path(&#39;/&#39;, &#39;Users&#39;, &#39;paciorek&#39;, &#39;Desktop&#39;, &#39;r-bootcamp-fall-2021&#39;, &#39;modules&#39;)) # absolute path
+setwd(file.path(&#39;~&#39;, &#39;Desktop&#39;, &#39;r-bootcamp-fall-2022&#39;, &#39;modules&#39;)) # change the working directory
+setwd(file.path(&#39;/&#39;, &#39;Users&#39;, &#39;paciorek&#39;, &#39;Desktop&#39;, &#39;r-bootcamp-fall-2022&#39;, &#39;modules&#39;)) # absolute path
 getwd()
 setwd(file.path(&#39;..&#39;, &#39;data&#39;)) # relative path
 </code></pre>
 
 <p>Many errors and much confusion result from you and R not being on the same page in terms of where in the directory structure you are.</p>
+
+<p>In RStudio, you can use <code>Session -&gt; Set Working Directory</code> instead of <code>setwd</code>.</p>
 
 <h1>The working directory: quick quiz</h1>
 
@@ -594,7 +628,7 @@ setwd(file.path(&#39;..&#39;, &#39;data&#39;)) # relative path
 <pre><code class="r">getwd()
 </code></pre>
 
-<pre><code>## [1] &quot;/accounts/gen/vis/paciorek/staff/workshops/r-bootcamp-fall-2021/modules&quot;
+<pre><code>## [1] &quot;/accounts/vis/paciorek/staff/workshops/r-bootcamp-fall-2022/modules&quot;
 </code></pre>
 
 <pre><code class="r">cpds &lt;- read.csv(file.path(&#39;..&#39;, &#39;data&#39;, &#39;cpds.csv&#39;))
@@ -611,6 +645,89 @@ head(cpds)
 </code></pre>
 
 <p>It&#39;s good to first look at your data in plain text format outside of R and then to check it after you&#39;ve read it into R.</p>
+
+<h1>More details on reading data into R</h1>
+
+<p>Remember that you&#39;ll need to know the current working directory so that you know where R is looking for files.</p>
+
+<p>Next let&#39;s work through a more involved example, so you can see some of the steps and tricks involved in reading data into R.</p>
+
+<pre><code class="r">rta &lt;- read.table(&quot;../data/RTAData.csv&quot;, sep = &quot;,&quot;, head = TRUE)
+rta[1:5, 1:5]
+</code></pre>
+
+<pre><code>##               time X40010 X40015 X40020 X40025
+## 1 2010-03-01 14:58    821    209    828    258
+## 2 2010-03-01 15:01    804    209    804    248
+## 3 2010-03-01 15:04    892    212    801    237
+## 4 2010-03-01 15:07    857    214    821    243
+## 5 2010-03-01 15:10    849    222    834    252
+</code></pre>
+
+<pre><code class="r">dim(rta)
+</code></pre>
+
+<pre><code>## [1] 120822     62
+</code></pre>
+
+<pre><code class="r"># great, we&#39;re all set, right?
+# Not so fast...
+unlist(lapply(rta, class))[1:5]
+</code></pre>
+
+<pre><code>##        time      X40010      X40015      X40020      X40025 
+## &quot;character&quot; &quot;character&quot; &quot;character&quot; &quot;character&quot; &quot;character&quot;
+</code></pre>
+
+<pre><code class="r"># let&#39;s delve more deeply
+# unique(rta[ , 2])  # don&#39;t run when creating slides
+head(sort(unique(rta[ , 2])))
+</code></pre>
+
+<pre><code>## [1] &quot;&quot;     &quot;1000&quot; &quot;1001&quot; &quot;1002&quot; &quot;1003&quot; &quot;1004&quot;
+</code></pre>
+
+<pre><code class="r">tail(sort(unique(rta[ , 2])))
+</code></pre>
+
+<pre><code>## [1] &quot;995&quot; &quot;996&quot; &quot;997&quot; &quot;998&quot; &quot;999&quot; &quot;x&quot;
+</code></pre>
+
+<pre><code class="r"># can we handle that with read.table?
+# help(read.table)
+
+rta2 &lt;- read.table(&quot;../data/RTAData.csv&quot;, sep = &quot;,&quot;, head = TRUE, 
+      na.strings = c(&#39;NA&#39;, &#39;x&#39;))
+unlist(lapply(rta2, class))[1:5]
+</code></pre>
+
+<pre><code>##        time      X40010      X40015      X40020      X40025 
+## &quot;character&quot;   &quot;integer&quot;   &quot;integer&quot;   &quot;integer&quot;   &quot;integer&quot;
+</code></pre>
+
+<pre><code class="r"># checking...
+sum(is.na( rta2[ , 2] ))
+</code></pre>
+
+<pre><code>## [1] 24507
+</code></pre>
+
+<pre><code class="r">sum( rta[ , 2] %in% c(&#39;&#39;,&#39;x&#39;))
+</code></pre>
+
+<pre><code>## [1] 24507
+</code></pre>
+
+<p>It&#39;s good to first look at your data in plain text format outside of R and then to check it after you&#39;ve read it into R.</p>
+
+<h1>Other ways to read data into R</h1>
+
+<p>The <em>read.table()</em> family of functions just skims the surface of things&hellip;</p>
+
+<p>1) You can also read in a file as vector of characters, one character string per line of the file with <em>readLines()</em>, and then post-process it. 
+2) You can read fixed width format (constant number of characters per field) with <em>read.fwf()</em>.
+3) <em>read_csv()</em> (and <em>read_lines()</em>, <em>read_fwf()</em>, etc.) in the <em>readr</em> package is a faster, more helpful drop-in replacement for <em>read.csv()</em> that plays well with <em>dplyr</em> (see Module 5).
+4) the <em>data.table</em> package is great for reading and manipulating large datasets (orders of gigabytes or 10s of gigabytes).</p>
 
 <h1>Reading &#39;foreign&#39; format data</h1>
 
@@ -673,8 +790,8 @@ dev.off()
 print(xtable(table(gapminder$year, gapminder$continent)), type = &quot;html&quot;)
 </code></pre>
 
-<pre><code>## &lt;!-- html table generated in R 4.1.0 by xtable 1.8-4 package --&gt;
-## &lt;!-- Fri Aug 20 16:55:20 2021 --&gt;
+<pre><code>## &lt;!-- html table generated in R 4.2.0 by xtable 1.8-4 package --&gt;
+## &lt;!-- Wed Jul 27 14:30:18 2022 --&gt;
 ## &lt;table border=1&gt;
 ## &lt;tr&gt; &lt;th&gt;  &lt;/th&gt; &lt;th&gt; Africa &lt;/th&gt; &lt;th&gt; Americas &lt;/th&gt; &lt;th&gt; Asia &lt;/th&gt; &lt;th&gt; Europe &lt;/th&gt; &lt;th&gt; Oceania &lt;/th&gt;  &lt;/tr&gt;
 ##   &lt;tr&gt; &lt;td align=&quot;right&quot;&gt; 1952 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  52 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  25 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  33 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  30 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;   2 &lt;/td&gt; &lt;/tr&gt;
@@ -694,7 +811,7 @@ print(xtable(table(gapminder$year, gapminder$continent)), type = &quot;html&quot
 
 <p>Recall our discussion of the <code>summary()</code> function used on either a vector or a regression object. What do you think is going on with call to <code>print()</code> above? </p>
 
-<h1>Version control</h1>
+<h1>Version control (optional)</h1>
 
 <h3>Overview</h3>
 
@@ -719,7 +836,7 @@ print(xtable(table(gapminder$year, gapminder$continent)), type = &quot;html&quot
 
 <h3>Making changes to a repository</h3>
 
-<p>We&#39;ll go through a short example of making changes to the r-bootcamp-fall-2021 repository. In this case you don&#39;t have permission to make changes so you&#39;ll just have to follow along as I do it. However, you could start your own repository and then you&#39;d be able to do similar things.</p>
+<p>We&#39;ll go through a short example of making changes to the r-bootcamp-fall-2022 repository. In this case you don&#39;t have permission to make changes so you&#39;ll just have to follow along as I do it. However, you could start your own repository and then you&#39;d be able to do similar things.</p>
 
 <p>Note that there are <a href="https://git-scm.com/downloads/guis">graphical interfaces to Git</a> that you might want to check out, but here I&#39;m just going to do it from the command line on my Mac.</p>
 
@@ -743,7 +860,7 @@ git push
 
 <p>The changes are then available to anyone to <em>pull</em> from the remote repository, a using <code>git pull</code> or graphical interfaces, such as using RStudio&#39;s tools to pull the changes to your machine, discussed in the GitHub slide in module 0.</p>
 
-<h1>Getting R help online</h1>
+<h1>Getting R help online (optional)</h1>
 
 <h3>Mailing lists</h3>
 

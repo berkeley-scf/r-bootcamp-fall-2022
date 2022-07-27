@@ -221,7 +221,7 @@ hr {
 <pre><code class="r">7 + runif(1) # add a random number
 </code></pre>
 
-<pre><code>## [1] 7.571459
+<pre><code>## [1] 7.025757
 </code></pre>
 
 <pre><code class="r">3^4 # powers
@@ -342,7 +342,8 @@ years
 <pre><code>## [1] 12
 </code></pre>
 
-<pre><code class="r">country &lt;- rep(&quot;Afghanistan&quot;, 12)
+<pre><code class="r">## This is a comment: here is an example of non-numeric data
+country &lt;- rep(&quot;Afghanistan&quot;, 12)
 country 
 </code></pre>
 
@@ -351,43 +352,16 @@ country
 ## [11] &quot;Afghanistan&quot; &quot;Afghanistan&quot;
 </code></pre>
 
-<pre><code class="r">## This is a comment: here is an example of non-numeric data
-countries &lt;- c(&quot;Afghanistan&quot;, &quot;India&quot;, &quot;Pakistan&quot;)
-countries
-</code></pre>
-
-<pre><code>## [1] &quot;Afghanistan&quot; &quot;India&quot;       &quot;Pakistan&quot;
-</code></pre>
-
 <p>If we don&#39;t assign the output of a command to an object, we haven&#39;t saved it for later use.</p>
 
-<p>R gives us a lot of flexibility (within certain rules) for assigning to (parts of) objects from (parts of) other objects.</p>
-
-<h1>How to be <a href="http://dilbert.com/strips/comic/2005-05-29/">lazy</a></h1>
-
-<p>If you&#39;re starting to type something you&#39;ve typed before, or the long name of an R object or function, STOP!  You likely don&#39;t need to type all of that.</p>
-
-<ul>
-<li>Tab completion</li>
-<li>Command history 
-
-<ul>
-<li>up/down arrows</li>
-<li>Ctrl-{up arrow} or Command-{up arrow}</li>
-</ul></li>
-<li>RStudio: select a line or block for execution</li>
-<li>For keyboard shortcuts in RStudio see <code>Tools -&gt; Keyboard Shortcuts Help</code> or <a href="https://www.r-bloggers.com/rstudio-shortcuts-and-tips">this online tip page</a>.</li>
-<li><a href="https://www.r-bloggers.com/tips-and-tricks-in-rstudio-and-r-markdown">Other tips</a> for saving time in RStudio and R Markdown</li>
-<li>Put your code in a file and use <code>source()</code>. For example: <code>source(&#39;myRcodeFile.R&#39;)</code></li>
-</ul>
-
-<p><strong>Question</strong>: Are there other tricks that anyone knows of? Please share in Piazza.</p>
-
-<p>RStudio has lots of shortcuts. See <a href="https://appsilon.com/r-studio-shortcuts-and-tips/">here</a> and <a href="https://www.r-bloggers.com/r-studio-shortcuts-and-tips-part-2">here</a>.</p>
+<p>R gives us a lot of flexibility (within certain rules) for assigning to (parts of) objects from (parts of) other objects.
+We&#39;ll see this through the bootcamp.</p>
 
 <h1>Vectors in R</h1>
 
-<p>The most basic form of an R object is a vector. In fact, individual (scalar) values are vectors of length one. </p>
+<p>The most basic form of an R object is a vector. The various objects <code>mySeq</code>, <code>years</code>, <code>country</code> are all vectors.</p>
+
+<p>In fact, individual (scalar) values are vectors of length one, so <code>val</code> and <code>Val</code> are also vectors. </p>
 
 <p>We can concatenate values into a vector with <code>c()</code>.</p>
 
@@ -397,7 +371,7 @@ devs &lt;- rnorm(5)
 devs
 </code></pre>
 
-<pre><code>## [1] -0.3596799 -0.8854655  0.5592186 -0.1130526 -0.7859554
+<pre><code>## [1]  0.4532996 -0.1058735 -0.8630559 -1.5341018 -1.0894918
 </code></pre>
 
 <pre><code class="r">## integer vector
@@ -444,48 +418,47 @@ nums &lt;- [1.1, 3, -5.7]
 
 <h1>Working with indices and subsets</h1>
 
-<pre><code class="r">vals &lt;- seq(2, 12, by = 2)
-vals
+<pre><code class="r">years
 </code></pre>
 
-<pre><code>## [1]  2  4  6  8 10 12
+<pre><code>##  [1] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 2002 2007
 </code></pre>
 
-<pre><code class="r">vals[3]
+<pre><code class="r">years[3]
 </code></pre>
 
-<pre><code>## [1] 6
+<pre><code>## [1] 1962
 </code></pre>
 
-<pre><code class="r">vals[3:5]
+<pre><code class="r">years[3:5]
 </code></pre>
 
-<pre><code>## [1]  6  8 10
+<pre><code>## [1] 1962 1967 1972
 </code></pre>
 
-<pre><code class="r">vals[c(1, 3, 6)]
+<pre><code class="r">years[c(1, 3, 6)]
 </code></pre>
 
-<pre><code>## [1]  2  6 12
+<pre><code>## [1] 1952 1962 1977
 </code></pre>
 
-<pre><code class="r">vals[-c(1, 3, 6)]
+<pre><code class="r">years[-c(1, 3, 6)]
 </code></pre>
 
-<pre><code>## [1]  4  8 10
+<pre><code>## [1] 1957 1967 1972 1982 1987 1992 1997 2002 2007
 </code></pre>
 
-<pre><code class="r">vals[c(rep(TRUE, 3), rep(FALSE, 2), TRUE)]
+<pre><code class="r">years[c(rep(TRUE, 3), rep(FALSE, 2), TRUE, rep(FALSE, 6))]
 </code></pre>
 
-<pre><code>## [1]  2  4  6 12
+<pre><code>## [1] 1952 1957 1962 1977
 </code></pre>
 
 <pre><code class="r">## If you haven&#39;t installed the gapminder package, do this first:
 install.packages(&#39;gapminder&#39;)
 </code></pre>
 
-<pre><code>## Installing package into &#39;/accounts/gen/vis/paciorek/R/x86_64-pc-linux-gnu-library/4.1&#39;
+<pre><code>## Installing package into &#39;/accounts/vis/paciorek/R/x86_64-pc-linux-gnu-library/4.2&#39;
 ## (as &#39;lib&#39; is unspecified)
 </code></pre>
 
@@ -504,23 +477,8 @@ gdp[1:10]
 <pre><code class="r">gdp[4] &lt;- 822.9711
 
 vals &lt;- rnorm(100)
-vals[1:2] &lt;- 0
-
-## How does R process these next subset operations?
-vals[vals &lt; 0] &lt;- 0
-vals[1:8]
-</code></pre>
-
-<pre><code>## [1] 0.0000000 0.0000000 0.6445558 1.2493382 1.4295690 0.3968993 0.0000000
-## [8] 0.0000000
-</code></pre>
-
-<pre><code class="r">wealthy &lt;- gdp[gdp &gt; 100000]
-gdp[1:10]
-</code></pre>
-
-<pre><code>##  [1] 779.4453 820.8530 853.1007 822.9711 739.9811 786.1134 978.0114 852.3959
-##  [9] 649.3414 635.3414
+vals[3:4] &lt;- c(7.5, 2.4)
+vals[1:2] &lt;- 0  # this uses &#39;recycling&#39; - more in Module 4
 </code></pre>
 
 <h1>Working with indices and subsets: quick quiz</h1>
@@ -545,7 +503,7 @@ Assume the vector is created like this:</p>
 
 <pre><code class="r">gdpTotal &lt;- gapminder$gdpPercap * gapminder$pop
 
-tmp &lt;- gdpTotal[gapminder$year == &quot;2007&quot;]
+tmp &lt;- gdpTotal[gapminder$year == &quot;2007&quot;]  # let&#39;s pick apart what is happening here
 gdpSubset &lt;- tmp[1:20]
 
 gdpSubset &gt;= 1e6  # Dr. Evil&#39;s version of &quot;a lot&quot;
@@ -555,63 +513,36 @@ gdpSubset &gt;= 1e6  # Dr. Evil&#39;s version of &quot;a lot&quot;
 ## [16] TRUE TRUE TRUE TRUE TRUE
 </code></pre>
 
-<pre><code class="r">vec1 &lt;- rnorm(5)
-vec2 &lt;- rnorm(5)
-vec1 &gt; vec2
-</code></pre>
-
-<pre><code>## [1]  TRUE  TRUE  TRUE FALSE  TRUE
-</code></pre>
-
-<pre><code class="r">vec1 == vec2
-</code></pre>
-
-<pre><code>## [1] FALSE FALSE FALSE FALSE FALSE
-</code></pre>
-
-<pre><code class="r">vec1 != vec2
-</code></pre>
-
-<pre><code>## [1] TRUE TRUE TRUE TRUE TRUE
-</code></pre>
-
-<pre><code class="r">## careful: 
-vec1 = vec2
-identical(vec1, vec2)
-</code></pre>
-
-<pre><code>## [1] TRUE
-</code></pre>
-
-<pre><code class="r">## using &#39;or&#39;
-gdpSubset &gt;= 1e12 | gdpSubset &lt;= 1e10
-</code></pre>
-
-<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-## [13] FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE
-</code></pre>
-
-<pre><code class="r">## using &#39;and&#39;
-gapminder$lifeExp[1:10] &lt; 75 &amp; gapminder$continent[1:10] == &quot;Americas&quot;
-</code></pre>
-
-<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-</code></pre>
-
 <h1>Using functions in R</h1>
 
 <ul>
-<li>We can see the code of a function:</li>
+<li>Functions generally take arguments, some of which are often optional:</li>
 </ul>
 
-<pre><code class="r">median  # We&#39;ll investigate what &#39;UseMethod&#39; does in Module 10
+<pre><code class="r">median(gapminder$lifeExp)
 </code></pre>
 
-<pre><code>## function (x, na.rm = FALSE, ...) 
-## UseMethod(&quot;median&quot;)
-## &lt;bytecode: 0x5602ae3f9a38&gt;
-## &lt;environment: namespace:stats&gt;
+<pre><code>## [1] 60.7125
 </code></pre>
+
+<pre><code class="r">median(gapminder$lifeExp, na.rm =  TRUE)
+</code></pre>
+
+<pre><code>## [1] 60.7125
+</code></pre>
+
+<ul>
+<li>We can embed function calls: </li>
+</ul>
+
+<pre><code class="r">hist(rnorm(1000))
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt=""/></p>
+
+<ul>
+<li>We can (usually) see the code of a function:</li>
+</ul>
 
 <pre><code class="r">lm
 </code></pre>
@@ -688,40 +619,18 @@ gapminder$lifeExp[1:10] &lt; 75 &amp; gapminder$continent[1:10] == &quot;America
 ##         z$qr &lt;- NULL
 ##     z
 ## }
-## &lt;bytecode: 0x5602b01ff688&gt;
+## &lt;bytecode: 0x5565e0018858&gt;
 ## &lt;environment: namespace:stats&gt;
 </code></pre>
 
-<pre><code class="r">median(gapminder$lifeExp)
+<pre><code class="r">median  # We&#39;ll investigate what &#39;UseMethod&#39; does in Module 10
 </code></pre>
 
-<pre><code>## [1] 60.7125
+<pre><code>## function (x, na.rm = FALSE, ...) 
+## UseMethod(&quot;median&quot;)
+## &lt;bytecode: 0x5565d1a9ab40&gt;
+## &lt;environment: namespace:stats&gt;
 </code></pre>
-
-<ul>
-<li>Functions generally take arguments, some of which are often optional:</li>
-</ul>
-
-<pre><code class="r">median(gapminder$lifeExp)
-</code></pre>
-
-<pre><code>## [1] 60.7125
-</code></pre>
-
-<pre><code class="r">median(gapminder$lifeExp, na.rm =  TRUE)
-</code></pre>
-
-<pre><code>## [1] 60.7125
-</code></pre>
-
-<ul>
-<li>We can embed function calls: </li>
-</ul>
-
-<pre><code class="r">hist(rnorm(1000))
-</code></pre>
-
-<p><img src="data:image/png;base64,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" alt=""/></p>
 
 <h1>Getting help about a function</h1>
 
@@ -731,8 +640,6 @@ gapminder$lifeExp[1:10] &lt; 75 &amp; gapminder$continent[1:10] == &quot;America
 ?lm
 
 ?log
-
-apropos(&quot;mean&quot;)
 </code></pre>
 
 <h1>Basic kinds of R objects</h1>
@@ -748,7 +655,7 @@ apropos(&quot;mean&quot;)
 <pre><code class="r">head(gapminder)
 </code></pre>
 
-<pre><code>## # A tibble: 6 x 6
+<pre><code>## # A tibble: 6 × 6
 ##   country     continent  year lifeExp      pop gdpPercap
 ##   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
 ## 1 Afghanistan Asia       1952    28.8  8425333      779.
@@ -757,6 +664,12 @@ apropos(&quot;mean&quot;)
 ## 4 Afghanistan Asia       1967    34.0 11537966      836.
 ## 5 Afghanistan Asia       1972    36.1 13079460      740.
 ## 6 Afghanistan Asia       1977    38.4 14880372      786.
+</code></pre>
+
+<pre><code class="r">gapminder$lifeExp[1:10]
+</code></pre>
+
+<pre><code>##  [1] 28.801 30.332 31.997 34.020 36.088 38.438 39.854 40.822 41.674 41.763
 </code></pre>
 
 <pre><code class="r">dim(gapminder)
@@ -835,13 +748,13 @@ myList
 ## [1] &quot;bear&quot;
 </code></pre>
 
-<pre><code class="r">myList[[1]] # result is not (usually) a list (unless you have nested lists)
+<pre><code class="r">myList[[3]] # result is not (usually) a list (unless you have nested lists)
 </code></pre>
 
-<pre><code>## [1] 3
+<pre><code>## [1] &quot;china&quot; &quot;japan&quot;
 </code></pre>
 
-<pre><code class="r">identical(myList[[1]], myList$stuff)
+<pre><code class="r">identical(myList[[3]], myList$moreStuff)
 </code></pre>
 
 <pre><code>## [1] TRUE
@@ -853,103 +766,13 @@ myList
 <pre><code>## [1] &quot;japan&quot;
 </code></pre>
 
-<pre><code class="r">myList[[4]][[2]]
+<pre><code class="r">names(myList)
 </code></pre>
 
-<pre><code>## [1] &quot;bear&quot;
-</code></pre>
-
-<pre><code class="r">myList[1:3] # subset of a list is a list
-</code></pre>
-
-<pre><code>## $stuff
-## [1] 3
-## 
-## $mat
-##      [,1] [,2]
-## [1,]    1    3
-## [2,]    2    4
-## 
-## $moreStuff
-## [1] &quot;china&quot; &quot;japan&quot;
-</code></pre>
-
-<pre><code class="r">myList$newOne &lt;- &#39;more weird stuff&#39;
-names(myList)
-</code></pre>
-
-<pre><code>## [1] &quot;stuff&quot;     &quot;mat&quot;       &quot;moreStuff&quot; &quot;&quot;          &quot;newOne&quot;
+<pre><code>## [1] &quot;stuff&quot;     &quot;mat&quot;       &quot;moreStuff&quot; &quot;&quot;
 </code></pre>
 
 <p>Lists can be used as vectors of complicated objects. E.g., suppose you have a linear regression for each value of a stratifying variable. You could have a list of regression fits. Each regression fit will itself be a list, so you&#39;ll have a list of lists.</p>
-
-<h1>Lists: quick quiz</h1>
-
-<p><strong>POLL 1C</strong>: How would you extract &ldquo;china&rdquo; from this list?</p>
-
-<pre><code>myList &lt;- list(stuff = 3, mat = matrix(1:4, nrow = 2), 
-   moreStuff = c(&quot;china&quot;, &quot;japan&quot;), list(5, &quot;bear&quot;))
-</code></pre>
-
-<p>1) myList$moreStuff[1]
-2) myList$moreStuff[[1]]
-3) myList[[1]]
-4) myList[[3]][2]
-5) myList[[3]][1]
-6) myList[3][1]
-7) myList[[&#39;moreStuff&#39;]][1]</p>
-
-<h1>Converting between different types of objects</h1>
-
-<p>You can use the <code>as()</code> family of functions.</p>
-
-<pre><code class="r">ints &lt;- 1:10
-as.character(ints)
-</code></pre>
-
-<pre><code>##  [1] &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot;
-</code></pre>
-
-<pre><code class="r">as.numeric(c(&#39;3.7&#39;, &#39;4.8&#39;))
-</code></pre>
-
-<pre><code>## [1] 3.7 4.8
-</code></pre>
-
-<p>Be careful: R tries to be helpful and convert between types/classes when it thinks it&#39;s a good idea. Sometimes it is overly optimistic. </p>
-
-<pre><code class="r">indices &lt;- c(1.7, 2.3)
-ints[indices]
-</code></pre>
-
-<pre><code>## [1] 1 2
-</code></pre>
-
-<pre><code class="r">ints[0.999999999]
-</code></pre>
-
-<pre><code>## integer(0)
-</code></pre>
-
-<h1>Converting between different types: quick quiz</h1>
-
-<p><strong>POLL 1D</strong>:</p>
-
-<p><em>Question 1</em>: What do you think this will do?</p>
-
-<pre><code>ints &lt;- 1:5
-ints[0.9999]
-</code></pre>
-
-<p>1) return an error
-2) return 1
-3) return an empty vector</p>
-
-<p><em>Question 2</em>: What does the code do when it tries to use 0.9999 to subset?</p>
-
-<p>1) round the 0.9999 to 1
-2) truncate the 0.9999 to 0
-3) return an error</p>
 
 <h1>A bit on plotting</h1>
 
@@ -961,7 +784,7 @@ ints[0.9999]
 <li><em>ggplot2</em> (a very popular add-on package)</li>
 </ul>
 
-<p>We&#39;ll see a little bit of <em>base</em> graphics here and then <em>ggplot2</em> tomorrow in Module 8.</p>
+<p>We&#39;ll see a little bit of <em>base</em> graphics here and then <em>ggplot2</em> tomorrow in Module 7.</p>
 
 <pre><code class="r">hist(gapminder$lifeExp)
 </code></pre>
@@ -1007,21 +830,27 @@ plot(gapminder$lifeExp ~ gapminder$gdpPercap, xlab = &#39;GDP per capita (dollar
 
 <p>5) Use the boolean vector from problem 4 to produce a new vector containing the per capita GDP only from the biggest economies.</p>
 
-<p>6) Plot life expectancy against gdpPercap with gdpPercap values greater than 40000 set to 40000.</p>
+<p>6) How does R process the following subset operations in the first line of code? Explain the individual steps that R carries out:</p>
 
-<p>7) Make a histogram of the life expectancy values for the year 2007.  Explore the effect of changing the number of bins in the histogram using the &#39;breaks&#39; argument.</p>
+<pre><code class="r">vals[vals &lt; 0] &lt;- 0
+vals[1:8]
+</code></pre>
 
-<p>8) Subset the data to those for the year 2007 (there is a way to do this all at once, but using what we&#39;ve seen already, you can pull out and subset the individual columns you need). Plot life expectancy against GDP per capita. Add a title to the plot. Now plot so that data for Asia are in one color and those for all other countries are in another color and those for all other continents are in another, using the &#39;col&#39; argument. Hint: &#39;col&#39; can take a vector of colors such as &ldquo;black&rdquo;,&ldquo;red&rdquo;,&ldquo;black&rdquo;, &hellip;</p>
+<p>7) Plot life expectancy against gdpPercap with gdpPercap values greater than 40000 set to 40000.</p>
+
+<p>8) Make a histogram of the life expectancy values for the year 2007.  Explore the effect of changing the number of bins in the histogram using the &#39;breaks&#39; argument.</p>
+
+<p>9) Subset the data to those for the year 2007 (there is a way to do this all at once, but using what we&#39;ve seen already, you can pull out and subset the individual columns you need). Plot life expectancy against GDP per capita. Add a title to the plot. Now plot so that data for Asia are in one color and those for all other countries are in another color and those for all other continents are in another, using the &#39;col&#39; argument. Hint: &#39;col&#39; can take a vector of colors such as &ldquo;black&rdquo;,&ldquo;red&rdquo;,&ldquo;black&rdquo;, &hellip;</p>
 
 <h3>Advanced</h3>
 
-<p>9) Consider the following regression model.  Figure out how to extract the \(R^2\) and residual standard error and store in new R variables. </p>
+<p>10) Consider the following regression model.  Figure out how to extract the \(R^2\) and residual standard error and store in new R variables. </p>
 
 <pre><code class="r">mod &lt;- lm(lifeExp ~ log(gdpPercap), data = gapminder)
 summ &lt;- summary(mod)
 </code></pre>
 
-<p>10) Take your plot from problem 8. Now modify the size of the points. Add a legend. Rotate the numbers on the y-axis so they are printed horizontally. Recall that <code>help(par)</code> will provide a lot of information.</p>
+<p>11) Take your plot from problem 9. Now modify the size of the points. Add a legend. Rotate the numbers on the y-axis so they are printed horizontally. Recall that <code>help(par)</code> will provide a lot of information.</p>
 
 </body>
 

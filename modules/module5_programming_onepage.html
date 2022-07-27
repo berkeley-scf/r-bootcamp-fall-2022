@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Loops</title>
+<title>R is a functional language</title>
 
 <script type="text/javascript">
 window.onload = function() {
@@ -201,363 +201,6 @@ hr {
 </head>
 
 <body>
-<h1>Loops</h1>
-
-<p>In many languages, looping (for loops, while loops, etc.) is one of the main
-constructs used to carry out computation. Loops are not emphasized as much in R,
-both because they can be slow and because other syntax is often cleaner.</p>
-
-<p>But there are lots of times when using a loop does make sense.</p>
-
-<p>Most of you are probably familiar at least with the basic idea of iterating
-through a series of steps. A for loop iterates through a pre-determined number
-of iterations, while a while loop iterates until some condition is met. For
-loops are more common in R, but while loops can be handy particularly for things
-like optimization.</p>
-
-<p>Let&#39;s take our use of <code>aggregate()</code> from Module 4 and use a for loop instead.</p>
-
-<pre><code class="r">out &lt;- list()
-years &lt;- unique(gapminder$year)
-length(out) &lt;- length(years)
-names(out) &lt;- years
-
-for (yrIdx in seq_along(years)) {
-     # equivalently: for(i in 1:length(years))
-     # n.b., seq_along(x) is better than 1:length(x), since it handles the case
-     # where the length of an object is 0 or NULL more robustly.
-     sub &lt;- subset(gapminder, gapminder$year == years[yrIdx])
-     # fit regression
-     out[[yrIdx]] &lt;- lm(lifeExp ~ log(gdpPercap), data = sub)
-}
-out[[&#39;2007&#39;]]
-</code></pre>
-
-<pre><code>## 
-## Call:
-## lm(formula = lifeExp ~ log(gdpPercap), data = sub)
-## 
-## Coefficients:
-##    (Intercept)  log(gdpPercap)  
-##          4.950           7.203
-</code></pre>
-
-<pre><code class="r">summary(out[[&#39;2007&#39;]])
-</code></pre>
-
-<pre><code>## 
-## Call:
-## lm(formula = lifeExp ~ log(gdpPercap), data = sub)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -25.947  -2.661   1.215   4.469  13.115 
-## 
-## Coefficients:
-##                Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)      4.9496     3.8577   1.283    0.202    
-## log(gdpPercap)   7.2028     0.4423  16.283   &lt;2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 7.122 on 140 degrees of freedom
-## Multiple R-squared:  0.6544, Adjusted R-squared:  0.652 
-## F-statistic: 265.2 on 1 and 140 DF,  p-value: &lt; 2.2e-16
-</code></pre>
-
-<pre><code class="r">summary(out[[&#39;1952&#39;]])
-</code></pre>
-
-<pre><code>## 
-## Call:
-## lm(formula = lifeExp ~ log(gdpPercap), data = sub)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -28.9571  -5.7319   0.7517   6.5770  13.7361 
-## 
-## Coefficients:
-##                Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)    -17.8457     5.0668  -3.522 0.000578 ***
-## log(gdpPercap)   8.8298     0.6626  13.326  &lt; 2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 8.146 on 140 degrees of freedom
-## Multiple R-squared:  0.5592, Adjusted R-squared:  0.556 
-## F-statistic: 177.6 on 1 and 140 DF,  p-value: &lt; 2.2e-16
-</code></pre>
-
-<p>The iterations do not have to explicitly be over sequential numbers.</p>
-
-<pre><code class="r">for (yr in years) {
-     cat(yr, &#39;\n&#39;)
-}
-</code></pre>
-
-<pre><code>## 1952 
-## 1957 
-## 1962 
-## 1967 
-## 1972 
-## 1977 
-## 1982 
-## 1987 
-## 1992 
-## 1997 
-## 2002 
-## 2007
-</code></pre>
-
-<h1>Calculation approaches: quick quiz</h1>
-
-<p><strong>POLL 5A</strong></p>
-
-<p>Question 1: Which of these give exactly this result: <code>pi</code>, <code>2*pi</code>, <code>3*pi</code>, &hellip;?</p>
-
-<p>1) (1:n)<em>pi
-2) out &lt;- rep(0, n); for(x in 1:n) out &lt;- x*pi
-3) sapply(1:n, function(x) x*pi)
-4) out &lt;- rep(0, n); for(x in 1:n) out[i] &lt;- x*pi
-5) lapply(1:n, function(x) x*pi)
-6) sapply(1:n, &ldquo;</em>&rdquo;, pi)
-7) 1:n*pi</p>
-
-<p>Question 2: Which of these do you think will be fastest for a long vector, x?</p>
-
-<p>1) x &lt;- exp(x)
-2) x &lt;- sapply(x, exp)
-3) for(i in 1:length(x)) x[i] &lt;- exp(x[i])</p>
-
-<h1>While loop</h1>
-
-<p>It&#39;s not a particularly interesting example, but we can see the <code>while</code> loop
-syntax in the same example. In this case </p>
-
-<pre><code class="r">yrIdx &lt;- 1
-while (yrIdx &lt;= length(years)) {
-     sub &lt;- subset(gapminder, gapminder$year == years[yrIdx])
-     # fit regression
-     out[[yrIdx]] &lt;- lm(lifeExp ~ log(gdpPercap), data = sub)
-     yrIdx = yrIdx + 1
-}
-summary(out[[&#39;2007&#39;]])
-</code></pre>
-
-<pre><code>## 
-## Call:
-## lm(formula = lifeExp ~ log(gdpPercap), data = sub)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -25.947  -2.661   1.215   4.469  13.115 
-## 
-## Coefficients:
-##                Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)      4.9496     3.8577   1.283    0.202    
-## log(gdpPercap)   7.2028     0.4423  16.283   &lt;2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 7.122 on 140 degrees of freedom
-## Multiple R-squared:  0.6544, Adjusted R-squared:  0.652 
-## F-statistic: 265.2 on 1 and 140 DF,  p-value: &lt; 2.2e-16
-</code></pre>
-
-<h1>Branching (if-then-else syntax)</h1>
-
-<p>We already saw an example of branching in the <em>for</em> loop example.</p>
-
-<p>Here&#39;s a simple example to illustrate the syntax. Note that the <em>then</em> is
-implicit.</p>
-
-<pre><code class="r">val &lt;- rnorm(1)
-val
-</code></pre>
-
-<pre><code>## [1] -0.5366697
-</code></pre>
-
-<pre><code class="r">if (val &lt; 0) {
-  print(&quot;val is negative&quot;)
-} else {
-  print(&quot;val is positive&quot;)
-}
-</code></pre>
-
-<pre><code>## [1] &quot;val is negative&quot;
-</code></pre>
-
-<p>We can chain together <code>if</code> statements as follows.</p>
-
-<pre><code class="r">val &lt;- rnorm(1)
-val
-</code></pre>
-
-<pre><code>## [1] -1.533217
-</code></pre>
-
-<pre><code class="r">if (val &lt; -1) {
-  print(&quot;val is more than one standard deviation below the mean.&quot;)
-} else if (abs(val) &lt;= 1) {
-  print(&quot;val is within one standard deviation of the mean.&quot;)
-} else {
-  print(&quot;val is more than one standard deviation above the mean.&quot;)
-}
-</code></pre>
-
-<pre><code>## [1] &quot;val is more than one standard deviation below the mean.&quot;
-</code></pre>
-
-<p>In general, the <code>{</code> brackets are only needed if you have multiple R expressions,
-but R will complain when an <code>else</code> starts a line of code, so generally using the
-<code>{</code> is good practice. That said, this <em>works just fine</em>:</p>
-
-<pre><code class="r">if (val &lt; 0) print(&quot;val is negative&quot;) else print(&quot;val is positive&quot;)
-</code></pre>
-
-<pre><code>## [1] &quot;val is negative&quot;
-</code></pre>
-
-<h1>The condition in an if statement</h1>
-
-<p>The condition in the if statement cannot be NA or R will give an error. This is
-a very common bug.</p>
-
-<pre><code class="r">continents &lt;- unique(gapminder$continent)
-continents  # what happened ?!
-</code></pre>
-
-<pre><code>## [1] Asia     Europe   Africa   Americas Oceania 
-## Levels: Africa Americas Asia Europe Oceania
-</code></pre>
-
-<pre><code class="r">continents &lt;- unique(as.character(gapminder$continent))
-continents &lt;- c(&#39;Antarctica&#39;, continents)
-
-out &lt;- rep(0, length(continents))
-for (i in seq_along(continents)) {
-    sub &lt;- gapminder[gapminder$continent == continents[i], ]
-    if(mean(sub$lifeExp) &lt; 50)
-       print(continents[i])
-}
-</code></pre>
-
-<pre><code>## Error in if (mean(sub$lifeExp) &lt; 50) print(continents[i]): missing value where TRUE/FALSE needed
-</code></pre>
-
-<pre><code class="r">print(i)
-</code></pre>
-
-<pre><code>## [1] 1
-</code></pre>
-
-<pre><code class="r">sub &lt;- gapminder[gapminder$continent == continents[i], ]
-if(mean(sub$lifeExp) &lt; 50) print(&#39;here&#39;)
-</code></pre>
-
-<pre><code>## Error in if (mean(sub$lifeExp) &lt; 50) print(&quot;here&quot;): missing value where TRUE/FALSE needed
-</code></pre>
-
-<pre><code class="r">mean(sub$lifeExp) &lt; 50
-</code></pre>
-
-<pre><code>## [1] NA
-</code></pre>
-
-<p>An <code>NA</code>/<code>NaN</code> is the main reason an if statement may fail, because R will
-generally convert other values to logical values.</p>
-
-<p>Zero evaluates to <code>FALSE</code>, all other numbers evaluate to <code>TRUE</code>. In general
-strings are not converted to booleans.</p>
-
-<p>A more robust alternative is to use <code>isTRUE()</code>:</p>
-
-<pre><code class="r">out &lt;- rep(0, length(continents))
-for (i in seq_along(continents)) {
-    sub &lt;- gapminder[gapminder$continent == continents[i], ]
-    if(isTRUE(mean(sub$lifeExp) &lt; 60))
-       print(continents[i])
-}
-</code></pre>
-
-<pre><code>## [1] &quot;Africa&quot;
-</code></pre>
-
-<p><strong>POLL 5B</strong>:</p>
-
-<p>What will this return?</p>
-
-<pre><code>if(sqrt(-1) == 0i) {
-   print(&#39;i&#39;)
-} else print(&#39;not i&#39;)
-</code></pre>
-
-<p>1) &#39;i&#39;
-2) an error
-3) &#39;not i&#39;</p>
-
-<h1>Flow control: <code>next</code> and <code>break</code> statements</h1>
-
-<p><code>next</code> skips the current evaluation of the loop statements:</p>
-
-<pre><code class="r">continents &lt;- unique(gapminder2007$continent)
-continents[2] &lt;- &quot;Oceania&quot;; continents[5] &lt;- &quot;Europe&quot;  # reorder to illustrate points below
-continents
-</code></pre>
-
-<pre><code>## [1] Asia     Oceania  Africa   Americas Europe  
-## Levels: Africa Americas Asia Europe Oceania
-</code></pre>
-
-<pre><code class="r">out &lt;- list(); length(out) &lt;- length(continents); names(out) &lt;- continents
-
-for (i in seq_along(continents)) {
-     # equivalently: for(i in 1:length(continents))
-     sub &lt;- subset(gapminder2007, gapminder2007$continent == continents[i])
-     if(sum(!is.na(sub$lifeExp)) &gt; 2) { # don&#39;t regress if &lt;= 2 obs
-     # fit regression
-       out[[i]] &lt;- lm(lifeExp ~ log(gdpPercap), data = sub)
-     } else {
-       next
-     }
-}
-cat(&quot;We got to iteration &quot;, i, &quot; of &quot;, length(continents), &quot; items.\n&quot;, sep = &quot;&quot;)
-</code></pre>
-
-<pre><code>## We got to iteration 5 of 5 items.
-</code></pre>
-
-<pre><code class="r">out[[&#39;Oceania&#39;]]
-</code></pre>
-
-<pre><code>## NULL
-</code></pre>
-
-<p><code>break</code> immediately ends loop evaluation:</p>
-
-<pre><code class="r">out &lt;- list(); length(out) &lt;- length(continents); names(out) &lt;- continents
-
-for (i in seq_along(continents)) {
-     # equivalently: for(i in 1:length(continents))
-     sub &lt;- subset(gapminder2007, gapminder2007$continent == continents[i])
-     if(sum(!is.na(sub$lifeExp)) &gt; 2) { # don&#39;t regress if &lt;= 2 obs
-     # fit regression
-       out[[i]] &lt;- lm(lifeExp ~ log(gdpPercap), data = sub)
-     } else {
-       break
-     }
-}
-
-cat(&quot;We got to iteration &quot;, i, &quot; of &quot;, length(continents), &quot; items.\n&quot;, sep = &quot;&quot;)
-</code></pre>
-
-<pre><code>## We got to iteration 2 of 5 items.
-</code></pre>
-
-<p>Effective use of <code>next</code> and <code>break</code> can make your <code>for</code> (and other) loops both
-more robust and efficient (e.g., by skipping cases where computations may fail).</p>
-
 <h1>R is a functional language</h1>
 
 <p>Functions are one of the most important constructs in R (and many other
@@ -575,7 +218,7 @@ repeatable operations as an individual function call.</p>
 
 <pre><code>## function (x, na.rm = FALSE, ...) 
 ## UseMethod(&quot;median&quot;)
-## &lt;bytecode: 0x5649c0a6da38&gt;
+## &lt;bytecode: 0x55945ff41b40&gt;
 ## &lt;environment: namespace:stats&gt;
 </code></pre>
 
@@ -659,7 +302,7 @@ gm_ord2 &lt;- sortByCol(gapminder, &quot;year&quot;, &quot;lifeExp&quot;)
 head(gm_ord)
 </code></pre>
 
-<pre><code>## # A tibble: 6 x 6
+<pre><code>## # A tibble: 6 × 6
 ##   country          continent  year lifeExp       pop gdpPercap
 ##   &lt;fct&gt;            &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;
 ## 1 Japan            Asia       2007    82.6 127467972    31656.
@@ -846,7 +489,364 @@ g(1)
 <p>Note that <code>x</code> is used as a global variable here, which in general is bad
 practice.</p>
 
-<h1>When do I start programming?</h1>
+<h1>Loops</h1>
+
+<p>In many languages, looping (for loops, while loops, etc.) is one of the main
+constructs used to carry out computation. Loops are not emphasized as much in R,
+both because they can be slow and because other syntax is often cleaner.</p>
+
+<p>But there are lots of times when using a loop does make sense.</p>
+
+<p>Most of you are probably familiar at least with the basic idea of iterating
+through a series of steps. A for loop iterates through a pre-determined number
+of iterations, while a while loop iterates until some condition is met. For
+loops are more common in R, but while loops can be handy particularly for things
+like optimization.</p>
+
+<p>Let&#39;s take an example from Module 4 and use a for loop instead of <code>lapply</code> or <code>aggregate</code>.</p>
+
+<pre><code class="r">out &lt;- list()
+years &lt;- unique(gapminder$year)
+length(out) &lt;- length(years)
+names(out) &lt;- years
+
+for (yrIdx in seq_along(years)) {
+     # equivalently: for(i in 1:length(years))
+     # n.b., seq_along(x) is better than 1:length(x), since it handles the case
+     # where the length of an object is 0 or NULL more robustly.
+     sub &lt;- subset(gapminder, gapminder$year == years[yrIdx])
+     # fit regression
+     out[[yrIdx]] &lt;- lm(lifeExp ~ log(gdpPercap), data = sub)
+}
+out[[&#39;2007&#39;]]
+</code></pre>
+
+<pre><code>## 
+## Call:
+## lm(formula = lifeExp ~ log(gdpPercap), data = sub)
+## 
+## Coefficients:
+##    (Intercept)  log(gdpPercap)  
+##          4.950           7.203
+</code></pre>
+
+<pre><code class="r">summary(out[[&#39;2007&#39;]])
+</code></pre>
+
+<pre><code>## 
+## Call:
+## lm(formula = lifeExp ~ log(gdpPercap), data = sub)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -25.947  -2.661   1.215   4.469  13.115 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)      4.9496     3.8577   1.283    0.202    
+## log(gdpPercap)   7.2028     0.4423  16.283   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 7.122 on 140 degrees of freedom
+## Multiple R-squared:  0.6544, Adjusted R-squared:  0.652 
+## F-statistic: 265.2 on 1 and 140 DF,  p-value: &lt; 2.2e-16
+</code></pre>
+
+<pre><code class="r">summary(out[[&#39;1952&#39;]])
+</code></pre>
+
+<pre><code>## 
+## Call:
+## lm(formula = lifeExp ~ log(gdpPercap), data = sub)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -28.9571  -5.7319   0.7517   6.5770  13.7361 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    -17.8457     5.0668  -3.522 0.000578 ***
+## log(gdpPercap)   8.8298     0.6626  13.326  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 8.146 on 140 degrees of freedom
+## Multiple R-squared:  0.5592, Adjusted R-squared:  0.556 
+## F-statistic: 177.6 on 1 and 140 DF,  p-value: &lt; 2.2e-16
+</code></pre>
+
+<p>The iterations do not have to explicitly be over sequential numbers.</p>
+
+<pre><code class="r">for (yr in years) {
+     cat(yr, &#39;\n&#39;)
+}
+</code></pre>
+
+<pre><code>## 1952 
+## 1957 
+## 1962 
+## 1967 
+## 1972 
+## 1977 
+## 1982 
+## 1987 
+## 1992 
+## 1997 
+## 2002 
+## 2007
+</code></pre>
+
+<h1>Calculation approaches: quick quiz</h1>
+
+<p><strong>POLL 5A</strong></p>
+
+<p>Question 1: Which of these give exactly this result: <code>pi</code>, <code>2*pi</code>, <code>3*pi</code>, &hellip;?</p>
+
+<p>1) (1:n)<em>pi
+2) out &lt;- rep(0, n); for(x in 1:n) out &lt;- x*pi
+3) sapply(1:n, function(x) x*pi)
+4) out &lt;- rep(0, n); for(x in 1:n) out[i] &lt;- x*pi
+5) lapply(1:n, function(x) x*pi)
+6) sapply(1:n, &ldquo;</em>&rdquo;, pi)
+7) 1:n*pi</p>
+
+<p>Question 2: Which of these do you think will be fastest for a long vector, x?</p>
+
+<p>1) x &lt;- exp(x)
+2) x &lt;- sapply(x, exp)
+3) for(i in 1:length(x)) x[i] &lt;- exp(x[i])</p>
+
+<h1>While loop (optional)</h1>
+
+<p>It&#39;s not a particularly interesting example, but we can see the <code>while</code> loop
+syntax in the same example. In this case </p>
+
+<pre><code class="r">yrIdx &lt;- 1
+while (yrIdx &lt;= length(years)) {
+     sub &lt;- subset(gapminder, gapminder$year == years[yrIdx])
+     # fit regression
+     out[[yrIdx]] &lt;- lm(lifeExp ~ log(gdpPercap), data = sub)
+     yrIdx = yrIdx + 1
+}
+summary(out[[&#39;2007&#39;]])
+</code></pre>
+
+<pre><code>## 
+## Call:
+## lm(formula = lifeExp ~ log(gdpPercap), data = sub)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -25.947  -2.661   1.215   4.469  13.115 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)      4.9496     3.8577   1.283    0.202    
+## log(gdpPercap)   7.2028     0.4423  16.283   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 7.122 on 140 degrees of freedom
+## Multiple R-squared:  0.6544, Adjusted R-squared:  0.652 
+## F-statistic: 265.2 on 1 and 140 DF,  p-value: &lt; 2.2e-16
+</code></pre>
+
+<h1>Branching (if-then-else syntax)</h1>
+
+<p>We already saw an example of branching in the <em>for</em> loop example.</p>
+
+<p>Here&#39;s a simple example to illustrate the syntax. Note that the <em>then</em> is
+implicit.</p>
+
+<pre><code class="r">val &lt;- rnorm(1)
+val
+</code></pre>
+
+<pre><code>## [1] 1.265302
+</code></pre>
+
+<pre><code class="r">if (val &lt; 0) {
+  print(&quot;val is negative&quot;)
+} else {
+  print(&quot;val is positive&quot;)
+}
+</code></pre>
+
+<pre><code>## [1] &quot;val is positive&quot;
+</code></pre>
+
+<p>We can chain together <code>if</code> statements as follows.</p>
+
+<pre><code class="r">val &lt;- rnorm(1)
+val
+</code></pre>
+
+<pre><code>## [1] -1.187692
+</code></pre>
+
+<pre><code class="r">if (val &lt; -1) {
+  print(&quot;val is more than one standard deviation below the mean.&quot;)
+} else if (abs(val) &lt;= 1) {
+  print(&quot;val is within one standard deviation of the mean.&quot;)
+} else {
+  print(&quot;val is more than one standard deviation above the mean.&quot;)
+}
+</code></pre>
+
+<pre><code>## [1] &quot;val is more than one standard deviation below the mean.&quot;
+</code></pre>
+
+<p>In general, the <code>{</code> brackets are only needed if you have multiple R expressions,
+but R will complain when an <code>else</code> starts a line of code, so generally using the
+<code>{</code> is good practice. That said, this <em>works just fine</em>:</p>
+
+<pre><code class="r">if (val &lt; 0) print(&quot;val is negative&quot;) else print(&quot;val is positive&quot;)
+</code></pre>
+
+<pre><code>## [1] &quot;val is negative&quot;
+</code></pre>
+
+<h1>The condition in an if statement</h1>
+
+<p>The condition in the if statement cannot be NA or R will give an error. This is
+a very common bug.</p>
+
+<pre><code class="r">continents &lt;- unique(gapminder$continent)
+continents  # what happened ?!
+</code></pre>
+
+<pre><code>## [1] Asia     Europe   Africa   Americas Oceania 
+## Levels: Africa Americas Asia Europe Oceania
+</code></pre>
+
+<pre><code class="r">continents &lt;- unique(as.character(gapminder$continent))
+continents &lt;- c(&#39;Antarctica&#39;, continents)
+
+out &lt;- rep(0, length(continents))
+for (i in seq_along(continents)) {
+    sub &lt;- gapminder[gapminder$continent == continents[i], ]
+    if(mean(sub$lifeExp) &lt; 50)
+       print(continents[i])
+}
+</code></pre>
+
+<pre><code>## Error in if (mean(sub$lifeExp) &lt; 50) print(continents[i]): missing value where TRUE/FALSE needed
+</code></pre>
+
+<pre><code class="r">print(i)
+</code></pre>
+
+<pre><code>## [1] 1
+</code></pre>
+
+<pre><code class="r">sub &lt;- gapminder[gapminder$continent == continents[i], ]
+if(mean(sub$lifeExp) &lt; 50) print(&#39;here&#39;)
+</code></pre>
+
+<pre><code>## Error in if (mean(sub$lifeExp) &lt; 50) print(&quot;here&quot;): missing value where TRUE/FALSE needed
+</code></pre>
+
+<pre><code class="r">mean(sub$lifeExp) &lt; 50
+</code></pre>
+
+<pre><code>## [1] NA
+</code></pre>
+
+<p>An <code>NA</code>/<code>NaN</code> is the main reason an if statement may fail, because R will
+generally convert other values to logical values.</p>
+
+<p>Zero evaluates to <code>FALSE</code>, all other numbers evaluate to <code>TRUE</code>. In general
+strings are not converted to booleans.</p>
+
+<p>A more robust alternative is to use <code>isTRUE()</code>:</p>
+
+<pre><code class="r">out &lt;- rep(0, length(continents))
+for (i in seq_along(continents)) {
+    sub &lt;- gapminder[gapminder$continent == continents[i], ]
+    if(isTRUE(mean(sub$lifeExp) &lt; 60))
+       print(continents[i])
+}
+</code></pre>
+
+<pre><code>## [1] &quot;Africa&quot;
+</code></pre>
+
+<p><strong>POLL 5B</strong>:</p>
+
+<p>What will this return?</p>
+
+<pre><code>if(sqrt(-1) == 0i) {
+   print(&#39;i&#39;)
+} else print(&#39;not i&#39;)
+</code></pre>
+
+<p>1) &#39;i&#39;
+2) an error
+3) &#39;not i&#39;</p>
+
+<h1>Flow control: <code>next</code> and <code>break</code> statements (optional)</h1>
+
+<p><code>next</code> skips the current evaluation of the loop statements:</p>
+
+<pre><code class="r">continents &lt;- unique(gapminder2007$continent)
+continents[2] &lt;- &quot;Oceania&quot;; continents[5] &lt;- &quot;Europe&quot;  # reorder to illustrate points below
+continents
+</code></pre>
+
+<pre><code>## [1] Asia     Oceania  Africa   Americas Europe  
+## Levels: Africa Americas Asia Europe Oceania
+</code></pre>
+
+<pre><code class="r">out &lt;- list(); length(out) &lt;- length(continents); names(out) &lt;- continents
+
+for (i in seq_along(continents)) {
+     # equivalently: for(i in 1:length(continents))
+     sub &lt;- subset(gapminder2007, gapminder2007$continent == continents[i])
+     if(sum(!is.na(sub$lifeExp)) &gt; 2) { # don&#39;t regress if &lt;= 2 obs
+     # fit regression
+       out[[i]] &lt;- lm(lifeExp ~ log(gdpPercap), data = sub)
+     } else {
+       next
+     }
+}
+cat(&quot;We got to iteration &quot;, i, &quot; of &quot;, length(continents), &quot; items.\n&quot;, sep = &quot;&quot;)
+</code></pre>
+
+<pre><code>## We got to iteration 5 of 5 items.
+</code></pre>
+
+<pre><code class="r">out[[&#39;Oceania&#39;]]
+</code></pre>
+
+<pre><code>## NULL
+</code></pre>
+
+<p><code>break</code> immediately ends loop evaluation:</p>
+
+<pre><code class="r">out &lt;- list(); length(out) &lt;- length(continents); names(out) &lt;- continents
+
+for (i in seq_along(continents)) {
+     # equivalently: for(i in 1:length(continents))
+     sub &lt;- subset(gapminder2007, gapminder2007$continent == continents[i])
+     if(sum(!is.na(sub$lifeExp)) &gt; 2) { # don&#39;t regress if &lt;= 2 obs
+     # fit regression
+       out[[i]] &lt;- lm(lifeExp ~ log(gdpPercap), data = sub)
+     } else {
+       break
+     }
+}
+
+cat(&quot;We got to iteration &quot;, i, &quot; of &quot;, length(continents), &quot; items.\n&quot;, sep = &quot;&quot;)
+</code></pre>
+
+<pre><code>## We got to iteration 2 of 5 items.
+</code></pre>
+
+<p>Effective use of <code>next</code> and <code>break</code> can make your <code>for</code> (and other) loops both
+more robust and efficient (e.g., by skipping cases where computations may fail).</p>
+
+<h1>When do I start programming? (optional)</h1>
 
 <blockquote>
 <p>“[W]e wanted users to be able to begin in an interactive environment,
@@ -859,7 +859,7 @@ language and system aspects would become more important</strong>.”</p>
 <p><a href="http://www.stat.bell-labs.com/S/history.html">John Chambers, “Stages in the Evolution of
 S”</a></p>
 
-<h1>Key Principles of R</h1>
+<h1>Key Principles of R (optional)</h1>
 
 <ul>
 <li>Everything that exists is an object.</li>
@@ -893,15 +893,15 @@ talk</a></p></li>
 x[ , 2]
 </code></pre>
 
-<pre><code>##  [1] 0.86554521 0.75992198 0.32760287 0.46474659 0.47148042 0.55240521
-##  [7] 0.21259133 0.04462478 0.14878614 0.07025813
+<pre><code>##  [1] 0.31668518 0.09193411 0.81136630 0.46051853 0.49686569 0.61024090
+##  [7] 0.93737333 0.11794049 0.72570030 0.56017250
 </code></pre>
 
 <pre><code class="r">&#39;[&#39;(x , , 2)
 </code></pre>
 
-<pre><code>##  [1] 0.86554521 0.75992198 0.32760287 0.46474659 0.47148042 0.55240521
-##  [7] 0.21259133 0.04462478 0.14878614 0.07025813
+<pre><code>##  [1] 0.31668518 0.09193411 0.81136630 0.46051853 0.49686569 0.61024090
+##  [7] 0.93737333 0.11794049 0.72570030 0.56017250
 </code></pre>
 
 <p>Also yes!</p>
@@ -936,7 +936,7 @@ class(square)
 <pre><code>## [1] &quot;function&quot;
 </code></pre>
 
-<h1>Modern Functional Programming in R (Advanced)</h1>
+<h1>(Advanced) Modern Functional Programming in R (optional)</h1>
 
 <p>Now that we&#39;ve taken an extensive look at <code>for</code> loops and programming with
 functions, we can move on from base R to look at more modern and powerful tools
