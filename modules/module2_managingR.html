@@ -104,22 +104,27 @@ of that.</p>
 <li>Ctrl-{up arrow} or Command-{up arrow}</li>
 </ul></li>
 <li>RStudio: select a line or block for execution</li>
-<li>For keyboard shortcuts in RStudio see
-<code>Tools -&gt; Keyboard Shortcuts Help</code> or <a href="https://www.r-bloggers.com/rstudio-shortcuts-and-tips">this online
-tip page</a>.</li>
+<li>For keyboard shortcuts in RStudio see:
+<ul>
+<li><code>Tools -&gt; Keyboard Shortcuts Help</code> or</li>
+<li><a href="https://www.r-bloggers.com/rstudio-shortcuts-and-tips">this
+online tip page</a>, or</li>
+<li><a href="https://appsilon.com/rstudio-shortcuts-and-tips">this</a>
+and <a href="https://www.r-bloggers.com/r-studio-shortcuts-and-tips-part-2">this</a>
+blog posts.</li>
+</ul></li>
 <li><a href="https://www.r-bloggers.com/tips-and-tricks-in-rstudio-and-r-markdown">Other
 tips</a> for saving time in RStudio and R Markdown</li>
 <li>Put your code in a file and use <code>source()</code>. For example:
 <code>source(&#39;myRcodeFile.R&#39;)</code></li>
 </ul>
 <p><strong>Question</strong>: Are there other tricks that anyone knows
-of? Please share in Piazza.</p>
-<p>RStudio has lots of shortcuts. See <a href="https://appsilon.com/r-studio-shortcuts-and-tips/">here</a> and <a href="https://www.r-bloggers.com/r-studio-shortcuts-and-tips-part-2">here</a>.</p>
+of? Please share in the online discussion forum.</p>
 </div>
 <div id="managing-your-objects" class="slide section level1">
 <h1>Managing your objects</h1>
 <p>R has a number of functions for getting metadata about your objects.
-Some of this is built in to RStudio.</p>
+Some of this is built in to RStudio Environment tab/panel.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> gapminder<span class="sc">$</span>year</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>v2 <span class="ot">&lt;-</span> gapminder<span class="sc">$</span>continent</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>v3 <span class="ot">&lt;-</span> gapminder<span class="sc">$</span>lifeExp</span>
@@ -166,8 +171,8 @@ object in R?</p>
 <li><code>gapminder</code> is a function</li>
 </ol>
 </div>
-<div id="managing-and-saving-the-workspace" class="slide section level1">
-<h1>Managing and saving the workspace</h1>
+<div id="managing-the-workspace" class="slide section level1">
+<h1>Managing the workspace</h1>
 <p>R has functions for learning about the collection of objects in your
 workspace. Some of this is built in to RStudio.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">5</span>)</span>
@@ -190,6 +195,9 @@ workspace. Some of this is built in to RStudio.</p>
 ## z : List of 2
 ##  $ a: num 3
 ##  $ b: chr [1:2] &quot;sam&quot; &quot;yang&quot;</code></pre>
+</div>
+<div id="saving-and-reloading-the-workspace" class="slide section level1">
+<h1>Saving and reloading the workspace</h1>
 <p>Finally we can save the objects in our R session:</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
 <pre><code>## [1] &quot;myList&quot; &quot;v1&quot;     &quot;v2&quot;     &quot;v3&quot;     &quot;y&quot;      &quot;z&quot;</code></pre>
@@ -229,7 +237,9 @@ package.</p>
 <em>packages</em> and not <em>libraries</em>. A <em>library</em> is the
 location in the directory structure where the packages are
 installed/stored.</p>
-<h3 id="using-packages">Using packages</h3>
+</div>
+<div id="using-packages" class="slide section level1">
+<h1>Using packages</h1>
 <p>Two steps:</p>
 <ol style="list-style-type: decimal">
 <li>Install the package on your machine
@@ -274,8 +284,9 @@ dependencies may be installed and loaded automatically. E.g.,
 <em>fields</em> depends on <em>maps</em> and on <em>spam</em>.</p>
 <p>You can also install directly from a package zip/tarball rather than
 from CRAN by giving a filename instead of a package name.</p>
-<h3 id="general-information-about-a-package">General information about a
-package</h3>
+</div>
+<div id="general-information-about-a-package" class="slide section level1">
+<h1>General information about a package</h1>
 <p>You can use syntax as follows to get a list of the objects in a
 package and a brief description:
 <code>library(help = packageName)</code>.</p>
@@ -314,7 +325,7 @@ principled way.</p>
 <pre><code>## [1] 7</code></pre>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(gapminder<span class="sc">$</span>lifeExp <span class="sc">~</span> gapminder<span class="sc">$</span>gdpPercap)</span></code></pre></div>
 <pre><code>## gapminder$lifeExp ~ gapminder$gdpPercap
-## &lt;environment: 0x55a04e0f9520&gt;</code></pre>
+## &lt;environment: 0x55d9fd3a3ab0&gt;</code></pre>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>stats<span class="sc">::</span><span class="fu">lm</span>(gapminder<span class="sc">$</span>lifeExp <span class="sc">~</span> gapminder<span class="sc">$</span>gdpPercap)</span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -402,26 +413,38 @@ same page in terms of where in the directory structure you are.</p>
 <pre><code>Users
 --paciorek
 ----Desktop
-------r-bootcamp-fall-2020
+------r-bootcamp-fall-2022
 --------data
 --------modules
 --------schedule
 ----Documents</code></pre>
-<p>and suppose my current working directory is:</p>
-<p><code>/Users/paciorek/Desktop/r-bootcamp-fall-2020/modules</code>.</p>
+<p>Which of the following are relative paths?</p>
+<ol style="list-style-type: decimal">
+<li>setwd(‘Users/paciorek/Desktop/r-bootcamp-fall-2022/data’)</li>
+<li>setwd(‘/Users/paciorek/Desktop/r-bootcamp-fall-2022/data’)</li>
+<li>setwd(‘data’)</li>
+<li>setwd(‘../data’)</li>
+<li>setwd(‘~paciorek/Desktop/r-bootcamp-fall-2022/data’)</li>
+<li>setwd(‘paciorek’, ‘Desktop/r-bootcamp-fall-2022/data’)</li>
+<li>setwd(‘./data’)</li>
+<li>setwd(‘Desktop/r-bootcamp-fall-2022/data’)</li>
+</ol>
+<p><strong>POLL 2C</strong>:</p>
+<p>Suppose my current working directory is:</p>
+<p><code>/Users/paciorek/Desktop/r-bootcamp-fall-2022/modules</code>.</p>
 <p>Windows users, just think of this as being:
-<code>C:\Users\paciorek\Desktop\r-bootcamp-fall-2020\modules</code>.</p>
+<code>C:\Users\paciorek\Desktop\r-bootcamp-fall-2022\modules</code>.</p>
 <p>Which of the following will allow me to change to the ‘data’
 subdirectory?</p>
 <ol style="list-style-type: decimal">
-<li>setwd(‘Users/paciorek/Desktop/r-bootcamp-fall-2020/data’)</li>
-<li>setwd(‘/Users/paciorek/Desktop/r-bootcamp-fall-2020/data’)</li>
+<li>setwd(‘Users/paciorek/Desktop/r-bootcamp-fall-2022/data’)</li>
+<li>setwd(‘/Users/paciorek/Desktop/r-bootcamp-fall-2022/data’)</li>
 <li>setwd(‘data’)</li>
 <li>setwd(‘../data’)</li>
-<li>setwd(‘~paciorek/Desktop/r-bootcamp-fall-2020/data’)</li>
-<li>setwd(‘paciorek’, ’ Desktop/r-bootcamp-fall-2020/data’)</li>
+<li>setwd(‘~paciorek/Desktop/r-bootcamp-fall-2022/data’)</li>
+<li>setwd(‘paciorek’, ‘Desktop/r-bootcamp-fall-2022/data’)</li>
 <li>setwd(‘./data’)</li>
-<li>setwd(‘Desktop/r-bootcamp-fall-2020/data’)</li>
+<li>setwd(‘Desktop/r-bootcamp-fall-2022/data’)</li>
 </ol>
 </div>
 <div id="reading-text-files-into-r" class="slide section level1">
@@ -502,7 +525,7 @@ field) with <em>read.fwf()</em>.</li>
 <li><em>read_csv()</em> (and <em>read_lines()</em>, <em>read_fwf()</em>,
 etc.) in the <em>readr</em> package is a faster, more helpful drop-in
 replacement for <em>read.csv()</em> that plays well with <em>dplyr</em>
-(see Module 5).</li>
+(see Module 6).</li>
 <li>the <em>data.table</em> package is great for reading and
 manipulating large datasets (orders of gigabytes or 10s of
 gigabytes).</li>
@@ -567,7 +590,7 @@ default).</p>
 <div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xtable)</span>
 <span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">xtable</span>(<span class="fu">table</span>(gapminder<span class="sc">$</span>year, gapminder<span class="sc">$</span>continent)), <span class="at">type =</span> <span class="st">&quot;html&quot;</span>)</span></code></pre></div>
 <pre><code>## &lt;!-- html table generated in R 4.2.0 by xtable 1.8-4 package --&gt;
-## &lt;!-- Wed Jul 27 14:30:18 2022 --&gt;
+## &lt;!-- Wed Jul 27 16:04:38 2022 --&gt;
 ## &lt;table border=1&gt;
 ## &lt;tr&gt; &lt;th&gt;  &lt;/th&gt; &lt;th&gt; Africa &lt;/th&gt; &lt;th&gt; Americas &lt;/th&gt; &lt;th&gt; Asia &lt;/th&gt; &lt;th&gt; Europe &lt;/th&gt; &lt;th&gt; Oceania &lt;/th&gt;  &lt;/tr&gt;
 ##   &lt;tr&gt; &lt;td align=&quot;right&quot;&gt; 1952 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  52 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  25 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  33 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  30 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;   2 &lt;/td&gt; &lt;/tr&gt;

@@ -62,7 +62,8 @@ val
 print(val)
 
 Val <- 7 # case-sensitive!
-print(c(val, Val))
+print(val)
+print(Val)
 ```
 
 We can work with (and store) sequences and repetitions
@@ -190,8 +191,8 @@ gdpSubset >= 1e6  # Dr. Evil's version of "a lot"
 
 * Functions generally take arguments, some of which are often optional:
 ```{r}
-median(gapminder$lifeExp)
-median(gapminder$lifeExp, na.rm =  TRUE)
+mean(gapminder$lifeExp)
+mean(gapminder$lifeExp, trim = 0.1)
 ```
 
 * We can embed function calls: 
@@ -202,7 +203,7 @@ hist(rnorm(1000))
 * We can (usually) see the code of a function:
 ```{r}
 lm
-median  # We'll investigate what 'UseMethod' does in Module 10
+mean  # We'll investigate what 'UseMethod' does in Module 10
 ```
 
 # Getting help about a function

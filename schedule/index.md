@@ -18,15 +18,16 @@ for discussion of solutions.
     * helpful shortcuts: tab-complete, up arrow, Ctrl-{up arrow}
     * vectors, indexing, and subset assignment
     * some basic functions; help()
-    * vectorized calculations, comparisons
-    * basic R objects: vectors, matrices, dataframes, lists
+    * vectorized calculations
+    * basic R objects: vectors, dataframes, lists
     * basic graphics
     * breakout problems
   - Break (15 minutes)
-  - [Module 2](../modules/module2_managingR): Managing R and your analyses (Chris) (45 minutes)
+  - [Module 2](../modules/module2_managingR): Managing R and your analyses (Chris)
     * managing R objects, the R workspace
     * using packages (installing, loading, namespaces)
-    * the working directory and basic file reading/writing
+    * the working directory
+    * file reading/writing
     * Git, GitHub and version control
     * getting R help online 
     * breakout problems
@@ -35,23 +36,22 @@ for discussion of solutions.
     * attributes, missing values and factors
     * subsetting
     * strings
+    * breakout problems
 
 - Lunch (on your own) (12:00-1:30)
 - Day 1 afternoon (1:30-5:00) (data processing and manipulation)
 
-  - Module 3: Working with data, continued (TBD) 
-    * more on reading data
-    * breakout problems
   - [Module 4](../modules/module4_calc): Calculations (TBD)
     * vectorized calculations and efficiency
-    * apply, lapply
-    * tabulation, stratified analyses, aggregation, merging data
+    * apply, lapply (map operations)
+    * tabulation, stratified analyses, 
+    * merging/joining tables
     * breakout problems 
   -  Break (15 minutes)
   - [Module 5](../modules/module5_programming): Programming in R (TBD)
-    * loops, if-else
     * writing your own functions, function arguments, functions as objects
     * basic scoping and environments
+    * loops, if-else
     * breakout problems/homework
 
 ## Day 2

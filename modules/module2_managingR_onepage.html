@@ -214,18 +214,22 @@ hr {
 <li>Ctrl-{up arrow} or Command-{up arrow}</li>
 </ul></li>
 <li>RStudio: select a line or block for execution</li>
-<li>For keyboard shortcuts in RStudio see <code>Tools -&gt; Keyboard Shortcuts Help</code> or <a href="https://www.r-bloggers.com/rstudio-shortcuts-and-tips">this online tip page</a>.</li>
+<li>For keyboard shortcuts in RStudio see:
+
+<ul>
+<li><code>Tools -&gt; Keyboard Shortcuts Help</code> or</li>
+<li><a href="https://www.r-bloggers.com/rstudio-shortcuts-and-tips">this online tip page</a>, or</li>
+<li><a href="https://appsilon.com/rstudio-shortcuts-and-tips">this</a> and <a href="https://www.r-bloggers.com/r-studio-shortcuts-and-tips-part-2">this</a> blog posts.</li>
+</ul></li>
 <li><a href="https://www.r-bloggers.com/tips-and-tricks-in-rstudio-and-r-markdown">Other tips</a> for saving time in RStudio and R Markdown</li>
 <li>Put your code in a file and use <code>source()</code>. For example: <code>source(&#39;myRcodeFile.R&#39;)</code></li>
 </ul>
 
-<p><strong>Question</strong>: Are there other tricks that anyone knows of? Please share in Piazza.</p>
-
-<p>RStudio has lots of shortcuts. See <a href="https://appsilon.com/r-studio-shortcuts-and-tips/">here</a> and <a href="https://www.r-bloggers.com/r-studio-shortcuts-and-tips-part-2">here</a>.</p>
+<p><strong>Question</strong>: Are there other tricks that anyone knows of? Please share in the online discussion forum.</p>
 
 <h1>Managing your objects</h1>
 
-<p>R has a number of functions for getting metadata about your objects. Some of this is built in to RStudio.</p>
+<p>R has a number of functions for getting metadata about your objects. Some of this is built in to RStudio Environment tab/panel.</p>
 
 <pre><code class="r">v1 &lt;- gapminder$year
 v2 &lt;- gapminder$continent
@@ -322,7 +326,7 @@ is.list(myList)
 4) <code>gapminder</code> is a list
 5) <code>gapminder</code> is a function</p>
 
-<h1>Managing and saving the workspace</h1>
+<h1>Managing the workspace</h1>
 
 <p>R has functions for learning about the collection of objects in your workspace. Some of this is built in to RStudio.</p>
 
@@ -357,6 +361,8 @@ ls()
 ##  $ a: num 3
 ##  $ b: chr [1:2] &quot;sam&quot; &quot;yang&quot;
 </code></pre>
+
+<h1>Saving and reloading the workspace</h1>
 
 <p>Finally we can save the objects in our R session:</p>
 
@@ -406,7 +412,7 @@ ls()
 
 <p>If you want to sound like an R expert, make sure to call them <em>packages</em> and not <em>libraries</em>. A <em>library</em> is the location in the directory structure where the packages are installed/stored.</p>
 
-<h3>Using packages</h3>
+<h1>Using packages</h1>
 
 <p>Two steps:</p>
 
@@ -457,7 +463,7 @@ ls()
 
 <p>You can also install directly from a package zip/tarball rather than from CRAN by giving a filename instead of a package name.</p>
 
-<h3>General information about a package</h3>
+<h1>General information about a package</h1>
 
 <p>You can use syntax as follows to get a list of the objects in a package and a brief description: <code>library(help = packageName)</code>. </p>
 
@@ -504,7 +510,7 @@ lm(7)
 </code></pre>
 
 <pre><code>## gapminder$lifeExp ~ gapminder$gdpPercap
-## &lt;environment: 0x55a04e0f9520&gt;
+## &lt;environment: 0x55d9fd3a3ab0&gt;
 </code></pre>
 
 <pre><code class="r">stats::lm(gapminder$lifeExp ~ gapminder$gdpPercap)
@@ -594,30 +600,43 @@ setwd(file.path(&#39;..&#39;, &#39;data&#39;)) # relative path
 <pre><code>Users
 --paciorek
 ----Desktop
-------r-bootcamp-fall-2020
+------r-bootcamp-fall-2022
 --------data
 --------modules
 --------schedule
 ----Documents
 </code></pre>
 
-<p>and suppose my current working directory is:</p>
+<p>Which of the following are relative paths?</p>
 
-<p><code>/Users/paciorek/Desktop/r-bootcamp-fall-2020/modules</code>.</p>
+<p>1) setwd(&#39;Users/paciorek/Desktop/r-bootcamp-fall-2022/data&#39;)
+2) setwd(&#39;/Users/paciorek/Desktop/r-bootcamp-fall-2022/data&#39;)
+3) setwd(&#39;data&#39;)
+4) setwd(&#39;../data&#39;)
+5) setwd(&#39;~paciorek/Desktop/r-bootcamp-fall-2022/data&#39;)
+6) setwd(&#39;paciorek&#39;, &#39;Desktop/r-bootcamp-fall-2022/data&#39;)
+7) setwd(&#39;./data&#39;)
+8) setwd(&#39;Desktop/r-bootcamp-fall-2022/data&#39;)</p>
+
+<p><strong>POLL 2C</strong>:</p>
+
+<p>Suppose my current working directory is:</p>
+
+<p><code>/Users/paciorek/Desktop/r-bootcamp-fall-2022/modules</code>.</p>
 
 <p>Windows users, just think of this as being:
-<code>C:\Users\paciorek\Desktop\r-bootcamp-fall-2020\modules</code>.</p>
+<code>C:\Users\paciorek\Desktop\r-bootcamp-fall-2022\modules</code>.</p>
 
 <p>Which of the following will allow me to change to the &#39;data&#39; subdirectory?</p>
 
-<p>1) setwd(&#39;Users/paciorek/Desktop/r-bootcamp-fall-2020/data&#39;)
-2) setwd(&#39;/Users/paciorek/Desktop/r-bootcamp-fall-2020/data&#39;)
+<p>1) setwd(&#39;Users/paciorek/Desktop/r-bootcamp-fall-2022/data&#39;)
+2) setwd(&#39;/Users/paciorek/Desktop/r-bootcamp-fall-2022/data&#39;)
 3) setwd(&#39;data&#39;)
 4) setwd(&#39;../data&#39;)
-5) setwd(&#39;~paciorek/Desktop/r-bootcamp-fall-2020/data&#39;)
-6) setwd(&#39;paciorek&#39;, &#39; Desktop/r-bootcamp-fall-2020/data&#39;)
+5) setwd(&#39;~paciorek/Desktop/r-bootcamp-fall-2022/data&#39;)
+6) setwd(&#39;paciorek&#39;, &#39;Desktop/r-bootcamp-fall-2022/data&#39;)
 7) setwd(&#39;./data&#39;)
-8) setwd(&#39;Desktop/r-bootcamp-fall-2020/data&#39;)</p>
+8) setwd(&#39;Desktop/r-bootcamp-fall-2022/data&#39;)</p>
 
 <h1>Reading text files into R</h1>
 
@@ -726,7 +745,7 @@ sum(is.na( rta2[ , 2] ))
 
 <p>1) You can also read in a file as vector of characters, one character string per line of the file with <em>readLines()</em>, and then post-process it. 
 2) You can read fixed width format (constant number of characters per field) with <em>read.fwf()</em>.
-3) <em>read_csv()</em> (and <em>read_lines()</em>, <em>read_fwf()</em>, etc.) in the <em>readr</em> package is a faster, more helpful drop-in replacement for <em>read.csv()</em> that plays well with <em>dplyr</em> (see Module 5).
+3) <em>read_csv()</em> (and <em>read_lines()</em>, <em>read_fwf()</em>, etc.) in the <em>readr</em> package is a faster, more helpful drop-in replacement for <em>read.csv()</em> that plays well with <em>dplyr</em> (see Module 6).
 4) the <em>data.table</em> package is great for reading and manipulating large datasets (orders of gigabytes or 10s of gigabytes).</p>
 
 <h1>Reading &#39;foreign&#39; format data</h1>
@@ -791,7 +810,7 @@ print(xtable(table(gapminder$year, gapminder$continent)), type = &quot;html&quot
 </code></pre>
 
 <pre><code>## &lt;!-- html table generated in R 4.2.0 by xtable 1.8-4 package --&gt;
-## &lt;!-- Wed Jul 27 14:30:18 2022 --&gt;
+## &lt;!-- Wed Jul 27 16:04:38 2022 --&gt;
 ## &lt;table border=1&gt;
 ## &lt;tr&gt; &lt;th&gt;  &lt;/th&gt; &lt;th&gt; Africa &lt;/th&gt; &lt;th&gt; Americas &lt;/th&gt; &lt;th&gt; Asia &lt;/th&gt; &lt;th&gt; Europe &lt;/th&gt; &lt;th&gt; Oceania &lt;/th&gt;  &lt;/tr&gt;
 ##   &lt;tr&gt; &lt;td align=&quot;right&quot;&gt; 1952 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  52 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  25 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  33 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  30 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;   2 &lt;/td&gt; &lt;/tr&gt;

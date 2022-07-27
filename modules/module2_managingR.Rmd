@@ -17,18 +17,20 @@ If you're starting to type something you've typed before, or the long name of an
     * up/down arrows
     * Ctrl-{up arrow} or Command-{up arrow}
 - RStudio: select a line or block for execution
-- For keyboard shortcuts in RStudio see `Tools -> Keyboard Shortcuts Help` or [this online tip page](https://www.r-bloggers.com/rstudio-shortcuts-and-tips).
+- For keyboard shortcuts in RStudio see:
+   - `Tools -> Keyboard Shortcuts Help` or
+   - [this online tip page](https://www.r-bloggers.com/rstudio-shortcuts-and-tips), or
+   - [this](https://appsilon.com/rstudio-shortcuts-and-tips) and [this](https://www.r-bloggers.com/r-studio-shortcuts-and-tips-part-2) blog posts.
 - [Other tips](https://www.r-bloggers.com/tips-and-tricks-in-rstudio-and-r-markdown) for saving time in RStudio and R Markdown
 - Put your code in a file and use `source()`. For example: `source('myRcodeFile.R')`
 
 
-**Question**: Are there other tricks that anyone knows of? Please share in Piazza.
+**Question**: Are there other tricks that anyone knows of? Please share in the online discussion forum.
 
-RStudio has lots of shortcuts. See [here](https://appsilon.com/r-studio-shortcuts-and-tips/) and [here](https://www.r-bloggers.com/r-studio-shortcuts-and-tips-part-2).
 
 # Managing your objects
 
-R has a number of functions for getting metadata about your objects. Some of this is built in to RStudio.
+R has a number of functions for getting metadata about your objects. Some of this is built in to RStudio Environment tab/panel.
 
 ```{r}
 
@@ -66,7 +68,7 @@ is.data.frame(myList)
 5) `gapminder` is a function
 
 
-# Managing and saving the workspace
+# Managing the workspace
 
 R has functions for learning about the collection of objects in your workspace. Some of this is built in to RStudio.
 
@@ -79,6 +81,8 @@ rm(x)    # delete a variable
 ls()
 ls.str() # list and describe variables
 ```
+
+# Saving and reloading the workspace
 
 Finally we can save the objects in our R session:
 ```{r}
@@ -102,7 +106,7 @@ Essentially any well-established and many not-so-established statistical methods
 
 If you want to sound like an R expert, make sure to call them *packages* and not *libraries*. A *library* is the location in the directory structure where the packages are installed/stored.
 
-### Using packages
+# Using packages
 
 Two steps:
 
@@ -146,7 +150,7 @@ Note that packages often are dependent on other packages so these dependencies m
 
 You can also install directly from a package zip/tarball rather than from CRAN by giving a filename instead of a package name.
 
-### General information about a package
+# General information about a package
 
 You can use syntax as follows to get a list of the objects in a package and a brief description: `library(help = packageName)`. 
 
@@ -251,30 +255,45 @@ Suppose I am on a Mac that has the following directories:
 Users
 --paciorek
 ----Desktop
-------r-bootcamp-fall-2020
+------r-bootcamp-fall-2022
 --------data
 --------modules
 --------schedule
 ----Documents
 ```
 
-and suppose my current working directory is:
+Which of the following are relative paths?
 
-`/Users/paciorek/Desktop/r-bootcamp-fall-2020/modules`.
+1) setwd('Users/paciorek/Desktop/r-bootcamp-fall-2022/data')
+2) setwd('/Users/paciorek/Desktop/r-bootcamp-fall-2022/data')
+3) setwd('data')
+4) setwd('../data')
+5) setwd('~paciorek/Desktop/r-bootcamp-fall-2022/data')
+6) setwd('paciorek', 'Desktop/r-bootcamp-fall-2022/data')
+7) setwd('./data')
+8) setwd('Desktop/r-bootcamp-fall-2022/data')
+
+
+**POLL 2C**:
+
+Suppose my current working directory is:
+
+`/Users/paciorek/Desktop/r-bootcamp-fall-2022/modules`.
 
 Windows users, just think of this as being:
-`C:\Users\paciorek\Desktop\r-bootcamp-fall-2020\modules`.
+`C:\Users\paciorek\Desktop\r-bootcamp-fall-2022\modules`.
 
 Which of the following will allow me to change to the 'data' subdirectory?
 
-1) setwd('Users/paciorek/Desktop/r-bootcamp-fall-2020/data')
-2) setwd('/Users/paciorek/Desktop/r-bootcamp-fall-2020/data')
+1) setwd('Users/paciorek/Desktop/r-bootcamp-fall-2022/data')
+2) setwd('/Users/paciorek/Desktop/r-bootcamp-fall-2022/data')
 3) setwd('data')
 4) setwd('../data')
-5) setwd('~paciorek/Desktop/r-bootcamp-fall-2020/data')
-6) setwd('paciorek', ' Desktop/r-bootcamp-fall-2020/data')
+5) setwd('~paciorek/Desktop/r-bootcamp-fall-2022/data')
+6) setwd('paciorek', 'Desktop/r-bootcamp-fall-2022/data')
 7) setwd('./data')
-8) setwd('Desktop/r-bootcamp-fall-2020/data')
+8) setwd('Desktop/r-bootcamp-fall-2022/data')
+
 
 
 # Reading text files into R
@@ -328,7 +347,7 @@ The *read.table()* family of functions just skims the surface of things...
 
 1) You can also read in a file as vector of characters, one character string per line of the file with *readLines()*, and then post-process it. 
 2) You can read fixed width format (constant number of characters per field) with *read.fwf()*.
-3) *read_csv()* (and *read_lines()*, *read_fwf()*, etc.) in the *readr* package is a faster, more helpful drop-in replacement for *read.csv()* that plays well with *dplyr* (see Module 5).
+3) *read_csv()* (and *read_lines()*, *read_fwf()*, etc.) in the *readr* package is a faster, more helpful drop-in replacement for *read.csv()* that plays well with *dplyr* (see Module 6).
 4) the *data.table* package is great for reading and manipulating large datasets (orders of gigabytes or 10s of gigabytes).
 
 
