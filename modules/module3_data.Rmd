@@ -8,6 +8,79 @@
 library(gapminder)
 ```
 
+# Lists
+
+Collections of disparate or complicated objects
+
+```{r}
+myList <- list(stuff = 3, mat = matrix(1:4, nrow = 2), 
+   moreStuff = c("china", "japan"), list(5, "bear"))
+myList
+myList[[3]] # result is not (usually) a list (unless you have nested lists)
+identical(myList[[3]], myList$moreStuff)
+myList$moreStuff[2]
+myList[[4]][[2]]
+myList[1:3] # subset of a list is a list
+myList$newOne <- 'more weird stuff'
+names(myList)
+```
+
+Lists can be used as vectors of complicated objects. E.g., suppose you have a linear regression for each value of a stratifying variable. You could have a list of regression fits. Each regression fit will itself be a list, so you'll have a list of lists.
+
+# Lists: quick quiz
+
+**POLL 3A**: How would you extract "china" from this list?
+
+```
+myList <- list(stuff = 3, mat = matrix(1:4, nrow = 2), 
+   moreStuff = c("china", "japan"), list(5, "bear"))
+```
+
+1) myList$moreStuff[1]
+2) myList$moreStuff[[1]]
+3) myList[[1]]
+4) myList[[3]][2]
+5) myList[[3]][1]
+6) myList[3][1]
+7) myList[['moreStuff']][1]
+
+
+# Data frames
+
+A review from Module 1...
+
+- Data frames are combinations of vectors of the same length, but can be of different types
+- Data frames are what is used for standard rectangular (record by field) datasets, similar to a spreadsheet
+- Data frames are a functionality that both sets R aside from some languages (e.g., Matlab) and provides functionality similar to some statistical packages (e.g., Stata, SAS)
+
+```{r}
+class(gapminder)
+head(gapminder)
+str(gapminder)
+```
+
+# Data frames are (special) lists!
+
+```{r}
+is.list(gapminder)
+length(gapminder)
+gapminder[[3]][1:5]
+lapply(gapminder, class) 
+```
+
+`lapply()` is a function used on lists; it works here to apply the `class()` function to each element of the list, which in this case is each field/column.
+
+# But lists are also vectors!
+
+```{r}
+length(gapminder)
+someFields <- gapminder[c(3,5)]
+head(someFields)
+identical(gapminder[c(3,5)], gapminder[ , c(3,5)])
+```
+
+In general the placement of commas in R is crucial, but here, two different operations give the same result because of the underlying structure of data frames.
+
 # Matrices and Arrays
 
 If you need to do numeric calculations on an entire non-vector object (dimension > 1), you generally want to use matrices and arrays, not data frames.
@@ -42,7 +115,7 @@ arr
 
 # Matrices: quick quiz
 
-**POLL 3A**: Recall the gap dataframe has columns that are numeric and columns that are character strings. What do you think will happen if we do this:
+**POLL 3B**: Recall the gap dataframe has columns that are numeric and columns that are character strings. What do you think will happen if we do this:
 
 ```
 as.matrix(gapminder)
@@ -73,7 +146,7 @@ Now let's do a bit of manipulation and see if you can infer how R represents mat
 
 # Attributes: quick quiz
 
-**POLL 3B**: Consider our matrix 'mat':
+**POLL 3C**: Consider our matrix 'mat':
 
 ```
 mat <- matrix(1:16, nrow = 4, ncol = 4)
@@ -174,7 +247,7 @@ myList
 
 # Missing values: quick quiz
 
-**POLL 3C**
+**POLL 3D**
 
 *Question 1*: Consider the following vector:
 
@@ -227,7 +300,8 @@ What is length(mylist):
 3) 1
 
 
-# Logical vectors
+# Logical vectors and boolean arithmetic
+
 ```{r}
 gapminder2007 <- gapminder[gapminder$year == 2007, ]
 
@@ -249,42 +323,45 @@ mean(healthy)
 
 **Question**: What do you think R is doing to do arithmetic on logical vectors?
 
+# Converting between different types of objects
 
-# Data frames
-
-A review from Module 1...
-
-- Data frames are combinations of vectors of the same length, but can be of different types
-- Data frames are what is used for standard rectangular (record by field) datasets, similar to a spreadsheet
-- Data frames are a functionality that both sets R aside from some languages (e.g., Matlab) and provides functionality similar to some statistical packages (e.g., Stata, SAS)
+You can use the `as()` family of functions.
 
 ```{r}
-class(gapminder)
-head(gapminder)
-str(gapminder)
+ints <- 1:10
+as.character(ints)
+as.numeric(c('3.7', '4.8'))
 ```
 
-# Data frames are (special) lists!
+Be careful: R tries to be helpful and convert between types/classes when it thinks it's a good idea. Sometimes it is overly optimistic. 
 
 ```{r}
-is.list(gapminder)
-length(gapminder)
-gapminder[[3]][1:5]
-lapply(gapminder, class) 
+indices <- c(1.7, 2.3)
+ints[indices]
+ints[0.999999999]
+```
+# Converting between different types: quick quiz
+
+**POLL 3E**:
+
+*Question 1*: What do you think this will do?
+
+```
+ints <- 1:5
+ints[0.9999]
 ```
 
-`lapply()` is a function used on lists; it works here to apply the `class()` function to each element of the list, which in this case is each field/column.
+1) return an error
+2) return 1
+3) return an empty vector
 
-# But lists are also vectors!
+*Question 2*: What does the code do when it tries to use 0.9999 to subset?
 
-```{r}
-length(gapminder)
-someFields <- gapminder[c(3,5)]
-head(someFields)
-identical(gapminder[c(3,5)], gapminder[ , c(3,5)])
-```
+1) round the 0.9999 to 1
+2) truncate the 0.9999 to 0
+3) return an error
 
-In general the placement of commas in R is crucial, but here, two different operations give the same result because of the underlying structure of data frames.
+
 
 # Factors
 - A factor is a special data type in R used for categorical data. In some cases it works like magic and in others it is incredibly frustrating. 
@@ -408,7 +485,7 @@ mat
 
 # Subsetting: quick quiz
 
-**POLL 3D**
+**POLL 3F**
 
 *Question 1*: Suppose I want to select the 3rd elements from the 2nd and 4th columns of a matrix or dataframe. Which syntax will work?
 
@@ -469,55 +546,13 @@ countries2 <- gsub("Korea Dem. Rep.", "North Korea", countries)
 countries2[indexes]
 ```
 
-# Regular expressions (regex or regexp)
+# Regular expressions (regex or regexp) (optional)
 
 Some of you may be familiar with using *regular expressions*, which is functionality for doing sophisticated pattern matching and replacement with strings. *Python* and *Perl* are both used extensively for such text manipulation. 
 
-R has a full set of regular expression capabilities available through the *grep()*, *gregexpr()*, and *gsub()* functions (among others - many R functions will work with regular expressions). A particularly nice way to make use of this functionality is to use the *stringr* package, which is more user-friendly than directly using the core R functions.
+R has a full set of regular expression capabilities available through the *grep()*, *gregexpr()*, and *gsub()* functions (among others - many R functions will work with regular expressions). However, a particularly nice way to make use of this functionality is to use the *stringr* package, which is more user-friendly than directly using the core R functions.
 
-You can basically do any regular expression/string manipulations in R, though the syntax may be a bit clunky at times.
-
-# More details on reading data into R
-
-Remember that you'll need to know the current working directory so that you know where R is looking for files.
-
-The workhorse for reading into a data frame is *read.table()*, which allows any separator (CSV, tab-delimited, etc.). *read.csv()* is a special case of *read.table()* for CSV files.
-
-You've already seen a bit of this, but let's work through a more involved example, so you can see some of the steps and tricks involved in reading data into R.
-
-```{r, cache=TRUE}
-rta <- read.table("../data/RTAData.csv", sep = ",", head = TRUE)
-rta[1:5, 1:5]
-dim(rta)
-# great, we're all set, right?
-# Not so fast...
-unlist(lapply(rta, class))[1:5]
-# let's delve more deeply
-# unique(rta[ , 2])  # don't run when creating slides
-head(sort(unique(rta[ , 2])))
-tail(sort(unique(rta[ , 2])))
-# can we handle that with read.table?
-# help(read.table)
-
-rta2 <- read.table("../data/RTAData.csv", sep = ",", head = TRUE, 
-      na.strings = c('NA', 'x'))
-unlist(lapply(rta2, class))[1:5]
-
-# checking...
-sum(is.na( rta2[ , 2] ))
-sum( rta[ , 2] %in% c('','x'))
-```
-
-It's good to first look at your data in plain text format outside of R and then to check it after you've read it into R.
-
-# Other ways to read data into R
-
-The *read.table()* family of functions just skims the surface of things...
-
-1) You can also read in a file as vector of characters, one character string per line of the file with *readLines()*, and then post-process it. 
-2) You can read fixed width format (constant number of characters per field) with *read.fwf()*.
-3) *read_csv()* (and *read_lines()*, *read_fwf()*, etc.) in the *readr* package is a faster, more helpful drop-in replacement for *read.csv()* that plays well with *dplyr* (see Module 5).
-4) the *data.table* package is great for reading and manipulating large datasets (orders of gigabytes or 10s of gigabytes).
+You can basically do any regular expression/string manipulations in R.
 
 
 # Breakout

@@ -11,7 +11,7 @@ library(gapminder)
 gapminder2007 <- gapminder[gapminder$year == 2007, ]
 ```
 
-# Reminder: Vectorized calculations and comparisons
+# Vectorized calculations and comparisons
 
 At the core of R is the idea of doing calculations on entire vectors.
 
@@ -85,9 +85,6 @@ vec1 + vec2
 4) an error
 
 
-
-
-
 # Vectorized calculations
 
 As we've seen, R has many functions that allow you to operate on each element of a vector all at once.
@@ -158,7 +155,7 @@ A %*% B
 identical(t(A)%*%A, crossprod(A))
 ```
 
-Some decompositions
+# Matrix decompositions 
 
 ```{r cache=TRUE}
 ## next 3 lines generate a positive definite matrix
@@ -194,7 +191,9 @@ for(i in 1:n)
 The same holds for using `rbind()`, `cbind()`, or adding to a list, one element at a time.
 
 
-**Question**: Thoughts on why this are so slow? Think about what R might be doing behind the scenes
+**Question**: Thoughts on why this are so slow? Think about what R might be doing behind the scenes.
+
+**Note**: This is one area where Python and some other languages handle the situation in a more sophisticated way.
 
 # The answer is to pre-allocate memory
 
@@ -283,7 +282,7 @@ sapply(1:6, function(n) rnorm(n))
 
 
 
-# And more `apply()`s
+# And more `apply()`s (optional)
 
 There are a bunch of `apply()` variants, as well as parallelized versions of them:
 
@@ -313,6 +312,7 @@ round( prop.table(tbl, margin = 1), 2 )
 ```
 
 # Stratified analyses I
+
 Often we want to do individual analyses within subsets or clusters of our data.
 
 As a first step, we might want to just split our dataset by a stratifying variable.  
@@ -342,10 +342,25 @@ split, e.g., subsets <- split(gap,  gap$year)
 4) a list of dataframes
 5) some new kind of object we haven't encountered yet
 
+# Stratified analyses I - map operations
 
-# Stratified analyses II
+Once you have the stratified dataset you can use `lapply` to  apply a function to each item in the list.
+
+This is known as a 'map' operation in other languages.
+
+```{r}
+meanfun <- function(sub) {
+   mean(sub$lifeExp)
+}	
+
+meanLifeExpByYear <- sapply(subsets, meanfun)
+```
+
+# Stratified analyses II (optional)
 
 Often we want to do individual analyses within subsets or clusters of our data. R has a variety of tools for this; for now we'll look at `aggregate()` and `by()`. These are wrappers of `tapply()`. 
+
+## aggregate()
 
 ```{r aggregate1}
 gmSmall <- gapminder[ , c('lifeExp', 'gdpPercap')]  # reduce to only numeric columns
@@ -357,8 +372,9 @@ xtabs(lifeExp ~ ., data = agg)
 
 Notice the 'long' vs. 'wide' formats. You'll see more about that sort of thing in Module 6.
 
+While you can use `aggregate` for this, many people use `dplyr`, as we'll discuss in Module 6.
 
-# Stratified analyses III
+## by()
 
 `aggregate()` works fine when the output is univariate, but what about more complicated analyses than computing the median, such as fitting a set of regressions?
 
@@ -372,6 +388,8 @@ length(out)
 summary(out[['2007']])
 summary(out[['1952']])
 ```
+
+This is handy, but it's just slightly simpler syntax than using `split` followed by `lapply`
 
 # Sorting
 
@@ -388,7 +406,7 @@ head(gm_ord)
 
 You could of course write your own *sort* function that uses `order()`. More in Module 5.
 
-# Merging Data
+# Joining/Merging Data
 
 We often need to combine data across multiple data frames, merging on common fields (i.e., *keys*). In database terminology, this is a *join* operation.
 
@@ -400,6 +418,32 @@ c2c <- unique(gapminder[ , c('country', 'continent')])
 gapminderSave <- gapminder
 gapminder <- gapminder[ , -which(names(gapminder) == "continent")]
 ```
+
+## using `dplyr`'s join functions
+
+The `dplyr` package (to be discussed in detail in Module 6) provides a variety of *join* operations like those used in databases.
+
+Now let's add the continent info in:
+
+```{r}
+head(c2c)
+head(gapminder)
+
+library(dplyr)
+
+gapminder <- inner_join(gapminder, c2c, by = "country")
+
+dim(gapminderSave)
+dim(gapminder)
+identical(gapminderSave, gapminder)
+identical(gapminderSave, gapminder[ , names(gapminderSave)])
+```
+
+You can also do *left*, *right*, and *full* joins. 
+
+## Using `merge` (optional)
+
+Alternatively, we could use the base R function, merge().
 
 Now let's add the continent info in:
 
@@ -416,7 +460,7 @@ identical(gapminderSave, gapminder)
 identical(as.data.frame(gapminderSave), gapminder[ , names(gapminderSave)])
 ```
 
-What's the deal with the `all.x` and `all.y` ?  We can tell R whether we want to keep all of the `x` observations, all the `y` observations, or neither, or both, when there may be rows in either of the datasets that don't match the other dataset.
+What's the deal with the `all.x` and `all.y`? They allow one to request the equivalent of left, right, and full joins.  We can tell R whether we want to keep all of the `x` observations, all the `y` observations, or neither, or both, when there may be rows in either of the datasets that don't match the other dataset.
 
 # Breakout
 

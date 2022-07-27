@@ -201,16 +201,16 @@ tsSimClass$set("public", "simulate", function() {
     return(private$mean + crossprod(private$U, rnorm(private$n)))
 })
 
-master <- tsSimClass$new(1:100, 2, 1)
-master
+my_ts <- tsSimClass$new(1:100, 2, 1)
+my_ts
 set.seed(1)
-devs <- master$simulate()   # generate a time series
-plot(master$getTimes(), devs, type = 'l', xlab = 'time',
+y <- my_ts$simulate()   # generate a time series
+plot(my_ts$getTimes(), y, type = 'l', xlab = 'time',
       ylab = 'process values')
-master <- tsSimClass$new(1:100, 2, 3)
+my_ts <- tsSimClass$new(1:100, 2, 3)
 set.seed(1)
-devs <- master$simulate()   # generate a second time series
-lines(master$getTimes(), devs, col = 'red')
+y <- my_ts$simulate()   # generate a second time series
+lines(my_ts$getTimes(), y, col = 'red')
 ```
 
 
@@ -639,7 +639,7 @@ rnorm(5)
     - with `foreach` you can use `%dorng%` from the *doRNG* package in place of `%dopar%`
     - with `mclapply()`, use the `mc.set.seed` argument (see `help(mcparallel)`) 
 
-* The ugly but good: Generate all your random numbers in the master process and distribute them to the tasks if feasible.
+* The ugly but good: Generate all your random numbers in the main process and distribute them to the tasks if feasible.
 
 The syntax for using L'Ecuyer is available in my [parallel computing tutorial](https://github.com/berkeley-scf/tutorial-parallel-basics).
 

@@ -8,6 +8,24 @@
 library(gapminder)
 ```
 
+# How to be [lazy](http://dilbert.com/strips/comic/2005-05-29/)
+
+If you're starting to type something you've typed before, or the long name of an R object or function, STOP!  You likely don't need to type all of that.
+
+- Tab completion
+- Command history 
+    * up/down arrows
+    * Ctrl-{up arrow} or Command-{up arrow}
+- RStudio: select a line or block for execution
+- For keyboard shortcuts in RStudio see `Tools -> Keyboard Shortcuts Help` or [this online tip page](https://www.r-bloggers.com/rstudio-shortcuts-and-tips).
+- [Other tips](https://www.r-bloggers.com/tips-and-tricks-in-rstudio-and-r-markdown) for saving time in RStudio and R Markdown
+- Put your code in a file and use `source()`. For example: `source('myRcodeFile.R')`
+
+
+**Question**: Are there other tricks that anyone knows of? Please share in Piazza.
+
+RStudio has lots of shortcuts. See [here](https://appsilon.com/r-studio-shortcuts-and-tips/) and [here](https://www.r-bloggers.com/r-studio-shortcuts-and-tips-part-2).
+
 # Managing your objects
 
 R has a number of functions for getting metadata about your objects. Some of this is built in to RStudio.
@@ -89,7 +107,9 @@ If you want to sound like an R expert, make sure to call them *packages* and not
 Two steps:
 
 1. Install the package on your machine
+   - one-time only - the package will be a set of files in the filesystem
 2. Load the package
+   - every time you start R and need to use a given package - the package will be loaded into memory
 
 To install a package, in RStudio, just do `Packages->Install Packages`.
 
@@ -161,8 +181,9 @@ rm(lm)
 
 Can you explain what is going on? Consider the results of `search()`.
 
+# More on packages, part 2 (optional)
 
-### Looking inside a package
+### (Advanced) Looking inside a package 
 
 Packages are available as "Package source", namely the raw code and help files, and "binaries", where stuff is packaged up for R to use efficiently. 
 
@@ -179,7 +200,7 @@ ls man
 ls data
 ```
 
-### Creating your own R package
+### (Advanced) Creating your own R package
 
 R is do-it-yourself - you can write your own package. At its most basic this is just some R scripts that are packaged together in a convenient format. And if giving it to someone else, it's best to have some documentation in the form of function help files. 
 
@@ -217,6 +238,8 @@ getwd()
 setwd(file.path('..', 'data')) # relative path
 ```
 Many errors and much confusion result from you and R not being on the same page in terms of where in the directory structure you are.
+
+In RStudio, you can use `Session -> Set Working Directory` instead of `setwd`.
 
 # The working directory: quick quiz
 
@@ -268,6 +291,47 @@ head(cpds)
 
 It's good to first look at your data in plain text format outside of R and then to check it after you've read it into R.
 
+# More details on reading data into R
+
+Remember that you'll need to know the current working directory so that you know where R is looking for files.
+
+Next let's work through a more involved example, so you can see some of the steps and tricks involved in reading data into R.
+
+```{r, cache=TRUE}
+rta <- read.table("../data/RTAData.csv", sep = ",", head = TRUE)
+rta[1:5, 1:5]
+dim(rta)
+# great, we're all set, right?
+# Not so fast...
+unlist(lapply(rta, class))[1:5]
+# let's delve more deeply
+# unique(rta[ , 2])  # don't run when creating slides
+head(sort(unique(rta[ , 2])))
+tail(sort(unique(rta[ , 2])))
+# can we handle that with read.table?
+# help(read.table)
+
+rta2 <- read.table("../data/RTAData.csv", sep = ",", head = TRUE, 
+      na.strings = c('NA', 'x'))
+unlist(lapply(rta2, class))[1:5]
+
+# checking...
+sum(is.na( rta2[ , 2] ))
+sum( rta[ , 2] %in% c('','x'))
+```
+
+It's good to first look at your data in plain text format outside of R and then to check it after you've read it into R.
+
+# Other ways to read data into R
+
+The *read.table()* family of functions just skims the surface of things...
+
+1) You can also read in a file as vector of characters, one character string per line of the file with *readLines()*, and then post-process it. 
+2) You can read fixed width format (constant number of characters per field) with *read.fwf()*.
+3) *read_csv()* (and *read_lines()*, *read_fwf()*, etc.) in the *readr* package is a faster, more helpful drop-in replacement for *read.csv()* that plays well with *dplyr* (see Module 5).
+4) the *data.table* package is great for reading and manipulating large datasets (orders of gigabytes or 10s of gigabytes).
+
+
 # Reading 'foreign' format data
 
 Here's an example of reading data produced by another statistical package (Stata) with `read.dta()`. 
@@ -313,7 +377,7 @@ print(xtable(table(gapminder$year, gapminder$continent)), type = "html")
 
 Recall our discussion of the `summary()` function used on either a vector or a regression object. What do you think is going on with call to `print()` above? 
 
-# Version control
+# Version control (optional)
 
 ### Overview
 
@@ -360,7 +424,7 @@ git push
 The changes are then available to anyone to *pull* from the remote repository, a using `git pull` or graphical interfaces, such as using RStudio's tools to pull the changes to your machine, discussed in the GitHub slide in module 0.
 
 
-# Getting R help online
+# Getting R help online (optional)
 
 ### Mailing lists
 
