@@ -24,7 +24,7 @@ Thus before you can even get to doing any sort of sophisticated analysis or plot
 The [`tidyverse`](https://www.tidyverse.org/) is a suite of packages designed 
 specifically to help with both these steps; some of which we will be introducing in this module. These are by no means the only packages out there for data wrangling but they are increasingly popular for their readable, straightforward syntax and sensible default behaviors.
 
-# Data frame Manipulation using Base R functions
+# Data frame manipulation using base R functions
 
 So far, you've seen the basics of manipulating data frames, e.g. subsetting, merging, and basic calculations.
 For instance, we can use base R functions to calculate summary statistics across groups of observations,
@@ -193,7 +193,7 @@ To clarify, both the `select` and `filter` functions subsets the data frame. The
 
 **Note:** The order of operations is very important in this case. If we used 'select' first, filter would not be able to find the variable `continent` since we would have removed it in the previous step.
 
-# `dplyr` Calculations Across Groups
+# `dplyr` calculations across groups
 
 A common task you'll encounter when working with data is running calculations on different groups within the data. For instance, what if we wanted to calculate the mean GDP per capita for each continent?
 
@@ -352,7 +352,7 @@ gap_with_extra_vars <- gapminder %>%
 head(gap_with_extra_vars)
 ```
 
-# `dplyr` Take-aways
+# `dplyr` take-aways
 
 * Human readable: the function names describe the action being done
 * Piping: chain functions in a step-by-step way, rather than nesting
@@ -403,7 +403,7 @@ gapminder %>% grouped_mean('continent', 'lifeExp')
 
 See the `rlang` or `seplyr` packages for how one can deal with this problem in this context of using functions. 
 
-# Tidying Data
+# Tidying data
 
 Even before we conduct analysis or calculations, we need to put our data into the correct format. The goal here is to rearrange a messy dataset into one that is **tidy**.
 
@@ -416,7 +416,7 @@ Tidy data is easier to work with, because you have a consistent way of referring
 
 For more on the concept of *tidy* data, read Hadley Wickham's paper [here](http://vita.had.co.nz/papers/tidy-data.html)
 
-# Wide vs. Long Formats
+# Wide vs. long formats
 
 > "Tidy datasets are all alike but every messy dataset is messy in its own way." – Hadley Wickham
 
@@ -458,7 +458,7 @@ For the "wide" format each row is often a site/subject/patient and you have mult
 
 You may find data input may be simpler and some programs/functions may prefer the "wide" format. However, many of R’s functions have been designed assuming you have "long" format data.
 
-# Tidying the Gapminder Data
+# Tidying the Gapminder data
 
 Lets look at the structure of our original gapminder data frame:
 
@@ -582,7 +582,7 @@ head(gap_medium)
 ```
 
 
-# Extra Resources
+# Extra Resources (optional)
 
 `dplyr` and `tidyr` have many more functions to help you wrangle and manipulate 
 your data. See the  [Data Wrangling Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) for more.

@@ -413,7 +413,7 @@ head(someFields)
 
 <p>In general the placement of commas in R is crucial, but here, two different operations give the same result because of the underlying structure of data frames.</p>
 
-<h1>Matrices and Arrays</h1>
+<h1>Matrices</h1>
 
 <p>If you need to do numeric calculations on an entire non-vector object (dimension &gt; 1), you generally want to use matrices and arrays, not data frames.</p>
 
@@ -427,30 +427,30 @@ head(someFields)
 mat
 </code></pre>
 
-<pre><code>##            [,1]        [,2]       [,3]       [,4]
-## [1,]  0.2739841  1.61645878 -0.2435902  0.5106564
-## [2,] -0.2355128 -0.04058911  0.9768606  0.2653700
-## [3,]  1.3962093 -0.49887427 -0.2197747 -0.2125031
+<pre><code>##            [,1]      [,2]       [,3]       [,4]
+## [1,]  0.3174077 1.6009510  0.1085762 -1.2173955
+## [2,]  0.8035843 1.1322524 -0.4967257 -0.3376897
+## [3,] -0.9004541 0.3170462 -0.4885157 -2.3694891
 </code></pre>
 
 <pre><code class="r"># vectorized calcs work with matrices too
 mat*4
 </code></pre>
 
-<pre><code>##            [,1]       [,2]       [,3]       [,4]
-## [1,]  1.0959362  6.4658351 -0.9743608  2.0426257
-## [2,] -0.9420514 -0.1623564  3.9074425  1.0614802
-## [3,]  5.5848373 -1.9954971 -0.8790989 -0.8500124
+<pre><code>##           [,1]     [,2]       [,3]      [,4]
+## [1,]  1.269631 6.403804  0.4343047 -4.869582
+## [2,]  3.214337 4.529010 -1.9869027 -1.350759
+## [3,] -3.601816 1.268185 -1.9540629 -9.477956
 </code></pre>
 
 <pre><code class="r">mat &lt;- cbind(mat, 1:3)
 mat
 </code></pre>
 
-<pre><code>##            [,1]        [,2]       [,3]       [,4] [,5]
-## [1,]  0.2739841  1.61645878 -0.2435902  0.5106564    1
-## [2,] -0.2355128 -0.04058911  0.9768606  0.2653700    2
-## [3,]  1.3962093 -0.49887427 -0.2197747 -0.2125031    3
+<pre><code>##            [,1]      [,2]       [,3]       [,4] [,5]
+## [1,]  0.3174077 1.6009510  0.1085762 -1.2173955    1
+## [2,]  0.8035843 1.1322524 -0.4967257 -0.3376897    2
+## [3,] -0.9004541 0.3170462 -0.4885157 -2.3694891    3
 </code></pre>
 
 <pre><code class="r"># Let&#39;s convert the gapminder dataframe to a matrix:
@@ -481,6 +481,8 @@ head(gm_mat)
 ## [6,] &quot;Afghanistan&quot; &quot;Asia&quot;    &quot;1977&quot; &quot;38.43800&quot; &quot;  14880372&quot; &quot;   786.1134&quot;
 </code></pre>
 
+<h1>Arrays</h1>
+
 <p>Arrays are like matrices but can have more or fewer than two dimensions.</p>
 
 <pre><code class="r">arr &lt;- array(rnorm(12), c(2, 3, 4))
@@ -489,27 +491,27 @@ arr
 
 <pre><code>## , , 1
 ## 
-##            [,1]        [,2]       [,3]
-## [1,] -0.1207030 -0.05537441 -1.5896604
-## [2,]  0.8577055 -1.64825044  0.4306485
+##            [,1]       [,2]       [,3]
+## [1,]  0.7417017  0.4747874  1.7091402
+## [2,] -0.3700466 -1.1549083 -0.1121775
 ## 
 ## , , 2
 ## 
-##             [,1]      [,2]      [,3]
-## [1,] -0.11079302 -0.414810 1.0538223
-## [2,] -0.07988219 -2.262451 0.9426871
+##            [,1]       [,2]       [,3]
+## [1,] -0.7172138 -0.3246392 -0.8776541
+## [2,] -0.4396797 -0.3709570 -0.2077589
 ## 
 ## , , 3
 ## 
-##            [,1]        [,2]       [,3]
-## [1,] -0.1207030 -0.05537441 -1.5896604
-## [2,]  0.8577055 -1.64825044  0.4306485
+##            [,1]       [,2]       [,3]
+## [1,]  0.7417017  0.4747874  1.7091402
+## [2,] -0.3700466 -1.1549083 -0.1121775
 ## 
 ## , , 4
 ## 
-##             [,1]      [,2]      [,3]
-## [1,] -0.11079302 -0.414810 1.0538223
-## [2,] -0.07988219 -2.262451 0.9426871
+##            [,1]       [,2]       [,3]
+## [1,] -0.7172138 -0.3246392 -0.8776541
+## [2,] -0.4396797 -0.3709570 -0.2077589
 </code></pre>
 
 <h1>Matrices: quick quiz</h1>
@@ -540,10 +542,10 @@ arr
 mat
 </code></pre>
 
-<pre><code>##              [,1]        [,2]       [,3]       [,4] [,5]
-## first   0.2739841  1.61645878 -0.2435902  0.5106564    1
-## middle -0.2355128 -0.04058911  0.9768606  0.2653700    2
-## last    1.3962093 -0.49887427 -0.2197747 -0.2125031    3
+<pre><code>##              [,1]      [,2]       [,3]       [,4] [,5]
+## first   0.3174077 1.6009510  0.1085762 -1.2173955    1
+## middle  0.8035843 1.1322524 -0.4967257 -0.3376897    2
+## last   -0.9004541 0.3170462 -0.4885157 -2.3694891    3
 </code></pre>
 
 <pre><code class="r">attributes(mat)
@@ -626,21 +628,18 @@ mat
 ## [3,]    3    6    9   12
 </code></pre>
 
-<pre><code class="r">c(mat)
-</code></pre>
-
-<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10 11 12
+<pre><code class="r">vals &lt;- c(mat)
 </code></pre>
 
 <p>You can go smoothly back and forth between a matrix (or an array) and a vector:</p>
 
-<pre><code class="r">identical(mat, matrix(c(mat), 3, 4))
+<pre><code class="r">identical(mat, matrix(vals, 3, 4))
 </code></pre>
 
 <pre><code>## [1] TRUE
 </code></pre>
 
-<pre><code class="r">identical(mat, matrix(c(mat), 3, 4, byrow = TRUE))
+<pre><code class="r">identical(mat, matrix(vals, 3, 4, byrow = TRUE))
 </code></pre>
 
 <pre><code>## [1] FALSE
@@ -661,8 +660,8 @@ vec[c(3, 5)] &lt;- NA
 vec
 </code></pre>
 
-<pre><code>##  [1]  0.04406566 -0.23342610          NA -2.22860485          NA -0.46406012
-##  [7]  0.62079287  0.85011418  1.16463705 -1.66876278  2.47599198  0.15748402
+<pre><code>##  [1]  1.6851517  0.4945223         NA -1.2393635         NA  1.1620222
+##  [7] -0.3867427 -1.3501064 -0.6790895  0.1611178 -0.9286824 -0.6820127
 </code></pre>
 
 <pre><code class="r">length(vec)
@@ -680,13 +679,13 @@ vec
 <pre><code class="r">sum(vec, na.rm = TRUE)
 </code></pre>
 
-<pre><code>## [1] 0.7182319
+<pre><code>## [1] -1.763183
 </code></pre>
 
 <pre><code class="r">hist(vec)
 </code></pre>
 
-<p><img src="data:image/png;base64,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" alt=""/></p>
+<p><img src="data:image/png;base64,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" alt=""/></p>
 
 <pre><code class="r">is.na(vec)
 </code></pre>
@@ -746,8 +745,8 @@ big
 vec
 </code></pre>
 
-<pre><code>##  [1]  0.04406566 -0.23342610          NA -2.22860485          NA -0.46406012
-##  [7]  0.62079287  0.85011418  1.16463705 -1.66876278  2.47599198  0.15748402
+<pre><code>##  [1]  1.6851517  0.4945223         NA -1.2393635         NA  1.1620222
+##  [7] -0.3867427 -1.3501064 -0.6790895  0.1611178 -0.9286824 -0.6820127
 </code></pre>
 
 <pre><code class="r">length(vec)
@@ -1014,7 +1013,7 @@ class(gapminder$continent)
 <li>What if we don&#39;t like the order these are in? Factor order is important for all kinds of things like plotting, analysis of variance, regression output, and more</li>
 </ul>
 
-<h1>(Advanced) Ordering the Factor</h1>
+<h1>(Advanced) Ordering the Factor (optional)</h1>
 
 <ul>
 <li>Ordered factors simply have an additional attribute explaining the order of the levels of a factor</li>
@@ -1104,6 +1103,104 @@ score[&quot;advanced&quot;]  # look up by name
 </code></pre>
 
 <p>What went wrong and how did we fix it?  Notice how easily this could be a big bug in your code.</p>
+
+<h1>Strings</h1>
+
+<p>R has lots of functionality for character strings. Usually these are stored as vectors of strings, each with arbitrary length.</p>
+
+<pre><code class="r">chars &lt;- c(&#39;hi&#39;, &#39;hallo&#39;, &quot;mother&#39;s&quot;, &#39;father\&#39;s&#39;, &quot;He said, \&quot;hi\&quot;&quot; )
+length(chars)
+</code></pre>
+
+<pre><code>## [1] 5
+</code></pre>
+
+<pre><code class="r">nchar(chars)
+</code></pre>
+
+<pre><code>## [1]  2  5  8  8 13
+</code></pre>
+
+<pre><code class="r">paste(&quot;bill&quot;, &quot;clinton&quot;, sep = &quot; &quot;)  # paste together a set of strings
+</code></pre>
+
+<pre><code>## [1] &quot;bill clinton&quot;
+</code></pre>
+
+<pre><code class="r">paste(chars, collapse = &#39; &#39;)  # paste together things from a vector
+</code></pre>
+
+<pre><code>## [1] &quot;hi hallo mother&#39;s father&#39;s He said, \&quot;hi\&quot;&quot;
+</code></pre>
+
+<pre><code class="r">strsplit(&quot;This is the R bootcamp&quot;, split = &quot; &quot;)
+</code></pre>
+
+<pre><code>## [[1]]
+## [1] &quot;This&quot;     &quot;is&quot;       &quot;the&quot;      &quot;R&quot;        &quot;bootcamp&quot;
+</code></pre>
+
+<pre><code class="r">countries &lt;- as.character(gapminder2007$country)
+substring(countries, 1, 3)
+</code></pre>
+
+<pre><code>##   [1] &quot;Afg&quot; &quot;Alb&quot; &quot;Alg&quot; &quot;Ang&quot; &quot;Arg&quot; &quot;Aus&quot; &quot;Aus&quot; &quot;Bah&quot; &quot;Ban&quot; &quot;Bel&quot; &quot;Ben&quot; &quot;Bol&quot;
+##  [13] &quot;Bos&quot; &quot;Bot&quot; &quot;Bra&quot; &quot;Bul&quot; &quot;Bur&quot; &quot;Bur&quot; &quot;Cam&quot; &quot;Cam&quot; &quot;Can&quot; &quot;Cen&quot; &quot;Cha&quot; &quot;Chi&quot;
+##  [25] &quot;Chi&quot; &quot;Col&quot; &quot;Com&quot; &quot;Con&quot; &quot;Con&quot; &quot;Cos&quot; &quot;Cot&quot; &quot;Cro&quot; &quot;Cub&quot; &quot;Cze&quot; &quot;Den&quot; &quot;Dji&quot;
+##  [37] &quot;Dom&quot; &quot;Ecu&quot; &quot;Egy&quot; &quot;El &quot; &quot;Equ&quot; &quot;Eri&quot; &quot;Eth&quot; &quot;Fin&quot; &quot;Fra&quot; &quot;Gab&quot; &quot;Gam&quot; &quot;Ger&quot;
+##  [49] &quot;Gha&quot; &quot;Gre&quot; &quot;Gua&quot; &quot;Gui&quot; &quot;Gui&quot; &quot;Hai&quot; &quot;Hon&quot; &quot;Hon&quot; &quot;Hun&quot; &quot;Ice&quot; &quot;Ind&quot; &quot;Ind&quot;
+##  [61] &quot;Ira&quot; &quot;Ira&quot; &quot;Ire&quot; &quot;Isr&quot; &quot;Ita&quot; &quot;Jam&quot; &quot;Jap&quot; &quot;Jor&quot; &quot;Ken&quot; &quot;Kor&quot; &quot;Kor&quot; &quot;Kuw&quot;
+##  [73] &quot;Leb&quot; &quot;Les&quot; &quot;Lib&quot; &quot;Lib&quot; &quot;Mad&quot; &quot;Mal&quot; &quot;Mal&quot; &quot;Mal&quot; &quot;Mau&quot; &quot;Mau&quot; &quot;Mex&quot; &quot;Mon&quot;
+##  [85] &quot;Mon&quot; &quot;Mor&quot; &quot;Moz&quot; &quot;Mya&quot; &quot;Nam&quot; &quot;Nep&quot; &quot;Net&quot; &quot;New&quot; &quot;Nic&quot; &quot;Nig&quot; &quot;Nig&quot; &quot;Nor&quot;
+##  [97] &quot;Oma&quot; &quot;Pak&quot; &quot;Pan&quot; &quot;Par&quot; &quot;Per&quot; &quot;Phi&quot; &quot;Pol&quot; &quot;Por&quot; &quot;Pue&quot; &quot;Reu&quot; &quot;Rom&quot; &quot;Rwa&quot;
+## [109] &quot;Sao&quot; &quot;Sau&quot; &quot;Sen&quot; &quot;Ser&quot; &quot;Sie&quot; &quot;Sin&quot; &quot;Slo&quot; &quot;Slo&quot; &quot;Som&quot; &quot;Sou&quot; &quot;Spa&quot; &quot;Sri&quot;
+## [121] &quot;Sud&quot; &quot;Swa&quot; &quot;Swe&quot; &quot;Swi&quot; &quot;Syr&quot; &quot;Tai&quot; &quot;Tan&quot; &quot;Tha&quot; &quot;Tog&quot; &quot;Tri&quot; &quot;Tun&quot; &quot;Tur&quot;
+## [133] &quot;Uga&quot; &quot;Uni&quot; &quot;Uni&quot; &quot;Uru&quot; &quot;Ven&quot; &quot;Vie&quot; &quot;Wes&quot; &quot;Yem&quot; &quot;Zam&quot; &quot;Zim&quot;
+</code></pre>
+
+<pre><code class="r">tmp &lt;- countries
+substring(tmp, 5, 10) &lt;- &quot;______&quot;
+tmp[1:20]
+</code></pre>
+
+<pre><code>##  [1] &quot;Afgh______n&quot;            &quot;Alba___&quot;                &quot;Alge___&quot;               
+##  [4] &quot;Ango__&quot;                 &quot;Arge_____&quot;              &quot;Aust_____&quot;             
+##  [7] &quot;Aust___&quot;                &quot;Bahr___&quot;                &quot;Bang______&quot;            
+## [10] &quot;Belg___&quot;                &quot;Beni_&quot;                  &quot;Boli___&quot;               
+## [13] &quot;Bosn______ Herzegovina&quot; &quot;Bots____&quot;               &quot;Braz__&quot;                
+## [16] &quot;Bulg____&quot;               &quot;Burk______so&quot;           &quot;Buru___&quot;               
+## [19] &quot;Camb____&quot;               &quot;Came____&quot;
+</code></pre>
+
+<p>We can search for patterns in character vectors and replace patterns (both vectorized!)</p>
+
+<pre><code class="r">indexes &lt;- grep(&quot;Korea&quot;, countries)
+indexes
+</code></pre>
+
+<pre><code>## [1] 70 71
+</code></pre>
+
+<pre><code class="r">countries[indexes]
+</code></pre>
+
+<pre><code>## [1] &quot;Korea, Dem. Rep.&quot; &quot;Korea, Rep.&quot;
+</code></pre>
+
+<pre><code class="r">countries2 &lt;- gsub(&quot;Korea Dem. Rep.&quot;, &quot;North Korea&quot;, countries)
+countries2[indexes]
+</code></pre>
+
+<pre><code>## [1] &quot;Korea, Dem. Rep.&quot; &quot;Korea, Rep.&quot;
+</code></pre>
+
+<h1>Regular expressions (regex or regexp) (optional)</h1>
+
+<p>Some of you may be familiar with using <em>regular expressions</em>, which is functionality for doing sophisticated pattern matching and replacement with strings. <em>Python</em> and <em>Perl</em> are both used extensively for such text manipulation. </p>
+
+<p>R has a full set of regular expression capabilities available through the <em>grep()</em>, <em>gregexpr()</em>, and <em>gsub()</em> functions (among others - many R functions will work with regular expressions). However, a particularly nice way to make use of this functionality is to use the <em>stringr</em> package, which is more user-friendly than directly using the core R functions.</p>
+
+<p>You can basically do any regular expression/string manipulations in R.</p>
 
 <h1>Subsetting</h1>
 
@@ -1239,22 +1336,22 @@ vec[c(3, 5, 12:14)] &lt;- 1:5
 vec
 </code></pre>
 
-<pre><code>##  [1] -1.5087262 -0.3985036  1.0000000  0.6209416  2.0000000 -0.9137708
-##  [7]  0.1730468  1.3196757 -1.1824914  0.8481889 -1.4284917  3.0000000
-## [13]  4.0000000  5.0000000  1.3658956  0.1369780 -0.1580476 -0.8128315
-## [19]  0.2614702  0.8430966
+<pre><code>##  [1]  0.1604717 -0.2099432  1.0000000 -0.2299347  2.0000000  1.3641291
+##  [7]  1.2627974  0.1631852  0.4527845  1.0032469  0.6748463  3.0000000
+## [13]  4.0000000  5.0000000 -0.5167445 -0.0369539  0.7404249 -1.1364493
+## [19]  1.9904780 -1.5357902
 </code></pre>
 
 <pre><code class="r">mat[2, 3:5] &lt;- rnorm(3)
-mat[mat[,1] &gt; 0, ] &lt;- -Inf
+mat[mat[,1] &gt; 3, ] &lt;- -Inf
 mat
 </code></pre>
 
-<pre><code>##   [,1] [,2] [,3] [,4] [,5]
-## a -Inf -Inf -Inf -Inf -Inf
-## b -Inf -Inf -Inf -Inf -Inf
-## c -Inf -Inf -Inf -Inf -Inf
-## d -Inf -Inf -Inf -Inf -Inf
+<pre><code>##   [,1] [,2]       [,3]        [,4]       [,5]
+## a    1    5  9.0000000 13.00000000 17.0000000
+## b    2    6 -0.5740042 -0.08584132 -0.3938248
+## c    3    7 11.0000000 15.00000000 19.0000000
+## d -Inf -Inf       -Inf        -Inf       -Inf
 </code></pre>
 
 <h1>Subsetting: quick quiz</h1>
@@ -1289,104 +1386,6 @@ mat
 7) mat[ , c(2, 4)][3, ]
 8) mat[ , c(2, 4)][3]
 9) mat[c(2, 4)][3, ]</p>
-
-<h1>Strings</h1>
-
-<p>R has lots of functionality for character strings. Usually these are stored as vectors of strings, each with arbitrary length.</p>
-
-<pre><code class="r">chars &lt;- c(&#39;hi&#39;, &#39;hallo&#39;, &quot;mother&#39;s&quot;, &#39;father\&#39;s&#39;, &quot;He said, \&quot;hi\&quot;&quot; )
-length(chars)
-</code></pre>
-
-<pre><code>## [1] 5
-</code></pre>
-
-<pre><code class="r">nchar(chars)
-</code></pre>
-
-<pre><code>## [1]  2  5  8  8 13
-</code></pre>
-
-<pre><code class="r">paste(&quot;bill&quot;, &quot;clinton&quot;, sep = &quot; &quot;)  # paste together a set of strings
-</code></pre>
-
-<pre><code>## [1] &quot;bill clinton&quot;
-</code></pre>
-
-<pre><code class="r">paste(chars, collapse = &#39; &#39;)  # paste together things from a vector
-</code></pre>
-
-<pre><code>## [1] &quot;hi hallo mother&#39;s father&#39;s He said, \&quot;hi\&quot;&quot;
-</code></pre>
-
-<pre><code class="r">strsplit(&quot;This is the R bootcamp&quot;, split = &quot; &quot;)
-</code></pre>
-
-<pre><code>## [[1]]
-## [1] &quot;This&quot;     &quot;is&quot;       &quot;the&quot;      &quot;R&quot;        &quot;bootcamp&quot;
-</code></pre>
-
-<pre><code class="r">countries &lt;- as.character(gapminder2007$country)
-substring(countries, 1, 3)
-</code></pre>
-
-<pre><code>##   [1] &quot;Afg&quot; &quot;Alb&quot; &quot;Alg&quot; &quot;Ang&quot; &quot;Arg&quot; &quot;Aus&quot; &quot;Aus&quot; &quot;Bah&quot; &quot;Ban&quot; &quot;Bel&quot; &quot;Ben&quot; &quot;Bol&quot;
-##  [13] &quot;Bos&quot; &quot;Bot&quot; &quot;Bra&quot; &quot;Bul&quot; &quot;Bur&quot; &quot;Bur&quot; &quot;Cam&quot; &quot;Cam&quot; &quot;Can&quot; &quot;Cen&quot; &quot;Cha&quot; &quot;Chi&quot;
-##  [25] &quot;Chi&quot; &quot;Col&quot; &quot;Com&quot; &quot;Con&quot; &quot;Con&quot; &quot;Cos&quot; &quot;Cot&quot; &quot;Cro&quot; &quot;Cub&quot; &quot;Cze&quot; &quot;Den&quot; &quot;Dji&quot;
-##  [37] &quot;Dom&quot; &quot;Ecu&quot; &quot;Egy&quot; &quot;El &quot; &quot;Equ&quot; &quot;Eri&quot; &quot;Eth&quot; &quot;Fin&quot; &quot;Fra&quot; &quot;Gab&quot; &quot;Gam&quot; &quot;Ger&quot;
-##  [49] &quot;Gha&quot; &quot;Gre&quot; &quot;Gua&quot; &quot;Gui&quot; &quot;Gui&quot; &quot;Hai&quot; &quot;Hon&quot; &quot;Hon&quot; &quot;Hun&quot; &quot;Ice&quot; &quot;Ind&quot; &quot;Ind&quot;
-##  [61] &quot;Ira&quot; &quot;Ira&quot; &quot;Ire&quot; &quot;Isr&quot; &quot;Ita&quot; &quot;Jam&quot; &quot;Jap&quot; &quot;Jor&quot; &quot;Ken&quot; &quot;Kor&quot; &quot;Kor&quot; &quot;Kuw&quot;
-##  [73] &quot;Leb&quot; &quot;Les&quot; &quot;Lib&quot; &quot;Lib&quot; &quot;Mad&quot; &quot;Mal&quot; &quot;Mal&quot; &quot;Mal&quot; &quot;Mau&quot; &quot;Mau&quot; &quot;Mex&quot; &quot;Mon&quot;
-##  [85] &quot;Mon&quot; &quot;Mor&quot; &quot;Moz&quot; &quot;Mya&quot; &quot;Nam&quot; &quot;Nep&quot; &quot;Net&quot; &quot;New&quot; &quot;Nic&quot; &quot;Nig&quot; &quot;Nig&quot; &quot;Nor&quot;
-##  [97] &quot;Oma&quot; &quot;Pak&quot; &quot;Pan&quot; &quot;Par&quot; &quot;Per&quot; &quot;Phi&quot; &quot;Pol&quot; &quot;Por&quot; &quot;Pue&quot; &quot;Reu&quot; &quot;Rom&quot; &quot;Rwa&quot;
-## [109] &quot;Sao&quot; &quot;Sau&quot; &quot;Sen&quot; &quot;Ser&quot; &quot;Sie&quot; &quot;Sin&quot; &quot;Slo&quot; &quot;Slo&quot; &quot;Som&quot; &quot;Sou&quot; &quot;Spa&quot; &quot;Sri&quot;
-## [121] &quot;Sud&quot; &quot;Swa&quot; &quot;Swe&quot; &quot;Swi&quot; &quot;Syr&quot; &quot;Tai&quot; &quot;Tan&quot; &quot;Tha&quot; &quot;Tog&quot; &quot;Tri&quot; &quot;Tun&quot; &quot;Tur&quot;
-## [133] &quot;Uga&quot; &quot;Uni&quot; &quot;Uni&quot; &quot;Uru&quot; &quot;Ven&quot; &quot;Vie&quot; &quot;Wes&quot; &quot;Yem&quot; &quot;Zam&quot; &quot;Zim&quot;
-</code></pre>
-
-<pre><code class="r">tmp &lt;- countries
-substring(tmp, 5, 10) &lt;- &quot;______&quot;
-tmp[1:20]
-</code></pre>
-
-<pre><code>##  [1] &quot;Afgh______n&quot;            &quot;Alba___&quot;                &quot;Alge___&quot;               
-##  [4] &quot;Ango__&quot;                 &quot;Arge_____&quot;              &quot;Aust_____&quot;             
-##  [7] &quot;Aust___&quot;                &quot;Bahr___&quot;                &quot;Bang______&quot;            
-## [10] &quot;Belg___&quot;                &quot;Beni_&quot;                  &quot;Boli___&quot;               
-## [13] &quot;Bosn______ Herzegovina&quot; &quot;Bots____&quot;               &quot;Braz__&quot;                
-## [16] &quot;Bulg____&quot;               &quot;Burk______so&quot;           &quot;Buru___&quot;               
-## [19] &quot;Camb____&quot;               &quot;Came____&quot;
-</code></pre>
-
-<p>We can search for patterns in character vectors and replace patterns (both vectorized!)</p>
-
-<pre><code class="r">indexes &lt;- grep(&quot;Korea&quot;, countries)
-indexes
-</code></pre>
-
-<pre><code>## [1] 70 71
-</code></pre>
-
-<pre><code class="r">countries[indexes]
-</code></pre>
-
-<pre><code>## [1] &quot;Korea, Dem. Rep.&quot; &quot;Korea, Rep.&quot;
-</code></pre>
-
-<pre><code class="r">countries2 &lt;- gsub(&quot;Korea Dem. Rep.&quot;, &quot;North Korea&quot;, countries)
-countries2[indexes]
-</code></pre>
-
-<pre><code>## [1] &quot;Korea, Dem. Rep.&quot; &quot;Korea, Rep.&quot;
-</code></pre>
-
-<h1>Regular expressions (regex or regexp) (optional)</h1>
-
-<p>Some of you may be familiar with using <em>regular expressions</em>, which is functionality for doing sophisticated pattern matching and replacement with strings. <em>Python</em> and <em>Perl</em> are both used extensively for such text manipulation. </p>
-
-<p>R has a full set of regular expression capabilities available through the <em>grep()</em>, <em>gregexpr()</em>, and <em>gsub()</em> functions (among others - many R functions will work with regular expressions). However, a particularly nice way to make use of this functionality is to use the <em>stringr</em> package, which is more user-friendly than directly using the core R functions.</p>
-
-<p>You can basically do any regular expression/string manipulations in R.</p>
 
 <h1>Breakout</h1>
 

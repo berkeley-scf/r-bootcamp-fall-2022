@@ -331,7 +331,7 @@ vec1 + vec2
 3) 2, 4, 4, 6
 4) an error</p>
 
-<h1>Vectorized calculations</h1>
+<h1>Why vectorize?</h1>
 
 <p>As we&#39;ve seen, R has many functions that allow you to operate on each element of a vector all at once.</p>
 
@@ -356,14 +356,14 @@ system.time(trunc &lt;- ifelse(vals &gt; 0, vals, 0))
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##   0.032   0.008   0.040
+##   0.031   0.008   0.039
 </code></pre>
 
 <pre><code class="r">system.time(vals &lt;- vals * (vals &gt; 0))
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##   0.007   0.000   0.007
+##   0.005   0.000   0.005
 </code></pre>
 
 <p><strong>Question</strong>: What am I doing with <code>vals * (vals &gt; 0)</code> ? What happens behind the scenes in R?</p>
@@ -459,7 +459,7 @@ A + B
 <pre><code>## [1] TRUE
 </code></pre>
 
-<h1>Matrix decompositions</h1>
+<h1>(Advanced) Matrix decompositions</h1>
 
 <pre><code class="r">## next 3 lines generate a positive definite matrix
 library(fields)
@@ -539,7 +539,7 @@ for(i in 1:n)
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##   0.032   0.000   0.032
+##   0.031   0.000   0.032
 </code></pre>
 
 <p>Here&#39;s how to pre-allocate an empty list: </p>
@@ -618,6 +618,8 @@ lapply(myList, min)
 ##       year2 
 ## &quot;character&quot;
 </code></pre>
+
+<p><strong>Note</strong>: Some of you may recognize these as map operations.</p>
 
 <h1><code>lapply()</code> and <code>sapply()</code> with vectors</h1>
 
@@ -728,7 +730,9 @@ head(tbl)
 
 <h1>Discretization</h1>
 
-<p>You may need to discretize a continuous variable [or a discrete variable with many levels], e.g., by life expectancy:</p>
+<p>You may need to discretize a continuous variable [or a discrete variable with many levels], e.g., by life expectancy.</p>
+
+<p>We can use <code>cut</code> to do it:</p>
 
 <pre><code class="r">gapminder2007$lifeExpBin &lt;- cut(gapminder2007$lifeExp, breaks = c(0, 40, 50, 60, 70, 75, 80, Inf))
 tbl &lt;- table(gapminder2007$continent, gapminder2007$lifeExpBin)
@@ -748,7 +752,7 @@ round( prop.table(tbl, margin = 1), 2 )
 
 <p>Often we want to do individual analyses within subsets or clusters of our data.</p>
 
-<p>As a first step, we might want to just split our dataset by a stratifying variable.  </p>
+<p>As a first step, we might want to just split our dataset by a stratifying variable (perhaps after using <code>cut</code> to create a categorical variable).  </p>
 
 <pre><code class="r">subsets &lt;- split(gapminder,  gapminder$year)
 length(subsets)
@@ -774,9 +778,9 @@ abline(h = 0, col = &#39;grey&#39;)
 
 <p>Obviously, we&#39;d want to iterate to improve that plot given the outlier.</p>
 
-<p><strong>POLL 4C</strong>: What kind of object is produced by</p>
+<p><strong>POLL 4C</strong>: What kind of object is produced by split, e.g.,</p>
 
-<pre><code>split, e.g., subsets &lt;- split(gap,  gap$year)
+<pre><code>subsets &lt;- split(gap,  gap$year)
 </code></pre>
 
 <p>1) a dataframe
@@ -796,6 +800,20 @@ abline(h = 0, col = &#39;grey&#39;)
 }   
 
 meanLifeExpByYear &lt;- sapply(subsets, meanfun)
+names(subsets)
+</code></pre>
+
+<pre><code>##  [1] &quot;1952&quot; &quot;1957&quot; &quot;1962&quot; &quot;1967&quot; &quot;1972&quot; &quot;1977&quot; &quot;1982&quot; &quot;1987&quot; &quot;1992&quot; &quot;1997&quot;
+## [11] &quot;2002&quot; &quot;2007&quot;
+</code></pre>
+
+<pre><code class="r">meanLifeExpByYear
+</code></pre>
+
+<pre><code>##     1952     1957     1962     1967     1972     1977     1982     1987 
+## 49.05762 51.50740 53.60925 55.67829 57.64739 59.57016 61.53320 63.21261 
+##     1992     1997     2002     2007 
+## 64.16034 65.01468 65.69492 67.00742
 </code></pre>
 
 <h1>Stratified analyses II (optional)</h1>

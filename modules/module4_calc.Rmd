@@ -85,7 +85,7 @@ vec1 + vec2
 4) an error
 
 
-# Vectorized calculations
+# Why vectorize?
 
 As we've seen, R has many functions that allow you to operate on each element of a vector all at once.
 
@@ -155,7 +155,7 @@ A %*% B
 identical(t(A)%*%A, crossprod(A))
 ```
 
-# Matrix decompositions 
+# (Advanced) Matrix decompositions 
 
 ```{r cache=TRUE}
 ## next 3 lines generate a positive definite matrix
@@ -249,6 +249,8 @@ Recall that a dataframe is a list:
 sapply(gapminder, class)
 ```
 
+**Note**: Some of you may recognize these as map operations.
+
 # `lapply()` and `sapply()` with vectors
 
 You can use `lapply()` and `sapply()` on regular vectors, such as vectors of indices, which can come in handy. This is a bit silly but it illustrates the idea:
@@ -304,7 +306,10 @@ all(rowSums(tbl) == 12)
 
 # Discretization
 
-You may need to discretize a continuous variable [or a discrete variable with many levels], e.g., by life expectancy:
+You may need to discretize a continuous variable [or a discrete variable with many levels], e.g., by life expectancy.
+
+We can use `cut` to do it:
+
 ```{r fig.width=9}
 gapminder2007$lifeExpBin <- cut(gapminder2007$lifeExp, breaks = c(0, 40, 50, 60, 70, 75, 80, Inf))
 tbl <- table(gapminder2007$continent, gapminder2007$lifeExpBin)
@@ -315,7 +320,7 @@ round( prop.table(tbl, margin = 1), 2 )
 
 Often we want to do individual analyses within subsets or clusters of our data.
 
-As a first step, we might want to just split our dataset by a stratifying variable.  
+As a first step, we might want to just split our dataset by a stratifying variable (perhaps after using `cut` to create a categorical variable).  
 
 ```{r, fig.cap ="", fig.width=12}
 subsets <- split(gapminder,  gapminder$year)
@@ -330,10 +335,10 @@ abline(h = 0, col = 'grey')
 
 Obviously, we'd want to iterate to improve that plot given the outlier.
 
-**POLL 4C**: What kind of object is produced by
+**POLL 4C**: What kind of object is produced by split, e.g.,
 
 ```
-split, e.g., subsets <- split(gap,  gap$year)
+subsets <- split(gap,  gap$year)
 ```
 
 1) a dataframe
@@ -354,6 +359,8 @@ meanfun <- function(sub) {
 }	
 
 meanLifeExpByYear <- sapply(subsets, meanfun)
+names(subsets)
+meanLifeExpByYear
 ```
 
 # Stratified analyses II (optional)

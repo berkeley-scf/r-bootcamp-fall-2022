@@ -41,6 +41,7 @@ for discussion of solutions.
 - Lunch (on your own) (12:00-1:30)
 - Day 1 afternoon (1:30-5:00) (data processing and manipulation)
 
+  - Finish Module 3 as needed
   - [Module 4](../modules/module4_calc): Calculations (TBD)
     * vectorized calculations and efficiency
     * apply, lapply (map operations)

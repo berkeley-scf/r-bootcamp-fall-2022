@@ -1,4 +1,4 @@
-% R Bootcamp, Module 8: Graphics
+% R Bootcamp, Module 7: Graphics
 % August 2022, UC Berkeley
 % Chris Paciorek
 
@@ -148,7 +148,7 @@ qplot(x = year, y = lifeExp, data = gapChina)
 qplot(x = year, y = lifeExp, data = gapChina, geom = "line")
 ```
 
-# Grammar of Graphics
+# Grammar of graphics
 
 `ggplot2` syntax is very different from base graphics and lattice. It's built on the **grammar of graphics**.
 The basic idea is that the visualization of all data requires four items:
@@ -313,7 +313,7 @@ ggplot(data = gapminder, aes(x = lifeExp)) + geom_histogram(binwidth = 5) +
 
 This can be quite powerful. It gives you the ability to take account of an additional variable.
 
-# Fitted lines and curves with `ggplot2`
+# Fitted lines and curves with `ggplot2` (optional)
 
 ```{r, fig.cap=" ", warning=FALSE, message=FALSE}
 ggplot(data = gapminder2007, aes(x = gdpPercap, y = lifeExp)) + geom_point() + scale_x_log10()
@@ -526,7 +526,7 @@ ggplot(data = gapChina, aes(x = year, y = lifeExp)) +
             geom_line(linetype = 5, size = 2) 
 ```
 
-# Themes with `ggplot2`
+# Themes with `ggplot2` (optional)
 
 Elements of the plot *not associated with geometries* can be adjusted using ggplot
 *themes*. 
@@ -578,7 +578,7 @@ plot3 <- ggplot(data = gapminder, aes(x = year, y = lifeExp)) +
 grid.arrange(plot1, plot2, plot3, nrow=3, ncol = 1)
 ```
 
-# `patchwork`: Combining Multiple `ggplot2` plots
+# `patchwork`: Combining Multiple `ggplot2` plots (optional)
 
 * The `patchwork` package may be used to combine multiple `ggplot2` plots using
   a small set of operators similar to the pipe.
@@ -626,7 +626,7 @@ Two basic image types:
 Every pixel of a plot contains its own separate coding; **bad if you want to resize the image**.
 
 ```{r, eval=FALSE}
-jpeg(filename = "example.jpg", width=, height=)
+jpeg(filename = "example.jpg", width = , height =)
 plot(x,y)
 dev.off()
 ```
@@ -636,8 +636,7 @@ dev.off()
 Every element of a plot is encoded with a function that gives its coding conditional on several factors; **great for resizing**
 
 ```{r, eval=FALSE}
-# NOT run
-pdf(file = "example.pdf", width=, height=)
+pdf(file = "example.pdf", width = , height =)
 plot(x,y)
 dev.off()
 ```
@@ -649,8 +648,7 @@ dev.off()
 
 # Assume we saved our plot as an object called `plot1`.
 
-ggsave(filename = "example.pdf", plot = plot1, scale = , width = ,
-       height = )
+ggsave(filename = "example.pdf", plot = plot1, scale = , width = , height = )
 ```
 
 # Breakout

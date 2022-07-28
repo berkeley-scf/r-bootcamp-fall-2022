@@ -1,4 +1,4 @@
-% R bootcamp, Module 7: Analysis
+% R bootcamp, Module 8: Analysis
 % August 2022, UC Berkeley
 % Chris Paciorek
 

@@ -81,7 +81,7 @@ identical(gapminder[c(3,5)], gapminder[ , c(3,5)])
 
 In general the placement of commas in R is crucial, but here, two different operations give the same result because of the underlying structure of data frames.
 
-# Matrices and Arrays
+# Matrices 
 
 If you need to do numeric calculations on an entire non-vector object (dimension > 1), you generally want to use matrices and arrays, not data frames.
 
@@ -106,6 +106,8 @@ head(gm_mat)
 gm_mat <- as.matrix(gapminder)
 head(gm_mat)
 ```
+
+# Arrays
 
 Arrays are like matrices but can have more or fewer than two dimensions.
 ```{r}
@@ -186,12 +188,13 @@ This is like Fortran, MATLAB and Julia but not like C or Python(numpy).
 ```{r}
 mat <- matrix(1:12, 3, 4)
 mat
-c(mat)
+vals <- c(mat)
 ```
+
 You can go smoothly back and forth between a matrix (or an array) and a vector:
 ```{r}
-identical(mat, matrix(c(mat), 3, 4))
-identical(mat, matrix(c(mat), 3, 4, byrow = TRUE))
+identical(mat, matrix(vals, 3, 4))
+identical(mat, matrix(vals, 3, 4, byrow = TRUE))
 ```
 
 This is a common cause of bugs!
@@ -378,7 +381,8 @@ summary(gapminder$continent)
 
 - What if we don't like the order these are in? Factor order is important for all kinds of things like plotting, analysis of variance, regression output, and more
 
-# (Advanced) Ordering the Factor
+# (Advanced) Ordering the Factor (optional)
+
 - Ordered factors simply have an additional attribute explaining the order of the levels of a factor
 - This is a useful shortcut when we want to preserve some of the meaning provided by the order
 - Think ordinal data
@@ -418,6 +422,42 @@ score[as.character(students[3])]
 ```
 
 What went wrong and how did we fix it?  Notice how easily this could be a big bug in your code.
+
+# Strings
+
+R has lots of functionality for character strings. Usually these are stored as vectors of strings, each with arbitrary length.
+
+```{r}
+chars <- c('hi', 'hallo', "mother's", 'father\'s', "He said, \"hi\"" )
+length(chars)
+nchar(chars)
+paste("bill", "clinton", sep = " ")  # paste together a set of strings
+paste(chars, collapse = ' ')  # paste together things from a vector
+
+strsplit("This is the R bootcamp", split = " ")
+
+countries <- as.character(gapminder2007$country)
+substring(countries, 1, 3)
+tmp <- countries
+substring(tmp, 5, 10) <- "______"
+tmp[1:20]
+```
+We can search for patterns in character vectors and replace patterns (both vectorized!)
+```{r}
+indexes <- grep("Korea", countries)
+indexes
+countries[indexes]
+countries2 <- gsub("Korea Dem. Rep.", "North Korea", countries)
+countries2[indexes]
+```
+
+# Regular expressions (regex or regexp) (optional)
+
+Some of you may be familiar with using *regular expressions*, which is functionality for doing sophisticated pattern matching and replacement with strings. *Python* and *Perl* are both used extensively for such text manipulation. 
+
+R has a full set of regular expression capabilities available through the *grep()*, *gregexpr()*, and *gsub()* functions (among others - many R functions will work with regular expressions). However, a particularly nice way to make use of this functionality is to use the *stringr* package, which is more user-friendly than directly using the core R functions.
+
+You can basically do any regular expression/string manipulations in R.
 
 # Subsetting
 
@@ -479,7 +519,7 @@ vec <- rnorm(20)
 vec[c(3, 5, 12:14)] <- 1:5
 vec
 mat[2, 3:5] <- rnorm(3)
-mat[mat[,1] > 0, ] <- -Inf
+mat[mat[,1] > 3, ] <- -Inf
 mat
 ```
 
@@ -518,41 +558,6 @@ mat <- matrix(1:16, nrow = 4, ncol = 4)
 9) mat[c(2, 4)][3, ]
 
 
-# Strings
-
-R has lots of functionality for character strings. Usually these are stored as vectors of strings, each with arbitrary length.
-
-```{r}
-chars <- c('hi', 'hallo', "mother's", 'father\'s', "He said, \"hi\"" )
-length(chars)
-nchar(chars)
-paste("bill", "clinton", sep = " ")  # paste together a set of strings
-paste(chars, collapse = ' ')  # paste together things from a vector
-
-strsplit("This is the R bootcamp", split = " ")
-
-countries <- as.character(gapminder2007$country)
-substring(countries, 1, 3)
-tmp <- countries
-substring(tmp, 5, 10) <- "______"
-tmp[1:20]
-```
-We can search for patterns in character vectors and replace patterns (both vectorized!)
-```{r}
-indexes <- grep("Korea", countries)
-indexes
-countries[indexes]
-countries2 <- gsub("Korea Dem. Rep.", "North Korea", countries)
-countries2[indexes]
-```
-
-# Regular expressions (regex or regexp) (optional)
-
-Some of you may be familiar with using *regular expressions*, which is functionality for doing sophisticated pattern matching and replacement with strings. *Python* and *Perl* are both used extensively for such text manipulation. 
-
-R has a full set of regular expression capabilities available through the *grep()*, *gregexpr()*, and *gsub()* functions (among others - many R functions will work with regular expressions). However, a particularly nice way to make use of this functionality is to use the *stringr* package, which is more user-friendly than directly using the core R functions.
-
-You can basically do any regular expression/string manipulations in R.
 
 
 # Breakout
