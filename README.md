@@ -41,7 +41,7 @@ NOTE: registrations will only be processed periodically, so there may be a delay
 
 If you have registered and realize you cannot attend, PLEASE [cancel your registration](https://forms.gle/Q75qCFDqygL8oY3D6) so that we can let people on the wait-list attend. If you don't cancel, you'll deprive someone else of a spot, as we always have a wait-list for this event.
 
-## Logistics - when, where, and how
+## Logistics - when, where, how, and what
 
 Physical location: UC Berkeley campus, building and room TBD.
 
@@ -51,16 +51,18 @@ Time:
 
 We'll start formally on Saturday morning at 8:30 am, but please plan to get here by 8:15 so you can sign in and get settled. And if you need help with any software installation please come at 8 am.
 
-The [schedule for the bootcamp](schedule) including links to all the modules.
-
 Note that street parking in Berkeley near campus on Saturdays is generally subject to two hour limits.
 
 You will probably want to [make sure you can use the campus WiFi (EduRoam)](https://berkeley.service-now.com/kb_view.do?sysparm_article=KB0013807) in advance of the event. But if you need wireless access as a guest (i.e., you don't have a CalNet ID), connect to 'CalVisitor'.
 
+### Schedule
 
-## Health information
+The [schedule for the bootcamp](schedule) including links to all the modules.
 
-Vaccination requirements will follow [campus requirements](https://uhs.berkeley.edu/requirements/covid19), so essentially everyone should be vaccinated. In particular, those of you arriving from another country should carefully examine these requirements, which will determine if you can attend the bootcamp in person.
+### Health information
+
+Vaccination requirements will follow [campus requirements](https://uhs.berkeley.
+edu/requirements/covid19), so essentially everyone should be vaccinated. In particular, those of you arriving from another country should carefully examine these requirements, which will determine if you can attend the bootcamp in person.
 
 ## Preparing for the course - course content
 
@@ -107,4 +109,4 @@ Please ask questions both during the presentations and during the breakout sessi
 
 ## Logistical Questions
 
-If you need to contact us directly with an administrative question, you can email r-bootcamp@lists.berkeley.edu.
+If you need to contact us directly with an administrative question, you can email r-bootcamp@lists.berkeley.edu. But for general questions that others might benefit from, please use the [online discussion forum](https://edstem.org/us/courses/24442).
