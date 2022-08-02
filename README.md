@@ -51,7 +51,7 @@ Time:
 
 We'll start formally on Saturday morning at 8:30 am, but please plan to get here by 8:15 so you can sign in and get settled. And if you need help with any software installation please come at 8 am.
 
-Here is the [schedule for the bootcamp](schedule) including links to all the modules.
+The [schedule for the bootcamp](schedule) including links to all the modules.
 
 Note that street parking in Berkeley near campus on Saturdays is generally subject to two hour limits.
 
@@ -98,12 +98,12 @@ Alternatively, IF INSTALLING ON YOUR LAPTOP FAILS, the following is an alternati
 
 Note that our ability to troubleshoot R or RStudio installed directly on your machine is limited (particularly in Windows). We'll try to help, but if we run into roadblocks, we'll direct you to the browser option.
 
-## Course Discussion
+## Course Discussion / Q&A
 
 Please ask questions both during the presentations and during the breakout sessions. 
 
 - Questions can be asked to the presenter or to the circulating bootcamp assistants.
-- We'll have an online discussion forum through Ed Discussion for online discussion and answering questions during (and before) the bootcamp.
+- We'll have an [online discussion forum](https://edstem.org/us/courses/24442) through Ed Discussion for online discussion and answering questions during (and before) the bootcamp. 
 
 ## Logistical Questions
 
