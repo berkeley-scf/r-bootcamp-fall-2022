@@ -7,7 +7,6 @@ See below for information on [registration](#registration), [logistics](#logisti
 Sponsored by: UC Berkeley Statistics and the Statewide Database at Berkeley Law
 
 ## Overview
-
 The bootcamp will be an intensive two-day introduction to R using RStudio. Topics will include:
 
  * R basics - reading and manipulating data, working with R data objects, doing calculations
@@ -27,7 +26,7 @@ The workshop doesn't assume any specific R knowledge and starts from the very ba
 
 In prior years, we've had two tracks, with one track serving to provide a slower pace for those with no experience with R or other programming languages. Unfortunately, this year we do not have staffing to support two tracks.
 
-If you have no R experience and little programming experience in other languages, you are likely to find the pace too quick. Therefore we recommend that you attend one of the [D-Lab](https://dlab.berkeley.edu)'s R Fundamentals workshops. In particular there will be [a workshop the week of August 15](https://dlab.berkeley.edu/events/more-d-lab-events-and-workshops-coming-soon/2022-08-15) (the week before classes start) as well as workshops later in the semester. 
+If you have no R experience and little programming experience in other languages, you are likely to find the pace too quick. Therefore we recommend that you attend one of the [D-Lab](https://dlab.berkeley.edu)'s R Fundamentals workshops. In particular there will be [a workshop the week of August 15](https://dlab.berkeley.edu/events/r-fundamentals-parts-1-4/2022-08-15) (the week before classes start) as well as workshops later in the semester. 
 
 ## Registration
 
