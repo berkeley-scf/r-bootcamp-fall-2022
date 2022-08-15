@@ -164,6 +164,8 @@ Assume the vector is created like this:
 vals <- rnorm(4)
 ```
 
+(respond at [https://pollev.com/chrispaciorek428](https://pollev.com/chrispaciorek428))
+
 1) vals[3]
 2) vals[2,3]
 3) vals[c(2,3)]
@@ -208,7 +210,7 @@ mean  # We'll investigate what 'UseMethod' does in Module 10
 
 # Getting help about a function
 
-To get information about a function you know exists, use `help` or `?`, e.g., `?lm`. For information on a general topic, use `apropos`.
+To get information about a function you know exists, use `help` or `?`, e.g., `?lm`. 
 
 ```{r eval = FALSE}
 help(lm)
@@ -219,7 +221,9 @@ help(lm)
 
 # Basic kinds of R objects
 
-We've seen vectors of various types (numeric (i.e., decimal/floating point/double), integer, boolean, character), all items must be of the same type.
+We've seen vectors of various types (numeric (i.e., decimal/floating point/double), integer, boolean, character).
+
+All items in a single vector must be of the same type.
 
 But vectors are not the only kinds of R objects.
 
@@ -285,7 +289,7 @@ plot(gapminder$lifeExp ~ gapminder$gdpPercap, xlab = 'GDP per capita (dollars)',
 
 # Breakout
 
-In general, your answers to any questions should involve writing code to manipulate objects. For example, if I ask you to find the maximum flight delay, do not scan through all the values and find it by eye. Use R to do the calculations and print results.
+In general, your answers to any questions should involve writing code to manipulate objects. For example, if I ask you to find the maximum life expectancy, do not scan through all the values and find it by eye. Use R to do the calculations and print results.
 
 ### Basics
 
