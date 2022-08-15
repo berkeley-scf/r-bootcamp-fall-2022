@@ -2,7 +2,7 @@
 
 This is the website for the tenth annual R bootcamp at Berkeley. The bootcamp will be an intensive two-day introduction to R using RStudio, held all day on Saturday August 20 and Sunday August 21, 2022
 
-See below for information on [registration](#registration), [logistics](#logistics---when-where-and-how), [workshop content](#preparing-for-the-course---course-content), and [preparing for the workshop](#preparing-for-the-course---software-installation) (primarily installing software in advance.
+See below for information on the [workshop schedule and links to the modules](schedule) [registration](#registration), [logistics](#logistics---when-where-and-how), [workshop content](#preparing-for-the-course---course-content), and [preparing for the workshop](#preparing-for-the-course---software-installation) (primarily installing software in advance.
 
 Sponsored by: UC Berkeley Statistics and the Statewide Database at Berkeley Law
 

@@ -100,4 +100,3 @@ for discussion of solutions.
     * Where to learn more (campus and non-campus resources)
 
 
-<iframe src="https://embed.polleverywhere.com/multiple_choice_polls/Gxvtisj8xccgQP5X6NVSm?controls=none&short_poll=true" width="800px" height="600px"></iframe>

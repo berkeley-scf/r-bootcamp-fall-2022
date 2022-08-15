@@ -6,11 +6,11 @@
 
 ## Where to find stuff
 
-The GitHub site ([https://github.com/berkeley-scf/r-bootcamp-fall-2022](https://github.com/berkeley-scf/r-bootcamp-fall-2022)) is the main site for the bootcamp. It has information on logistics, software installation, and is the master repository for materials for the modules.
+This [website](https://berkeley-scf.github.io/r-bootcamp-fall-2022) and the associated GitHub site ([https://github.com/berkeley-scf/r-bootcamp-fall-2022](https://github.com/berkeley-scf/r-bootcamp-fall-2022)) is the main site for the bootcamp. It has information on logistics, software installation, and is the master repository for materials for the modules.
 
 We have an [Ed Discussion site](https://edstem.org/us/courses/24442) for discussion and answering questions online during (and before) the bootcamp. 
 
-If you have an administrative question, email r-bootcamp@lists.berkeley.edu.
+If you have an administrative question before or after the bootcamp, email r-bootcamp@lists.berkeley.edu.
 
 ## Wireless
 
@@ -149,8 +149,8 @@ RStudio provides an integrated development environment in which all of these pie
 # What are my other options? 
 
 - Python
-- Matlab/Octave
 - Julia
+- MATLAB
 - C/C++
 - SAS
 - Stata
@@ -180,4 +180,4 @@ The building blocks of scientific computing include:
 
 # We want your feedback (even if you leave early)!
 
-During the afternoon break tomorrow, we'll ask everyone to fill out a feedback form, but if you leave early, please see the Ed Discussion board for the link. In order to view the recordings after the last day of the bootcamp, you'll need to fill out the feedback form!
+During the afternoon break tomorrow, we'll ask everyone to fill out a feedback form, but if you leave early, please see the Ed Discussion board for the link.

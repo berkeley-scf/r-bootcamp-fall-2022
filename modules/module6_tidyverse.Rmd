@@ -1,6 +1,6 @@
 % R Bootcamp, Module 6: Data manipulation with the `tidyverse`
 % August 2022, UC Berkeley
-% Chris Paciorek
+% Corrine Elliott
 
 
 ```{r chunksetup, include=FALSE}
@@ -586,6 +586,8 @@ head(gap_medium)
 
 `dplyr` and `tidyr` have many more functions to help you wrangle and manipulate 
 your data. See the  [Data Wrangling Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) for more.
+
+Here are [some additional functions/verbs](https://www.r-bloggers.com/2022/07/eight-r-tidyverse-tips-for-everyday-data-engineering/?utm_source=phpList&utm_medium=email&utm_campaign=R-bloggers-daily&utm_content=HTML) for use with dplyr: 
 
 There are some other useful packages in the [tidyverse](http://www.tidyverse.org):
 

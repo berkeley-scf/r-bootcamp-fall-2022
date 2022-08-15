@@ -1,6 +1,6 @@
 % R bootcamp, Module 4: Calculations
 % August 2022, UC Berkeley
-% Chris Paciorek
+% Alan Aw
 
 ```{r chunksetup, include=FALSE} 
 # include any code here you don't want to show up in the document,

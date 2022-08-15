@@ -1,6 +1,6 @@
 % R Bootcamp, Module 7: Graphics
 % August 2022, UC Berkeley
-% Chris Paciorek
+% Florica Constantine
 
 ```{r chunksetup, include=FALSE}
 knitr::opts_chunk$set(fig.cap = " ", warning=FALSE, fig.show = "hold")

@@ -30,7 +30,7 @@ Think of a mathematical operation you need - can you guess how to do it in R?
 
 Side note to presenter: turn off R Notebook inline view via RStudio -> Preferences -> R Markdown -> Show output inline ...
 
-# R as a calculator: quick quiz
+# R as a calculator: quick quiz (respond at [https://pollev.com/chrispaciorek428](https://pollev.com/chrispaciorek428))
 
 **POLL 1A**:
 
