@@ -32,7 +32,7 @@ Side note to presenter: turn off R Notebook inline view via RStudio -> Preferenc
 
 # R as a calculator: quick quiz (respond at [https://pollev.com/chrispaciorek428](https://pollev.com/chrispaciorek428))
 
-**POLL 1A**:
+**[P](https://www.polleverywhere.com/multiple_choice_polls/jZ8bvPGPJRODpSbWig5r4)OLL 1A**:
 
 *Question 1*: How do I calculate the cosine of 2 pi?
 
@@ -44,7 +44,6 @@ Side note to presenter: turn off R Notebook inline view via RStudio -> Preferenc
 6) cos(2 * 3.14159)
 7) cos[2*pi]
 
-[A](https://www.polleverywhere.com/multiple_choice_polls/jZ8bvPGPJRODpSbWig5r4)
 
 *Question 2*: What happens if you do this?
 
@@ -158,7 +157,7 @@ vals[1:2] <- 0  # this uses 'recycling' - more in Module 4
 
 # Working with indices and subsets: quick quiz
 
-**POLL 1B**: Which of these will work to extract a subset of a vector?
+**[P](https://www.polleverywhere.com/multiple_choice_polls/9Q2CMmwBTQZVeM9cKrfum)OLL 1B**: Which of these will work to extract a subset of a vector?
 Assume the vector is created like this:
 
 ```
@@ -174,8 +173,6 @@ vals <- rnorm(4)
 5) vals[c(FALSE, TRUE, TRUE, FALSE)]
 6) vals[c(f,t,t,f)]
 7) vals(3)
-
-[A](https://www.polleverywhere.com/multiple_choice_polls/9Q2CMmwBTQZVeM9cKrfum)
 
 # Vectorized calculations and comparisons
 

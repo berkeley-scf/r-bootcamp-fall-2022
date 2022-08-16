@@ -58,7 +58,7 @@ is.data.frame(myList)
 
 # Managing objects: quick quiz
 
-**POLL 2A**: Which of these is true about the gapminder object in R?
+**[P](https://www.polleverywhere.com/multiple_choice_polls/K8NRn7KetenA0wkFK6n6c)OLL 2A**: Which of these is true about the gapminder object in R?
 
 (respond at [https://pollev.com/chrispaciorek428](https://pollev.com/chrispaciorek428))
 
@@ -68,7 +68,6 @@ is.data.frame(myList)
 4) `gapminder` is a list
 5) `gapminder` is a function
 
-[A](https://www.polleverywhere.com/multiple_choice_polls/K8NRn7KetenA0wkFK6n6c)
 
 # Managing the workspace
 
@@ -271,7 +270,7 @@ In RStudio, you can use `Session -> Set Working Directory` instead of `setwd`.
 
 (respond at [https://pollev.com/chrispaciorek428](https://pollev.com/chrispaciorek428))
 
-**POLL 2B**:
+**[P](https://www.polleverywhere.com/multiple_choice_polls/2t5009xR83yX3Tzp5schp)OLL 2B**:
 
 Suppose I am on a Mac that has the following directories:
 
@@ -297,9 +296,8 @@ Which of the following use relative paths?
 7) setwd('./data')
 8) setwd('Desktop/r-bootcamp-fall-2022/data')
 
-[A](https://www.polleverywhere.com/multiple_choice_polls/2t5009xR83yX3Tzp5schp]
 
-**POLL 2C**:
+**[P](https://www.polleverywhere.com/multiple_choice_polls/bfvk2xcxBma160uubRaos)OLL 2C**:
 
 Suppose my current working directory is:
 
@@ -318,8 +316,6 @@ Which of the following will allow me to change to the 'data' subdirectory?
 6) setwd('paciorek', 'Desktop/r-bootcamp-fall-2022/data')
 7) setwd('./data')
 8) setwd('Desktop/r-bootcamp-fall-2022/data')
-
-[A](https://www.polleverywhere.com/multiple_choice_polls/bfvk2xcxBma160uubRaos)
 
 # Reading text files into R
 
