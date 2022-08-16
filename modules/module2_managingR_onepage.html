@@ -218,7 +218,6 @@ hr {
 
 <ul>
 <li><code>Tools -&gt; Keyboard Shortcuts Help</code> or</li>
-<li><a href="https://www.r-bloggers.com/rstudio-shortcuts-and-tips">this online tip page</a>, or</li>
 <li><a href="https://appsilon.com/rstudio-shortcuts-and-tips">this</a> and <a href="https://www.r-bloggers.com/r-studio-shortcuts-and-tips-part-2">this</a> blog posts.</li>
 </ul></li>
 <li><a href="https://www.r-bloggers.com/tips-and-tricks-in-rstudio-and-r-markdown">Other tips</a> for saving time in RStudio and R Markdown</li>
@@ -320,6 +319,8 @@ is.list(myList)
 
 <p><strong>POLL 2A</strong>: Which of these is true about the gapminder object in R?</p>
 
+<p>(respond at <a href="https://pollev.com/chrispaciorek428">https://pollev.com/chrispaciorek428</a>)</p>
+
 <p>1) <code>gapminder</code> is a data frame
 2) <code>gapminder</code> is a matrix
 3) <code>gapminder</code> is a vector
@@ -330,7 +331,8 @@ is.list(myList)
 
 <p>R has functions for learning about the collection of objects in your workspace. Some of this is built in to RStudio.</p>
 
-<pre><code class="r">x &lt;- rnorm(5)
+<pre><code class="r">## Let&#39;s first create a few objects
+x &lt;- rnorm(5)
 y &lt;- c(5L, 2L, 7L)
 z &lt;- list(a = 3, b = c(&#39;sam&#39;, &#39;yang&#39;))
 ls()  # search the user workspace (global environment)
@@ -465,7 +467,10 @@ ls()
 
 <h1>General information about a package</h1>
 
-<p>You can use syntax as follows to get a list of the objects in a package and a brief description: <code>library(help = packageName)</code>. </p>
+<p>You can use syntax as follows to get a list of the objects in a package and a brief description:</p>
+
+<pre><code class="r">library(help = packageName)
+</code></pre>
 
 <p>On CRAN there often <em>vignettes</em> that are an overview and describe usage of a package if you click on a specific package. The <em>reference manual</em> is just a single document with the help files for all of the objects/functions in a package, so may be helpful but often it&#39;s hard to get the big picture view from that.</p>
 
@@ -473,11 +478,20 @@ ls()
 
 <h3>The search path</h3>
 
-<p>To see the packages that are loaded and the order in which packages are searched for functions/objects: <code>search()</code>.</p>
+<p>To see the packages that are loaded and the order in which packages are searched for functions/objects:</p>
 
-<p>To see what <em>libraries</em> (i.e., directory locations) R is retrieving packages from: <code>.libPaths()</code>.</p>
+<pre><code class="r">search()
+</code></pre>
 
-<p>And to see where R is getting specific packages, <code>searchpaths()</code>.</p>
+<p>To see what <em>libraries</em> (i.e., directory locations) R is retrieving packages from: </p>
+
+<pre><code class="r">.libPaths()
+</code></pre>
+
+<p>And to see where R is getting specific packages:</p>
+
+<pre><code class="r">searchpaths()
+</code></pre>
 
 <h3>Package namespaces</h3>
 
@@ -510,7 +524,7 @@ lm(7)
 </code></pre>
 
 <pre><code>## gapminder$lifeExp ~ gapminder$gdpPercap
-## &lt;environment: 0x55d9fd3a3ab0&gt;
+## &lt;environment: 0x55b71fd82c50&gt;
 </code></pre>
 
 <pre><code class="r">stats::lm(gapminder$lifeExp ~ gapminder$gdpPercap)
@@ -568,19 +582,22 @@ ls data
 
 <p>To read and write from R, you need to have a firm grasp of where in the computer&#39;s filesystem you are reading and writing from. </p>
 
-<pre><code class="r">getwd()  # what directory will R look in?
-# Linux/Mac specific
+<pre><code class="r">## What directory does R look for files in (working directory)?
+getwd()
+
+## Changing the working directory (Linux/Mac specific)
 setwd(&#39;~/Desktop/r-bootcamp-fall-2022&#39;) # change the working directory
 setwd(&#39;/Users/paciorek/Desktop&#39;) # absolute path
 getwd()
 setwd(&#39;r-bootcamp-fall-2022/modules&#39;) # relative path
 setwd(&#39;../tmp&#39;) # relative path, up and back down the tree
 
-# Windows - use either \\ or / to indicate directories
+# Changing the working directory (Windows specific)
+## Windows - use either \\ or / to indicate directories
 # setwd(&#39;C:\\Users\\Your_username\\Desktop\\r-bootcamp-fall-2022&#39;)
 # setwd(&#39;..\\r-bootcamp-fall-2022&#39;)
 
-# platform-agnostic
+# Changing the working directory (platform-agnostic)
 setwd(file.path(&#39;~&#39;, &#39;Desktop&#39;, &#39;r-bootcamp-fall-2022&#39;, &#39;modules&#39;)) # change the working directory
 setwd(file.path(&#39;/&#39;, &#39;Users&#39;, &#39;paciorek&#39;, &#39;Desktop&#39;, &#39;r-bootcamp-fall-2022&#39;, &#39;modules&#39;)) # absolute path
 getwd()
@@ -592,6 +609,8 @@ setwd(file.path(&#39;..&#39;, &#39;data&#39;)) # relative path
 <p>In RStudio, you can use <code>Session -&gt; Set Working Directory</code> instead of <code>setwd</code>.</p>
 
 <h1>The working directory: quick quiz</h1>
+
+<p>(respond at <a href="https://pollev.com/chrispaciorek428">https://pollev.com/chrispaciorek428</a>)</p>
 
 <p><strong>POLL 2B</strong>:</p>
 
@@ -607,7 +626,7 @@ setwd(file.path(&#39;..&#39;, &#39;data&#39;)) # relative path
 ----Documents
 </code></pre>
 
-<p>Which of the following are relative paths?</p>
+<p>Which of the following use relative paths?</p>
 
 <p>1) setwd(&#39;Users/paciorek/Desktop/r-bootcamp-fall-2022/data&#39;)
 2) setwd(&#39;/Users/paciorek/Desktop/r-bootcamp-fall-2022/data&#39;)
@@ -691,11 +710,16 @@ rta[1:5, 1:5]
 
 <pre><code class="r"># great, we&#39;re all set, right?
 # Not so fast...
-unlist(lapply(rta, class))[1:5]
+rta[5, 2]
 </code></pre>
 
-<pre><code>##        time      X40010      X40015      X40020      X40025 
-## &quot;character&quot; &quot;character&quot; &quot;character&quot; &quot;character&quot; &quot;character&quot;
+<pre><code>## [1] &quot;849&quot;
+</code></pre>
+
+<pre><code class="r">class(rta[ , 2])
+</code></pre>
+
+<pre><code>## [1] &quot;character&quot;
 </code></pre>
 
 <pre><code class="r"># let&#39;s delve more deeply
@@ -717,11 +741,10 @@ head(sort(unique(rta[ , 2])))
 
 rta2 &lt;- read.table(&quot;../data/RTAData.csv&quot;, sep = &quot;,&quot;, head = TRUE, 
       na.strings = c(&#39;NA&#39;, &#39;x&#39;))
-unlist(lapply(rta2, class))[1:5]
+class(rta2[ , 2])
 </code></pre>
 
-<pre><code>##        time      X40010      X40015      X40020      X40025 
-## &quot;character&quot;   &quot;integer&quot;   &quot;integer&quot;   &quot;integer&quot;   &quot;integer&quot;
+<pre><code>## [1] &quot;integer&quot;
 </code></pre>
 
 <pre><code class="r"># checking...
@@ -773,7 +796,10 @@ head(vote)
 ## 6    rural     &lt;NA&gt;   &lt;NA&gt; 2004      4 0
 </code></pre>
 
-<p>There are a number of other formats that we can handle for either reading or writing. Let&#39;s see <code>library(help = foreign)</code>.</p>
+<p>There are a number of other formats that we can handle for either reading or writing. Let&#39;s see:</p>
+
+<pre><code class="r">library(help = foreign)
+</code></pre>
 
 <p>R can also read in (and write out) Excel files, netCDF files, HDF5 files, etc., in many cases through add-on packages from CRAN. </p>
 
@@ -810,7 +836,7 @@ print(xtable(table(gapminder$year, gapminder$continent)), type = &quot;html&quot
 </code></pre>
 
 <pre><code>## &lt;!-- html table generated in R 4.2.0 by xtable 1.8-4 package --&gt;
-## &lt;!-- Wed Jul 27 16:04:38 2022 --&gt;
+## &lt;!-- Mon Aug 15 17:26:39 2022 --&gt;
 ## &lt;table border=1&gt;
 ## &lt;tr&gt; &lt;th&gt;  &lt;/th&gt; &lt;th&gt; Africa &lt;/th&gt; &lt;th&gt; Americas &lt;/th&gt; &lt;th&gt; Asia &lt;/th&gt; &lt;th&gt; Europe &lt;/th&gt; &lt;th&gt; Oceania &lt;/th&gt;  &lt;/tr&gt;
 ##   &lt;tr&gt; &lt;td align=&quot;right&quot;&gt; 1952 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  52 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  25 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  33 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  30 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;   2 &lt;/td&gt; &lt;/tr&gt;
@@ -827,8 +853,6 @@ print(xtable(table(gapminder$year, gapminder$continent)), type = &quot;html&quot
 ##   &lt;tr&gt; &lt;td align=&quot;right&quot;&gt; 2007 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  52 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  25 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  33 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  30 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;   2 &lt;/td&gt; &lt;/tr&gt;
 ##    &lt;/table&gt;
 </code></pre>
-
-<p>Recall our discussion of the <code>summary()</code> function used on either a vector or a regression object. What do you think is going on with call to <code>print()</code> above? </p>
 
 <h1>Version control (optional)</h1>
 

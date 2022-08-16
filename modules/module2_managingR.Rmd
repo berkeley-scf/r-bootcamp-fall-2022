@@ -19,7 +19,6 @@ If you're starting to type something you've typed before, or the long name of an
 - RStudio: select a line or block for execution
 - For keyboard shortcuts in RStudio see:
    - `Tools -> Keyboard Shortcuts Help` or
-   - [this online tip page](https://www.r-bloggers.com/rstudio-shortcuts-and-tips), or
    - [this](https://appsilon.com/rstudio-shortcuts-and-tips) and [this](https://www.r-bloggers.com/r-studio-shortcuts-and-tips-part-2) blog posts.
 - [Other tips](https://www.r-bloggers.com/tips-and-tricks-in-rstudio-and-r-markdown) for saving time in RStudio and R Markdown
 - Put your code in a file and use `source()`. For example: `source('myRcodeFile.R')`
@@ -61,18 +60,22 @@ is.data.frame(myList)
 
 **POLL 2A**: Which of these is true about the gapminder object in R?
 
+(respond at [https://pollev.com/chrispaciorek428](https://pollev.com/chrispaciorek428))
+
 1) `gapminder` is a data frame
 2) `gapminder` is a matrix
 3) `gapminder` is a vector
 4) `gapminder` is a list
 5) `gapminder` is a function
 
+[A](https://www.polleverywhere.com/multiple_choice_polls/K8NRn7KetenA0wkFK6n6c)
 
 # Managing the workspace
 
 R has functions for learning about the collection of objects in your workspace. Some of this is built in to RStudio.
 
 ```{r}
+## Let's first create a few objects
 x <- rnorm(5)
 y <- c(5L, 2L, 7L)
 z <- list(a = 3, b = c('sam', 'yang'))
@@ -152,7 +155,11 @@ You can also install directly from a package zip/tarball rather than from CRAN b
 
 # General information about a package
 
-You can use syntax as follows to get a list of the objects in a package and a brief description: `library(help = packageName)`. 
+You can use syntax as follows to get a list of the objects in a package and a brief description:
+
+```{r, eval=FALSE}
+library(help = packageName)
+```
 
 On CRAN there often *vignettes* that are an overview and describe usage of a package if you click on a specific package. The *reference manual* is just a single document with the help files for all of the objects/functions in a package, so may be helpful but often it's hard to get the big picture view from that.
 
@@ -160,11 +167,23 @@ On CRAN there often *vignettes* that are an overview and describe usage of a pac
 
 ### The search path
 
-To see the packages that are loaded and the order in which packages are searched for functions/objects: `search()`.
+To see the packages that are loaded and the order in which packages are searched for functions/objects:
 
-To see what *libraries* (i.e., directory locations) R is retrieving packages from: `.libPaths()`.
+```{r, eval=FALSE}
+search()
+```
 
-And to see where R is getting specific packages, `searchpaths()`.
+To see what *libraries* (i.e., directory locations) R is retrieving packages from: 
+
+```{r, eval=FALSE}
+.libPaths()
+```
+
+And to see where R is getting specific packages:
+
+```{r, eval=FALSE}
+searchpaths()
+```
 
 ### Package namespaces
 
@@ -223,19 +242,22 @@ See the *devtools* package and `package.skeleton()` for some useful tools to hel
 To read and write from R, you need to have a firm grasp of where in the computer's filesystem you are reading and writing from. 
 
 ```{r, eval=FALSE}
-getwd()  # what directory will R look in?
-# Linux/Mac specific
+## What directory does R look for files in (working directory)?
+getwd()
+
+## Changing the working directory (Linux/Mac specific)
 setwd('~/Desktop/r-bootcamp-fall-2022') # change the working directory
 setwd('/Users/paciorek/Desktop') # absolute path
 getwd()
 setwd('r-bootcamp-fall-2022/modules') # relative path
 setwd('../tmp') # relative path, up and back down the tree
 
-# Windows - use either \\ or / to indicate directories
+# Changing the working directory (Windows specific)
+## Windows - use either \\ or / to indicate directories
 # setwd('C:\\Users\\Your_username\\Desktop\\r-bootcamp-fall-2022')
 # setwd('..\\r-bootcamp-fall-2022')
 
-# platform-agnostic
+# Changing the working directory (platform-agnostic)
 setwd(file.path('~', 'Desktop', 'r-bootcamp-fall-2022', 'modules')) # change the working directory
 setwd(file.path('/', 'Users', 'paciorek', 'Desktop', 'r-bootcamp-fall-2022', 'modules')) # absolute path
 getwd()
@@ -246,6 +268,8 @@ Many errors and much confusion result from you and R not being on the same page 
 In RStudio, you can use `Session -> Set Working Directory` instead of `setwd`.
 
 # The working directory: quick quiz
+
+(respond at [https://pollev.com/chrispaciorek428](https://pollev.com/chrispaciorek428))
 
 **POLL 2B**:
 
@@ -262,7 +286,7 @@ Users
 ----Documents
 ```
 
-Which of the following are relative paths?
+Which of the following use relative paths?
 
 1) setwd('Users/paciorek/Desktop/r-bootcamp-fall-2022/data')
 2) setwd('/Users/paciorek/Desktop/r-bootcamp-fall-2022/data')
@@ -273,6 +297,7 @@ Which of the following are relative paths?
 7) setwd('./data')
 8) setwd('Desktop/r-bootcamp-fall-2022/data')
 
+[A](https://www.polleverywhere.com/multiple_choice_polls/2t5009xR83yX3Tzp5schp]
 
 **POLL 2C**:
 
@@ -294,7 +319,7 @@ Which of the following will allow me to change to the 'data' subdirectory?
 7) setwd('./data')
 8) setwd('Desktop/r-bootcamp-fall-2022/data')
 
-
+[A](https://www.polleverywhere.com/multiple_choice_polls/bfvk2xcxBma160uubRaos)
 
 # Reading text files into R
 
@@ -322,7 +347,9 @@ rta[1:5, 1:5]
 dim(rta)
 # great, we're all set, right?
 # Not so fast...
-unlist(lapply(rta, class))[1:5]
+rta[5, 2]
+class(rta[ , 2])
+
 # let's delve more deeply
 # unique(rta[ , 2])  # don't run when creating slides
 head(sort(unique(rta[ , 2])))
@@ -332,7 +359,7 @@ tail(sort(unique(rta[ , 2])))
 
 rta2 <- read.table("../data/RTAData.csv", sep = ",", head = TRUE, 
       na.strings = c('NA', 'x'))
-unlist(lapply(rta2, class))[1:5]
+class(rta2[ , 2])
 
 # checking...
 sum(is.na( rta2[ , 2] ))
@@ -361,7 +388,12 @@ vote <- read.dta(file.path('..', 'data', '2004_labeled_processed_race.dta'))
 head(vote)
 ```
 
-There are a number of other formats that we can handle for either reading or writing. Let's see `library(help = foreign)`.
+There are a number of other formats that we can handle for either reading or writing. Let's see:
+
+```{r, eval=FALSE}
+library(help = foreign)
+```
+
 
 R can also read in (and write out) Excel files, netCDF files, HDF5 files, etc., in many cases through add-on packages from CRAN. 
 
@@ -394,7 +426,6 @@ library(xtable)
 print(xtable(table(gapminder$year, gapminder$continent)), type = "html")
 ```
 
-Recall our discussion of the `summary()` function used on either a vector or a regression object. What do you think is going on with call to `print()` above? 
 
 # Version control (optional)
 
@@ -467,7 +498,7 @@ Here are some guidelines when posting to one of the R mailing lists [https://www
 
 `sessionInfo()` is a function that will give information about your R version, OS, etc., that you can include in your posting.
 
-You also want to include a short, focused, [reproducible](https://adv-r.had.co.nz/Reproducibility.html) example of your problem that others can run. 
+You also want to include a short, focused, [reproducible](http://adv-r.had.co.nz/Reproducibility.html) example of your problem that others can run. 
 
 
 # Breakout

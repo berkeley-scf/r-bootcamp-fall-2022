@@ -44,6 +44,7 @@ Side note to presenter: turn off R Notebook inline view via RStudio -> Preferenc
 6) cos(2 * 3.14159)
 7) cos[2*pi]
 
+[A](https://www.polleverywhere.com/multiple_choice_polls/jZ8bvPGPJRODpSbWig5r4)
 
 *Question 2*: What happens if you do this?
 
@@ -173,6 +174,8 @@ vals <- rnorm(4)
 5) vals[c(FALSE, TRUE, TRUE, FALSE)]
 6) vals[c(f,t,t,f)]
 7) vals(3)
+
+[A](https://www.polleverywhere.com/multiple_choice_polls/9Q2CMmwBTQZVeM9cKrfum)
 
 # Vectorized calculations and comparisons
 

@@ -107,8 +107,6 @@ of that.</p>
 <li>For keyboard shortcuts in RStudio see:
 <ul>
 <li><code>Tools -&gt; Keyboard Shortcuts Help</code> or</li>
-<li><a href="https://www.r-bloggers.com/rstudio-shortcuts-and-tips">this
-online tip page</a>, or</li>
 <li><a href="https://appsilon.com/rstudio-shortcuts-and-tips">this</a>
 and <a href="https://www.r-bloggers.com/r-studio-shortcuts-and-tips-part-2">this</a>
 blog posts.</li>
@@ -163,6 +161,7 @@ sense?</p>
 <h1>Managing objects: quick quiz</h1>
 <p><strong>POLL 2A</strong>: Which of these is true about the gapminder
 object in R?</p>
+<p>(respond at <a href="https://pollev.com/chrispaciorek428">https://pollev.com/chrispaciorek428</a>)</p>
 <ol style="list-style-type: decimal">
 <li><code>gapminder</code> is a data frame</li>
 <li><code>gapminder</code> is a matrix</li>
@@ -175,10 +174,11 @@ object in R?</p>
 <h1>Managing the workspace</h1>
 <p>R has functions for learning about the collection of objects in your
 workspace. Some of this is built in to RStudio.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">5</span>)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(5L, 2L, 7L)</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">a =</span> <span class="dv">3</span>, <span class="at">b =</span> <span class="fu">c</span>(<span class="st">&#39;sam&#39;</span>, <span class="st">&#39;yang&#39;</span>))</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()  <span class="co"># search the user workspace (global environment)</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Let&#39;s first create a few objects</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">5</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(5L, 2L, 7L)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">a =</span> <span class="dv">3</span>, <span class="at">b =</span> <span class="fu">c</span>(<span class="st">&#39;sam&#39;</span>, <span class="st">&#39;yang&#39;</span>))</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()  <span class="co"># search the user workspace (global environment)</span></span></code></pre></div>
 <pre><code>## [1] &quot;myList&quot; &quot;v1&quot;     &quot;v2&quot;     &quot;v3&quot;     &quot;x&quot;      &quot;y&quot;      &quot;z&quot;</code></pre>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x)    <span class="co"># delete a variable</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
@@ -288,8 +288,8 @@ from CRAN by giving a filename instead of a package name.</p>
 <div id="general-information-about-a-package" class="slide section level1">
 <h1>General information about a package</h1>
 <p>You can use syntax as follows to get a list of the objects in a
-package and a brief description:
-<code>library(help = packageName)</code>.</p>
+package and a brief description:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="at">help =</span> packageName)</span></code></pre></div>
 <p>On CRAN there often <em>vignettes</em> that are an overview and
 describe usage of a package if you click on a specific package. The
 <em>reference manual</em> is just a single document with the help files
@@ -300,17 +300,19 @@ often it’s hard to get the big picture view from that.</p>
 <h1>More on packages</h1>
 <h3 id="the-search-path">The search path</h3>
 <p>To see the packages that are loaded and the order in which packages
-are searched for functions/objects: <code>search()</code>.</p>
+are searched for functions/objects:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">search</span>()</span></code></pre></div>
 <p>To see what <em>libraries</em> (i.e., directory locations) R is
-retrieving packages from: <code>.libPaths()</code>.</p>
-<p>And to see where R is getting specific packages,
-<code>searchpaths()</code>.</p>
+retrieving packages from:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.libPaths</span>()</span></code></pre></div>
+<p>And to see where R is getting specific packages:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">searchpaths</span>()</span></code></pre></div>
 <h3 id="package-namespaces">Package namespaces</h3>
 <p>Namespaces are way to keep all the names for objects in a package
 together in a coherent way and allow R to look for objects in a
 principled way.</p>
 <p>A few useful things to know:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(<span class="st">&#39;package:stats&#39;</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(<span class="st">&#39;package:stats&#39;</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>]</span></code></pre></div>
 <pre><code>##  [1] &quot;acf&quot;                  &quot;acf2AR&quot;               &quot;add.scope&quot;           
 ##  [4] &quot;add1&quot;                 &quot;addmargins&quot;           &quot;aggregate&quot;           
 ##  [7] &quot;aggregate.data.frame&quot; &quot;aggregate.ts&quot;         &quot;AIC&quot;                 
@@ -318,15 +320,15 @@ principled way.</p>
 ## [13] &quot;aov&quot;                  &quot;approx&quot;               &quot;approxfun&quot;           
 ## [16] &quot;ar&quot;                   &quot;ar.burg&quot;              &quot;ar.mle&quot;              
 ## [19] &quot;ar.ols&quot;               &quot;ar.yw&quot;</code></pre>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>lm <span class="ot">&lt;-</span> <span class="cf">function</span>(i) {</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">print</span>(i)</span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(<span class="dv">7</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>lm <span class="ot">&lt;-</span> <span class="cf">function</span>(i) {</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">print</span>(i)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(<span class="dv">7</span>) </span></code></pre></div>
 <pre><code>## [1] 7</code></pre>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(gapminder<span class="sc">$</span>lifeExp <span class="sc">~</span> gapminder<span class="sc">$</span>gdpPercap)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(gapminder<span class="sc">$</span>lifeExp <span class="sc">~</span> gapminder<span class="sc">$</span>gdpPercap)</span></code></pre></div>
 <pre><code>## gapminder$lifeExp ~ gapminder$gdpPercap
-## &lt;environment: 0x55d9fd3a3ab0&gt;</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>stats<span class="sc">::</span><span class="fu">lm</span>(gapminder<span class="sc">$</span>lifeExp <span class="sc">~</span> gapminder<span class="sc">$</span>gdpPercap)</span></code></pre></div>
+## &lt;environment: 0x55b71fd82c50&gt;</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>stats<span class="sc">::</span><span class="fu">lm</span>(gapminder<span class="sc">$</span>lifeExp <span class="sc">~</span> gapminder<span class="sc">$</span>gdpPercap)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## stats::lm(formula = gapminder$lifeExp ~ gapminder$gdpPercap)
@@ -334,7 +336,7 @@ principled way.</p>
 ## Coefficients:
 ##         (Intercept)  gapminder$gdpPercap  
 ##           5.396e+01            7.649e-04</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(lm)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(lm)</span></code></pre></div>
 <p>Can you explain what is going on? Consider the results of
 <code>search()</code>.</p>
 </div>
@@ -349,14 +351,14 @@ efficiently.</p>
 in some packages), download and unzip the package source tarball. From
 the command line of a Linux/Mac terminal (note this won’t look right in
 the slides version of the HTML):</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> https://cran.r-project.org/src/contrib/fields_9.6.tar.gz <span class="dt">\</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">-o</span> fields_9.6.tar.gz</span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvzf</span> fields_9.6.tar.gz</span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> fields</span>
-<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> R</span>
-<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> src</span>
-<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> man</span>
-<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> https://cran.r-project.org/src/contrib/fields_9.6.tar.gz <span class="dt">\</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">-o</span> fields_9.6.tar.gz</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvzf</span> fields_9.6.tar.gz</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> fields</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> R</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> src</span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> man</span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data</span></code></pre></div>
 <h3 id="advanced-creating-your-own-r-package">(Advanced) Creating your
 own R package</h3>
 <p>R is do-it-yourself - you can write your own package. At its most
@@ -383,23 +385,26 @@ book</a>.</p>
 <h1>The working directory</h1>
 <p>To read and write from R, you need to have a firm grasp of where in
 the computer’s filesystem you are reading and writing from.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()  <span class="co"># what directory will R look in?</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Linux/Mac specific</span></span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&#39;~/Desktop/r-bootcamp-fall-2022&#39;</span>) <span class="co"># change the working directory</span></span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&#39;/Users/paciorek/Desktop&#39;</span>) <span class="co"># absolute path</span></span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&#39;r-bootcamp-fall-2022/modules&#39;</span>) <span class="co"># relative path</span></span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&#39;../tmp&#39;</span>) <span class="co"># relative path, up and back down the tree</span></span>
-<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Windows - use either \\ or / to indicate directories</span></span>
-<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a><span class="co"># setwd(&#39;C:\\Users\\Your_username\\Desktop\\r-bootcamp-fall-2022&#39;)</span></span>
-<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a><span class="co"># setwd(&#39;..\\r-bootcamp-fall-2022&#39;)</span></span>
-<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a><span class="co"># platform-agnostic</span></span>
-<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">file.path</span>(<span class="st">&#39;~&#39;</span>, <span class="st">&#39;Desktop&#39;</span>, <span class="st">&#39;r-bootcamp-fall-2022&#39;</span>, <span class="st">&#39;modules&#39;</span>)) <span class="co"># change the working directory</span></span>
-<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">file.path</span>(<span class="st">&#39;/&#39;</span>, <span class="st">&#39;Users&#39;</span>, <span class="st">&#39;paciorek&#39;</span>, <span class="st">&#39;Desktop&#39;</span>, <span class="st">&#39;r-bootcamp-fall-2022&#39;</span>, <span class="st">&#39;modules&#39;</span>)) <span class="co"># absolute path</span></span>
-<span id="cb53-16"><a href="#cb53-16" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
-<span id="cb53-17"><a href="#cb53-17" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">file.path</span>(<span class="st">&#39;..&#39;</span>, <span class="st">&#39;data&#39;</span>)) <span class="co"># relative path</span></span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="do">## What directory does R look for files in (working directory)?</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Changing the working directory (Linux/Mac specific)</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&#39;~/Desktop/r-bootcamp-fall-2022&#39;</span>) <span class="co"># change the working directory</span></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&#39;/Users/paciorek/Desktop&#39;</span>) <span class="co"># absolute path</span></span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&#39;r-bootcamp-fall-2022/modules&#39;</span>) <span class="co"># relative path</span></span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&#39;../tmp&#39;</span>) <span class="co"># relative path, up and back down the tree</span></span>
+<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Changing the working directory (Windows specific)</span></span>
+<span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Windows - use either \\ or / to indicate directories</span></span>
+<span id="cb57-13"><a href="#cb57-13" aria-hidden="true" tabindex="-1"></a><span class="co"># setwd(&#39;C:\\Users\\Your_username\\Desktop\\r-bootcamp-fall-2022&#39;)</span></span>
+<span id="cb57-14"><a href="#cb57-14" aria-hidden="true" tabindex="-1"></a><span class="co"># setwd(&#39;..\\r-bootcamp-fall-2022&#39;)</span></span>
+<span id="cb57-15"><a href="#cb57-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-16"><a href="#cb57-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Changing the working directory (platform-agnostic)</span></span>
+<span id="cb57-17"><a href="#cb57-17" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">file.path</span>(<span class="st">&#39;~&#39;</span>, <span class="st">&#39;Desktop&#39;</span>, <span class="st">&#39;r-bootcamp-fall-2022&#39;</span>, <span class="st">&#39;modules&#39;</span>)) <span class="co"># change the working directory</span></span>
+<span id="cb57-18"><a href="#cb57-18" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">file.path</span>(<span class="st">&#39;/&#39;</span>, <span class="st">&#39;Users&#39;</span>, <span class="st">&#39;paciorek&#39;</span>, <span class="st">&#39;Desktop&#39;</span>, <span class="st">&#39;r-bootcamp-fall-2022&#39;</span>, <span class="st">&#39;modules&#39;</span>)) <span class="co"># absolute path</span></span>
+<span id="cb57-19"><a href="#cb57-19" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
+<span id="cb57-20"><a href="#cb57-20" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">file.path</span>(<span class="st">&#39;..&#39;</span>, <span class="st">&#39;data&#39;</span>)) <span class="co"># relative path</span></span></code></pre></div>
 <p>Many errors and much confusion result from you and R not being on the
 same page in terms of where in the directory structure you are.</p>
 <p>In RStudio, you can use
@@ -408,6 +413,7 @@ same page in terms of where in the directory structure you are.</p>
 </div>
 <div id="the-working-directory-quick-quiz" class="slide section level1">
 <h1>The working directory: quick quiz</h1>
+<p>(respond at <a href="https://pollev.com/chrispaciorek428">https://pollev.com/chrispaciorek428</a>)</p>
 <p><strong>POLL 2B</strong>:</p>
 <p>Suppose I am on a Mac that has the following directories:</p>
 <pre><code>Users
@@ -418,7 +424,7 @@ same page in terms of where in the directory structure you are.</p>
 --------modules
 --------schedule
 ----Documents</code></pre>
-<p>Which of the following are relative paths?</p>
+<p>Which of the following use relative paths?</p>
 <ol style="list-style-type: decimal">
 <li>setwd(‘Users/paciorek/Desktop/r-bootcamp-fall-2022/data’)</li>
 <li>setwd(‘/Users/paciorek/Desktop/r-bootcamp-fall-2022/data’)</li>
@@ -455,10 +461,10 @@ tab-delimited, etc.). <code>read.csv()</code> is a special case of
 <code>read.table()</code> for CSV files.</p>
 <p>Here’s a simple example where R is able to read the data in using the
 default arguments to <code>read.csv()</code>.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
 <pre><code>## [1] &quot;/accounts/vis/paciorek/staff/workshops/r-bootcamp-fall-2022/modules&quot;</code></pre>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>cpds <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(<span class="st">&#39;..&#39;</span>, <span class="st">&#39;data&#39;</span>, <span class="st">&#39;cpds.csv&#39;</span>))</span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cpds)</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>cpds <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(<span class="st">&#39;..&#39;</span>, <span class="st">&#39;data&#39;</span>, <span class="st">&#39;cpds.csv&#39;</span>))</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cpds)</span></code></pre></div>
 <pre><code>##   year   country vturn outlays realgdpgr unemp
 ## 1 1960 Australia  95.5      NA        NA  1.42
 ## 2 1961 Australia  95.3      NA     -0.07  2.79
@@ -475,39 +481,39 @@ R and then to check it after you’ve read it into R.</p>
 that you know where R is looking for files.</p>
 <p>Next let’s work through a more involved example, so you can see some
 of the steps and tricks involved in reading data into R.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>rta <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;../data/RTAData.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="at">head =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>rta[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>rta <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;../data/RTAData.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="at">head =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>rta[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
 <pre><code>##               time X40010 X40015 X40020 X40025
 ## 1 2010-03-01 14:58    821    209    828    258
 ## 2 2010-03-01 15:01    804    209    804    248
 ## 3 2010-03-01 15:04    892    212    801    237
 ## 4 2010-03-01 15:07    857    214    821    243
 ## 5 2010-03-01 15:10    849    222    834    252</code></pre>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(rta)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(rta)</span></code></pre></div>
 <pre><code>## [1] 120822     62</code></pre>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># great, we&#39;re all set, right?</span></span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Not so fast...</span></span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">lapply</span>(rta, class))[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
-<pre><code>##        time      X40010      X40015      X40020      X40025 
-## &quot;character&quot; &quot;character&quot; &quot;character&quot; &quot;character&quot; &quot;character&quot;</code></pre>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># let&#39;s delve more deeply</span></span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="co"># unique(rta[ , 2])  # don&#39;t run when creating slides</span></span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">sort</span>(<span class="fu">unique</span>(rta[ , <span class="dv">2</span>])))</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># great, we&#39;re all set, right?</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Not so fast...</span></span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>rta[<span class="dv">5</span>, <span class="dv">2</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;849&quot;</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(rta[ , <span class="dv">2</span>])</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># let&#39;s delve more deeply</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="co"># unique(rta[ , 2])  # don&#39;t run when creating slides</span></span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">sort</span>(<span class="fu">unique</span>(rta[ , <span class="dv">2</span>])))</span></code></pre></div>
 <pre><code>## [1] &quot;&quot;     &quot;1000&quot; &quot;1001&quot; &quot;1002&quot; &quot;1003&quot; &quot;1004&quot;</code></pre>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(<span class="fu">sort</span>(<span class="fu">unique</span>(rta[ , <span class="dv">2</span>])))</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(<span class="fu">sort</span>(<span class="fu">unique</span>(rta[ , <span class="dv">2</span>])))</span></code></pre></div>
 <pre><code>## [1] &quot;995&quot; &quot;996&quot; &quot;997&quot; &quot;998&quot; &quot;999&quot; &quot;x&quot;</code></pre>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># can we handle that with read.table?</span></span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="co"># help(read.table)</span></span>
-<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>rta2 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;../data/RTAData.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="at">head =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">&#39;NA&#39;</span>, <span class="st">&#39;x&#39;</span>))</span>
-<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">lapply</span>(rta2, class))[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
-<pre><code>##        time      X40010      X40015      X40020      X40025 
-## &quot;character&quot;   &quot;integer&quot;   &quot;integer&quot;   &quot;integer&quot;   &quot;integer&quot;</code></pre>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># checking...</span></span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>( rta2[ , <span class="dv">2</span>] ))</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># can we handle that with read.table?</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="co"># help(read.table)</span></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>rta2 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;../data/RTAData.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="at">head =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">&#39;NA&#39;</span>, <span class="st">&#39;x&#39;</span>))</span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(rta2[ , <span class="dv">2</span>])</span></code></pre></div>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># checking...</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>( rta2[ , <span class="dv">2</span>] ))</span></code></pre></div>
 <pre><code>## [1] 24507</code></pre>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>( rta[ , <span class="dv">2</span>] <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;&#39;</span>,<span class="st">&#39;x&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>( rta[ , <span class="dv">2</span>] <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;&#39;</span>,<span class="st">&#39;x&#39;</span>))</span></code></pre></div>
 <pre><code>## [1] 24507</code></pre>
 <p>It’s good to first look at your data in plain text format outside of
 R and then to check it after you’ve read it into R.</p>
@@ -535,9 +541,9 @@ gigabytes).</li>
 <h1>Reading ‘foreign’ format data</h1>
 <p>Here’s an example of reading data produced by another statistical
 package (Stata) with <code>read.dta()</code>.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(foreign)</span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>vote <span class="ot">&lt;-</span> <span class="fu">read.dta</span>(<span class="fu">file.path</span>(<span class="st">&#39;..&#39;</span>, <span class="st">&#39;data&#39;</span>, <span class="st">&#39;2004_labeled_processed_race.dta&#39;</span>))</span>
-<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(vote)</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(foreign)</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>vote <span class="ot">&lt;-</span> <span class="fu">read.dta</span>(<span class="fu">file.path</span>(<span class="st">&#39;..&#39;</span>, <span class="st">&#39;data&#39;</span>, <span class="st">&#39;2004_labeled_processed_race.dta&#39;</span>))</span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(vote)</span></code></pre></div>
 <pre><code>##   state pres04    sex  race  age9 partyid income relign8 age60 age65 geocode
 ## 1     2      1 female white 25-29    &lt;NA&gt;   &lt;NA&gt;    &lt;NA&gt; 18-29 25-29       3
 ## 2     2      2   male white 18-24    &lt;NA&gt;   &lt;NA&gt;    &lt;NA&gt; 18-29 18-24       3
@@ -553,7 +559,8 @@ package (Stata) with <code>read.dta()</code>.</p>
 ## 5    rural     &lt;NA&gt;   &lt;NA&gt; 2004      4 0
 ## 6    rural     &lt;NA&gt;   &lt;NA&gt; 2004      4 0</code></pre>
 <p>There are a number of other formats that we can handle for either
-reading or writing. Let’s see <code>library(help = foreign)</code>.</p>
+reading or writing. Let’s see:</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="at">help =</span> foreign)</span></code></pre></div>
 <p>R can also read in (and write out) Excel files, netCDF files, HDF5
 files, etc., in many cases through add-on packages from CRAN.</p>
 <p>A pause for a (gentle) diatribe:</p>
@@ -579,18 +586,18 @@ the formatting to a fine degree.</li>
 previous slide</li>
 </ol>
 <h3 id="writing-out-plots-and-tables">Writing out plots and tables</h3>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="st">&#39;myplot.pdf&#39;</span>, <span class="at">width =</span> <span class="dv">7</span>, <span class="at">height =</span> <span class="dv">7</span>)</span>
-<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>); y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
-<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span>
-<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="st">&#39;myplot.pdf&#39;</span>, <span class="at">width =</span> <span class="dv">7</span>, <span class="at">height =</span> <span class="dv">7</span>)</span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>); y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
 <pre><code>## png 
 ##   2</code></pre>
 <p><code>xtable()</code> formats tables for HTML and Latex (the
 default).</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xtable)</span>
-<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">xtable</span>(<span class="fu">table</span>(gapminder<span class="sc">$</span>year, gapminder<span class="sc">$</span>continent)), <span class="at">type =</span> <span class="st">&quot;html&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xtable)</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">xtable</span>(<span class="fu">table</span>(gapminder<span class="sc">$</span>year, gapminder<span class="sc">$</span>continent)), <span class="at">type =</span> <span class="st">&quot;html&quot;</span>)</span></code></pre></div>
 <pre><code>## &lt;!-- html table generated in R 4.2.0 by xtable 1.8-4 package --&gt;
-## &lt;!-- Wed Jul 27 16:04:38 2022 --&gt;
+## &lt;!-- Mon Aug 15 17:26:39 2022 --&gt;
 ## &lt;table border=1&gt;
 ## &lt;tr&gt; &lt;th&gt;  &lt;/th&gt; &lt;th&gt; Africa &lt;/th&gt; &lt;th&gt; Americas &lt;/th&gt; &lt;th&gt; Asia &lt;/th&gt; &lt;th&gt; Europe &lt;/th&gt; &lt;th&gt; Oceania &lt;/th&gt;  &lt;/tr&gt;
 ##   &lt;tr&gt; &lt;td align=&quot;right&quot;&gt; 1952 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  52 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  25 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  33 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  30 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;   2 &lt;/td&gt; &lt;/tr&gt;
@@ -606,9 +613,6 @@ default).</p>
 ##   &lt;tr&gt; &lt;td align=&quot;right&quot;&gt; 2002 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  52 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  25 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  33 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  30 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;   2 &lt;/td&gt; &lt;/tr&gt;
 ##   &lt;tr&gt; &lt;td align=&quot;right&quot;&gt; 2007 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  52 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  25 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  33 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  30 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;   2 &lt;/td&gt; &lt;/tr&gt;
 ##    &lt;/table&gt;</code></pre>
-<p>Recall our discussion of the <code>summary()</code> function used on
-either a vector or a regression object. What do you think is going on
-with call to <code>print()</code> above?</p>
 </div>
 <div id="version-control-optional" class="slide section level1">
 <h1>Version control (optional)</h1>
@@ -661,10 +665,10 @@ such as on GitHub.</p>
 </ol>
 <p>Here’s how this would look from the command line (this won’t look
 right in the slides version of the HTML):</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add myfile</span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="co"># make changes to mycode.R</span></span>
-<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-am</span><span class="st">&#39;added myfile and fixed bug in mycode.R&#39;</span></span>
-<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add myfile</span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="co"># make changes to mycode.R</span></span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-am</span><span class="st">&#39;added myfile and fixed bug in mycode.R&#39;</span></span>
+<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div>
 <p>The changes are then available to anyone to <em>pull</em> from the
 remote repository, a using <code>git pull</code> or graphical
 interfaces, such as using RStudio’s tools to pull the changes to your
