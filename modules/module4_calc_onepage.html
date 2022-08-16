@@ -208,17 +208,13 @@ hr {
 
 <p>At the core of R is the idea of doing calculations on entire vectors.</p>
 
-<pre><code class="r">gdpTotal &lt;- gapminder$gdpPercap * gapminder$pop
+<pre><code class="r">## Vectorized arithmetic
+gdpTotal &lt;- gapminder$gdpPercap * gapminder$pop
 
-gdpSubset &lt;- gapminder2007$gdpPercap[1:10]
+## Vectorized comparisons
+wealthy &lt;- gapminder2007$gdpPercap &gt;= 30000
 
-gdpSubset &gt;= 30000
-</code></pre>
-
-<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE  TRUE
-</code></pre>
-
-<pre><code class="r">vec1 &lt;- rnorm(5)
+vec1 &lt;- rnorm(5)
 vec2 &lt;- rnorm(5)
 vec1 &gt; vec2
 </code></pre>
@@ -226,7 +222,8 @@ vec1 &gt; vec2
 <pre><code>## [1]  TRUE FALSE FALSE  TRUE  TRUE
 </code></pre>
 
-<pre><code class="r">vec1 == vec2
+<pre><code class="r">## Vectorized boolean operations
+vec1 == vec2
 </code></pre>
 
 <pre><code>## [1] FALSE FALSE FALSE FALSE FALSE
@@ -250,7 +247,7 @@ identical(vec1, vec2)
 gdpSubset &gt;= 100000 | gdpSubset &lt;= 1000
 </code></pre>
 
-<pre><code>##  [1]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;gdpSubset&#39; not found
 </code></pre>
 
 <pre><code class="r">## using &#39;and&#39;
@@ -305,9 +302,7 @@ vec10
 
 <h1>Vectorized calculations: quick quiz</h1>
 
-<p><strong>POLL 4A</strong></p>
-
-<p>Question 1: 2<sup>3</sup> is raising 2 to the power 3, so you get 8. </p>
+<p><strong><a href="https://www.polleverywhere.com/multiple_choice_polls/UnX1ymqBWe624UwdBnnQB">P</a>OLL 4A</strong>: 2<sup>3</sup> is raising 2 to the power 3, so you get 8. </p>
 
 <p>What will this return?</p>
 
@@ -319,7 +314,7 @@ vec10
 4) 1, 4, 9, 16
 5) 1, 16, 81, 256</p>
 
-<p>Question 2: What will this return?</p>
+<p><strong><a href="https://www.polleverywhere.com/multiple_choice_polls/IcuoQWyZ3IUs8A8PBH6eb">P</a>OLL 4B</strong>: What will this return?</p>
 
 <pre><code>vec1 &lt;- c(1,2,3,4)
 vec2 &lt;- c(1,2)
@@ -333,12 +328,13 @@ vec1 + vec2
 
 <h1>Why vectorize?</h1>
 
-<p>As we&#39;ve seen, R has many functions that allow you to operate on each element of a vector all at once.</p>
+<p>As we&#39;ve seen, R has many functions that allow you to operate on each element of a vector all at once. Here&#39;s an example of a statistical calculation with simulated values.</p>
+
+<p>Imagine how this code would look if written using a loop, or three separate loops.</p>
 
 <pre><code class="r">vals &lt;- rnorm(1000)
 chi2vals &lt;- vals^2
 chi2_df1000 &lt;- sum(chi2vals)
-# imagine if the code above were a loop, or three separate loops
 </code></pre>
 
 <p>Advantages:</p>
@@ -356,14 +352,14 @@ system.time(trunc &lt;- ifelse(vals &gt; 0, vals, 0))
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##   0.031   0.008   0.039
+##   0.024   0.012   0.035
 </code></pre>
 
 <pre><code class="r">system.time(vals &lt;- vals * (vals &gt; 0))
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##   0.005   0.000   0.005
+##   0.004   0.000   0.004
 </code></pre>
 
 <p><strong>Question</strong>: What am I doing with <code>vals * (vals &gt; 0)</code> ? What happens behind the scenes in R?</p>
@@ -383,12 +379,6 @@ head(gapminder$year2)
 </code></pre>
 
 <p>Question: Note the code above runs and the syntax is perfectly good R syntax, but in terms of what it does, there is a bug in it. See if you can see what it is.</p>
-
-<h1>Linear algebra</h1>
-
-<p>R can do essentially any linear algebra you need. It uses system-level packages called BLAS (basic linear algebra subroutines) and LAPACK (linear algebra package). Note that these calculations will be essentially as fast as if you wrote C code because R just calls C and Fortran routines to do the calculations.</p>
-
-<p>The BLAS that comes with R is fairly slow. It&#39;s possible to use a faster BLAS, as well as one that uses multiple cores automatically. This can in some cases give you an order of magnitude speedup if your work involves a lot of matrix manipulations/linear algebra. More details in Module 10.</p>
 
 <h1>Vectorized vector/matrix calculations</h1>
 
@@ -459,7 +449,15 @@ A + B
 <pre><code>## [1] TRUE
 </code></pre>
 
+<h1>Linear algebra (optional)</h1>
+
+<p>R can do essentially any linear algebra you need. It uses system-level packages called BLAS (basic linear algebra subroutines) and LAPACK (linear algebra package). Note that these calculations will be essentially as fast as if you wrote C code because R just calls C and Fortran routines to do the calculations.</p>
+
+<p>The BLAS that comes with R is fairly slow. It&#39;s possible to use a faster BLAS, as well as one that uses multiple cores automatically. This can in some cases give you an order of magnitude speedup if your work involves a lot of matrix manipulations/linear algebra. More details in Module 10.</p>
+
 <h1>(Advanced) Matrix decompositions</h1>
+
+<p>Here are some examples of common matrix decompositions: Cholesky decomposition, eigenvalues/eigenvectors, and SVD. These all use BLAS+LAPACK.</p>
 
 <pre><code class="r">## next 3 lines generate a positive definite matrix
 library(fields)
@@ -539,7 +537,7 @@ for(i in 1:n)
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##   0.031   0.000   0.032
+##   0.027   0.000   0.026
 </code></pre>
 
 <p>Here&#39;s how to pre-allocate an empty list: </p>
