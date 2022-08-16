@@ -29,7 +29,9 @@ Lists can be used as vectors of complicated objects. E.g., suppose you have a li
 
 # Lists: quick quiz
 
-**POLL 3A**: How would you extract "china" from this list?
+**[P](https://www.polleverywhere.com/multiple_choice_polls/n6adK1IU7niikhA2ZgLNi)OLL 3A**: How would you extract "china" from this list?
+
+(respond at [https://pollev.com/chrispaciorek428](https://pollev.com/chrispaciorek428))
 
 ```
 myList <- list(stuff = 3, mat = matrix(1:4, nrow = 2), 
@@ -51,7 +53,7 @@ A review from Module 1...
 
 - Data frames are combinations of vectors of the same length, but can be of different types
 - Data frames are what is used for standard rectangular (record by field) datasets, similar to a spreadsheet
-- Data frames are a functionality that both sets R aside from some languages (e.g., Matlab) and provides functionality similar to some statistical packages (e.g., Stata, SAS)
+- Data frames are a functionality that both sets R aside from some languages (e.g., MATLAB) and provides functionality similar to some statistical packages (e.g., Stata, SAS)
 
 ```{r}
 class(gapminder)
@@ -101,23 +103,11 @@ mat
 # Let's convert the gapminder dataframe to a matrix:
 gm_mat <- as.matrix(gapminder[ , c('lifeExp', 'gdpPercap')])
 head(gm_mat)
-
-# What do you think will happen?
-gm_mat <- as.matrix(gapminder)
-head(gm_mat)
-```
-
-# Arrays
-
-Arrays are like matrices but can have more or fewer than two dimensions.
-```{r}
-arr <- array(rnorm(12), c(2, 3, 4))
-arr
 ```
 
 # Matrices: quick quiz
 
-**POLL 3B**: Recall the gap dataframe has columns that are numeric and columns that are character strings. What do you think will happen if we do this:
+**[P](https://www.polleverywhere.com/multiple_choice_polls/1jt7IHbQvXnaqRmUCGOru)OLL 3B**: Recall the gap dataframe has columns that are numeric and columns that are character strings. What do you think will happen if we do this:
 
 ```
 as.matrix(gapminder)
@@ -128,6 +118,14 @@ as.matrix(gapminder)
 3) R will throw an error
 4) all character columns will be converted to numeric values
 5) R will drop some of the columns
+
+# Arrays
+
+Arrays are like matrices but can have more or fewer than two dimensions.
+```{r}
+arr <- array(rnorm(12), c(2, 3, 4))
+arr
+```
 
 # Attributes
 
@@ -148,7 +146,7 @@ Now let's do a bit of manipulation and see if you can infer how R represents mat
 
 # Attributes: quick quiz
 
-**POLL 3C**: Consider our matrix 'mat':
+**[P](https://www.polleverywhere.com/multiple_choice_polls/YkHAsxssHtWqCQ9DGMDbo)OLL 3C**: Consider our matrix 'mat':
 
 ```
 mat <- matrix(1:16, nrow = 4, ncol = 4)
@@ -204,7 +202,8 @@ This is a common cause of bugs!
 
 Since it was designed by statisticians, R handles missing values very well relative to other languages.
 
-* `NA` is a missing value
+##  `NA` is a missing value
+
 ```{r, fig.cap = ""}
 vec <- rnorm(12)
 vec[c(3, 5)] <- NA
@@ -217,21 +216,21 @@ is.na(vec)
 ```
 Be careful because many R functions won't warn you that they are ignoring the missing values.
 
-* To infinity and beyond
+##  To infinity and beyond
 ```{r}
 big <- 1e500 
 big
 big + 7
 ```
 
-* `NaN` stands for Not a Number
+##  `NaN` stands for Not a Number
 ```{r}
 sqrt(-5)
 big - big
 1/0
 ```
 
-* `NULL`
+##  `NULL`
 ```{r nulldata}
 vec <- c(vec, NULL) 
 vec
@@ -251,6 +250,8 @@ myList
 # Missing values: quick quiz
 
 **POLL 3D**
+
+(just respond in your head; I won't collect the answers online)
 
 *Question 1*: Consider the following vector:
 
@@ -347,6 +348,8 @@ ints[0.999999999]
 
 **POLL 3E**:
 
+(just respond in your head; I won't collect the answers online)
+
 *Question 1*: What do you think this will do?
 
 ```
@@ -414,7 +417,7 @@ unclass(students)
 ```{r}
 students <- factor(c('basic','proficient','advanced','basic', 
       'advanced', 'minimal'))
-score = c(minimal = 3, basic = 1, advanced = 13, proficient = 7) # a named vector
+score = c(minimal = 65, basic = 75, advanced = 95, proficient = 85) # a named vector
 score["advanced"]  # look up by name
 students[3]
 score[students[3]]
@@ -425,7 +428,7 @@ What went wrong and how did we fix it?  Notice how easily this could be a big bu
 
 # Strings
 
-R has lots of functionality for character strings. Usually these are stored as vectors of strings, each with arbitrary length.
+R has lots of functionality for character strings. Usually these are stored as vectors of strings, each string of arbitrary length.
 
 ```{r}
 chars <- c('hi', 'hallo', "mother's", 'father\'s', "He said, \"hi\"" )
@@ -447,7 +450,7 @@ We can search for patterns in character vectors and replace patterns (both vecto
 indexes <- grep("Korea", countries)
 indexes
 countries[indexes]
-countries2 <- gsub("Korea Dem. Rep.", "North Korea", countries)
+countries2 <- gsub("Korea, Dem. Rep.", "North Korea", countries)
 countries2[indexes]
 ```
 
@@ -469,7 +472,7 @@ mat <- matrix(1:20, 4, 5)
 rownames(mat) <- letters[1:4]
 mat
 ```
-1) by direct indexing
+## 1) by direct indexing
 
 ```{r}
 vec[c(3, 5, 12:14)]
@@ -485,9 +488,7 @@ elemInd
 gapminder[elemInd]
 ```
 
-
-
-2) by a vector of logicals
+## 2) by a vector of logicals
 
 ```{r}
 wealthy <- gapminder$gdpPercap > 50000
@@ -497,18 +498,18 @@ gapminder[wealthy, ]
 
 What happened in the last subsetting operation?
 
-3) by a vector of names
+## 3) by a vector of names
 ```{r}
 mat[c('a', 'd', 'a'), ]
 ```
 
-4) using *subset()*
+## 4) using *subset()*
 
 ```{r}
 subset(gapminder, gdpPercap > 50000)
 ```
 
-5) using *dplyr* tools such as *filter()* and *select()* -- more in Module 6
+## 5) using *dplyr* tools such as *filter()* and *select()* -- more in Module 6
 
 # Assignment into subsets
 
@@ -525,9 +526,7 @@ mat
 
 # Subsetting: quick quiz
 
-**POLL 3F**
-
-*Question 1*: Suppose I want to select the 3rd elements from the 2nd and 4th columns of a matrix or dataframe. Which syntax will work?
+**[P](https://www.polleverywhere.com/multiple_choice_polls/fFm9QlOQDGRz0pJZklyV2)OLL 3F**: Suppose I want to select the 3rd elements from the 2nd and 4th columns of a matrix or dataframe. Which syntax will work?
 
 Here's a test matrix:
 
@@ -545,7 +544,7 @@ mat <- matrix(1:16, nrow = 4, ncol = 4)
 8) mat[ , c(2, 4)][3]
 9) mat[c(2, 4)][3, ]
 
-*Question 2*: (Advanced) One of those answers won't work with a matrix but will work with a dataframe. Which one?
+**POLL 3F**: (Advanced) One of those answers won't work with a matrix but will work with a dataframe. Which one?
 
 1) mat[3, (2, 4)]
 2) mat[c(FALSE, FALSE, TRUE, FALSE), c(FALSE, TRUE, FALSE, TRUE)]
@@ -566,7 +565,7 @@ mat <- matrix(1:16, nrow = 4, ncol = 4)
 
 1) Extract the 5th row from the gapminder dataset.
 
-2) Extract the last row from the gapminder dataset.
+2) Extract the last row from the gapminder dataset. 
 
 3) Count the number of gdpPercap values greater than 50000 in the gapminder dataset.
 
@@ -578,7 +577,7 @@ mat <- matrix(1:16, nrow = 4, ncol = 4)
 
 6) Create a character string using `paste()` that tells the user how many rows there are in the data frame - do this programmatically such that it would work for any data frame regardless of how many rows it has. The result should look like this: "There are 1704 rows in the dataset"
 
-7) If you didn't do it this way already, extract the last row from the gapminder dataset without typing the number '1704'.
+7) If you didn't do it this way already in problem #2, extract the last row from the gapminder dataset without typing the number '1704'.
 
 8) Create a boolean vector indicating if the life expectancy is greater than 75 and the gdpPercap is less than 10000 and calculate the proportion of all the records these represent.
 

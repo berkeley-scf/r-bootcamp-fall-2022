@@ -251,12 +251,12 @@ getwd()
 setwd('r-bootcamp-fall-2022/modules') # relative path
 setwd('../tmp') # relative path, up and back down the tree
 
-# Changing the working directory (Windows specific)
+## Changing the working directory (Windows specific)
 ## Windows - use either \\ or / to indicate directories
 # setwd('C:\\Users\\Your_username\\Desktop\\r-bootcamp-fall-2022')
 # setwd('..\\r-bootcamp-fall-2022')
 
-# Changing the working directory (platform-agnostic)
+## Changing the working directory (platform-agnostic)
 setwd(file.path('~', 'Desktop', 'r-bootcamp-fall-2022', 'modules')) # change the working directory
 setwd(file.path('/', 'Users', 'paciorek', 'Desktop', 'r-bootcamp-fall-2022', 'modules')) # absolute path
 getwd()

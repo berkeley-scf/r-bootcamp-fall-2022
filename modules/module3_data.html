@@ -143,8 +143,9 @@ itself be a list, so you’ll have a list of lists.</p>
 </div>
 <div id="lists-quick-quiz" class="slide section level1">
 <h1>Lists: quick quiz</h1>
-<p><strong>POLL 3A</strong>: How would you extract “china” from this
-list?</p>
+<p><strong><a href="https://www.polleverywhere.com/multiple_choice_polls/n6adK1IU7niikhA2ZgLNi">P</a>OLL
+3A</strong>: How would you extract “china” from this list?</p>
+<p>(respond at <a href="https://pollev.com/chrispaciorek428">https://pollev.com/chrispaciorek428</a>)</p>
 <pre><code>myList &lt;- list(stuff = 3, mat = matrix(1:4, nrow = 2), 
    moreStuff = c(&quot;china&quot;, &quot;japan&quot;), list(5, &quot;bear&quot;))</code></pre>
 <ol style="list-style-type: decimal">
@@ -166,7 +167,7 @@ be of different types</li>
 <li>Data frames are what is used for standard rectangular (record by
 field) datasets, similar to a spreadsheet</li>
 <li>Data frames are a functionality that both sets R aside from some
-languages (e.g., Matlab) and provides functionality similar to some
+languages (e.g., MATLAB) and provides functionality similar to some
 statistical packages (e.g., Stata, SAS)</li>
 </ul>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(gapminder)</span></code></pre></div>
@@ -255,22 +256,22 @@ character matrices.</li>
 </ul>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">12</span>), <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">4</span>)</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>mat</span></code></pre></div>
-<pre><code>##            [,1]      [,2]       [,3]       [,4]
-## [1,]  0.3174077 1.6009510  0.1085762 -1.2173955
-## [2,]  0.8035843 1.1322524 -0.4967257 -0.3376897
-## [3,] -0.9004541 0.3170462 -0.4885157 -2.3694891</code></pre>
+<pre><code>##            [,1]        [,2]       [,3]      [,4]
+## [1,]  0.3046559  0.06265687  0.7539251 0.6543073
+## [2,] -0.1494738 -0.14930801 -0.1913831 0.8146286
+## [3,]  1.8834225  0.21849591 -1.6925464 1.1735638</code></pre>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># vectorized calcs work with matrices too</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>mat<span class="sc">*</span><span class="dv">4</span></span></code></pre></div>
-<pre><code>##           [,1]     [,2]       [,3]      [,4]
-## [1,]  1.269631 6.403804  0.4343047 -4.869582
-## [2,]  3.214337 4.529010 -1.9869027 -1.350759
-## [3,] -3.601816 1.268185 -1.9540629 -9.477956</code></pre>
+<pre><code>##            [,1]       [,2]       [,3]     [,4]
+## [1,]  1.2186237  0.2506275  3.0157003 2.617229
+## [2,] -0.5978951 -0.5972321 -0.7655324 3.258514
+## [3,]  7.5336902  0.8739836 -6.7701854 4.694255</code></pre>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">cbind</span>(mat, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>mat</span></code></pre></div>
-<pre><code>##            [,1]      [,2]       [,3]       [,4] [,5]
-## [1,]  0.3174077 1.6009510  0.1085762 -1.2173955    1
-## [2,]  0.8035843 1.1322524 -0.4967257 -0.3376897    2
-## [3,] -0.9004541 0.3170462 -0.4885157 -2.3694891    3</code></pre>
+<pre><code>##            [,1]        [,2]       [,3]      [,4] [,5]
+## [1,]  0.3046559  0.06265687  0.7539251 0.6543073    1
+## [2,] -0.1494738 -0.14930801 -0.1913831 0.8146286    2
+## [3,]  1.8834225  0.21849591 -1.6925464 1.1735638    3</code></pre>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let&#39;s convert the gapminder dataframe to a matrix:</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>gm_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(gapminder[ , <span class="fu">c</span>(<span class="st">&#39;lifeExp&#39;</span>, <span class="st">&#39;gdpPercap&#39;</span>)])</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gm_mat)</span></code></pre></div>
@@ -281,52 +282,13 @@ character matrices.</li>
 ## [4,]  34.020  836.1971
 ## [5,]  36.088  739.9811
 ## [6,]  38.438  786.1134</code></pre>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What do you think will happen?</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>gm_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(gapminder)</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gm_mat)</span></code></pre></div>
-<pre><code>##      country       continent year   lifeExp    pop          gdpPercap    
-## [1,] &quot;Afghanistan&quot; &quot;Asia&quot;    &quot;1952&quot; &quot;28.80100&quot; &quot;   8425333&quot; &quot;   779.4453&quot;
-## [2,] &quot;Afghanistan&quot; &quot;Asia&quot;    &quot;1957&quot; &quot;30.33200&quot; &quot;   9240934&quot; &quot;   820.8530&quot;
-## [3,] &quot;Afghanistan&quot; &quot;Asia&quot;    &quot;1962&quot; &quot;31.99700&quot; &quot;  10267083&quot; &quot;   853.1007&quot;
-## [4,] &quot;Afghanistan&quot; &quot;Asia&quot;    &quot;1967&quot; &quot;34.02000&quot; &quot;  11537966&quot; &quot;   836.1971&quot;
-## [5,] &quot;Afghanistan&quot; &quot;Asia&quot;    &quot;1972&quot; &quot;36.08800&quot; &quot;  13079460&quot; &quot;   739.9811&quot;
-## [6,] &quot;Afghanistan&quot; &quot;Asia&quot;    &quot;1977&quot; &quot;38.43800&quot; &quot;  14880372&quot; &quot;   786.1134&quot;</code></pre>
-</div>
-<div id="arrays" class="slide section level1">
-<h1>Arrays</h1>
-<p>Arrays are like matrices but can have more or fewer than two
-dimensions.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>arr <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="fu">rnorm</span>(<span class="dv">12</span>), <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>))</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>arr</span></code></pre></div>
-<pre><code>## , , 1
-## 
-##            [,1]       [,2]       [,3]
-## [1,]  0.7417017  0.4747874  1.7091402
-## [2,] -0.3700466 -1.1549083 -0.1121775
-## 
-## , , 2
-## 
-##            [,1]       [,2]       [,3]
-## [1,] -0.7172138 -0.3246392 -0.8776541
-## [2,] -0.4396797 -0.3709570 -0.2077589
-## 
-## , , 3
-## 
-##            [,1]       [,2]       [,3]
-## [1,]  0.7417017  0.4747874  1.7091402
-## [2,] -0.3700466 -1.1549083 -0.1121775
-## 
-## , , 4
-## 
-##            [,1]       [,2]       [,3]
-## [1,] -0.7172138 -0.3246392 -0.8776541
-## [2,] -0.4396797 -0.3709570 -0.2077589</code></pre>
 </div>
 <div id="matrices-quick-quiz" class="slide section level1">
 <h1>Matrices: quick quiz</h1>
-<p><strong>POLL 3B</strong>: Recall the gap dataframe has columns that
-are numeric and columns that are character strings. What do you think
-will happen if we do this:</p>
+<p><strong><a href="https://www.polleverywhere.com/multiple_choice_polls/1jt7IHbQvXnaqRmUCGOru">P</a>OLL
+3B</strong>: Recall the gap dataframe has columns that are numeric and
+columns that are character strings. What do you think will happen if we
+do this:</p>
 <pre><code>as.matrix(gapminder)</code></pre>
 <ol style="list-style-type: decimal">
 <li>it will convert to a matrix with no changes</li>
@@ -336,19 +298,49 @@ will happen if we do this:</p>
 <li>R will drop some of the columns</li>
 </ol>
 </div>
+<div id="arrays" class="slide section level1">
+<h1>Arrays</h1>
+<p>Arrays are like matrices but can have more or fewer than two
+dimensions.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>arr <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="fu">rnorm</span>(<span class="dv">12</span>), <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>))</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>arr</span></code></pre></div>
+<pre><code>## , , 1
+## 
+##           [,1]       [,2]       [,3]
+## [1,] 1.4848810 -0.0629038  0.8661009
+## [2,] 0.3621751  0.8931410 -1.7531259
+## 
+## , , 2
+## 
+##            [,1]      [,2]       [,3]
+## [1,] -0.5718926 0.1222098  1.0661923
+## [2,]  0.2560027 0.7113368 -0.2877908
+## 
+## , , 3
+## 
+##           [,1]       [,2]       [,3]
+## [1,] 1.4848810 -0.0629038  0.8661009
+## [2,] 0.3621751  0.8931410 -1.7531259
+## 
+## , , 4
+## 
+##            [,1]      [,2]       [,3]
+## [1,] -0.5718926 0.1222098  1.0661923
+## [2,]  0.2560027 0.7113368 -0.2877908</code></pre>
+</div>
 <div id="attributes" class="slide section level1">
 <h1>Attributes</h1>
 <p>Objects have <em>attributes</em>.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(mat)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(mat)</span></code></pre></div>
 <pre><code>## $dim
 ## [1] 3 5</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(mat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;first&#39;</span>, <span class="st">&#39;middle&#39;</span>, <span class="st">&#39;last&#39;</span>)</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>mat</span></code></pre></div>
-<pre><code>##              [,1]      [,2]       [,3]       [,4] [,5]
-## first   0.3174077 1.6009510  0.1085762 -1.2173955    1
-## middle  0.8035843 1.1322524 -0.4967257 -0.3376897    2
-## last   -0.9004541 0.3170462 -0.4885157 -2.3694891    3</code></pre>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(mat)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(mat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;first&#39;</span>, <span class="st">&#39;middle&#39;</span>, <span class="st">&#39;last&#39;</span>)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>mat</span></code></pre></div>
+<pre><code>##              [,1]        [,2]       [,3]      [,4] [,5]
+## first   0.3046559  0.06265687  0.7539251 0.6543073    1
+## middle -0.1494738 -0.14930801 -0.1913831 0.8146286    2
+## last    1.8834225  0.21849591 -1.6925464 1.1735638    3</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(mat)</span></code></pre></div>
 <pre><code>## $dim
 ## [1] 3 5
 ## 
@@ -358,18 +350,19 @@ will happen if we do this:</p>
 ## 
 ## $dimnames[[2]]
 ## NULL</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(<span class="fu">attributes</span>(gapminder))</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(<span class="fu">attributes</span>(gapminder))</span></code></pre></div>
 <pre><code>## [1] &quot;names&quot;     &quot;class&quot;     &quot;row.names&quot;</code></pre>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(gapminder)<span class="sc">$</span>names</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(gapminder)<span class="sc">$</span>names</span></code></pre></div>
 <pre><code>## [1] &quot;country&quot;   &quot;continent&quot; &quot;year&quot;      &quot;lifeExp&quot;   &quot;pop&quot;       &quot;gdpPercap&quot;</code></pre>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(gapminder)<span class="sc">$</span>row.names[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(gapminder)<span class="sc">$</span>row.names[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <p>Now let’s do a bit of manipulation and see if you can infer how R
 represents matrices internally.</p>
 </div>
 <div id="attributes-quick-quiz" class="slide section level1">
 <h1>Attributes: quick quiz</h1>
-<p><strong>POLL 3C</strong>: Consider our matrix ‘mat’:</p>
+<p><strong><a href="https://www.polleverywhere.com/multiple_choice_polls/YkHAsxssHtWqCQ9DGMDbo">P</a>OLL
+3C</strong>: Consider our matrix ‘mat’:</p>
 <pre><code>mat &lt;- matrix(1:16, nrow = 4, ncol = 4)
      [,1] [,2] [,3] [,4]
 [1,]    1    5    9   13
@@ -385,10 +378,10 @@ represents matrices internally.</p>
 <li>4, 8, 12, 16</li>
 <li>an error</li>
 </ol>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>mat[<span class="dv">4</span>]</span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(mat) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>mat</span>
-<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="fu">is.matrix</span>(mat)</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>mat[<span class="dv">4</span>]</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(mat) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>mat</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="fu">is.matrix</span>(mat)</span></code></pre></div>
 <p><strong>Question</strong>: What can you infer about what a matrix is
 in R?</p>
 <p><strong>Question</strong>: What kind of object are the attributes
@@ -398,18 +391,18 @@ themselves? How do I check?</p>
 <h1>Matrices are stored column-major</h1>
 <p>This is like Fortran, MATLAB and Julia but not like C or
 Python(numpy).</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>mat</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>mat</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,]    1    4    7   10
 ## [2,]    2    5    8   11
 ## [3,]    3    6    9   12</code></pre>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>vals <span class="ot">&lt;-</span> <span class="fu">c</span>(mat)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>vals <span class="ot">&lt;-</span> <span class="fu">c</span>(mat)</span></code></pre></div>
 <p>You can go smoothly back and forth between a matrix (or an array) and
 a vector:</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(mat, <span class="fu">matrix</span>(vals, <span class="dv">3</span>, <span class="dv">4</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(mat, <span class="fu">matrix</span>(vals, <span class="dv">3</span>, <span class="dv">4</span>))</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(mat, <span class="fu">matrix</span>(vals, <span class="dv">3</span>, <span class="dv">4</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(mat, <span class="fu">matrix</span>(vals, <span class="dv">3</span>, <span class="dv">4</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <p>This is a common cause of bugs!</p>
 </div>
@@ -417,63 +410,56 @@ a vector:</p>
 <h1>Missing values and other special values</h1>
 <p>Since it was designed by statisticians, R handles missing values very
 well relative to other languages.</p>
-<ul>
-<li><code>NA</code> is a missing value</li>
-</ul>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">12</span>)</span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>vec[<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>vec</span></code></pre></div>
-<pre><code>##  [1]  1.6851517  0.4945223         NA -1.2393635         NA  1.1620222
-##  [7] -0.3867427 -1.3501064 -0.6790895  0.1611178 -0.9286824 -0.6820127</code></pre>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(vec)</span></code></pre></div>
+<h2 id="na-is-a-missing-value"><code>NA</code> is a missing value</h2>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">12</span>)</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>vec[<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>vec</span></code></pre></div>
+<pre><code>##  [1] -1.25137382 -0.95488840          NA -1.27116613          NA -0.24774029
+##  [7]  0.83461018 -1.22990920  0.95024448  0.01552437  0.20700966  0.08969027</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(vec)</span></code></pre></div>
 <pre><code>## [1] 12</code></pre>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(vec)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(vec)</span></code></pre></div>
 <pre><code>## [1] NA</code></pre>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(vec, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## [1] -1.763183</code></pre>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(vec)</span></code></pre></div>
-<p><img src="data:image/png;base64,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" /></p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(vec)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(vec, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] -2.857999</code></pre>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(vec)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /></p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(vec)</span></code></pre></div>
 <pre><code>##  [1] FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
 <p>Be careful because many R functions won’t warn you that they are
 ignoring the missing values.</p>
-<ul>
-<li>To infinity and beyond</li>
-</ul>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>big <span class="ot">&lt;-</span> <span class="fl">1e500</span> </span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>big</span></code></pre></div>
+<h2 id="to-infinity-and-beyond">To infinity and beyond</h2>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>big <span class="ot">&lt;-</span> <span class="fl">1e500</span> </span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>big</span></code></pre></div>
 <pre><code>## [1] Inf</code></pre>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>big <span class="sc">+</span> <span class="dv">7</span></span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>big <span class="sc">+</span> <span class="dv">7</span></span></code></pre></div>
 <pre><code>## [1] Inf</code></pre>
-<ul>
-<li><code>NaN</code> stands for Not a Number</li>
-</ul>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="sc">-</span><span class="dv">5</span>)</span></code></pre></div>
+<h2 id="nan-stands-for-not-a-number"><code>NaN</code> stands for Not a
+Number</h2>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="sc">-</span><span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## Warning in sqrt(-5): NaNs produced</code></pre>
 <pre><code>## [1] NaN</code></pre>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>big <span class="sc">-</span> big</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>big <span class="sc">-</span> big</span></code></pre></div>
 <pre><code>## [1] NaN</code></pre>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">/</span><span class="dv">0</span></span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">/</span><span class="dv">0</span></span></code></pre></div>
 <pre><code>## [1] Inf</code></pre>
-<ul>
-<li><code>NULL</code></li>
-</ul>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(vec, <span class="cn">NULL</span>) </span>
-<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>vec</span></code></pre></div>
-<pre><code>##  [1]  1.6851517  0.4945223         NA -1.2393635         NA  1.1620222
-##  [7] -0.3867427 -1.3501064 -0.6790895  0.1611178 -0.9286824 -0.6820127</code></pre>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(vec)</span></code></pre></div>
+<h2 id="null"><code>NULL</code></h2>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(vec, <span class="cn">NULL</span>) </span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>vec</span></code></pre></div>
+<pre><code>##  [1] -1.25137382 -0.95488840          NA -1.27116613          NA -0.24774029
+##  [7]  0.83461018 -1.22990920  0.95024448  0.01552437  0.20700966  0.08969027</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(vec)</span></code></pre></div>
 <pre><code>## [1] 12</code></pre>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> <span class="dv">7</span></span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> <span class="dv">7</span></span></code></pre></div>
 <pre><code>## numeric(0)</code></pre>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>a[<span class="dv">3</span>, <span class="dv">4</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>a[<span class="dv">3</span>, <span class="dv">4</span>]</span></code></pre></div>
 <pre><code>## NULL</code></pre>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.null</span>(a)</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.null</span>(a)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>myList <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">a =</span> <span class="dv">7</span>, <span class="at">b =</span> <span class="dv">5</span>)</span>
-<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>myList<span class="sc">$</span>a <span class="ot">&lt;-</span> <span class="cn">NULL</span>  <span class="co"># works for data frames too</span></span>
-<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a>myList</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>myList <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">a =</span> <span class="dv">7</span>, <span class="at">b =</span> <span class="dv">5</span>)</span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>myList<span class="sc">$</span>a <span class="ot">&lt;-</span> <span class="cn">NULL</span>  <span class="co"># works for data frames too</span></span>
+<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a>myList</span></code></pre></div>
 <pre><code>## $b
 ## [1] 5</code></pre>
 <p><code>NA</code> can hold a place but <code>NULL</code> cannot.
@@ -484,6 +470,7 @@ ignoring the missing values.</p>
 <div id="missing-values-quick-quiz" class="slide section level1">
 <h1>Missing values: quick quiz</h1>
 <p><strong>POLL 3D</strong></p>
+<p>(just respond in your head; I won’t collect the answers online)</p>
 <p><em>Question 1</em>: Consider the following vector:</p>
 <pre><code>vec &lt;- c(3, NA, 7)</code></pre>
 <p>What is vec[2]:</p>
@@ -521,19 +508,19 @@ mylist[[2]] &lt;- NULL</code></pre>
 </div>
 <div id="logical-vectors-and-boolean-arithmetic" class="slide section level1">
 <h1>Logical vectors and boolean arithmetic</h1>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>gapminder2007 <span class="ot">&lt;-</span> gapminder[gapminder<span class="sc">$</span>year <span class="sc">==</span> <span class="dv">2007</span>, ]</span>
-<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb108-3"><a href="#cb108-3" aria-hidden="true" tabindex="-1"></a>wealthy <span class="ot">&lt;-</span> gapminder2007<span class="sc">$</span>gdpPercap <span class="sc">&gt;</span> <span class="dv">35000</span></span>
-<span id="cb108-4"><a href="#cb108-4" aria-hidden="true" tabindex="-1"></a>healthy <span class="ot">&lt;-</span> gapminder2007<span class="sc">$</span>lifeExp <span class="sc">&gt;</span> <span class="dv">75</span></span>
-<span id="cb108-5"><a href="#cb108-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb108-6"><a href="#cb108-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(wealthy)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>gapminder2007 <span class="ot">&lt;-</span> gapminder[gapminder<span class="sc">$</span>year <span class="sc">==</span> <span class="dv">2007</span>, ]</span>
+<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb106-3"><a href="#cb106-3" aria-hidden="true" tabindex="-1"></a>wealthy <span class="ot">&lt;-</span> gapminder2007<span class="sc">$</span>gdpPercap <span class="sc">&gt;</span> <span class="dv">35000</span></span>
+<span id="cb106-4"><a href="#cb106-4" aria-hidden="true" tabindex="-1"></a>healthy <span class="ot">&lt;-</span> gapminder2007<span class="sc">$</span>lifeExp <span class="sc">&gt;</span> <span class="dv">75</span></span>
+<span id="cb106-5"><a href="#cb106-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb106-6"><a href="#cb106-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(wealthy)</span></code></pre></div>
 <pre><code>## [1] FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(wealthy)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(wealthy)</span></code></pre></div>
 <pre><code>## wealthy
 ## FALSE  TRUE 
 ##   130    12</code></pre>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># note the vectorized boolean arithmetic</span></span>
-<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>gapminder2007[wealthy <span class="sc">&amp;</span> healthy, ]</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="co"># note the vectorized boolean arithmetic</span></span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a>gapminder2007[wealthy <span class="sc">&amp;</span> healthy, ]</span></code></pre></div>
 <pre><code>## # A tibble: 12 × 6
 ##    country          continent  year lifeExp       pop gdpPercap
 ##    &lt;fct&gt;            &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;
@@ -549,7 +536,7 @@ mylist[[2]] &lt;- NULL</code></pre>
 ## 10 Singapore        Asia       2007    80.0   4553009    47143.
 ## 11 Switzerland      Europe     2007    81.7   7554661    37506.
 ## 12 United States    Americas   2007    78.2 301139947    42952.</code></pre>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>gapminder2007[wealthy <span class="sc">|</span> healthy, ]</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>gapminder2007[wealthy <span class="sc">|</span> healthy, ]</span></code></pre></div>
 <pre><code>## # A tibble: 44 × 6
 ##    country    continent  year lifeExp      pop gdpPercap
 ##    &lt;fct&gt;      &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
@@ -565,15 +552,15 @@ mylist[[2]] &lt;- NULL</code></pre>
 ## 10 Croatia    Europe     2007    75.7  4493312    14619.
 ## # … with 34 more rows
 ## # ℹ Use `print(n = ...)` to see more rows</code></pre>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>gapminder2007[wealthy <span class="sc">&amp;</span> <span class="sc">!</span>healthy, ]</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>gapminder2007[wealthy <span class="sc">&amp;</span> <span class="sc">!</span>healthy, ]</span></code></pre></div>
 <pre><code>## # A tibble: 0 × 6
 ## # … with 6 variables: country &lt;fct&gt;, continent &lt;fct&gt;, year &lt;int&gt;,
 ## #   lifeExp &lt;dbl&gt;, pop &lt;int&gt;, gdpPercap &lt;dbl&gt;
 ## # ℹ Use `colnames()` to see all variable names</code></pre>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what am I doing here?</span></span>
-<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(healthy)</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what am I doing here?</span></span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(healthy)</span></code></pre></div>
 <pre><code>## [1] 44</code></pre>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(healthy)</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(healthy)</span></code></pre></div>
 <pre><code>## [1] 0.3098592</code></pre>
 <p><strong>Question</strong>: What do you think R is doing to do
 arithmetic on logical vectors?</p>
@@ -581,22 +568,23 @@ arithmetic on logical vectors?</p>
 <div id="converting-between-different-types-of-objects" class="slide section level1">
 <h1>Converting between different types of objects</h1>
 <p>You can use the <code>as()</code> family of functions.</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a>ints <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
-<span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as.character</span>(ints)</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a>ints <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as.character</span>(ints)</span></code></pre></div>
 <pre><code>##  [1] &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot;</code></pre>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">c</span>(<span class="st">&#39;3.7&#39;</span>, <span class="st">&#39;4.8&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">c</span>(<span class="st">&#39;3.7&#39;</span>, <span class="st">&#39;4.8&#39;</span>))</span></code></pre></div>
 <pre><code>## [1] 3.7 4.8</code></pre>
 <p>Be careful: R tries to be helpful and convert between types/classes
 when it thinks it’s a good idea. Sometimes it is overly optimistic.</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>indices <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.7</span>, <span class="fl">2.3</span>)</span>
-<span id="cb126-2"><a href="#cb126-2" aria-hidden="true" tabindex="-1"></a>ints[indices]</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a>indices <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.7</span>, <span class="fl">2.3</span>)</span>
+<span id="cb124-2"><a href="#cb124-2" aria-hidden="true" tabindex="-1"></a>ints[indices]</span></code></pre></div>
 <pre><code>## [1] 1 2</code></pre>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>ints[<span class="fl">0.999999999</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>ints[<span class="fl">0.999999999</span>]</span></code></pre></div>
 <pre><code>## integer(0)</code></pre>
 </div>
 <div id="converting-between-different-types-quick-quiz" class="slide section level1">
 <h1>Converting between different types: quick quiz</h1>
 <p><strong>POLL 3E</strong>:</p>
+<p>(just respond in your head; I won’t collect the answers online)</p>
 <p><em>Question 1</em>: What do you think this will do?</p>
 <pre><code>ints &lt;- 1:5
 ints[0.9999]</code></pre>
@@ -620,17 +608,17 @@ ints[0.9999]</code></pre>
 some cases it works like magic and in others it is incredibly
 frustrating.</li>
 </ul>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="do">## let&#39;s read the Gapminder data from a file with a special argument:</span></span>
-<span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(<span class="st">&#39;..&#39;</span>, <span class="st">&#39;data&#39;</span>, <span class="st">&#39;gapminder-FiveYearData.csv&#39;</span>),</span>
-<span id="cb131-3"><a href="#cb131-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>) <span class="co"># This was the default before R 4.0</span></span>
-<span id="cb131-4"><a href="#cb131-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(gapminder<span class="sc">$</span>continent)</span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="do">## let&#39;s read the Gapminder data from a file with a special argument:</span></span>
+<span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(<span class="st">&#39;..&#39;</span>, <span class="st">&#39;data&#39;</span>, <span class="st">&#39;gapminder-FiveYearData.csv&#39;</span>),</span>
+<span id="cb129-3"><a href="#cb129-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>) <span class="co"># This was the default before R 4.0</span></span>
+<span id="cb129-4"><a href="#cb129-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(gapminder<span class="sc">$</span>continent)</span></code></pre></div>
 <pre><code>## [1] &quot;factor&quot;</code></pre>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gapminder<span class="sc">$</span>continent) <span class="co"># What order are the factors in?</span></span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gapminder<span class="sc">$</span>continent) <span class="co"># What order are the factors in?</span></span></code></pre></div>
 <pre><code>## [1] Asia Asia Asia Asia Asia Asia
 ## Levels: Africa Americas Asia Europe Oceania</code></pre>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(gapminder[[<span class="st">&quot;continent&quot;</span>]])  <span class="co"># note alternate way to get the variable</span></span></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(gapminder[[<span class="st">&quot;continent&quot;</span>]])  <span class="co"># note alternate way to get the variable</span></span></code></pre></div>
 <pre><code>## [1] &quot;Africa&quot;   &quot;Americas&quot; &quot;Asia&quot;     &quot;Europe&quot;   &quot;Oceania&quot;</code></pre>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gapminder<span class="sc">$</span>continent)</span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gapminder<span class="sc">$</span>continent)</span></code></pre></div>
 <pre><code>##   Africa Americas     Asia   Europe  Oceania 
 ##      624      300      396      360       24</code></pre>
 <ul>
@@ -650,15 +638,15 @@ meaning provided by the order</li>
 </ul>
 <p>This example is a bit artificial as ‘continent’ doesn’t really have a
 natural ordering.</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a>gapminder<span class="sc">$</span>continent2 <span class="ot">&lt;-</span> <span class="fu">ordered</span>(gapminder<span class="sc">$</span>continent, </span>
-<span id="cb139-2"><a href="#cb139-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">levels =</span> <span class="fu">levels</span>(gapminder<span class="sc">$</span>continent)[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)])</span>
-<span id="cb139-3"><a href="#cb139-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-4"><a href="#cb139-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gapminder<span class="sc">$</span>continent2)</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a>gapminder<span class="sc">$</span>continent2 <span class="ot">&lt;-</span> <span class="fu">ordered</span>(gapminder<span class="sc">$</span>continent, </span>
+<span id="cb137-2"><a href="#cb137-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">levels =</span> <span class="fu">levels</span>(gapminder<span class="sc">$</span>continent)[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)])</span>
+<span id="cb137-3"><a href="#cb137-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb137-4"><a href="#cb137-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gapminder<span class="sc">$</span>continent2)</span></code></pre></div>
 <pre><code>## [1] Asia Asia Asia Asia Asia Asia
 ## Levels: Americas &lt; Africa &lt; Asia &lt; Europe &lt; Oceania</code></pre>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(gapminder<span class="sc">$</span>continent2)</span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(gapminder<span class="sc">$</span>continent2)</span></code></pre></div>
 <pre><code>## [1] &quot;Americas&quot; &quot;Africa&quot;   &quot;Asia&quot;     &quot;Europe&quot;   &quot;Oceania&quot;</code></pre>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(lifeExp <span class="sc">~</span> continent2, <span class="at">data =</span> gapminder)</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(lifeExp <span class="sc">~</span> continent2, <span class="at">data =</span> gapminder)</span></code></pre></div>
 <p><img src="data:image/png;base64,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" /></p>
 </div>
 <div id="advanced-reclassifying-factors" class="slide section level1">
@@ -667,11 +655,11 @@ natural ordering.</p>
 <li>Turning factors into other data types can be tricky. All factors
 have an underlying numeric structure.</li>
 </ul>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a>students <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&#39;basic&#39;</span>,<span class="st">&#39;proficient&#39;</span>,<span class="st">&#39;advanced&#39;</span>,<span class="st">&#39;basic&#39;</span>, </span>
-<span id="cb144-2"><a href="#cb144-2" aria-hidden="true" tabindex="-1"></a>      <span class="st">&#39;advanced&#39;</span>, <span class="st">&#39;minimal&#39;</span>))</span>
-<span id="cb144-3"><a href="#cb144-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(students)</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a>students <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&#39;basic&#39;</span>,<span class="st">&#39;proficient&#39;</span>,<span class="st">&#39;advanced&#39;</span>,<span class="st">&#39;basic&#39;</span>, </span>
+<span id="cb142-2"><a href="#cb142-2" aria-hidden="true" tabindex="-1"></a>      <span class="st">&#39;advanced&#39;</span>, <span class="st">&#39;minimal&#39;</span>))</span>
+<span id="cb142-3"><a href="#cb142-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(students)</span></code></pre></div>
 <pre><code>## [1] &quot;advanced&quot;   &quot;basic&quot;      &quot;minimal&quot;    &quot;proficient&quot;</code></pre>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unclass</span>(students)</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unclass</span>(students)</span></code></pre></div>
 <pre><code>## [1] 2 4 1 2 1 3
 ## attr(,&quot;levels&quot;)
 ## [1] &quot;advanced&quot;   &quot;basic&quot;      &quot;minimal&quot;    &quot;proficient&quot;</code></pre>
@@ -680,42 +668,42 @@ have an underlying numeric structure.</li>
 <li>Be careful! The best way to convert a factor is to convert it to a
 character first.</li>
 </ul>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a>students <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&#39;basic&#39;</span>,<span class="st">&#39;proficient&#39;</span>,<span class="st">&#39;advanced&#39;</span>,<span class="st">&#39;basic&#39;</span>, </span>
-<span id="cb148-2"><a href="#cb148-2" aria-hidden="true" tabindex="-1"></a>      <span class="st">&#39;advanced&#39;</span>, <span class="st">&#39;minimal&#39;</span>))</span>
-<span id="cb148-3"><a href="#cb148-3" aria-hidden="true" tabindex="-1"></a>score <span class="ot">=</span> <span class="fu">c</span>(<span class="at">minimal =</span> <span class="dv">3</span>, <span class="at">basic =</span> <span class="dv">1</span>, <span class="at">advanced =</span> <span class="dv">13</span>, <span class="at">proficient =</span> <span class="dv">7</span>) <span class="co"># a named vector</span></span>
-<span id="cb148-4"><a href="#cb148-4" aria-hidden="true" tabindex="-1"></a>score[<span class="st">&quot;advanced&quot;</span>]  <span class="co"># look up by name</span></span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a>students <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&#39;basic&#39;</span>,<span class="st">&#39;proficient&#39;</span>,<span class="st">&#39;advanced&#39;</span>,<span class="st">&#39;basic&#39;</span>, </span>
+<span id="cb146-2"><a href="#cb146-2" aria-hidden="true" tabindex="-1"></a>      <span class="st">&#39;advanced&#39;</span>, <span class="st">&#39;minimal&#39;</span>))</span>
+<span id="cb146-3"><a href="#cb146-3" aria-hidden="true" tabindex="-1"></a>score <span class="ot">=</span> <span class="fu">c</span>(<span class="at">minimal =</span> <span class="dv">65</span>, <span class="at">basic =</span> <span class="dv">75</span>, <span class="at">advanced =</span> <span class="dv">95</span>, <span class="at">proficient =</span> <span class="dv">85</span>) <span class="co"># a named vector</span></span>
+<span id="cb146-4"><a href="#cb146-4" aria-hidden="true" tabindex="-1"></a>score[<span class="st">&quot;advanced&quot;</span>]  <span class="co"># look up by name</span></span></code></pre></div>
 <pre><code>## advanced 
-##       13</code></pre>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a>students[<span class="dv">3</span>]</span></code></pre></div>
+##       95</code></pre>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a>students[<span class="dv">3</span>]</span></code></pre></div>
 <pre><code>## [1] advanced
 ## Levels: advanced basic minimal proficient</code></pre>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a>score[students[<span class="dv">3</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a>score[students[<span class="dv">3</span>]]</span></code></pre></div>
 <pre><code>## minimal 
-##       3</code></pre>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a>score[<span class="fu">as.character</span>(students[<span class="dv">3</span>])]</span></code></pre></div>
+##      65</code></pre>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a>score[<span class="fu">as.character</span>(students[<span class="dv">3</span>])]</span></code></pre></div>
 <pre><code>## advanced 
-##       13</code></pre>
+##       95</code></pre>
 <p>What went wrong and how did we fix it? Notice how easily this could
 be a big bug in your code.</p>
 </div>
 <div id="strings" class="slide section level1">
 <h1>Strings</h1>
 <p>R has lots of functionality for character strings. Usually these are
-stored as vectors of strings, each with arbitrary length.</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a>chars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;hi&#39;</span>, <span class="st">&#39;hallo&#39;</span>, <span class="st">&quot;mother&#39;s&quot;</span>, <span class="st">&#39;father</span><span class="sc">\&#39;</span><span class="st">s&#39;</span>, <span class="st">&quot;He said, </span><span class="sc">\&quot;</span><span class="st">hi</span><span class="sc">\&quot;</span><span class="st">&quot;</span> )</span>
-<span id="cb156-2"><a href="#cb156-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(chars)</span></code></pre></div>
+stored as vectors of strings, each string of arbitrary length.</p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a>chars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;hi&#39;</span>, <span class="st">&#39;hallo&#39;</span>, <span class="st">&quot;mother&#39;s&quot;</span>, <span class="st">&#39;father</span><span class="sc">\&#39;</span><span class="st">s&#39;</span>, <span class="st">&quot;He said, </span><span class="sc">\&quot;</span><span class="st">hi</span><span class="sc">\&quot;</span><span class="st">&quot;</span> )</span>
+<span id="cb154-2"><a href="#cb154-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(chars)</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nchar</span>(chars)</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nchar</span>(chars)</span></code></pre></div>
 <pre><code>## [1]  2  5  8  8 13</code></pre>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;bill&quot;</span>, <span class="st">&quot;clinton&quot;</span>, <span class="at">sep =</span> <span class="st">&quot; &quot;</span>)  <span class="co"># paste together a set of strings</span></span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;bill&quot;</span>, <span class="st">&quot;clinton&quot;</span>, <span class="at">sep =</span> <span class="st">&quot; &quot;</span>)  <span class="co"># paste together a set of strings</span></span></code></pre></div>
 <pre><code>## [1] &quot;bill clinton&quot;</code></pre>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(chars, <span class="at">collapse =</span> <span class="st">&#39; &#39;</span>)  <span class="co"># paste together things from a vector</span></span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(chars, <span class="at">collapse =</span> <span class="st">&#39; &#39;</span>)  <span class="co"># paste together things from a vector</span></span></code></pre></div>
 <pre><code>## [1] &quot;hi hallo mother&#39;s father&#39;s He said, \&quot;hi\&quot;&quot;</code></pre>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strsplit</span>(<span class="st">&quot;This is the R bootcamp&quot;</span>, <span class="at">split =</span> <span class="st">&quot; &quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strsplit</span>(<span class="st">&quot;This is the R bootcamp&quot;</span>, <span class="at">split =</span> <span class="st">&quot; &quot;</span>)</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] &quot;This&quot;     &quot;is&quot;       &quot;the&quot;      &quot;R&quot;        &quot;bootcamp&quot;</code></pre>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="#cb166-1" aria-hidden="true" tabindex="-1"></a>countries <span class="ot">&lt;-</span> <span class="fu">as.character</span>(gapminder2007<span class="sc">$</span>country)</span>
-<span id="cb166-2"><a href="#cb166-2" aria-hidden="true" tabindex="-1"></a><span class="fu">substring</span>(countries, <span class="dv">1</span>, <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="#cb164-1" aria-hidden="true" tabindex="-1"></a>countries <span class="ot">&lt;-</span> <span class="fu">as.character</span>(gapminder2007<span class="sc">$</span>country)</span>
+<span id="cb164-2"><a href="#cb164-2" aria-hidden="true" tabindex="-1"></a><span class="fu">substring</span>(countries, <span class="dv">1</span>, <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##   [1] &quot;Afg&quot; &quot;Alb&quot; &quot;Alg&quot; &quot;Ang&quot; &quot;Arg&quot; &quot;Aus&quot; &quot;Aus&quot; &quot;Bah&quot; &quot;Ban&quot; &quot;Bel&quot; &quot;Ben&quot; &quot;Bol&quot;
 ##  [13] &quot;Bos&quot; &quot;Bot&quot; &quot;Bra&quot; &quot;Bul&quot; &quot;Bur&quot; &quot;Bur&quot; &quot;Cam&quot; &quot;Cam&quot; &quot;Can&quot; &quot;Cen&quot; &quot;Cha&quot; &quot;Chi&quot;
 ##  [25] &quot;Chi&quot; &quot;Col&quot; &quot;Com&quot; &quot;Con&quot; &quot;Con&quot; &quot;Cos&quot; &quot;Cot&quot; &quot;Cro&quot; &quot;Cub&quot; &quot;Cze&quot; &quot;Den&quot; &quot;Dji&quot;
@@ -728,9 +716,9 @@ stored as vectors of strings, each with arbitrary length.</p>
 ## [109] &quot;Sao&quot; &quot;Sau&quot; &quot;Sen&quot; &quot;Ser&quot; &quot;Sie&quot; &quot;Sin&quot; &quot;Slo&quot; &quot;Slo&quot; &quot;Som&quot; &quot;Sou&quot; &quot;Spa&quot; &quot;Sri&quot;
 ## [121] &quot;Sud&quot; &quot;Swa&quot; &quot;Swe&quot; &quot;Swi&quot; &quot;Syr&quot; &quot;Tai&quot; &quot;Tan&quot; &quot;Tha&quot; &quot;Tog&quot; &quot;Tri&quot; &quot;Tun&quot; &quot;Tur&quot;
 ## [133] &quot;Uga&quot; &quot;Uni&quot; &quot;Uni&quot; &quot;Uru&quot; &quot;Ven&quot; &quot;Vie&quot; &quot;Wes&quot; &quot;Yem&quot; &quot;Zam&quot; &quot;Zim&quot;</code></pre>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="#cb168-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> countries</span>
-<span id="cb168-2"><a href="#cb168-2" aria-hidden="true" tabindex="-1"></a><span class="fu">substring</span>(tmp, <span class="dv">5</span>, <span class="dv">10</span>) <span class="ot">&lt;-</span> <span class="st">&quot;______&quot;</span></span>
-<span id="cb168-3"><a href="#cb168-3" aria-hidden="true" tabindex="-1"></a>tmp[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="#cb166-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> countries</span>
+<span id="cb166-2"><a href="#cb166-2" aria-hidden="true" tabindex="-1"></a><span class="fu">substring</span>(tmp, <span class="dv">5</span>, <span class="dv">10</span>) <span class="ot">&lt;-</span> <span class="st">&quot;______&quot;</span></span>
+<span id="cb166-3"><a href="#cb166-3" aria-hidden="true" tabindex="-1"></a>tmp[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>]</span></code></pre></div>
 <pre><code>##  [1] &quot;Afgh______n&quot;            &quot;Alba___&quot;                &quot;Alge___&quot;               
 ##  [4] &quot;Ango__&quot;                 &quot;Arge_____&quot;              &quot;Aust_____&quot;             
 ##  [7] &quot;Aust___&quot;                &quot;Bahr___&quot;                &quot;Bang______&quot;            
@@ -740,14 +728,14 @@ stored as vectors of strings, each with arbitrary length.</p>
 ## [19] &quot;Camb____&quot;               &quot;Came____&quot;</code></pre>
 <p>We can search for patterns in character vectors and replace patterns
 (both vectorized!)</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="#cb170-1" aria-hidden="true" tabindex="-1"></a>indexes <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">&quot;Korea&quot;</span>, countries)</span>
-<span id="cb170-2"><a href="#cb170-2" aria-hidden="true" tabindex="-1"></a>indexes</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="#cb168-1" aria-hidden="true" tabindex="-1"></a>indexes <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">&quot;Korea&quot;</span>, countries)</span>
+<span id="cb168-2"><a href="#cb168-2" aria-hidden="true" tabindex="-1"></a>indexes</span></code></pre></div>
 <pre><code>## [1] 70 71</code></pre>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="#cb172-1" aria-hidden="true" tabindex="-1"></a>countries[indexes]</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="#cb170-1" aria-hidden="true" tabindex="-1"></a>countries[indexes]</span></code></pre></div>
 <pre><code>## [1] &quot;Korea, Dem. Rep.&quot; &quot;Korea, Rep.&quot;</code></pre>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="#cb174-1" aria-hidden="true" tabindex="-1"></a>countries2 <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;Korea Dem. Rep.&quot;</span>, <span class="st">&quot;North Korea&quot;</span>, countries)</span>
-<span id="cb174-2"><a href="#cb174-2" aria-hidden="true" tabindex="-1"></a>countries2[indexes]</span></code></pre></div>
-<pre><code>## [1] &quot;Korea, Dem. Rep.&quot; &quot;Korea, Rep.&quot;</code></pre>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="#cb172-1" aria-hidden="true" tabindex="-1"></a>countries2 <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;Korea, Dem. Rep.&quot;</span>, <span class="st">&quot;North Korea&quot;</span>, countries)</span>
+<span id="cb172-2"><a href="#cb172-2" aria-hidden="true" tabindex="-1"></a>countries2[indexes]</span></code></pre></div>
+<pre><code>## [1] &quot;North Korea&quot; &quot;Korea, Rep.&quot;</code></pre>
 </div>
 <div id="regular-expressions-regex-or-regexp-optional" class="slide section level1">
 <h1>Regular expressions (regex or regexp) (optional)</h1>
@@ -768,21 +756,19 @@ R.</p>
 <h1>Subsetting</h1>
 <p>There are many ways to select subsets in R. The syntax below is
 useful for vectors, matrices, data frames, arrays and lists.</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="#cb176-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> gapminder2007<span class="sc">$</span>lifeExp</span>
-<span id="cb176-2"><a href="#cb176-2" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
-<span id="cb176-3"><a href="#cb176-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(mat) <span class="ot">&lt;-</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span>
-<span id="cb176-4"><a href="#cb176-4" aria-hidden="true" tabindex="-1"></a>mat</span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="#cb174-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> gapminder2007<span class="sc">$</span>lifeExp</span>
+<span id="cb174-2"><a href="#cb174-2" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb174-3"><a href="#cb174-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(mat) <span class="ot">&lt;-</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span>
+<span id="cb174-4"><a href="#cb174-4" aria-hidden="true" tabindex="-1"></a>mat</span></code></pre></div>
 <pre><code>##   [,1] [,2] [,3] [,4] [,5]
 ## a    1    5    9   13   17
 ## b    2    6   10   14   18
 ## c    3    7   11   15   19
 ## d    4    8   12   16   20</code></pre>
-<ol style="list-style-type: decimal">
-<li>by direct indexing</li>
-</ol>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="#cb178-1" aria-hidden="true" tabindex="-1"></a>vec[<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">12</span><span class="sc">:</span><span class="dv">14</span>)]</span></code></pre></div>
+<h2 id="by-direct-indexing">1) by direct indexing</h2>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="#cb176-1" aria-hidden="true" tabindex="-1"></a>vec[<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">12</span><span class="sc">:</span><span class="dv">14</span>)]</span></code></pre></div>
 <pre><code>## [1] 72.301 75.320 65.554 74.852 50.728</code></pre>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="#cb180-1" aria-hidden="true" tabindex="-1"></a>vec[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">5</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="#cb178-1" aria-hidden="true" tabindex="-1"></a>vec[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">5</span>)]</span></code></pre></div>
 <pre><code>##   [1] 43.828 76.423 42.731 81.235 79.829 75.635 64.062 79.441 56.728 65.554
 ##  [11] 74.852 50.728 72.390 73.005 52.295 49.580 59.723 50.430 80.653 44.741
 ##  [21] 50.651 78.553 72.961 72.889 65.152 46.462 55.322 78.782 48.328 75.748
@@ -797,28 +783,26 @@ useful for vectors, matrices, data frames, arrays and lists.</p>
 ## [111] 42.568 79.972 74.663 77.926 48.159 49.339 80.941 72.396 58.556 39.613
 ## [121] 80.884 81.701 74.143 78.400 52.517 70.616 58.420 69.819 73.923 71.777
 ## [131] 51.542 79.425 78.242 76.384 73.747 74.249 73.422 62.698 42.384 43.487</code></pre>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="#cb182-1" aria-hidden="true" tabindex="-1"></a>gapminder[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>), <span class="dv">5</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="#cb180-1" aria-hidden="true" tabindex="-1"></a>gapminder[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>), <span class="dv">5</span>]</span></code></pre></div>
 <pre><code>## [1] 30.332 34.020</code></pre>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="#cb184-1" aria-hidden="true" tabindex="-1"></a>gapminder[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>), <span class="st">&#39;lifeExp&#39;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="#cb182-1" aria-hidden="true" tabindex="-1"></a>gapminder[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>), <span class="st">&#39;lifeExp&#39;</span>]</span></code></pre></div>
 <pre><code>## [1] 30.332 34.020</code></pre>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Advanced: subset using a 2-column matrix of indices:</span></span>
-<span id="cb186-2"><a href="#cb186-2" aria-hidden="true" tabindex="-1"></a>rowInd <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
-<span id="cb186-3"><a href="#cb186-3" aria-hidden="true" tabindex="-1"></a>colInd <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
-<span id="cb186-4"><a href="#cb186-4" aria-hidden="true" tabindex="-1"></a>elemInd <span class="ot">&lt;-</span> <span class="fu">cbind</span>(rowInd, colInd)</span>
-<span id="cb186-5"><a href="#cb186-5" aria-hidden="true" tabindex="-1"></a>elemInd</span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Advanced: subset using a 2-column matrix of indices:</span></span>
+<span id="cb184-2"><a href="#cb184-2" aria-hidden="true" tabindex="-1"></a>rowInd <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb184-3"><a href="#cb184-3" aria-hidden="true" tabindex="-1"></a>colInd <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb184-4"><a href="#cb184-4" aria-hidden="true" tabindex="-1"></a>elemInd <span class="ot">&lt;-</span> <span class="fu">cbind</span>(rowInd, colInd)</span>
+<span id="cb184-5"><a href="#cb184-5" aria-hidden="true" tabindex="-1"></a>elemInd</span></code></pre></div>
 <pre><code>##      rowInd colInd
 ## [1,]      1      2
 ## [2,]      3      2
 ## [3,]      4      1</code></pre>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="#cb188-1" aria-hidden="true" tabindex="-1"></a>gapminder[elemInd]</span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="#cb186-1" aria-hidden="true" tabindex="-1"></a>gapminder[elemInd]</span></code></pre></div>
 <pre><code>## [1] &quot;1952&quot;        &quot;1962&quot;        &quot;Afghanistan&quot;</code></pre>
-<ol start="2" style="list-style-type: decimal">
-<li>by a vector of logicals</li>
-</ol>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="#cb190-1" aria-hidden="true" tabindex="-1"></a>wealthy <span class="ot">&lt;-</span> gapminder<span class="sc">$</span>gdpPercap <span class="sc">&gt;</span> <span class="dv">50000</span></span>
-<span id="cb190-2"><a href="#cb190-2" aria-hidden="true" tabindex="-1"></a>gapminder<span class="sc">$</span>gdpPercap[wealthy]</span></code></pre></div>
+<h2 id="by-a-vector-of-logicals">2) by a vector of logicals</h2>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="#cb188-1" aria-hidden="true" tabindex="-1"></a>wealthy <span class="ot">&lt;-</span> gapminder<span class="sc">$</span>gdpPercap <span class="sc">&gt;</span> <span class="dv">50000</span></span>
+<span id="cb188-2"><a href="#cb188-2" aria-hidden="true" tabindex="-1"></a>gapminder<span class="sc">$</span>gdpPercap[wealthy]</span></code></pre></div>
 <pre><code>## [1] 108382.35 113523.13  95458.11  80894.88 109347.87  59265.48</code></pre>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="#cb192-1" aria-hidden="true" tabindex="-1"></a>gapminder[wealthy, ]</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="#cb190-1" aria-hidden="true" tabindex="-1"></a>gapminder[wealthy, ]</span></code></pre></div>
 <pre><code>##     country year     pop continent lifeExp gdpPercap continent2
 ## 853  Kuwait 1952  160000      Asia  55.565 108382.35       Asia
 ## 854  Kuwait 1957  212846      Asia  58.033 113523.13       Asia
@@ -827,18 +811,14 @@ useful for vectors, matrices, data frames, arrays and lists.</p>
 ## 857  Kuwait 1972  841934      Asia  67.712 109347.87       Asia
 ## 858  Kuwait 1977 1140357      Asia  69.343  59265.48       Asia</code></pre>
 <p>What happened in the last subsetting operation?</p>
-<ol start="3" style="list-style-type: decimal">
-<li>by a vector of names</li>
-</ol>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="#cb194-1" aria-hidden="true" tabindex="-1"></a>mat[<span class="fu">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;a&#39;</span>), ]</span></code></pre></div>
+<h2 id="by-a-vector-of-names">3) by a vector of names</h2>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="#cb192-1" aria-hidden="true" tabindex="-1"></a>mat[<span class="fu">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;a&#39;</span>), ]</span></code></pre></div>
 <pre><code>##   [,1] [,2] [,3] [,4] [,5]
 ## a    1    5    9   13   17
 ## d    4    8   12   16   20
 ## a    1    5    9   13   17</code></pre>
-<ol start="4" style="list-style-type: decimal">
-<li>using <em>subset()</em></li>
-</ol>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(gapminder, gdpPercap <span class="sc">&gt;</span> <span class="dv">50000</span>)</span></code></pre></div>
+<h2 id="using-subset">4) using <em>subset()</em></h2>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(gapminder, gdpPercap <span class="sc">&gt;</span> <span class="dv">50000</span>)</span></code></pre></div>
 <pre><code>##     country year     pop continent lifeExp gdpPercap continent2
 ## 853  Kuwait 1952  160000      Asia  55.565 108382.35       Asia
 ## 854  Kuwait 1957  212846      Asia  58.033 113523.13       Asia
@@ -846,37 +826,35 @@ useful for vectors, matrices, data frames, arrays and lists.</p>
 ## 856  Kuwait 1967  575003      Asia  64.624  80894.88       Asia
 ## 857  Kuwait 1972  841934      Asia  67.712 109347.87       Asia
 ## 858  Kuwait 1977 1140357      Asia  69.343  59265.48       Asia</code></pre>
-<ol start="5" style="list-style-type: decimal">
-<li>using <em>dplyr</em> tools such as <em>filter()</em> and
-<em>select()</em> – more in Module 6</li>
-</ol>
+<h2 id="using-dplyr-tools-such-as-filter-and-select-more-in-module-6">5)
+using <em>dplyr</em> tools such as <em>filter()</em> and
+<em>select()</em> – more in Module 6</h2>
 </div>
 <div id="assignment-into-subsets" class="slide section level1">
 <h1>Assignment into subsets</h1>
 <p>We can assign into subsets by using similar syntax, as we saw with
 vectors.</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="#cb198-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">20</span>)</span>
-<span id="cb198-2"><a href="#cb198-2" aria-hidden="true" tabindex="-1"></a>vec[<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">12</span><span class="sc">:</span><span class="dv">14</span>)] <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
-<span id="cb198-3"><a href="#cb198-3" aria-hidden="true" tabindex="-1"></a>vec</span></code></pre></div>
-<pre><code>##  [1]  0.1604717 -0.2099432  1.0000000 -0.2299347  2.0000000  1.3641291
-##  [7]  1.2627974  0.1631852  0.4527845  1.0032469  0.6748463  3.0000000
-## [13]  4.0000000  5.0000000 -0.5167445 -0.0369539  0.7404249 -1.1364493
-## [19]  1.9904780 -1.5357902</code></pre>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="#cb200-1" aria-hidden="true" tabindex="-1"></a>mat[<span class="dv">2</span>, <span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">3</span>)</span>
-<span id="cb200-2"><a href="#cb200-2" aria-hidden="true" tabindex="-1"></a>mat[mat[,<span class="dv">1</span>] <span class="sc">&gt;</span> <span class="dv">3</span>, ] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="cn">Inf</span></span>
-<span id="cb200-3"><a href="#cb200-3" aria-hidden="true" tabindex="-1"></a>mat</span></code></pre></div>
-<pre><code>##   [,1] [,2]       [,3]        [,4]       [,5]
-## a    1    5  9.0000000 13.00000000 17.0000000
-## b    2    6 -0.5740042 -0.08584132 -0.3938248
-## c    3    7 11.0000000 15.00000000 19.0000000
-## d -Inf -Inf       -Inf        -Inf       -Inf</code></pre>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="#cb196-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">20</span>)</span>
+<span id="cb196-2"><a href="#cb196-2" aria-hidden="true" tabindex="-1"></a>vec[<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">12</span><span class="sc">:</span><span class="dv">14</span>)] <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb196-3"><a href="#cb196-3" aria-hidden="true" tabindex="-1"></a>vec</span></code></pre></div>
+<pre><code>##  [1]  0.9670612581 -1.3902535960  1.0000000000  0.0599868501  2.0000000000
+##  [6]  1.0093672958  0.2927229005  0.1378489837 -0.8350071467  1.5912864340
+## [11] -0.1663258146  3.0000000000  4.0000000000  5.0000000000  0.8394032657
+## [16] -0.0005844545 -0.7318971916  2.0960350413 -0.0565864583  0.8341225037</code></pre>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="#cb198-1" aria-hidden="true" tabindex="-1"></a>mat[<span class="dv">2</span>, <span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">3</span>)</span>
+<span id="cb198-2"><a href="#cb198-2" aria-hidden="true" tabindex="-1"></a>mat[mat[,<span class="dv">1</span>] <span class="sc">&gt;</span> <span class="dv">3</span>, ] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="cn">Inf</span></span>
+<span id="cb198-3"><a href="#cb198-3" aria-hidden="true" tabindex="-1"></a>mat</span></code></pre></div>
+<pre><code>##   [,1] [,2]        [,3]      [,4]       [,5]
+## a    1    5  9.00000000 13.000000 17.0000000
+## b    2    6  0.01599645  1.653888 -0.1430284
+## c    3    7 11.00000000 15.000000 19.0000000
+## d -Inf -Inf        -Inf      -Inf       -Inf</code></pre>
 </div>
 <div id="subsetting-quick-quiz" class="slide section level1">
 <h1>Subsetting: quick quiz</h1>
-<p><strong>POLL 3F</strong></p>
-<p><em>Question 1</em>: Suppose I want to select the 3rd elements from
-the 2nd and 4th columns of a matrix or dataframe. Which syntax will
-work?</p>
+<p><strong><a href="https://www.polleverywhere.com/multiple_choice_polls/fFm9QlOQDGRz0pJZklyV2">P</a>OLL
+3F</strong>: Suppose I want to select the 3rd elements from the 2nd and
+4th columns of a matrix or dataframe. Which syntax will work?</p>
 <p>Here’s a test matrix:</p>
 <pre><code>mat &lt;- matrix(1:16, nrow = 4, ncol = 4)</code></pre>
 <ol style="list-style-type: decimal">
@@ -890,8 +868,8 @@ work?</p>
 <li>mat[ , c(2, 4)][3]</li>
 <li>mat[c(2, 4)][3, ]</li>
 </ol>
-<p><em>Question 2</em>: (Advanced) One of those answers won’t work with
-a matrix but will work with a dataframe. Which one?</p>
+<p><strong>POLL 3F</strong>: (Advanced) One of those answers won’t work
+with a matrix but will work with a dataframe. Which one?</p>
 <ol style="list-style-type: decimal">
 <li>mat[3, (2, 4)]</li>
 <li>mat[c(FALSE, FALSE, TRUE, FALSE), c(FALSE, TRUE, FALSE, TRUE)]</li>
@@ -927,8 +905,9 @@ the user how many rows there are in the data frame - do this
 programmatically such that it would work for any data frame regardless
 of how many rows it has. The result should look like this: “There are
 1704 rows in the dataset”</p></li>
-<li><p>If you didn’t do it this way already, extract the last row from
-the gapminder dataset without typing the number ‘1704’.</p></li>
+<li><p>If you didn’t do it this way already in problem #2, extract the
+last row from the gapminder dataset without typing the number
+‘1704’.</p></li>
 <li><p>Create a boolean vector indicating if the life expectancy is
 greater than 75 and the gdpPercap is less than 10000 and calculate the
 proportion of all the records these represent.</p></li>

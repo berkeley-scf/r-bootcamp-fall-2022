@@ -282,7 +282,9 @@ names(myList)
 
 <h1>Lists: quick quiz</h1>
 
-<p><strong>POLL 3A</strong>: How would you extract &ldquo;china&rdquo; from this list?</p>
+<p><strong><a href="https://www.polleverywhere.com/multiple_choice_polls/n6adK1IU7niikhA2ZgLNi">P</a>OLL 3A</strong>: How would you extract &ldquo;china&rdquo; from this list?</p>
+
+<p>(respond at <a href="https://pollev.com/chrispaciorek428">https://pollev.com/chrispaciorek428</a>)</p>
 
 <pre><code>myList &lt;- list(stuff = 3, mat = matrix(1:4, nrow = 2), 
    moreStuff = c(&quot;china&quot;, &quot;japan&quot;), list(5, &quot;bear&quot;))
@@ -303,7 +305,7 @@ names(myList)
 <ul>
 <li>Data frames are combinations of vectors of the same length, but can be of different types</li>
 <li>Data frames are what is used for standard rectangular (record by field) datasets, similar to a spreadsheet</li>
-<li>Data frames are a functionality that both sets R aside from some languages (e.g., Matlab) and provides functionality similar to some statistical packages (e.g., Stata, SAS)</li>
+<li>Data frames are a functionality that both sets R aside from some languages (e.g., MATLAB) and provides functionality similar to some statistical packages (e.g., Stata, SAS)</li>
 </ul>
 
 <pre><code class="r">class(gapminder)
@@ -427,30 +429,30 @@ head(someFields)
 mat
 </code></pre>
 
-<pre><code>##            [,1]      [,2]       [,3]       [,4]
-## [1,]  0.3174077 1.6009510  0.1085762 -1.2173955
-## [2,]  0.8035843 1.1322524 -0.4967257 -0.3376897
-## [3,] -0.9004541 0.3170462 -0.4885157 -2.3694891
+<pre><code>##            [,1]        [,2]       [,3]      [,4]
+## [1,]  0.3046559  0.06265687  0.7539251 0.6543073
+## [2,] -0.1494738 -0.14930801 -0.1913831 0.8146286
+## [3,]  1.8834225  0.21849591 -1.6925464 1.1735638
 </code></pre>
 
 <pre><code class="r"># vectorized calcs work with matrices too
 mat*4
 </code></pre>
 
-<pre><code>##           [,1]     [,2]       [,3]      [,4]
-## [1,]  1.269631 6.403804  0.4343047 -4.869582
-## [2,]  3.214337 4.529010 -1.9869027 -1.350759
-## [3,] -3.601816 1.268185 -1.9540629 -9.477956
+<pre><code>##            [,1]       [,2]       [,3]     [,4]
+## [1,]  1.2186237  0.2506275  3.0157003 2.617229
+## [2,] -0.5978951 -0.5972321 -0.7655324 3.258514
+## [3,]  7.5336902  0.8739836 -6.7701854 4.694255
 </code></pre>
 
 <pre><code class="r">mat &lt;- cbind(mat, 1:3)
 mat
 </code></pre>
 
-<pre><code>##            [,1]      [,2]       [,3]       [,4] [,5]
-## [1,]  0.3174077 1.6009510  0.1085762 -1.2173955    1
-## [2,]  0.8035843 1.1322524 -0.4967257 -0.3376897    2
-## [3,] -0.9004541 0.3170462 -0.4885157 -2.3694891    3
+<pre><code>##            [,1]        [,2]       [,3]      [,4] [,5]
+## [1,]  0.3046559  0.06265687  0.7539251 0.6543073    1
+## [2,] -0.1494738 -0.14930801 -0.1913831 0.8146286    2
+## [3,]  1.8834225  0.21849591 -1.6925464 1.1735638    3
 </code></pre>
 
 <pre><code class="r"># Let&#39;s convert the gapminder dataframe to a matrix:
@@ -467,19 +469,18 @@ head(gm_mat)
 ## [6,]  38.438  786.1134
 </code></pre>
 
-<pre><code class="r"># What do you think will happen?
-gm_mat &lt;- as.matrix(gapminder)
-head(gm_mat)
+<h1>Matrices: quick quiz</h1>
+
+<p><strong><a href="https://www.polleverywhere.com/multiple_choice_polls/1jt7IHbQvXnaqRmUCGOru">P</a>OLL 3B</strong>: Recall the gap dataframe has columns that are numeric and columns that are character strings. What do you think will happen if we do this:</p>
+
+<pre><code>as.matrix(gapminder)
 </code></pre>
 
-<pre><code>##      country       continent year   lifeExp    pop          gdpPercap    
-## [1,] &quot;Afghanistan&quot; &quot;Asia&quot;    &quot;1952&quot; &quot;28.80100&quot; &quot;   8425333&quot; &quot;   779.4453&quot;
-## [2,] &quot;Afghanistan&quot; &quot;Asia&quot;    &quot;1957&quot; &quot;30.33200&quot; &quot;   9240934&quot; &quot;   820.8530&quot;
-## [3,] &quot;Afghanistan&quot; &quot;Asia&quot;    &quot;1962&quot; &quot;31.99700&quot; &quot;  10267083&quot; &quot;   853.1007&quot;
-## [4,] &quot;Afghanistan&quot; &quot;Asia&quot;    &quot;1967&quot; &quot;34.02000&quot; &quot;  11537966&quot; &quot;   836.1971&quot;
-## [5,] &quot;Afghanistan&quot; &quot;Asia&quot;    &quot;1972&quot; &quot;36.08800&quot; &quot;  13079460&quot; &quot;   739.9811&quot;
-## [6,] &quot;Afghanistan&quot; &quot;Asia&quot;    &quot;1977&quot; &quot;38.43800&quot; &quot;  14880372&quot; &quot;   786.1134&quot;
-</code></pre>
+<p>1) it will convert to a matrix with no changes
+2) all numeric columns will be converted to character strings
+3) R will throw an error
+4) all character columns will be converted to numeric values
+5) R will drop some of the columns</p>
 
 <h1>Arrays</h1>
 
@@ -491,41 +492,28 @@ arr
 
 <pre><code>## , , 1
 ## 
-##            [,1]       [,2]       [,3]
-## [1,]  0.7417017  0.4747874  1.7091402
-## [2,] -0.3700466 -1.1549083 -0.1121775
+##           [,1]       [,2]       [,3]
+## [1,] 1.4848810 -0.0629038  0.8661009
+## [2,] 0.3621751  0.8931410 -1.7531259
 ## 
 ## , , 2
 ## 
-##            [,1]       [,2]       [,3]
-## [1,] -0.7172138 -0.3246392 -0.8776541
-## [2,] -0.4396797 -0.3709570 -0.2077589
+##            [,1]      [,2]       [,3]
+## [1,] -0.5718926 0.1222098  1.0661923
+## [2,]  0.2560027 0.7113368 -0.2877908
 ## 
 ## , , 3
 ## 
-##            [,1]       [,2]       [,3]
-## [1,]  0.7417017  0.4747874  1.7091402
-## [2,] -0.3700466 -1.1549083 -0.1121775
+##           [,1]       [,2]       [,3]
+## [1,] 1.4848810 -0.0629038  0.8661009
+## [2,] 0.3621751  0.8931410 -1.7531259
 ## 
 ## , , 4
 ## 
-##            [,1]       [,2]       [,3]
-## [1,] -0.7172138 -0.3246392 -0.8776541
-## [2,] -0.4396797 -0.3709570 -0.2077589
+##            [,1]      [,2]       [,3]
+## [1,] -0.5718926 0.1222098  1.0661923
+## [2,]  0.2560027 0.7113368 -0.2877908
 </code></pre>
-
-<h1>Matrices: quick quiz</h1>
-
-<p><strong>POLL 3B</strong>: Recall the gap dataframe has columns that are numeric and columns that are character strings. What do you think will happen if we do this:</p>
-
-<pre><code>as.matrix(gapminder)
-</code></pre>
-
-<p>1) it will convert to a matrix with no changes
-2) all numeric columns will be converted to character strings
-3) R will throw an error
-4) all character columns will be converted to numeric values
-5) R will drop some of the columns</p>
 
 <h1>Attributes</h1>
 
@@ -542,10 +530,10 @@ arr
 mat
 </code></pre>
 
-<pre><code>##              [,1]      [,2]       [,3]       [,4] [,5]
-## first   0.3174077 1.6009510  0.1085762 -1.2173955    1
-## middle  0.8035843 1.1322524 -0.4967257 -0.3376897    2
-## last   -0.9004541 0.3170462 -0.4885157 -2.3694891    3
+<pre><code>##              [,1]        [,2]       [,3]      [,4] [,5]
+## first   0.3046559  0.06265687  0.7539251 0.6543073    1
+## middle -0.1494738 -0.14930801 -0.1913831 0.8146286    2
+## last    1.8834225  0.21849591 -1.6925464 1.1735638    3
 </code></pre>
 
 <pre><code class="r">attributes(mat)
@@ -584,7 +572,7 @@ mat
 
 <h1>Attributes: quick quiz</h1>
 
-<p><strong>POLL 3C</strong>: Consider our matrix &#39;mat&#39;:</p>
+<p><strong><a href="https://www.polleverywhere.com/multiple_choice_polls/YkHAsxssHtWqCQ9DGMDbo">P</a>OLL 3C</strong>: Consider our matrix &#39;mat&#39;:</p>
 
 <pre><code>mat &lt;- matrix(1:16, nrow = 4, ncol = 4)
      [,1] [,2] [,3] [,4]
@@ -651,17 +639,15 @@ mat
 
 <p>Since it was designed by statisticians, R handles missing values very well relative to other languages.</p>
 
-<ul>
-<li><code>NA</code> is a missing value</li>
-</ul>
+<h2><code>NA</code> is a missing value</h2>
 
 <pre><code class="r">vec &lt;- rnorm(12)
 vec[c(3, 5)] &lt;- NA
 vec
 </code></pre>
 
-<pre><code>##  [1]  1.6851517  0.4945223         NA -1.2393635         NA  1.1620222
-##  [7] -0.3867427 -1.3501064 -0.6790895  0.1611178 -0.9286824 -0.6820127
+<pre><code>##  [1] -1.25137382 -0.95488840          NA -1.27116613          NA -0.24774029
+##  [7]  0.83461018 -1.22990920  0.95024448  0.01552437  0.20700966  0.08969027
 </code></pre>
 
 <pre><code class="r">length(vec)
@@ -679,13 +665,13 @@ vec
 <pre><code class="r">sum(vec, na.rm = TRUE)
 </code></pre>
 
-<pre><code>## [1] -1.763183
+<pre><code>## [1] -2.857999
 </code></pre>
 
 <pre><code class="r">hist(vec)
 </code></pre>
 
-<p><img src="data:image/png;base64,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" alt=""/></p>
+<p><img src="data:image/png;base64,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" alt=""/></p>
 
 <pre><code class="r">is.na(vec)
 </code></pre>
@@ -695,9 +681,7 @@ vec
 
 <p>Be careful because many R functions won&#39;t warn you that they are ignoring the missing values.</p>
 
-<ul>
-<li>To infinity and beyond</li>
-</ul>
+<h2>To infinity and beyond</h2>
 
 <pre><code class="r">big &lt;- 1e500 
 big
@@ -712,9 +696,7 @@ big
 <pre><code>## [1] Inf
 </code></pre>
 
-<ul>
-<li><code>NaN</code> stands for Not a Number</li>
-</ul>
+<h2><code>NaN</code> stands for Not a Number</h2>
 
 <pre><code class="r">sqrt(-5)
 </code></pre>
@@ -737,16 +719,14 @@ big
 <pre><code>## [1] Inf
 </code></pre>
 
-<ul>
-<li><code>NULL</code></li>
-</ul>
+<h2><code>NULL</code></h2>
 
 <pre><code class="r">vec &lt;- c(vec, NULL) 
 vec
 </code></pre>
 
-<pre><code>##  [1]  1.6851517  0.4945223         NA -1.2393635         NA  1.1620222
-##  [7] -0.3867427 -1.3501064 -0.6790895  0.1611178 -0.9286824 -0.6820127
+<pre><code>##  [1] -1.25137382 -0.95488840          NA -1.27116613          NA -0.24774029
+##  [7]  0.83461018 -1.22990920  0.95024448  0.01552437  0.20700966  0.08969027
 </code></pre>
 
 <pre><code class="r">length(vec)
@@ -789,6 +769,8 @@ myList
 <h1>Missing values: quick quiz</h1>
 
 <p><strong>POLL 3D</strong></p>
+
+<p>(just respond in your head; I won&#39;t collect the answers online)</p>
 
 <p><em>Question 1</em>: Consider the following vector:</p>
 
@@ -958,6 +940,8 @@ ints[indices]
 
 <p><strong>POLL 3E</strong>:</p>
 
+<p>(just respond in your head; I won&#39;t collect the answers online)</p>
+
 <p><em>Question 1</em>: What do you think this will do?</p>
 
 <pre><code>ints &lt;- 1:5
@@ -1073,12 +1057,12 @@ levels(students)
 
 <pre><code class="r">students &lt;- factor(c(&#39;basic&#39;,&#39;proficient&#39;,&#39;advanced&#39;,&#39;basic&#39;, 
       &#39;advanced&#39;, &#39;minimal&#39;))
-score = c(minimal = 3, basic = 1, advanced = 13, proficient = 7) # a named vector
+score = c(minimal = 65, basic = 75, advanced = 95, proficient = 85) # a named vector
 score[&quot;advanced&quot;]  # look up by name
 </code></pre>
 
 <pre><code>## advanced 
-##       13
+##       95
 </code></pre>
 
 <pre><code class="r">students[3]
@@ -1092,21 +1076,21 @@ score[&quot;advanced&quot;]  # look up by name
 </code></pre>
 
 <pre><code>## minimal 
-##       3
+##      65
 </code></pre>
 
 <pre><code class="r">score[as.character(students[3])]
 </code></pre>
 
 <pre><code>## advanced 
-##       13
+##       95
 </code></pre>
 
 <p>What went wrong and how did we fix it?  Notice how easily this could be a big bug in your code.</p>
 
 <h1>Strings</h1>
 
-<p>R has lots of functionality for character strings. Usually these are stored as vectors of strings, each with arbitrary length.</p>
+<p>R has lots of functionality for character strings. Usually these are stored as vectors of strings, each string of arbitrary length.</p>
 
 <pre><code class="r">chars &lt;- c(&#39;hi&#39;, &#39;hallo&#39;, &quot;mother&#39;s&quot;, &#39;father\&#39;s&#39;, &quot;He said, \&quot;hi\&quot;&quot; )
 length(chars)
@@ -1187,11 +1171,11 @@ indexes
 <pre><code>## [1] &quot;Korea, Dem. Rep.&quot; &quot;Korea, Rep.&quot;
 </code></pre>
 
-<pre><code class="r">countries2 &lt;- gsub(&quot;Korea Dem. Rep.&quot;, &quot;North Korea&quot;, countries)
+<pre><code class="r">countries2 &lt;- gsub(&quot;Korea, Dem. Rep.&quot;, &quot;North Korea&quot;, countries)
 countries2[indexes]
 </code></pre>
 
-<pre><code>## [1] &quot;Korea, Dem. Rep.&quot; &quot;Korea, Rep.&quot;
+<pre><code>## [1] &quot;North Korea&quot; &quot;Korea, Rep.&quot;
 </code></pre>
 
 <h1>Regular expressions (regex or regexp) (optional)</h1>
@@ -1219,7 +1203,7 @@ mat
 ## d    4    8   12   16   20
 </code></pre>
 
-<p>1) by direct indexing</p>
+<h2>1) by direct indexing</h2>
 
 <pre><code class="r">vec[c(3, 5, 12:14)]
 </code></pre>
@@ -1277,7 +1261,7 @@ elemInd
 <pre><code>## [1] &quot;1952&quot;        &quot;1962&quot;        &quot;Afghanistan&quot;
 </code></pre>
 
-<p>2) by a vector of logicals</p>
+<h2>2) by a vector of logicals</h2>
 
 <pre><code class="r">wealthy &lt;- gapminder$gdpPercap &gt; 50000
 gapminder$gdpPercap[wealthy]
@@ -1300,7 +1284,7 @@ gapminder$gdpPercap[wealthy]
 
 <p>What happened in the last subsetting operation?</p>
 
-<p>3) by a vector of names</p>
+<h2>3) by a vector of names</h2>
 
 <pre><code class="r">mat[c(&#39;a&#39;, &#39;d&#39;, &#39;a&#39;), ]
 </code></pre>
@@ -1311,7 +1295,7 @@ gapminder$gdpPercap[wealthy]
 ## a    1    5    9   13   17
 </code></pre>
 
-<p>4) using <em>subset()</em></p>
+<h2>4) using <em>subset()</em></h2>
 
 <pre><code class="r">subset(gapminder, gdpPercap &gt; 50000)
 </code></pre>
@@ -1325,7 +1309,7 @@ gapminder$gdpPercap[wealthy]
 ## 858  Kuwait 1977 1140357      Asia  69.343  59265.48       Asia
 </code></pre>
 
-<p>5) using <em>dplyr</em> tools such as <em>filter()</em> and <em>select()</em> &ndash; more in Module 6</p>
+<h2>5) using <em>dplyr</em> tools such as <em>filter()</em> and <em>select()</em> &ndash; more in Module 6</h2>
 
 <h1>Assignment into subsets</h1>
 
@@ -1336,10 +1320,10 @@ vec[c(3, 5, 12:14)] &lt;- 1:5
 vec
 </code></pre>
 
-<pre><code>##  [1]  0.1604717 -0.2099432  1.0000000 -0.2299347  2.0000000  1.3641291
-##  [7]  1.2627974  0.1631852  0.4527845  1.0032469  0.6748463  3.0000000
-## [13]  4.0000000  5.0000000 -0.5167445 -0.0369539  0.7404249 -1.1364493
-## [19]  1.9904780 -1.5357902
+<pre><code>##  [1]  0.9670612581 -1.3902535960  1.0000000000  0.0599868501  2.0000000000
+##  [6]  1.0093672958  0.2927229005  0.1378489837 -0.8350071467  1.5912864340
+## [11] -0.1663258146  3.0000000000  4.0000000000  5.0000000000  0.8394032657
+## [16] -0.0005844545 -0.7318971916  2.0960350413 -0.0565864583  0.8341225037
 </code></pre>
 
 <pre><code class="r">mat[2, 3:5] &lt;- rnorm(3)
@@ -1347,18 +1331,16 @@ mat[mat[,1] &gt; 3, ] &lt;- -Inf
 mat
 </code></pre>
 
-<pre><code>##   [,1] [,2]       [,3]        [,4]       [,5]
-## a    1    5  9.0000000 13.00000000 17.0000000
-## b    2    6 -0.5740042 -0.08584132 -0.3938248
-## c    3    7 11.0000000 15.00000000 19.0000000
-## d -Inf -Inf       -Inf        -Inf       -Inf
+<pre><code>##   [,1] [,2]        [,3]      [,4]       [,5]
+## a    1    5  9.00000000 13.000000 17.0000000
+## b    2    6  0.01599645  1.653888 -0.1430284
+## c    3    7 11.00000000 15.000000 19.0000000
+## d -Inf -Inf        -Inf      -Inf       -Inf
 </code></pre>
 
 <h1>Subsetting: quick quiz</h1>
 
-<p><strong>POLL 3F</strong></p>
-
-<p><em>Question 1</em>: Suppose I want to select the 3rd elements from the 2nd and 4th columns of a matrix or dataframe. Which syntax will work?</p>
+<p><strong><a href="https://www.polleverywhere.com/multiple_choice_polls/fFm9QlOQDGRz0pJZklyV2">P</a>OLL 3F</strong>: Suppose I want to select the 3rd elements from the 2nd and 4th columns of a matrix or dataframe. Which syntax will work?</p>
 
 <p>Here&#39;s a test matrix:</p>
 
@@ -1375,7 +1357,7 @@ mat
 8) mat[ , c(2, 4)][3]
 9) mat[c(2, 4)][3, ]</p>
 
-<p><em>Question 2</em>: (Advanced) One of those answers won&#39;t work with a matrix but will work with a dataframe. Which one?</p>
+<p><strong>POLL 3F</strong>: (Advanced) One of those answers won&#39;t work with a matrix but will work with a dataframe. Which one?</p>
 
 <p>1) mat[3, (2, 4)]
 2) mat[c(FALSE, FALSE, TRUE, FALSE), c(FALSE, TRUE, FALSE, TRUE)]
@@ -1393,7 +1375,7 @@ mat
 
 <p>1) Extract the 5th row from the gapminder dataset.</p>
 
-<p>2) Extract the last row from the gapminder dataset.</p>
+<p>2) Extract the last row from the gapminder dataset. </p>
 
 <p>3) Count the number of gdpPercap values greater than 50000 in the gapminder dataset.</p>
 
@@ -1405,7 +1387,7 @@ mat
 
 <p>6) Create a character string using <code>paste()</code> that tells the user how many rows there are in the data frame - do this programmatically such that it would work for any data frame regardless of how many rows it has. The result should look like this: &ldquo;There are 1704 rows in the dataset&rdquo;</p>
 
-<p>7) If you didn&#39;t do it this way already, extract the last row from the gapminder dataset without typing the number &#39;1704&#39;.</p>
+<p>7) If you didn&#39;t do it this way already in problem #2, extract the last row from the gapminder dataset without typing the number &#39;1704&#39;.</p>
 
 <p>8) Create a boolean vector indicating if the life expectancy is greater than 75 and the gdpPercap is less than 10000 and calculate the proportion of all the records these represent.</p>
 
