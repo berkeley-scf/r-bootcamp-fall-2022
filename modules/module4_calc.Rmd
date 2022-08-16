@@ -128,6 +128,8 @@ Question: Note the code above runs and the syntax is perfectly good R syntax, bu
 
 # Vectorized vector/matrix calculations
 
+## Vectorized arithmetic 
+
 Recall that `+`, `-`,`*`, `/` do vectorized calculations:
 
 ```{r}
@@ -140,7 +142,7 @@ A * B
 A * B[ , 1]
 ```
 
-Matrix/vector multiplication
+## Linear algebra: Matrix/vector multiplication
 
 ```{r}
 A %*% B[ , 1]
@@ -238,6 +240,8 @@ col_sum <- colSums(mat)
 
 # `lapply()` and `sapply()`
 
+These are 'map' operations that apply a function to each element of a list.
+
 ```{r}
 myList <- list(rnorm(3), rnorm(3), rnorm(5))
 lapply(myList, min)
@@ -246,13 +250,11 @@ sapply(myList, min)
 
 Note that we don't generally want to use `apply()` on a data frame. 
 
-Recall that a dataframe is a list:
+Recall that a dataframe is a list, hence this works:
 
 ```{r}
 sapply(gapminder, class)
 ```
-
-**Note**: Some of you may recognize these as map operations.
 
 # `lapply()` and `sapply()` with vectors
 
@@ -273,9 +275,7 @@ out <- sapply(1:10, function(x) x^2)
 out
 ```
 
-**POLL 4B**
-
-What do you think this will return:
+**[P](https://www.polleverywhere.com/multiple_choice_polls/FnXK4VqjXAnHT0ZZbMXNG)OLL 4C**: What do you think this will return:
 
 ```
 sapply(1:6, function(n) rnorm(n))
@@ -303,6 +303,7 @@ There are a bunch of `apply()` variants, as well as parallelized versions of the
 tbl <- table(gapminder$country, gapminder$continent)
 head(tbl)
 rowSums(tbl)[1:20]
+## Here we do a data validity check: all countries should have 12 obs in the same continent
 all(rowSums(tbl) == 12)
 ```
 
@@ -314,7 +315,8 @@ You may need to discretize a continuous variable [or a discrete variable with ma
 We can use `cut` to do it:
 
 ```{r fig.width=9}
-gapminder2007$lifeExpBin <- cut(gapminder2007$lifeExp, breaks = c(0, 40, 50, 60, 70, 75, 80, Inf))
+gapminder2007$lifeExpBin <- cut(gapminder2007$lifeExp,
+                                breaks = c(0, 40, 50, 60, 70, 75, 80, Inf))
 tbl <- table(gapminder2007$continent, gapminder2007$lifeExpBin)
 round( prop.table(tbl, margin = 1), 2 )
 ```
@@ -338,7 +340,7 @@ abline(h = 0, col = 'grey')
 
 Obviously, we'd want to iterate to improve that plot given the outlier.
 
-**POLL 4C**: What kind of object is produced by split, e.g.,
+**[P](https://www.polleverywhere.com/multiple_choice_polls/rvczm8PGtI3bD2BkcEwvu)OLL 4D**: What kind of object is produced by split, e.g.,
 
 ```
 subsets <- split(gap,  gap$year)
@@ -416,6 +418,8 @@ head(gm_ord)
 
 You could of course write your own *sort* function that uses `order()`. More in Module 5.
 
+Or, most people probably use `dplyr::arrange`. More in Module 6.
+
 # Joining/Merging Data
 
 We often need to combine data across multiple data frames, merging on common fields (i.e., *keys*). In database terminology, this is a *join* operation.
@@ -427,6 +431,9 @@ Suppose that our dataset did not have 'continent' in it, but that we had a separ
 c2c <- unique(gapminder[ , c('country', 'continent')])
 gapminderSave <- gapminder
 gapminder <- gapminder[ , -which(names(gapminder) == "continent")]
+
+# Now our gapminder dataset doesn't have continent
+head(gapminder)
 ```
 
 ## using `dplyr`'s join functions
@@ -458,6 +465,8 @@ Alternatively, we could use the base R function, merge().
 Now let's add the continent info in:
 
 ```{r}
+gapminder <- gapminderSave  ## reset things
+
 head(c2c)
 head(gapminder)
 
@@ -490,7 +499,7 @@ What's the deal with the `all.x` and `all.y`? They allow one to request the equi
 
 6) Create a boxplot of life expectancy by binned gdpPercap.
  
-7) Create a dataframe that has the total population across all the countries for each year.
+7) Create a dataframe that has the total (i.e., world) population across all the countries for each year.
 
 8) Merge the info from problem 8 back into the original gapminder dataset. Now plot life expectancy as a function of world population. 
 
@@ -510,8 +519,8 @@ nrow = 3, ncol = 4)
 
 Compute the statistic without *any* loops as follows:
 
-a. First, assume you have the *e* matrix. How do you compute the statistic without loops as a function of `y` and `e`?
-b. How can you construct the *e* matrix? Hint: the numerator of *e* is just an *outer product* for which the `outer()` function can be used.
+  - First, assume you have the *e* matrix. How do you compute the statistic without loops as a function of `y` and `e`?
+  - How can you construct the *e* matrix? Hint: the numerator of *e* is just an *outer product* for which the `outer()` function can be used.
 
 ### Advanced 
 

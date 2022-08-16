@@ -352,14 +352,14 @@ system.time(trunc &lt;- ifelse(vals &gt; 0, vals, 0))
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##   0.024   0.012   0.035
+##   0.030   0.004   0.034
 </code></pre>
 
 <pre><code class="r">system.time(vals &lt;- vals * (vals &gt; 0))
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##   0.004   0.000   0.004
+##   0.004   0.001   0.004
 </code></pre>
 
 <p><strong>Question</strong>: What am I doing with <code>vals * (vals &gt; 0)</code> ? What happens behind the scenes in R?</p>
@@ -381,6 +381,8 @@ head(gapminder$year2)
 <p>Question: Note the code above runs and the syntax is perfectly good R syntax, but in terms of what it does, there is a bug in it. See if you can see what it is.</p>
 
 <h1>Vectorized vector/matrix calculations</h1>
+
+<h2>Vectorized arithmetic</h2>
 
 <p>Recall that <code>+</code>, <code>-</code>,<code>*</code>, <code>/</code> do vectorized calculations:</p>
 
@@ -423,7 +425,7 @@ A + B
 ## [3,]   36   72  108
 </code></pre>
 
-<p>Matrix/vector multiplication</p>
+<h2>Linear algebra: Matrix/vector multiplication</h2>
 
 <pre><code class="r">A %*% B[ , 1]
 </code></pre>
@@ -537,7 +539,7 @@ for(i in 1:n)
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##   0.027   0.000   0.026
+##   0.026   0.000   0.026
 </code></pre>
 
 <p>Here&#39;s how to pre-allocate an empty list: </p>
@@ -584,6 +586,8 @@ col_sum &lt;- colSums(mat)
 
 <h1><code>lapply()</code> and <code>sapply()</code></h1>
 
+<p>These are &#39;map&#39; operations that apply a function to each element of a list.</p>
+
 <pre><code class="r">myList &lt;- list(rnorm(3), rnorm(3), rnorm(5))
 lapply(myList, min)
 </code></pre>
@@ -606,7 +610,7 @@ lapply(myList, min)
 
 <p>Note that we don&#39;t generally want to use <code>apply()</code> on a data frame. </p>
 
-<p>Recall that a dataframe is a list:</p>
+<p>Recall that a dataframe is a list, hence this works:</p>
 
 <pre><code class="r">sapply(gapminder, class)
 </code></pre>
@@ -616,8 +620,6 @@ lapply(myList, min)
 ##       year2 
 ## &quot;character&quot;
 </code></pre>
-
-<p><strong>Note</strong>: Some of you may recognize these as map operations.</p>
 
 <h1><code>lapply()</code> and <code>sapply()</code> with vectors</h1>
 
@@ -660,9 +662,7 @@ out
 <pre><code>##  [1]   1   4   9  16  25  36  49  64  81 100
 </code></pre>
 
-<p><strong>POLL 4B</strong></p>
-
-<p>What do you think this will return:</p>
+<p><strong><a href="https://www.polleverywhere.com/multiple_choice_polls/FnXK4VqjXAnHT0ZZbMXNG">P</a>OLL 4C</strong>: What do you think this will return:</p>
 
 <pre><code>sapply(1:6, function(n) rnorm(n))
 </code></pre>
@@ -720,7 +720,8 @@ head(tbl)
 ##                     12                     12
 </code></pre>
 
-<pre><code class="r">all(rowSums(tbl) == 12)
+<pre><code class="r">## Here we do a data validity check: all countries should have 12 obs in the same continent
+all(rowSums(tbl) == 12)
 </code></pre>
 
 <pre><code>## [1] TRUE
@@ -732,7 +733,8 @@ head(tbl)
 
 <p>We can use <code>cut</code> to do it:</p>
 
-<pre><code class="r">gapminder2007$lifeExpBin &lt;- cut(gapminder2007$lifeExp, breaks = c(0, 40, 50, 60, 70, 75, 80, Inf))
+<pre><code class="r">gapminder2007$lifeExpBin &lt;- cut(gapminder2007$lifeExp,
+                                breaks = c(0, 40, 50, 60, 70, 75, 80, Inf))
 tbl &lt;- table(gapminder2007$continent, gapminder2007$lifeExpBin)
 round( prop.table(tbl, margin = 1), 2 )
 </code></pre>
@@ -776,7 +778,7 @@ abline(h = 0, col = &#39;grey&#39;)
 
 <p>Obviously, we&#39;d want to iterate to improve that plot given the outlier.</p>
 
-<p><strong>POLL 4C</strong>: What kind of object is produced by split, e.g.,</p>
+<p><strong><a href="https://www.polleverywhere.com/multiple_choice_polls/rvczm8PGtI3bD2BkcEwvu">P</a>OLL 4D</strong>: What kind of object is produced by split, e.g.,</p>
 
 <pre><code>subsets &lt;- split(gap,  gap$year)
 </code></pre>
@@ -1022,6 +1024,8 @@ head(gm_ord)
 
 <p>You could of course write your own <em>sort</em> function that uses <code>order()</code>. More in Module 5.</p>
 
+<p>Or, most people probably use <code>dplyr::arrange</code>. More in Module 6.</p>
+
 <h1>Joining/Merging Data</h1>
 
 <p>We often need to combine data across multiple data frames, merging on common fields (i.e., <em>keys</em>). In database terminology, this is a <em>join</em> operation.</p>
@@ -1032,6 +1036,20 @@ head(gm_ord)
 c2c &lt;- unique(gapminder[ , c(&#39;country&#39;, &#39;continent&#39;)])
 gapminderSave &lt;- gapminder
 gapminder &lt;- gapminder[ , -which(names(gapminder) == &quot;continent&quot;)]
+
+# Now our gapminder dataset doesn&#39;t have continent
+head(gapminder)
+</code></pre>
+
+<pre><code>## # A tibble: 6 × 6
+##   country      year lifeExp      pop gdpPercap year2
+##   &lt;fct&gt;       &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;
+## 1 Afghanistan  1952    28.8  8425333      779. 52   
+## 2 Afghanistan  1957    30.3  9240934      821. 57   
+## 3 Afghanistan  1962    32.0 10267083      853. 62   
+## 4 Afghanistan  1967    34.0 11537966      836. 67   
+## 5 Afghanistan  1972    36.1 13079460      740. 72   
+## 6 Afghanistan  1977    38.4 14880372      786. 77
 </code></pre>
 
 <h2>using <code>dplyr</code>&#39;s join functions</h2>
@@ -1104,7 +1122,9 @@ dim(gapminderSave)
 
 <p>Now let&#39;s add the continent info in:</p>
 
-<pre><code class="r">head(c2c)
+<pre><code class="r">gapminder &lt;- gapminderSave  ## reset things
+
+head(c2c)
 </code></pre>
 
 <pre><code>## # A tibble: 6 × 2
@@ -1122,14 +1142,14 @@ dim(gapminderSave)
 </code></pre>
 
 <pre><code>## # A tibble: 6 × 7
-##   country      year lifeExp      pop gdpPercap year2 continent
-##   &lt;fct&gt;       &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;    
-## 1 Afghanistan  1952    28.8  8425333      779. 52    Asia     
-## 2 Afghanistan  1957    30.3  9240934      821. 57    Asia     
-## 3 Afghanistan  1962    32.0 10267083      853. 62    Asia     
-## 4 Afghanistan  1967    34.0 11537966      836. 67    Asia     
-## 5 Afghanistan  1972    36.1 13079460      740. 72    Asia     
-## 6 Afghanistan  1977    38.4 14880372      786. 77    Asia
+##   country     continent  year lifeExp      pop gdpPercap year2
+##   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;
+## 1 Afghanistan Asia       1952    28.8  8425333      779. 52   
+## 2 Afghanistan Asia       1957    30.3  9240934      821. 57   
+## 3 Afghanistan Asia       1962    32.0 10267083      853. 62   
+## 4 Afghanistan Asia       1967    34.0 11537966      836. 67   
+## 5 Afghanistan Asia       1972    36.1 13079460      740. 72   
+## 6 Afghanistan Asia       1977    38.4 14880372      786. 77
 </code></pre>
 
 <pre><code class="r">gapminder &lt;- merge(gapminder, c2c, by.x = &#39;country&#39;, by.y = &#39;country&#39;,
@@ -1179,7 +1199,7 @@ dim(gapminderSave)
 
 <p>6) Create a boxplot of life expectancy by binned gdpPercap.</p>
 
-<p>7) Create a dataframe that has the total population across all the countries for each year.</p>
+<p>7) Create a dataframe that has the total (i.e., world) population across all the countries for each year.</p>
 
 <p>8) Merge the info from problem 8 back into the original gapminder dataset. Now plot life expectancy as a function of world population. </p>
 
@@ -1199,8 +1219,10 @@ nrow = 3, ncol = 4)
 
 <p>Compute the statistic without <em>any</em> loops as follows:</p>
 
-<p>a. First, assume you have the <em>e</em> matrix. How do you compute the statistic without loops as a function of <code>y</code> and <code>e</code>?
-b. How can you construct the <em>e</em> matrix? Hint: the numerator of <em>e</em> is just an <em>outer product</em> for which the <code>outer()</code> function can be used.</p>
+<ul>
+<li>First, assume you have the <em>e</em> matrix. How do you compute the statistic without loops as a function of <code>y</code> and <code>e</code>?</li>
+<li>How can you construct the <em>e</em> matrix? Hint: the numerator of <em>e</em> is just an <em>outer product</em> for which the <code>outer()</code> function can be used.</li>
+</ul>
 
 <h3>Advanced</h3>
 

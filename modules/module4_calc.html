@@ -187,10 +187,10 @@ tricks for vectorizing things in unexpected ways:</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>vals <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e6</span>)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(trunc <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(vals <span class="sc">&gt;</span> <span class="dv">0</span>, vals, <span class="dv">0</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.024   0.012   0.035</code></pre>
+##   0.030   0.004   0.034</code></pre>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(vals <span class="ot">&lt;-</span> vals <span class="sc">*</span> (vals <span class="sc">&gt;</span> <span class="dv">0</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.004   0.000   0.004</code></pre>
+##   0.004   0.001   0.004</code></pre>
 <p><strong>Question</strong>: What am I doing with
 <code>vals * (vals &gt; 0)</code> ? What happens behind the scenes in
 R?</p>
@@ -212,6 +212,7 @@ can see what it is.</p>
 </div>
 <div id="vectorized-vectormatrix-calculations" class="slide section level1">
 <h1>Vectorized vector/matrix calculations</h1>
+<h2 id="vectorized-arithmetic">Vectorized arithmetic</h2>
 <p>Recall that <code>+</code>, <code>-</code>,<code>*</code>,
 <code>/</code> do vectorized calculations:</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="dv">3</span>)</span>
@@ -237,7 +238,8 @@ can see what it is.</p>
 ## [1,]    4   16   28
 ## [2,]   16   40   64
 ## [3,]   36   72  108</code></pre>
-<p>Matrix/vector multiplication</p>
+<h2 id="linear-algebra-matrixvector-multiplication">Linear algebra:
+Matrix/vector multiplication</h2>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>A <span class="sc">%*%</span> B[ , <span class="dv">1</span>]</span></code></pre></div>
 <pre><code>##      [,1]
 ## [1,]  120
@@ -332,7 +334,7 @@ fact that I could do this as <code>vals &lt;- 1:n</code>.)</p>
 <span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>      vals[i] <span class="ot">&lt;-</span> i</span>
 <span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.027   0.000   0.026</code></pre>
+##   0.026   0.000   0.026</code></pre>
 <p>Here’s how to pre-allocate an empty list:</p>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>vals <span class="ot">&lt;-</span> <span class="fu">list</span>(); <span class="fu">length</span>(vals) <span class="ot">&lt;-</span> n</span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(vals)</span></code></pre></div>
@@ -369,6 +371,8 @@ etc.</p>
 </div>
 <div id="lapply-and-sapply" class="slide section level1">
 <h1><code>lapply()</code> and <code>sapply()</code></h1>
+<p>These are ‘map’ operations that apply a function to each element of a
+list.</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>myList <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">rnorm</span>(<span class="dv">3</span>), <span class="fu">rnorm</span>(<span class="dv">3</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>))</span>
 <span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(myList, min)</span></code></pre></div>
 <pre><code>## [[1]]
@@ -383,14 +387,12 @@ etc.</p>
 <pre><code>## [1] -0.7225794 -1.6751297 -1.1847330</code></pre>
 <p>Note that we don’t generally want to use <code>apply()</code> on a
 data frame.</p>
-<p>Recall that a dataframe is a list:</p>
+<p>Recall that a dataframe is a list, hence this works:</p>
 <div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(gapminder, class)</span></code></pre></div>
 <pre><code>##     country   continent        year     lifeExp         pop   gdpPercap 
 ##    &quot;factor&quot;    &quot;factor&quot;   &quot;integer&quot;   &quot;numeric&quot;   &quot;integer&quot;   &quot;numeric&quot; 
 ##       year2 
 ## &quot;character&quot;</code></pre>
-<p><strong>Note</strong>: Some of you may recognize these as map
-operations.</p>
 </div>
 <div id="lapply-and-sapply-with-vectors" class="slide section level1">
 <h1><code>lapply()</code> and <code>sapply()</code> with vectors</h1>
@@ -424,8 +426,8 @@ This is a bit silly but it illustrates the idea:</p>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="cf">function</span>(x) x<span class="sc">^</span><span class="dv">2</span>)</span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>out</span></code></pre></div>
 <pre><code>##  [1]   1   4   9  16  25  36  49  64  81 100</code></pre>
-<p><strong>POLL 4B</strong></p>
-<p>What do you think this will return:</p>
+<p><strong><a href="https://www.polleverywhere.com/multiple_choice_polls/FnXK4VqjXAnHT0ZZbMXNG">P</a>OLL
+4C</strong>: What do you think this will return:</p>
 <pre><code>sapply(1:6, function(n) rnorm(n))</code></pre>
 <ol style="list-style-type: decimal">
 <li>a list, like lapply</li>
@@ -477,7 +479,8 @@ friend</li>
 ##                     12                     12                     12 
 ##               Cambodia               Cameroon 
 ##                     12                     12</code></pre>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(<span class="fu">rowSums</span>(tbl) <span class="sc">==</span> <span class="dv">12</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Here we do a data validity check: all countries should have 12 obs in the same continent</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(<span class="fu">rowSums</span>(tbl) <span class="sc">==</span> <span class="dv">12</span>)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </div>
 <div id="discretization" class="slide section level1">
@@ -485,9 +488,10 @@ friend</li>
 <p>You may need to discretize a continuous variable [or a discrete
 variable with many levels], e.g., by life expectancy.</p>
 <p>We can use <code>cut</code> to do it:</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>gapminder2007<span class="sc">$</span>lifeExpBin <span class="ot">&lt;-</span> <span class="fu">cut</span>(gapminder2007<span class="sc">$</span>lifeExp, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">70</span>, <span class="dv">75</span>, <span class="dv">80</span>, <span class="cn">Inf</span>))</span>
-<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>tbl <span class="ot">&lt;-</span> <span class="fu">table</span>(gapminder2007<span class="sc">$</span>continent, gapminder2007<span class="sc">$</span>lifeExpBin)</span>
-<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>( <span class="fu">prop.table</span>(tbl, <span class="at">margin =</span> <span class="dv">1</span>), <span class="dv">2</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>gapminder2007<span class="sc">$</span>lifeExpBin <span class="ot">&lt;-</span> <span class="fu">cut</span>(gapminder2007<span class="sc">$</span>lifeExp,</span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">70</span>, <span class="dv">75</span>, <span class="dv">80</span>, <span class="cn">Inf</span>))</span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>tbl <span class="ot">&lt;-</span> <span class="fu">table</span>(gapminder2007<span class="sc">$</span>continent, gapminder2007<span class="sc">$</span>lifeExpBin)</span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>( <span class="fu">prop.table</span>(tbl, <span class="at">margin =</span> <span class="dv">1</span>), <span class="dv">2</span> )</span></code></pre></div>
 <pre><code>##           
 ##            (0,40] (40,50] (50,60] (60,70] (70,75] (75,80] (80,Inf]
 ##   Africa     0.02    0.33    0.42    0.10    0.12    0.02     0.00
@@ -516,8 +520,8 @@ categorical variable).</p>
 <p><img src="data:image/png;base64,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" /></p>
 <p>Obviously, we’d want to iterate to improve that plot given the
 outlier.</p>
-<p><strong>POLL 4C</strong>: What kind of object is produced by split,
-e.g.,</p>
+<p><strong><a href="https://www.polleverywhere.com/multiple_choice_polls/rvczm8PGtI3bD2BkcEwvu">P</a>OLL
+4D</strong>: What kind of object is produced by split, e.g.,</p>
 <pre><code>subsets &lt;- split(gap,  gap$year)</code></pre>
 <ol style="list-style-type: decimal">
 <li>a dataframe</li>
@@ -724,6 +728,8 @@ bad.</p>
 ## 6 Spain            Europe     2007    80.9  40448191    28821. 07</code></pre>
 <p>You could of course write your own <em>sort</em> function that uses
 <code>order()</code>. More in Module 5.</p>
+<p>Or, most people probably use <code>dplyr::arrange</code>. More in
+Module 6.</p>
 </div>
 <div id="joiningmerging-data" class="slide section level1">
 <h1>Joining/Merging Data</h1>
@@ -735,24 +741,10 @@ had a separate data frame that matches country to continent.</p>
 <div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ignore the &#39;wizard&#39; behind the curtain...</span></span>
 <span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a>c2c <span class="ot">&lt;-</span> <span class="fu">unique</span>(gapminder[ , <span class="fu">c</span>(<span class="st">&#39;country&#39;</span>, <span class="st">&#39;continent&#39;</span>)])</span>
 <span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a>gapminderSave <span class="ot">&lt;-</span> gapminder</span>
-<span id="cb105-4"><a href="#cb105-4" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> gapminder[ , <span class="sc">-</span><span class="fu">which</span>(<span class="fu">names</span>(gapminder) <span class="sc">==</span> <span class="st">&quot;continent&quot;</span>)]</span></code></pre></div>
-<h2 id="using-dplyrs-join-functions">using <code>dplyr</code>’s join
-functions</h2>
-<p>The <code>dplyr</code> package (to be discussed in detail in Module
-6) provides a variety of <em>join</em> operations like those used in
-databases.</p>
-<p>Now let’s add the continent info in:</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(c2c)</span></code></pre></div>
-<pre><code>## # A tibble: 6 × 2
-##   country     continent
-##   &lt;fct&gt;       &lt;fct&gt;    
-## 1 Afghanistan Asia     
-## 2 Albania     Europe   
-## 3 Algeria     Africa   
-## 4 Angola      Africa   
-## 5 Argentina   Americas 
-## 6 Australia   Oceania</code></pre>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gapminder)</span></code></pre></div>
+<span id="cb105-4"><a href="#cb105-4" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> gapminder[ , <span class="sc">-</span><span class="fu">which</span>(<span class="fu">names</span>(gapminder) <span class="sc">==</span> <span class="st">&quot;continent&quot;</span>)]</span>
+<span id="cb105-5"><a href="#cb105-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-6"><a href="#cb105-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Now our gapminder dataset doesn&#39;t have continent</span></span>
+<span id="cb105-7"><a href="#cb105-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gapminder)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 6
 ##   country      year lifeExp      pop gdpPercap year2
 ##   &lt;fct&gt;       &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;
@@ -762,24 +754,13 @@ databases.</p>
 ## 4 Afghanistan  1967    34.0 11537966      836. 67   
 ## 5 Afghanistan  1972    36.1 13079460      740. 72   
 ## 6 Afghanistan  1977    38.4 14880372      786. 77</code></pre>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(gapminder, c2c, <span class="at">by =</span> <span class="st">&quot;country&quot;</span>)</span>
-<span id="cb110-4"><a href="#cb110-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb110-5"><a href="#cb110-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(gapminderSave)</span></code></pre></div>
-<pre><code>## [1] 1704    7</code></pre>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(gapminder)</span></code></pre></div>
-<pre><code>## [1] 1704    7</code></pre>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(gapminderSave, gapminder)</span></code></pre></div>
-<pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(gapminderSave, gapminder[ , <span class="fu">names</span>(gapminderSave)])</span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
-<p>You can also do <em>left</em>, <em>right</em>, and <em>full</em>
-joins.</p>
-<h2 id="using-merge-optional">Using <code>merge</code> (optional)</h2>
-<p>Alternatively, we could use the base R function, merge().</p>
+<h2 id="using-dplyrs-join-functions">using <code>dplyr</code>’s join
+functions</h2>
+<p>The <code>dplyr</code> package (to be discussed in detail in Module
+6) provides a variety of <em>join</em> operations like those used in
+databases.</p>
 <p>Now let’s add the continent info in:</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(c2c)</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(c2c)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 2
 ##   country     continent
 ##   &lt;fct&gt;       &lt;fct&gt;    
@@ -789,26 +770,65 @@ joins.</p>
 ## 4 Angola      Africa   
 ## 5 Argentina   Americas 
 ## 6 Australia   Oceania</code></pre>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gapminder)</span></code></pre></div>
-<pre><code>## # A tibble: 6 × 7
-##   country      year lifeExp      pop gdpPercap year2 continent
-##   &lt;fct&gt;       &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;    
-## 1 Afghanistan  1952    28.8  8425333      779. 52    Asia     
-## 2 Afghanistan  1957    30.3  9240934      821. 57    Asia     
-## 3 Afghanistan  1962    32.0 10267083      853. 62    Asia     
-## 4 Afghanistan  1967    34.0 11537966      836. 67    Asia     
-## 5 Afghanistan  1972    36.1 13079460      740. 72    Asia     
-## 6 Afghanistan  1977    38.4 14880372      786. 77    Asia</code></pre>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">merge</span>(gapminder, c2c, <span class="at">by.x =</span> <span class="st">&#39;country&#39;</span>, <span class="at">by.y =</span> <span class="st">&#39;country&#39;</span>,</span>
-<span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">all.x =</span> <span class="cn">TRUE</span>, <span class="at">all.y =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb122-3"><a href="#cb122-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb122-4"><a href="#cb122-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(gapminderSave)</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gapminder)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 6
+##   country      year lifeExp      pop gdpPercap year2
+##   &lt;fct&gt;       &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;
+## 1 Afghanistan  1952    28.8  8425333      779. 52   
+## 2 Afghanistan  1957    30.3  9240934      821. 57   
+## 3 Afghanistan  1962    32.0 10267083      853. 62   
+## 4 Afghanistan  1967    34.0 11537966      836. 67   
+## 5 Afghanistan  1972    36.1 13079460      740. 72   
+## 6 Afghanistan  1977    38.4 14880372      786. 77</code></pre>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-3"><a href="#cb111-3" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(gapminder, c2c, <span class="at">by =</span> <span class="st">&quot;country&quot;</span>)</span>
+<span id="cb111-4"><a href="#cb111-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-5"><a href="#cb111-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(gapminderSave)</span></code></pre></div>
 <pre><code>## [1] 1704    7</code></pre>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(gapminder)</span></code></pre></div>
-<pre><code>## [1] 1704    8</code></pre>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(gapminderSave, gapminder)</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(gapminder)</span></code></pre></div>
+<pre><code>## [1] 1704    7</code></pre>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(gapminderSave, gapminder)</span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(<span class="fu">as.data.frame</span>(gapminderSave), gapminder[ , <span class="fu">names</span>(gapminderSave)])</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(gapminderSave, gapminder[ , <span class="fu">names</span>(gapminderSave)])</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>You can also do <em>left</em>, <em>right</em>, and <em>full</em>
+joins.</p>
+<h2 id="using-merge-optional">Using <code>merge</code> (optional)</h2>
+<p>Alternatively, we could use the base R function, merge().</p>
+<p>Now let’s add the continent info in:</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> gapminderSave  <span class="do">## reset things</span></span>
+<span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb119-3"><a href="#cb119-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(c2c)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 2
+##   country     continent
+##   &lt;fct&gt;       &lt;fct&gt;    
+## 1 Afghanistan Asia     
+## 2 Albania     Europe   
+## 3 Algeria     Africa   
+## 4 Angola      Africa   
+## 5 Argentina   Americas 
+## 6 Australia   Oceania</code></pre>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gapminder)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 7
+##   country     continent  year lifeExp      pop gdpPercap year2
+##   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;
+## 1 Afghanistan Asia       1952    28.8  8425333      779. 52   
+## 2 Afghanistan Asia       1957    30.3  9240934      821. 57   
+## 3 Afghanistan Asia       1962    32.0 10267083      853. 62   
+## 4 Afghanistan Asia       1967    34.0 11537966      836. 67   
+## 5 Afghanistan Asia       1972    36.1 13079460      740. 72   
+## 6 Afghanistan Asia       1977    38.4 14880372      786. 77</code></pre>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">merge</span>(gapminder, c2c, <span class="at">by.x =</span> <span class="st">&#39;country&#39;</span>, <span class="at">by.y =</span> <span class="st">&#39;country&#39;</span>,</span>
+<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">all.x =</span> <span class="cn">TRUE</span>, <span class="at">all.y =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb123-3"><a href="#cb123-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb123-4"><a href="#cb123-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(gapminderSave)</span></code></pre></div>
+<pre><code>## [1] 1704    7</code></pre>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(gapminder)</span></code></pre></div>
+<pre><code>## [1] 1704    8</code></pre>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(gapminderSave, gapminder)</span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(<span class="fu">as.data.frame</span>(gapminderSave), gapminder[ , <span class="fu">names</span>(gapminderSave)])</span></code></pre></div>
 <pre><code>## Error in `[.data.frame`(gapminder, , names(gapminderSave)): undefined columns selected</code></pre>
 <p>What’s the deal with the <code>all.x</code> and <code>all.y</code>?
 They allow one to request the equivalent of left, right, and full joins.
@@ -838,8 +858,8 @@ a topic we’ll cover in Module 5).</p></li>
 <li><p>Discretize gdpPercap into some bins and create a gdpPercap_binned
 variable. Count the number of values in each bin.</p></li>
 <li><p>Create a boxplot of life expectancy by binned gdpPercap.</p></li>
-<li><p>Create a dataframe that has the total population across all the
-countries for each year.</p></li>
+<li><p>Create a dataframe that has the total (i.e., world) population
+across all the countries for each year.</p></li>
 <li><p>Merge the info from problem 8 back into the original gapminder
 dataset. Now plot life expectancy as a function of world
 population.</p></li>
@@ -856,17 +876,17 @@ the values in the i’th row, <img style="vertical-align:middle" src="data:image
 values in the j’th column, and <img style="vertical-align:middle" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAMBAMAAACZySCyAAAAMFBMVEX///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAv3aB7AAAAD3RSTlMAMlSZEO+7dkSJq90iZs0qwsm8AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAU0lEQVQIHWNgVGZgMmAAAidWAbYCEKNBnoFVAMRgmMUgD6YZdjCUgRksXxjSISIfeD5CGDdvfmBIAkIGBnYDBhEg5GtgPQCW4mKwhSjhva4AZgAAr7oNbitNQ5QAAAAASUVORK5CYII=" alt="y_{\cdot\cdot}" title="y_{\cdot\cdot}" class="math inline" /> the
 sum of all the values. Suppose I give you a matrix in R with the <img style="vertical-align:middle" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAOBAMAAAA/Njq6AAAAMFBMVEX///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAv3aB7AAAAD3RSTlMAMlSZEO+7dkSJq90iZs0qwsm8AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAgElEQVQIHWNgVGZgMmAAAydWAbYCCLNBnoFVgOkCAxuQO4tBHiLIwLCDoQzKZPnCkM5wi4F3IpD/gecjL7fDFU0g8+bNDwznGByMQKrYDRjmMjC8YWDga2A9wLDlAkMAAwMXgy0Dg+0BxgQGBt7rCmBVUBuB6vkOgARAgK2IgQEA6DkX5tRc8kAAAAAASUVORK5CYII=" alt="y_{ij}" title="y_{ij}" class="math inline" /> values.</p>
 <p>You can generate a test matrix as:</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">12</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb130-2"><a href="#cb130-2" aria-hidden="true" tabindex="-1"></a><span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">12</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a><span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">4</span>)</span></code></pre></div>
 <p>Compute the statistic without <em>any</em> loops as follows:</p>
-<ol style="list-style-type: lower-alpha">
+<ul>
 <li>First, assume you have the <em>e</em> matrix. How do you compute the
 statistic without loops as a function of <code>y</code> and
 <code>e</code>?</li>
 <li>How can you construct the <em>e</em> matrix? Hint: the numerator of
 <em>e</em> is just an <em>outer product</em> for which the
 <code>outer()</code> function can be used.</li>
-</ol>
+</ul>
 <h3 id="advanced">Advanced</h3>
 <ol start="10" style="list-style-type: decimal">
 <li><p>For each combination of year and continent, find the 95th
@@ -874,19 +894,19 @@ percentile of life expectancy.</p></li>
 <li><p>Here’s a cool trick to pull off a particular element of a list of
 lists:</p></li>
 </ol>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">a =</span> <span class="fu">list</span>(<span class="at">mn =</span> <span class="dv">7</span>, <span class="at">sd =</span> <span class="dv">3</span>), <span class="at">b =</span> <span class="fu">list</span>(<span class="at">mn =</span> <span class="dv">6</span>,<span class="at">sd =</span> <span class="dv">1</span>), </span>
-<span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">c =</span> <span class="fu">list</span>(<span class="at">mn =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
-<span id="cb131-3"><a href="#cb131-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(params, <span class="st">&quot;[[&quot;</span>, <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">a =</span> <span class="fu">list</span>(<span class="at">mn =</span> <span class="dv">7</span>, <span class="at">sd =</span> <span class="dv">3</span>), <span class="at">b =</span> <span class="fu">list</span>(<span class="at">mn =</span> <span class="dv">6</span>,<span class="at">sd =</span> <span class="dv">1</span>), </span>
+<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">c =</span> <span class="fu">list</span>(<span class="at">mn =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
+<span id="cb132-3"><a href="#cb132-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(params, <span class="st">&quot;[[&quot;</span>, <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## a b c 
 ## 7 6 2</code></pre>
 <p>Explain what that does and why it works.</p>
 <p>Hint:</p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">3</span>)</span>
-<span id="cb133-2"><a href="#cb133-2" aria-hidden="true" tabindex="-1"></a>test[[<span class="dv">2</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">3</span>)</span>
+<span id="cb134-2"><a href="#cb134-2" aria-hidden="true" tabindex="-1"></a>test[[<span class="dv">2</span>]]</span></code></pre></div>
 <pre><code>## [1] 7</code></pre>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="co"># `[[`(test, 2)  # need it commented or R Markdown processing messes it up...</span></span>
-<span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb135-3"><a href="#cb135-3" aria-hidden="true" tabindex="-1"></a><span class="co"># `+`(3, 7)</span></span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="co"># `[[`(test, 2)  # need it commented or R Markdown processing messes it up...</span></span>
+<span id="cb136-2"><a href="#cb136-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb136-3"><a href="#cb136-3" aria-hidden="true" tabindex="-1"></a><span class="co"># `+`(3, 7)</span></span></code></pre></div>
 </div>
 </body>
 </html>
