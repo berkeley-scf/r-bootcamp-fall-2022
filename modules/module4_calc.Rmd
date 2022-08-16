@@ -368,6 +368,8 @@ names(subsets)
 meanLifeExpByYear
 ```
 
+We'll talk in detail about writing functions in Module 5.
+
 # Stratified analyses II (optional)
 
 Often we want to do individual analyses within subsets or clusters of our data. R has a variety of tools for this; for now we'll look at `aggregate()` and `by()`. These are wrappers of `tapply()`. 
@@ -465,7 +467,7 @@ Alternatively, we could use the base R function, merge().
 Now let's add the continent info in:
 
 ```{r}
-gapminder <- gapminderSave  ## reset things
+gapminder <- gapminder[ , -which(names(gapminder) == "continent")]  ## reset
 
 head(c2c)
 head(gapminder)
@@ -501,7 +503,7 @@ What's the deal with the `all.x` and `all.y`? They allow one to request the equi
  
 7) Create a dataframe that has the total (i.e., world) population across all the countries for each year.
 
-8) Merge the info from problem 8 back into the original gapminder dataset. Now plot life expectancy as a function of world population. 
+8) Merge the info from problem 7 back into the original gapminder dataset. Now plot life expectancy as a function of world population. 
 
 9)  Suppose we have two categorical variables and we conduct a hypothesis test of independence. The chi-square statistic is: 
 

@@ -187,10 +187,10 @@ tricks for vectorizing things in unexpected ways:</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>vals <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e6</span>)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(trunc <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(vals <span class="sc">&gt;</span> <span class="dv">0</span>, vals, <span class="dv">0</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.030   0.004   0.034</code></pre>
+##   0.031   0.004   0.034</code></pre>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(vals <span class="ot">&lt;-</span> vals <span class="sc">*</span> (vals <span class="sc">&gt;</span> <span class="dv">0</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.004   0.001   0.004</code></pre>
+##   0.005   0.001   0.005</code></pre>
 <p><strong>Question</strong>: What am I doing with
 <code>vals * (vals &gt; 0)</code> ? What happens behind the scenes in
 R?</p>
@@ -334,7 +334,7 @@ fact that I could do this as <code>vals &lt;- 1:n</code>.)</p>
 <span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>      vals[i] <span class="ot">&lt;-</span> i</span>
 <span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.026   0.000   0.026</code></pre>
+##   0.027   0.000   0.028</code></pre>
 <p>Here’s how to pre-allocate an empty list:</p>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>vals <span class="ot">&lt;-</span> <span class="fu">list</span>(); <span class="fu">length</span>(vals) <span class="ot">&lt;-</span> n</span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(vals)</span></code></pre></div>
@@ -549,6 +549,7 @@ to apply a function to each item in the list.</p>
 ## 49.05762 51.50740 53.60925 55.67829 57.64739 59.57016 61.53320 63.21261 
 ##     1992     1997     2002     2007 
 ## 64.16034 65.01468 65.69492 67.00742</code></pre>
+<p>We’ll talk in detail about writing functions in Module 5.</p>
 </div>
 <div id="stratified-analyses-ii-optional" class="slide section level1">
 <h1>Stratified analyses II (optional)</h1>
@@ -797,7 +798,7 @@ joins.</p>
 <h2 id="using-merge-optional">Using <code>merge</code> (optional)</h2>
 <p>Alternatively, we could use the base R function, merge().</p>
 <p>Now let’s add the continent info in:</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> gapminderSave  <span class="do">## reset things</span></span>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> gapminder[ , <span class="sc">-</span><span class="fu">which</span>(<span class="fu">names</span>(gapminder) <span class="sc">==</span> <span class="st">&quot;continent&quot;</span>)]  <span class="do">## reset</span></span>
 <span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb119-3"><a href="#cb119-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(c2c)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 2
@@ -810,26 +811,26 @@ joins.</p>
 ## 5 Argentina   Americas 
 ## 6 Australia   Oceania</code></pre>
 <div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gapminder)</span></code></pre></div>
-<pre><code>## # A tibble: 6 × 7
-##   country     continent  year lifeExp      pop gdpPercap year2
-##   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;
-## 1 Afghanistan Asia       1952    28.8  8425333      779. 52   
-## 2 Afghanistan Asia       1957    30.3  9240934      821. 57   
-## 3 Afghanistan Asia       1962    32.0 10267083      853. 62   
-## 4 Afghanistan Asia       1967    34.0 11537966      836. 67   
-## 5 Afghanistan Asia       1972    36.1 13079460      740. 72   
-## 6 Afghanistan Asia       1977    38.4 14880372      786. 77</code></pre>
+<pre><code>## # A tibble: 6 × 6
+##   country      year lifeExp      pop gdpPercap year2
+##   &lt;fct&gt;       &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;
+## 1 Afghanistan  1952    28.8  8425333      779. 52   
+## 2 Afghanistan  1957    30.3  9240934      821. 57   
+## 3 Afghanistan  1962    32.0 10267083      853. 62   
+## 4 Afghanistan  1967    34.0 11537966      836. 67   
+## 5 Afghanistan  1972    36.1 13079460      740. 72   
+## 6 Afghanistan  1977    38.4 14880372      786. 77</code></pre>
 <div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">merge</span>(gapminder, c2c, <span class="at">by.x =</span> <span class="st">&#39;country&#39;</span>, <span class="at">by.y =</span> <span class="st">&#39;country&#39;</span>,</span>
 <span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">all.x =</span> <span class="cn">TRUE</span>, <span class="at">all.y =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb123-3"><a href="#cb123-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb123-4"><a href="#cb123-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(gapminderSave)</span></code></pre></div>
 <pre><code>## [1] 1704    7</code></pre>
 <div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(gapminder)</span></code></pre></div>
-<pre><code>## [1] 1704    8</code></pre>
+<pre><code>## [1] 1704    7</code></pre>
 <div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(gapminderSave, gapminder)</span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(<span class="fu">as.data.frame</span>(gapminderSave), gapminder[ , <span class="fu">names</span>(gapminderSave)])</span></code></pre></div>
-<pre><code>## Error in `[.data.frame`(gapminder, , names(gapminderSave)): undefined columns selected</code></pre>
+<pre><code>## [1] TRUE</code></pre>
 <p>What’s the deal with the <code>all.x</code> and <code>all.y</code>?
 They allow one to request the equivalent of left, right, and full joins.
 We can tell R whether we want to keep all of the <code>x</code>
@@ -860,7 +861,7 @@ variable. Count the number of values in each bin.</p></li>
 <li><p>Create a boxplot of life expectancy by binned gdpPercap.</p></li>
 <li><p>Create a dataframe that has the total (i.e., world) population
 across all the countries for each year.</p></li>
-<li><p>Merge the info from problem 8 back into the original gapminder
+<li><p>Merge the info from problem 7 back into the original gapminder
 dataset. Now plot life expectancy as a function of world
 population.</p></li>
 <li><p>Suppose we have two categorical variables and we conduct a

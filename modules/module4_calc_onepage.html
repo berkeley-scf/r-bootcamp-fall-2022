@@ -352,14 +352,14 @@ system.time(trunc &lt;- ifelse(vals &gt; 0, vals, 0))
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##   0.030   0.004   0.034
+##   0.031   0.004   0.034
 </code></pre>
 
 <pre><code class="r">system.time(vals &lt;- vals * (vals &gt; 0))
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##   0.004   0.001   0.004
+##   0.005   0.001   0.005
 </code></pre>
 
 <p><strong>Question</strong>: What am I doing with <code>vals * (vals &gt; 0)</code> ? What happens behind the scenes in R?</p>
@@ -539,7 +539,7 @@ for(i in 1:n)
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##   0.026   0.000   0.026
+##   0.027   0.000   0.028
 </code></pre>
 
 <p>Here&#39;s how to pre-allocate an empty list: </p>
@@ -815,6 +815,8 @@ names(subsets)
 ##     1992     1997     2002     2007 
 ## 64.16034 65.01468 65.69492 67.00742
 </code></pre>
+
+<p>We&#39;ll talk in detail about writing functions in Module 5.</p>
 
 <h1>Stratified analyses II (optional)</h1>
 
@@ -1122,7 +1124,7 @@ dim(gapminderSave)
 
 <p>Now let&#39;s add the continent info in:</p>
 
-<pre><code class="r">gapminder &lt;- gapminderSave  ## reset things
+<pre><code class="r">gapminder &lt;- gapminder[ , -which(names(gapminder) == &quot;continent&quot;)]  ## reset
 
 head(c2c)
 </code></pre>
@@ -1141,15 +1143,15 @@ head(c2c)
 <pre><code class="r">head(gapminder)
 </code></pre>
 
-<pre><code>## # A tibble: 6 × 7
-##   country     continent  year lifeExp      pop gdpPercap year2
-##   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;
-## 1 Afghanistan Asia       1952    28.8  8425333      779. 52   
-## 2 Afghanistan Asia       1957    30.3  9240934      821. 57   
-## 3 Afghanistan Asia       1962    32.0 10267083      853. 62   
-## 4 Afghanistan Asia       1967    34.0 11537966      836. 67   
-## 5 Afghanistan Asia       1972    36.1 13079460      740. 72   
-## 6 Afghanistan Asia       1977    38.4 14880372      786. 77
+<pre><code>## # A tibble: 6 × 6
+##   country      year lifeExp      pop gdpPercap year2
+##   &lt;fct&gt;       &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;
+## 1 Afghanistan  1952    28.8  8425333      779. 52   
+## 2 Afghanistan  1957    30.3  9240934      821. 57   
+## 3 Afghanistan  1962    32.0 10267083      853. 62   
+## 4 Afghanistan  1967    34.0 11537966      836. 67   
+## 5 Afghanistan  1972    36.1 13079460      740. 72   
+## 6 Afghanistan  1977    38.4 14880372      786. 77
 </code></pre>
 
 <pre><code class="r">gapminder &lt;- merge(gapminder, c2c, by.x = &#39;country&#39;, by.y = &#39;country&#39;,
@@ -1164,7 +1166,7 @@ dim(gapminderSave)
 <pre><code class="r">dim(gapminder)
 </code></pre>
 
-<pre><code>## [1] 1704    8
+<pre><code>## [1] 1704    7
 </code></pre>
 
 <pre><code class="r">identical(gapminderSave, gapminder)
@@ -1176,7 +1178,7 @@ dim(gapminderSave)
 <pre><code class="r">identical(as.data.frame(gapminderSave), gapminder[ , names(gapminderSave)])
 </code></pre>
 
-<pre><code>## Error in `[.data.frame`(gapminder, , names(gapminderSave)): undefined columns selected
+<pre><code>## [1] TRUE
 </code></pre>
 
 <p>What&#39;s the deal with the <code>all.x</code> and <code>all.y</code>? They allow one to request the equivalent of left, right, and full joins.  We can tell R whether we want to keep all of the <code>x</code> observations, all the <code>y</code> observations, or neither, or both, when there may be rows in either of the datasets that don&#39;t match the other dataset.</p>
@@ -1201,7 +1203,7 @@ dim(gapminderSave)
 
 <p>7) Create a dataframe that has the total (i.e., world) population across all the countries for each year.</p>
 
-<p>8) Merge the info from problem 8 back into the original gapminder dataset. Now plot life expectancy as a function of world population. </p>
+<p>8) Merge the info from problem 7 back into the original gapminder dataset. Now plot life expectancy as a function of world population. </p>
 
 <p>9)  Suppose we have two categorical variables and we conduct a hypothesis test of independence. The chi-square statistic is: </p>
 
