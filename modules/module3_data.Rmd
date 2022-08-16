@@ -113,6 +113,8 @@ head(gm_mat)
 as.matrix(gapminder)
 ```
 
+(respond at [https://pollev.com/chrispaciorek428](https://pollev.com/chrispaciorek428))
+
 1) it will convert to a matrix with no changes
 2) all numeric columns will be converted to character strings
 3) R will throw an error
@@ -147,6 +149,8 @@ Now let's do a bit of manipulation and see if you can infer how R represents mat
 # Attributes: quick quiz
 
 **[P](https://www.polleverywhere.com/multiple_choice_polls/YkHAsxssHtWqCQ9DGMDbo)OLL 3C**: Consider our matrix 'mat':
+
+(respond at [https://pollev.com/chrispaciorek428](https://pollev.com/chrispaciorek428))
 
 ```
 mat <- matrix(1:16, nrow = 4, ncol = 4)
@@ -530,6 +534,8 @@ mat
 # Subsetting: quick quiz
 
 **[P](https://www.polleverywhere.com/multiple_choice_polls/fFm9QlOQDGRz0pJZklyV2)OLL 3F**: Suppose I want to select the 3rd elements from the 2nd and 4th columns of a matrix or dataframe. Which syntax will work?
+
+(respond at [https://pollev.com/chrispaciorek428](https://pollev.com/chrispaciorek428))
 
 Here's a test matrix:
 

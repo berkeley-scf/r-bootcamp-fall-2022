@@ -60,6 +60,8 @@ vec10 + vec3
 
 **[P](https://www.polleverywhere.com/multiple_choice_polls/UnX1ymqBWe624UwdBnnQB)OLL 4A**: 2^3 is raising 2 to the power 3, so you get 8. 
 
+(respond at [https://pollev.com/chrispaciorek428](https://pollev.com/chrispaciorek428))
+
 What will this return?
 
 `(1:4)^(1:4)`
@@ -277,6 +279,8 @@ out
 
 **[P](https://www.polleverywhere.com/multiple_choice_polls/FnXK4VqjXAnHT0ZZbMXNG)OLL 4C**: What do you think this will return:
 
+(respond at [https://pollev.com/chrispaciorek428](https://pollev.com/chrispaciorek428))
+
 ```
 sapply(1:6, function(n) rnorm(n))
 ```
@@ -341,6 +345,8 @@ abline(h = 0, col = 'grey')
 Obviously, we'd want to iterate to improve that plot given the outlier.
 
 **[P](https://www.polleverywhere.com/multiple_choice_polls/rvczm8PGtI3bD2BkcEwvu)OLL 4D**: What kind of object is produced by split, e.g.,
+
+(respond at [https://pollev.com/chrispaciorek428](https://pollev.com/chrispaciorek428))
 
 ```
 subsets <- split(gap,  gap$year)

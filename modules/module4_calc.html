@@ -145,6 +145,7 @@ made by the R developers?</p>
 <h1>Vectorized calculations: quick quiz</h1>
 <p><strong><a href="https://www.polleverywhere.com/multiple_choice_polls/UnX1ymqBWe624UwdBnnQB">P</a>OLL
 4A</strong>: 2^3 is raising 2 to the power 3, so you get 8.</p>
+<p>(respond at <a href="https://pollev.com/chrispaciorek428">https://pollev.com/chrispaciorek428</a>)</p>
 <p>What will this return?</p>
 <p><code>(1:4)^(1:4)</code></p>
 <ol style="list-style-type: decimal">
@@ -187,10 +188,10 @@ tricks for vectorizing things in unexpected ways:</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>vals <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e6</span>)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(trunc <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(vals <span class="sc">&gt;</span> <span class="dv">0</span>, vals, <span class="dv">0</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.031   0.004   0.034</code></pre>
+##   0.019   0.020   0.039</code></pre>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(vals <span class="ot">&lt;-</span> vals <span class="sc">*</span> (vals <span class="sc">&gt;</span> <span class="dv">0</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.005   0.001   0.005</code></pre>
+##   0.005   0.000   0.004</code></pre>
 <p><strong>Question</strong>: What am I doing with
 <code>vals * (vals &gt; 0)</code> ? What happens behind the scenes in
 R?</p>
@@ -334,7 +335,7 @@ fact that I could do this as <code>vals &lt;- 1:n</code>.)</p>
 <span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>      vals[i] <span class="ot">&lt;-</span> i</span>
 <span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.027   0.000   0.028</code></pre>
+##   0.028   0.000   0.028</code></pre>
 <p>Here’s how to pre-allocate an empty list:</p>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>vals <span class="ot">&lt;-</span> <span class="fu">list</span>(); <span class="fu">length</span>(vals) <span class="ot">&lt;-</span> n</span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(vals)</span></code></pre></div>
@@ -428,6 +429,7 @@ This is a bit silly but it illustrates the idea:</p>
 <pre><code>##  [1]   1   4   9  16  25  36  49  64  81 100</code></pre>
 <p><strong><a href="https://www.polleverywhere.com/multiple_choice_polls/FnXK4VqjXAnHT0ZZbMXNG">P</a>OLL
 4C</strong>: What do you think this will return:</p>
+<p>(respond at <a href="https://pollev.com/chrispaciorek428">https://pollev.com/chrispaciorek428</a>)</p>
 <pre><code>sapply(1:6, function(n) rnorm(n))</code></pre>
 <ol style="list-style-type: decimal">
 <li>a list, like lapply</li>
@@ -522,6 +524,7 @@ categorical variable).</p>
 outlier.</p>
 <p><strong><a href="https://www.polleverywhere.com/multiple_choice_polls/rvczm8PGtI3bD2BkcEwvu">P</a>OLL
 4D</strong>: What kind of object is produced by split, e.g.,</p>
+<p>(respond at <a href="https://pollev.com/chrispaciorek428">https://pollev.com/chrispaciorek428</a>)</p>
 <pre><code>subsets &lt;- split(gap,  gap$year)</code></pre>
 <ol style="list-style-type: decimal">
 <li>a dataframe</li>

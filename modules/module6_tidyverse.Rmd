@@ -166,6 +166,8 @@ In this case we don't specify which data object we use in the call to `select()`
 
 **[P](https://www.polleverywhere.com/multiple_choice_polls/1BDSh7IPqBR6gRLTDt0Pp)OLL 6A**: Which of these will produce an error? (Assume 'continent' is a column in the data frame but not a stand-alone variable.)
 
+(respond at [https://pollev.com/chrispaciorek428](https://pollev.com/chrispaciorek428))
+
 1) gapminder[ , 'continent']
 2) gapminder[ , continent]
 3) gapminder %>% select(continent)
@@ -176,7 +178,7 @@ In this case we don't specify which data object we use in the call to `select()`
 8) gapminder[[continent]]
 9) gapminder[['continent']]
 
-
+We'll talk more about when you need quotes and when not a bit later.
 
 # `dplyr::filter`
 
@@ -334,6 +336,8 @@ And if you use an aggregation function such as `mean()` within `summarize()` wit
 
 **[P](https://www.polleverywhere.com/multiple_choice_polls/RPDOSwm5VqRh2nY0VWxAN)OLL 6B**: Which of these has the same number of rows as the original gapminder dataframe?
 
+(respond at [https://pollev.com/chrispaciorek428](https://pollev.com/chrispaciorek428))
+
 1) gapminder %>% group_by(continent) %>% mutate(mean_gdp = mean(gdpPercap))
 2) gapminder %>% group_by(continent) %>% summarize(mean_gdp = mean(gdpPercap))
 3) gapminder %>% group_by(continent) %>% summarize(mean_gdp = mean(gdpPercap)) %>% mutate(mean_gdpBillion = mean_gdp / 1e9)
@@ -350,7 +354,7 @@ gap_with_extra_vars <- gapminder %>%
               sd_gdpPercap = sd(gdpPercap),
               mean_pop = mean(pop),
               sd_pop = sd(pop)) %>%
-    arrange(desc(year), continent) # `desc()` puts things ins descending order
+    arrange(desc(year), continent) # `desc()` = descending order
 head(gap_with_extra_vars)
 ```
 
@@ -416,7 +420,7 @@ The two most important properties of tidy data are:
 
 Tidy data is easier to work with, because you have a consistent way of referring to variables (as column names) and observations (as row indices). It then becomes easy to manipulate, visualize, and model.
 
-For more on the concept of *tidy* data, read Hadley Wickham's paper [here](http://vita.had.co.nz/papers/tidy-data.html)
+For more on the concept of *tidy* data, you can read [Hadley Wickham's paper](http://vita.had.co.nz/papers/tidy-data.html).
 
 # Wide vs. long formats
 
@@ -441,7 +445,9 @@ long <- data.frame(
 long
 ```
 
-**POLL 6C**: Which of the 'wide' and 'long' objects do you prefer in terms of how the heartrate 'data' are formatted?
+**[P](https://www.polleverywhere.com/multiple_choice_polls/NIjOztXluscRrLFsE6MxH)OLL 6C**: Which of the 'wide' and 'long' objects do you prefer in terms of how the heartrate 'data' are formatted?
+
+(respond at [https://pollev.com/chrispaciorek428](https://pollev.com/chrispaciorek428))
 
 1) wide
 2) long
@@ -593,7 +599,7 @@ Here are [some additional functions/verbs](https://www.r-bloggers.com/2022/07/ei
 
 There are some other useful packages in the [tidyverse](http://www.tidyverse.org):
 
-* `ggplot2` for plotting (We'll cover this in module 8)
+* `ggplot2` for plotting (We'll cover this in module 7)
 * `readr` and `haven` for reading in data
 * `purrr` for working with lists and operations similar to the `lapply` family introduced in Module 4. 
 * `stringr`, `lubridate`, `forcats` for manipulating strings, dates, and factors, respectively
@@ -601,7 +607,7 @@ There are some other useful packages in the [tidyverse](http://www.tidyverse.org
 
 **Pro Tip:** To install and load the core tidyverse packages (includes `tidyr`, `dplyr`, and `ggplot2`, among others), try:
 ```{r, eval = F}
-## NOT run
+# NOT run
 install.packages("tidyverse")
 library(tidyverse)
 ```

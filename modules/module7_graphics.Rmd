@@ -18,9 +18,9 @@ library(gapminder)
 
 # By way of introduction...
 
-* 3 main facilities for producing graphics in R: **base**, **`ggplot2`**, and **`lattice`**
-* In practice, these facilities are grouped into two camps: "basic" and "advanced"
-* A better formulation: quick/dirty v. involved/fancy
+* Three main frameworks for producing graphics in R: **base**, **`ggplot2`**, and **`lattice`**
+* Some consider these to be "basic" and "advanced".
+* And some consider them to be quick/dirty versus involved/fancy.
 
 And here's some motivation - we can produce a plot like [this](gapminder.pdf) with a few lines of code.
 
@@ -70,12 +70,16 @@ barplot(gapChina$pop, width = 4, names.arg = gapChina$year,
 * Base graphics often recognizes the object type and will implement specific plot methods
 * `lattice` and `ggplot2` generally **don't** exhibit this sort of behavior
 
+Here are two examples:
+
 ```{r, fig.cap=" "}
 gap_lm <- lm(lifeExp ~ log(gdpPercap) + year, data = gapminder)
 
 # Calls plotting method for class of the dataset ("data.frame")
 plot(gapminder[,c('pop','lifeExp','gdpPercap')])
+```
 
+```{r, fig.cap=""}
 # Calls plotting method for class of gap_lm object ("lm"), print first two plots only
 plot(gap_lm, which=1:2)
 ```
@@ -88,7 +92,7 @@ a) good for exploratory data analysis and sanity checks
 
 b) inconsistent in syntax across functions: some take x,y while others take formulas
 
-c) defaults plotting parameters are ugly, and it can be difficult to customize
+c) default plotting parameters are ugly, and it can be difficult to customize
 
 d) that said, one can do essentially anything in base graphics with some work
 
@@ -108,9 +112,9 @@ a) faster than `ggplot2` (though only noticeable over many and large plots)
 
 b) simpler than `ggplot2` (at first)
 
-c) better at trellis graphs than `ggplot2`
+c) perhaps better at trellis plots than `ggplot2` (some think this)
 
-d) able to do 3d graphs
+d) able to do 3d plots (but be cautious about using 3d plots)
 
 We'll focus on `ggplot2` as it is very powerful, very widely-used and allows one to produce very nice-looking graphics without a lot of coding.
 
@@ -124,7 +128,7 @@ The general call for `ggplot2` graphics looks something like this:
 ggplot(data = , aes(x = ,y = , [options])) + geom_xxxx() + ... + ... + ...
 ```
 
-Note that `ggplot2` graphs in layers in a *continuing call* (hence the endless +...+...+...), which really makes the extra layer part of the call.
+Note that `ggplot2` graphs in layers in a *continuing call* (hence the endless +...+...+...), which makes additional layers in the plot.
 
 ```{r, eval=FALSE}
 ... + geom_xxxx(data = , aes(x = , y = ,[options]), [options]) + ... + ... + ...
@@ -155,7 +159,7 @@ The basic idea is that the visualization of all data requires four items:
 
 1) One or more **statistics** conveying information about the data (identities, means, medians, etc.)
 
-2) A **coordinate system** that differentiates between the intersections of statistics (at most two for ggplot, three for `lattice`)
+2) A **coordinate system** that characterizes the intersections of statistics (at most two for ggplot, three for `lattice`)
 
 3) **Geometries** that differentiate between off-coordinate variation in *kind*
 
@@ -169,16 +173,16 @@ All of these are important to *truly* becoming a `ggplot2` master, but today we 
 ### Some Examples
 
 ```{r, warning = FALSE, message = FALSE, fig.cap = ""}
-# Scatterplot
+## Scatterplot
 ggplot(gapChina, aes(x = year, y = lifeExp)) + geom_point() +
                           ggtitle("China's life expectancy")
-# Line (time series) plot
+## Line (time series) plot
 ggplot(gapChina, aes(x = year, y = lifeExp)) + geom_line() +
                           ggtitle("China's life expectancy")
-# Boxplot
+## Boxplot
 ggplot(gapminder, aes(x = factor(year), y = lifeExp)) + geom_boxplot() +
                           ggtitle("World's life expectancy")
-# Histogram
+## Histogram
 gapminder2007 <- gapminder %>% filter(year == 2007)
 ggplot(gapminder2007, aes(x = lifeExp)) + geom_histogram(binwidth = 5) +
                           ggtitle("World's life expectancy")
@@ -187,7 +191,7 @@ ggplot(gapminder2007, aes(x = lifeExp)) + geom_histogram(binwidth = 5) +
 
 # `ggplot2` and tidy data
 
-* `ggplot2` plays nice with `dplyr` and pipes. If you want to manipulate your data specifically for one plot but not save the new dataset, you can call your `dplyr` chain and pipe it directly into a ggplot call.
+* `ggplot2` plays nicely with `dplyr` and pipes. If you want to manipulate your data specifically for one plot but not save the new dataset, you can call your `dplyr` chain and pipe it directly into a ggplot call.
 
 ```{r, fig.cap = "", fig.show = "hold"}
 # This combines the subsetting and plotting into one step
@@ -410,11 +414,13 @@ ggplot(data = gapminder2007, aes(x = gdpPercap, y = lifeExp)) +
             geom_point(aes(size = pop, color = continent)) + scale_x_log10()
 ```
 
-How many variables have we represented? If we used a trellis plot we could represent yet another variable. 
+How many variables have we represented? If we used a trellis plot we could represent yet another variable!
 
 # Using aesthetics: quick quiz
 
-**POLL 8A**: Which of these ggplot2 calls will work (in the sense of not giving an error, not in the sense of being a useful plot)?
+**[P](https://www.polleverywhere.com/multiple_choice_polls/tRHisoyMmYVlr6Xv1WD9r)OLL 7A**: Which of these ggplot2 calls will work (in the sense of not giving an error, not in the sense of being a useful plot)?
+
+(respond at [https://pollev.com/chrispaciorek428](https://pollev.com/chrispaciorek428))
 
 1) gapminder %>% ggplot(aes(x = gdpPercap, y = lifeExp)) %>% geom_point()
 2) gapminder %>% ggplot(aes(x = gdpPercap, y = lifeExp))
@@ -429,10 +435,10 @@ How many variables have we represented? If we used a trellis plot we could repre
 
 Aesthetics are handled by their very own `scale` functions which allow you to set
 the limits, breaks, tranformations, and any palletes that might determine how you want your 
-data plotted. `ggplot2` includes a number of helpful default scale functions like 
-`scale_x_log10` that can tranform your data on the fly or `scale_color_viridis` 
-which uses palettes from the `viridis` package specifically
-designed to "make plots that are pretty, better represent your data, easier to read by those with colorblindness, and print well in grey scale."
+data plotted. `ggplot2` includes a number of helpful default scale functions. For example:
+
+  - `scale_x_log10` that can transform your data on the fly
+  - `scale_color_viridis` uses palettes from the `viridis` package specifically designed to "make plots that are pretty, better represent your data, easier to read by those with colorblindness, and print well in grey scale."
 
 For example, our data might be better represented using a log10 transformation of per capita GDP:
 ```{r}
@@ -615,7 +621,7 @@ plot1 / plot2 / plot3
 
 Feel free to explore more at [https://github.com/thomasp85/patchwork](https://github.com/thomasp85/patchwork).
 
-**Note:** `patchwork` is an example of a ggplot2 extension package of which there are many! One of the benefits to learning and using `ggplot2` is that there is a huge community of developers that build separate graphics packages that generally use the same syntax to extend the `ggplot2` functionality into things like animation and 3D plotting! Check them out --> http://www.ggplot2-exts.org/gallery/ 
+**Note:** `patchwork` is an example of a ggplot2 extension package of which there are many! One of the benefits to learning and using `ggplot2` is that there is a huge community of developers that build separate graphics packages that generally use the same syntax to extend the `ggplot2` functionality into things like animation and 3D plotting! [Check them out here](http://www.ggplot2-exts.org/gallery/).
 
 # Exporting
 
@@ -633,7 +639,7 @@ dev.off()
 
 ### **Vector** (.pdf, .ps)
 
-Every element of a plot is encoded with a function that gives its coding conditional on several factors; **great for resizing**
+Every element of a plot is encoded with a function that gives its coding conditional on several factors; **great for resizing**, but image files with many elements can be very large.
 
 ```{r, eval=FALSE}
 pdf(file = "example.pdf", width = , height =)
@@ -682,5 +688,5 @@ ggplot(data = gapminder, aes(x = year, y = lifeExp)) +
             geom_line(aes(color = continent))
 ```
 
-This doesn't work. See if you can understand why and how to fix it. Hint, look up `group` in the ggplot2 help information in R.
+This doesn't work. See if you can understand why and how to fix it. Hint, look up "group" in the ggplot2 help information in R.
 
