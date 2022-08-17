@@ -13,22 +13,18 @@ gapminder2007 <- gapminder[gapminder$year == 2007, ]
 
 # Describing relationships
 
-- Once we've carried out group-wise operations and perhaps reshaped it, we may also like to describe the relationships in the data. Often this involves fitting some style of regression model.  The goal can be pure prediction, description, or inferring a causal relationship between variables.
+- Once we've carried out group-wise operations and perhaps reshaped it, we may also like to describe the relationships in the data. Often this involves fitting some style of regression model, or a more complicated statistical or machine learning model.  The goal can be pure prediction, description, or inferring a causal relationship between variables.
 
-Of course to infer causality, one has to be quite careful and techniques that try to avoid the usual pitfall that correlation is not causation are way beyond what we can cover here.
+Of course to infer causality, one has to be quite careful and techniques that try to avoid the usual pitfall that correlation is not causation are well beyond what we can cover here.
 
 We'll just see the basics of how to fit regressions here. 
 
 # Inference/Regression
 
 - Running regressions in R is generally straightforward.
-
 - Most basic, catch-all regression function in R is *glm*
-
 - *glm* fits a generalized linear model with your choice of family/link function (gaussian, logit, poisson, etc.)
-
-- *lm* is just a standard linear regression (equivalent to glm with family = gaussian(link = "identity"))
-
+  - *lm* is just a standard linear regression (equivalent to glm with family = gaussian(link = "identity"))
 - The basic glm call looks something like this:
 
 ```{r eval=FALSE}
@@ -49,23 +45,16 @@ reg <- lm(formula = lifeExp ~ log(gdpPercap) + log(pop) + continent + year,
 
 # Regression: quick quiz
 
-**POLL 7A**:
+**[P](https://www.polleverywhere.com/multiple_choice_polls/qgHSSe4LA4okQxca0DbKB)OLL 8A**:
 
-Consider this regression model:
+Consider this regression model. What kind of variable should 'year' be?
+
+(respond at [https://pollev.com/chrispaciorek428](https://pollev.com/chrispaciorek428))
 
 ```
 reg <- lm(formula = lifeExp ~ log(gdpPercap) + log(pop) + continent + year, 
                 data = gapminder)
 ```
-
-*Question 1*: 'continent' could be:
-
-1) numeric
-2) character
-3) factor
-4) none of the above
-
-*Question 2*: 'year' should be:
 
 1) numeric
 2) character
@@ -75,7 +64,7 @@ reg <- lm(formula = lifeExp ~ log(gdpPercap) + log(pop) + continent + year,
 
 # Regression output
 
-- When we store this regression in an object, we get access to several items of interest
+- When we store this regression in an object, we get access to several items of interest, as will generally be the case from fitting any statistical/machine learning model.
 
 ```{r}
 # View components contained in the regression output
@@ -88,11 +77,14 @@ reg$df.residual
 plot(reg)
 ```
 
-**POLL 7B** Suppose you see this syntax when using the output of a regression:
+**[P](https://www.polleverywhere.com/multiple_choice_polls/76o1jRheyV9WsT6EkRk5Z)OLL 8B** Suppose you see this syntax when using the output of a regression:
 
 ```
 reg$coefficients
 ```
+
+(respond at [https://pollev.com/chrispaciorek428](https://pollev.com/chrispaciorek428))
+
 
 The `reg` object is:
 
@@ -176,13 +168,13 @@ If we were serious about building a good-fitting model, we could use the same ki
 
 # How does GAM choose how much to smooth?
 
-GAM uses the data to choose how much smoothing to do. Roughly one can think of what it is doing as carrying out cross-validation and choosing the best amount of smoothing for predicting held-out data.
+GAM uses the data to choose how much smoothing to do. Roughly one can think of what it is doing as carrying out cross-validation and choosing the best amount of smoothing for predicting held-out data, but without having to actually do cross-validation.
 
-`k` simply sets an upper bound on the amount of smoothing (you can think if `k` as the number of degrees of freedom - one would be a linear fit).
+`k` simply sets an upper bound on the amount of smoothing (you can think of `k` as the number of degrees of freedom - "1" would be a linear fit).
 
  - Make sure `k` is less than the number of unique values of the predictor variable
  - The default for `k` is relatively small and in some cases this may overly limit the smoothness of the curve.
-    - You can try increasing `k` and see if it increases the fit.
+    - You can try increasing `k` and see if it improves the fit.
     - If `summary` reports and `edf` that is close to `k` that often suggests that `k` should be increased.
 
 # Distributions
@@ -191,9 +183,9 @@ Since R was developed by statisticians, it handles distributions and simulation 
 
 All commonly-used distributions have functions in R. Each distribution has a family of functions: 
 
-* d - probability density/mass function, e.g. `dnorm()`
+* d - probability density/mass function (PDF), e.g. `dnorm()`
 * r - generate a random value, e.g., `rnorm()`
-* p - cumulative distribution function, e.g., `pnorm()`
+* p - cumulative distribution function (CDF), e.g., `pnorm()`
 * q - quantile function (inverse CDF), e.g., `qnorm()`
 
 Some of the distributions include the following (in the form of their random number generator function): `rnorm()`, `runif()`, `rbinom()`, `rpois()`, `rbeta()`, `rgamma()`, `rt()`, `rchisq()`.
@@ -223,7 +215,9 @@ lines(x, dchisq(x, df = 2), col = 'red')
 
 # Distributions: quick quiz
 
-**POLL 7C**:  Suppose you want know the probability of getting 4 or fewer heads when flipping a coin 10 times. Which of the following will work?
+**[P](https://www.polleverywhere.com/multiple_choice_polls/DzwNrFy34BkV0XUO51QGx)OLL 8C**:  Suppose you want know the probability of getting 4 or fewer heads when flipping a coin 10 times. Which of the following will work?
+
+(respond at [https://pollev.com/chrispaciorek428](https://pollev.com/chrispaciorek428))
 
 1) dbinom(4, size = 10, prob = 0.5)
 2) pbinom(4, size = 10, prob = 0.5)
@@ -275,8 +269,9 @@ vals
 vals <- sample(1:nrow(gapminder), 10)
 vals
 set.seed(1)
-vals <- sample(1:nrow(gapminder), 10)
-vals
+vals <- sample(1:nrow(gapminder), 15)
+vals[1:10]
+vals[11:15]
 ```
 
 # Optimization
