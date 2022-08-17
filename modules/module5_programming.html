@@ -106,7 +106,7 @@ another function.</li>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>median</span></code></pre></div>
 <pre><code>## function (x, na.rm = FALSE, ...) 
 ## UseMethod(&quot;median&quot;)
-## &lt;bytecode: 0x55e36c0ca408&gt;
+## &lt;bytecode: 0x5643c5fcf408&gt;
 ## &lt;environment: namespace:stats&gt;</code></pre>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(median)</span></code></pre></div>
 <pre><code>## function (x, na.rm = FALSE, ...) 
@@ -257,9 +257,9 @@ saw an R function produce from earlier today?</p>
 <span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>new_x <span class="ot">&lt;-</span> <span class="fu">myfun</span>(x)</span>
 <span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(new_x)</span></code></pre></div>
-<pre><code>## [1]  99.31712 100.82422 100.13347</code></pre>
+<pre><code>## [1]  98.55649 100.08633 100.47514</code></pre>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x)</span></code></pre></div>
-<pre><code>## [1] -0.6828823  0.8242183  0.1334706</code></pre>
+<pre><code>## [1] -1.44351132  0.08632782  0.47514057</code></pre>
 <p>Functions in R are (roughly) <em>pass-by-value</em> and not
 <em>pass-by-reference</em>. This means that if you modify an argument
 inside the function it will not change the original value outside the
@@ -340,13 +340,14 @@ this kind of problem.</p>
 <p>In many languages, looping (for loops, while loops, etc.) is one of
 the main constructs used to carry out computation. Loops are not
 emphasized as much in R, both because they can be slow and because other
-syntax is often cleaner.</p>
+syntax (vectorized calls, lapply, etc.) is often cleaner.</p>
 <p>But there are lots of times when using a loop does make sense.</p>
 <p>Most of you are probably familiar at least with the basic idea of
-iterating through a series of steps. A for loop iterates through a
-pre-determined number of iterations, while a while loop iterates until
-some condition is met. For loops are more common in R, but while loops
-can be handy particularly for things like optimization.</p>
+iterating through a series of steps. A <strong>for</strong> loop
+iterates through a pre-determined number of iterations, while a
+<strong>while</strong> loop iterates until some condition is met. For
+loops are more common in R, but while loops can be handy particularly
+for things like optimization.</p>
 <p>Let’s take an example from Module 4 and use a for loop instead of
 <code>lapply</code> or <code>aggregate</code>.</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
@@ -428,9 +429,10 @@ numbers.</p>
 </div>
 <div id="calculation-approaches-quick-quiz" class="slide section level1">
 <h1>Calculation approaches: quick quiz</h1>
-<p><strong>POLL 5A</strong></p>
-<p>Question 1: Which of these give exactly this result: <code>pi</code>,
+<p><strong><a href="https://www.polleverywhere.com/multiple_choice_polls/P8EFGwLwHRr0HrTFd1TzE">P</a>OLL
+5A</strong>: Which of these give exactly this result: <code>pi</code>,
 <code>2*pi</code>, <code>3*pi</code>, …?</p>
+<p>(respond at <a href="https://pollev.com/chrispaciorek428">https://pollev.com/chrispaciorek428</a>)</p>
 <ol style="list-style-type: decimal">
 <li>(1:n)*pi</li>
 <li>out &lt;- rep(0, n); for(x in 1:n) out &lt;- x*pi</li>
@@ -440,8 +442,8 @@ numbers.</p>
 <li>sapply(1:n, “*“, pi)</li>
 <li>1:n*pi</li>
 </ol>
-<p>Question 2: Which of these do you think will be fastest for a long
-vector, x?</p>
+<p><strong>Question</strong>: Which of these do you think will be
+fastest for a long vector x?</p>
 <ol style="list-style-type: decimal">
 <li>x &lt;- exp(x)</li>
 <li>x &lt;- sapply(x, exp)</li>
@@ -481,13 +483,13 @@ vector, x?</p>
 </div>
 <div id="branching-if-then-else-syntax" class="slide section level1">
 <h1>Branching (if-then-else syntax)</h1>
-<p>We already saw an example of branching in the <em>for</em> loop
-example.</p>
+<p>Often we need our code to do different things depending on whether
+some condition is true or false.</p>
 <p>Here’s a simple example to illustrate the syntax. Note that the
 <em>then</em> is implicit.</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>val <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>)</span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>val</span></code></pre></div>
-<pre><code>## [1] -0.01131348</code></pre>
+<pre><code>## [1] -0.5749203</code></pre>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (val <span class="sc">&lt;</span> <span class="dv">0</span>) {</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;val is negative&quot;</span>)</span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
@@ -497,7 +499,7 @@ example.</p>
 <p>We can chain together <code>if</code> statements as follows.</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>val <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>)</span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>val</span></code></pre></div>
-<pre><code>## [1] 1.058921</code></pre>
+<pre><code>## [1] 2.164743</code></pre>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (val <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">1</span>) {</span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;val is more than one standard deviation below the mean.&quot;</span>)</span>
 <span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (<span class="fu">abs</span>(val) <span class="sc">&lt;=</span> <span class="dv">1</span>) {</span>
@@ -518,7 +520,7 @@ practice. That said, this <em>works just fine</em>:</p>
 <p>The condition in the if statement cannot be NA or R will give an
 error. This is a very common bug.</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>continents <span class="ot">&lt;-</span> <span class="fu">unique</span>(gapminder<span class="sc">$</span>continent)</span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>continents  <span class="co"># what happened ?!</span></span></code></pre></div>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>continents  </span></code></pre></div>
 <pre><code>## [1] Asia     Europe   Africa   Americas Oceania 
 ## Levels: Africa Americas Asia Europe Oceania</code></pre>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>continents <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">as.character</span>(gapminder<span class="sc">$</span>continent))</span>
@@ -551,8 +553,7 @@ logical values.</p>
 <span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>       <span class="fu">print</span>(continents[i])</span>
 <span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <pre><code>## [1] &quot;Africa&quot;</code></pre>
-<p><strong>POLL 5B</strong>:</p>
-<p>What will this return?</p>
+<p>Here’s another example. What will this return?</p>
 <pre><code>if(sqrt(-1) == 0i) {
    print(&#39;i&#39;)
 } else print(&#39;not i&#39;)</code></pre>
@@ -565,8 +566,7 @@ logical values.</p>
 <div id="flow-control-next-and-break-statements-optional" class="slide section level1">
 <h1>Flow control: <code>next</code> and <code>break</code> statements
 (optional)</h1>
-<p><code>next</code> skips the current evaluation of the loop
-statements:</p>
+<p>‘next’ skips the current evaluation of the loop statements:</p>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>continents <span class="ot">&lt;-</span> <span class="fu">unique</span>(gapminder2007<span class="sc">$</span>continent)</span>
 <span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>continents[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Oceania&quot;</span>; continents[<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Europe&quot;</span>  <span class="co"># reorder to illustrate points below</span></span>
 <span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>continents</span></code></pre></div>
@@ -588,7 +588,7 @@ statements:</p>
 <pre><code>## We got to iteration 5 of 5 items.</code></pre>
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>out[[<span class="st">&#39;Oceania&#39;</span>]]</span></code></pre></div>
 <pre><code>## NULL</code></pre>
-<p><code>break</code> immediately ends loop evaluation:</p>
+<p>‘break’ immediately ends loop evaluation:</p>
 <div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">list</span>(); <span class="fu">length</span>(out) <span class="ot">&lt;-</span> <span class="fu">length</span>(continents); <span class="fu">names</span>(out) <span class="ot">&lt;-</span> continents</span>
 <span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(continents)) {</span>
@@ -639,11 +639,11 @@ mean?</h3>
 <p>And what about indexing?</p>
 <div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(<span class="dv">100</span>), <span class="dv">10</span>)</span>
 <span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>x[ , <span class="dv">2</span>]</span></code></pre></div>
-<pre><code>##  [1] 0.02593738 0.02430033 0.08974216 0.57780594 0.09186860 0.72074232
-##  [7] 0.94757413 0.39807487 0.37361375 0.64733667</code></pre>
+<pre><code>##  [1] 0.8180790 0.7552074 0.6515242 0.7474064 0.4888648 0.2772108 0.1388223
+##  [8] 0.9673852 0.1100587 0.2639538</code></pre>
 <div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;[&#39;</span>(x , , <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>##  [1] 0.02593738 0.02430033 0.08974216 0.57780594 0.09186860 0.72074232
-##  [7] 0.94757413 0.39807487 0.37361375 0.64733667</code></pre>
+<pre><code>##  [1] 0.8180790 0.7552074 0.6515242 0.7474064 0.4888648 0.2772108 0.1388223
+##  [8] 0.9673852 0.1100587 0.2639538</code></pre>
 <p>Also yes!</p>
 <p>This holds more generally - one can investigate and see the same
 thing in terms of a <code>for</code> loop.</p>
@@ -662,15 +662,15 @@ mean?</h3>
 <div id="advanced-modern-functional-programming-in-r-optional" class="slide section level1">
 <h1>(Advanced) Modern Functional Programming in R (optional)</h1>
 <p>Now that we’ve taken an extensive look at <code>for</code> loops and
-programming with functions, we can move on from base R to look at more
-modern and powerful tools for programming provided by <a href="http://purrr.tidyverse.org/"><code>purrr</code></a>, a core
+programming with functions, we can consider moving on from base R to
+look at more modern and powerful tools for programming provided by <a href="http://purrr.tidyverse.org/"><code>purrr</code></a>, a core
 package in the <a href="http://www.tidyverse.org/"><code>tidyverse</code></a>, a set of
 modern tools for “doing data science” in R. <code>purrr</code> provides
 facilities to manipulate data sets using functions in a “tidy” manner.
 Using <code>purrr</code> requires familiarity with several other core
 packages of the <code>tidyverse</code>, most notably <code>dplyr</code>
 and <code>magrittr</code>. We won’t have time to cover details of how to
-use <code>purrr</code> here, but we highly recommend you look into these
+use <code>purrr</code> here, but you may want to look into these
 packages as you continuing exploring R.</p>
 <div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span></code></pre></div>
@@ -786,7 +786,7 @@ function should instead set values above a threshold to the value of the
 threshold.</p></li>
 <li><p>Augment your function so that it checks that the input is a
 numeric vector and return an error if not. (See the help information for
-<code>stop()</code>.)</p></li>
+<code>stop()</code> (or <code>stopifnot()</code>.)</p></li>
 <li><p>Figure out what <code>invisible()</code> does and why it is
 useful when writing functions. Use <code>invisible()</code> in your
 function from just above or in the <code>sortByCol()</code>

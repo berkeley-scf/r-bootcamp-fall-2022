@@ -264,8 +264,8 @@ both because they can be slow and because other syntax (vectorized calls, lapply
 But there are lots of times when using a loop does make sense.
 
 Most of you are probably familiar at least with the basic idea of iterating
-through a series of steps. A for loop iterates through a pre-determined number
-of iterations, while a while loop iterates until some condition is met. For
+through a series of steps. A **for** loop iterates through a pre-determined number
+of iterations, while a **while** loop iterates until some condition is met. For
 loops are more common in R, but while loops can be handy particularly for things
 like optimization.
 
@@ -300,9 +300,10 @@ for (yr in years) {
 
 # Calculation approaches: quick quiz
 
-**POLL 5A**
+**[P](https://www.polleverywhere.com/multiple_choice_polls/P8EFGwLwHRr0HrTFd1TzE)OLL 5A**: Which of these give exactly this result: `pi`, `2*pi`, `3*pi`, ...?
 
-Question 1: Which of these give exactly this result: `pi`, `2*pi`, `3*pi`, ...?
+(respond at [https://pollev.com/chrispaciorek428](https://pollev.com/chrispaciorek428))
+
 
 1) (1:n)*pi
 2) out <- rep(0, n); for(x in 1:n) out <- x*pi
@@ -312,7 +313,7 @@ Question 1: Which of these give exactly this result: `pi`, `2*pi`, `3*pi`, ...?
 6) sapply(1:n, "*", pi)
 7) 1:n*pi
 
-Question 2: Which of these do you think will be fastest for a long vector, x?
+**Question**: Which of these do you think will be fastest for a long vector x?
 
 1) x <- exp(x)
 2) x <- sapply(x, exp)
@@ -337,7 +338,7 @@ summary(out[['2007']])
 
 # Branching (if-then-else syntax)
 
-We already saw an example of branching in the *for* loop example.
+Often we need our code to do different things depending on whether some condition is true or false.
 
 Here's a simple example to illustrate the syntax. Note that the *then* is
 implicit.
@@ -381,7 +382,7 @@ a very common bug.
 
 ```{r, if-bug}
 continents <- unique(gapminder$continent)
-continents  # what happened ?!
+continents  
 
 continents <- unique(as.character(gapminder$continent))
 continents <- c('Antarctica', continents)
@@ -416,9 +417,7 @@ for (i in seq_along(continents)) {
 }
 ```
 
-**POLL 5B**:
-
-What will this return?
+Here's another example. What will this return?
 
 ```
 if(sqrt(-1) == 0i) {
@@ -432,7 +431,7 @@ if(sqrt(-1) == 0i) {
 
 # Flow control: `next` and `break` statements (optional)
 
-`next` skips the current evaluation of the loop statements:
+'next' skips the current evaluation of the loop statements:
 
 ```{r, next}
 continents <- unique(gapminder2007$continent)
@@ -454,7 +453,7 @@ cat("We got to iteration ", i, " of ", length(continents), " items.\n", sep = ""
 out[['Oceania']]
 ```
 
-`break` immediately ends loop evaluation:
+'break' immediately ends loop evaluation:
 
 ```{r, break}
 out <- list(); length(out) <- length(continents); names(out) <- continents
@@ -532,14 +531,14 @@ class(square)
 # (Advanced) Modern Functional Programming in R (optional)
 
 Now that we've taken an extensive look at `for` loops and programming with
-functions, we can move on from base R to look at more modern and powerful tools
+functions, we can consider moving on from base R to look at more modern and powerful tools
 for programming provided by [`purrr`](http://purrr.tidyverse.org/), a core
 package in the [`tidyverse`](http://www.tidyverse.org/), a set of modern tools
 for "doing data science" in R. `purrr` provides facilities to manipulate data
 sets using functions in a "tidy" manner. Using `purrr` requires familiarity with
 several other core packages of the `tidyverse`, most notably `dplyr` and
 `magrittr`. We won't have time to cover details of how to use `purrr` here, but
-we highly recommend you look into these packages as you continuing exploring R.
+you may want to look into these packages as you continuing exploring R.
 
 ```{r tidyverse}
 library(dplyr)
@@ -649,7 +648,7 @@ threshold to be the value of threshold. Optionally, the function should instead
 set values above a threshold to the value of the threshold.
 
 3) Augment your function so that it checks that the input is a numeric vector
-and return an error if not. (See the help information for `stop()`.)
+and return an error if not. (See the help information for `stop()` (or `stopifnot()`.)
 
 4) Figure out what `invisible()` does and why it is useful when writing
 functions. Use `invisible()` in your function from just above or in the

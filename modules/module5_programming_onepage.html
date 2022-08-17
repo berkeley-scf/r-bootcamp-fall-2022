@@ -218,7 +218,7 @@ repeatable operations as an individual function call.</p>
 
 <pre><code>## function (x, na.rm = FALSE, ...) 
 ## UseMethod(&quot;median&quot;)
-## &lt;bytecode: 0x55e36c0ca408&gt;
+## &lt;bytecode: 0x5643c5fcf408&gt;
 ## &lt;environment: namespace:stats&gt;
 </code></pre>
 
@@ -434,13 +434,13 @@ new_x &lt;- myfun(x)
 print(new_x)
 </code></pre>
 
-<pre><code>## [1]  99.31712 100.82422 100.13347
+<pre><code>## [1]  98.55649 100.08633 100.47514
 </code></pre>
 
 <pre><code class="r">print(x)
 </code></pre>
 
-<pre><code>## [1] -0.6828823  0.8242183  0.1334706
+<pre><code>## [1] -1.44351132  0.08632782  0.47514057
 </code></pre>
 
 <p>Functions in R are (roughly) <em>pass-by-value</em> and not <em>pass-by-reference</em>. This
@@ -536,13 +536,13 @@ lm(y~x)
 
 <p>In many languages, looping (for loops, while loops, etc.) is one of the main
 constructs used to carry out computation. Loops are not emphasized as much in R,
-both because they can be slow and because other syntax is often cleaner.</p>
+both because they can be slow and because other syntax (vectorized calls, lapply, etc.) is often cleaner.</p>
 
 <p>But there are lots of times when using a loop does make sense.</p>
 
 <p>Most of you are probably familiar at least with the basic idea of iterating
-through a series of steps. A for loop iterates through a pre-determined number
-of iterations, while a while loop iterates until some condition is met. For
+through a series of steps. A <strong>for</strong> loop iterates through a pre-determined number
+of iterations, while a <strong>while</strong> loop iterates until some condition is met. For
 loops are more common in R, but while loops can be handy particularly for things
 like optimization.</p>
 
@@ -642,9 +642,9 @@ out[[&#39;2007&#39;]]
 
 <h1>Calculation approaches: quick quiz</h1>
 
-<p><strong>POLL 5A</strong></p>
+<p><strong><a href="https://www.polleverywhere.com/multiple_choice_polls/P8EFGwLwHRr0HrTFd1TzE">P</a>OLL 5A</strong>: Which of these give exactly this result: <code>pi</code>, <code>2*pi</code>, <code>3*pi</code>, &hellip;?</p>
 
-<p>Question 1: Which of these give exactly this result: <code>pi</code>, <code>2*pi</code>, <code>3*pi</code>, &hellip;?</p>
+<p>(respond at <a href="https://pollev.com/chrispaciorek428">https://pollev.com/chrispaciorek428</a>)</p>
 
 <p>1) (1:n)<em>pi
 2) out &lt;- rep(0, n); for(x in 1:n) out &lt;- x*pi
@@ -654,7 +654,7 @@ out[[&#39;2007&#39;]]
 6) sapply(1:n, &ldquo;</em>&rdquo;, pi)
 7) 1:n*pi</p>
 
-<p>Question 2: Which of these do you think will be fastest for a long vector, x?</p>
+<p><strong>Question</strong>: Which of these do you think will be fastest for a long vector x?</p>
 
 <p>1) x &lt;- exp(x)
 2) x &lt;- sapply(x, exp)
@@ -697,7 +697,7 @@ summary(out[[&#39;2007&#39;]])
 
 <h1>Branching (if-then-else syntax)</h1>
 
-<p>We already saw an example of branching in the <em>for</em> loop example.</p>
+<p>Often we need our code to do different things depending on whether some condition is true or false.</p>
 
 <p>Here&#39;s a simple example to illustrate the syntax. Note that the <em>then</em> is
 implicit.</p>
@@ -706,7 +706,7 @@ implicit.</p>
 val
 </code></pre>
 
-<pre><code>## [1] -0.01131348
+<pre><code>## [1] -0.5749203
 </code></pre>
 
 <pre><code class="r">if (val &lt; 0) {
@@ -725,7 +725,7 @@ val
 val
 </code></pre>
 
-<pre><code>## [1] 1.058921
+<pre><code>## [1] 2.164743
 </code></pre>
 
 <pre><code class="r">if (val &lt; -1) {
@@ -756,7 +756,7 @@ but R will complain when an <code>else</code> starts a line of code, so generall
 a very common bug.</p>
 
 <pre><code class="r">continents &lt;- unique(gapminder$continent)
-continents  # what happened ?!
+continents  
 </code></pre>
 
 <pre><code>## [1] Asia     Europe   Africa   Americas Oceania 
@@ -815,9 +815,7 @@ for (i in seq_along(continents)) {
 <pre><code>## [1] &quot;Africa&quot;
 </code></pre>
 
-<p><strong>POLL 5B</strong>:</p>
-
-<p>What will this return?</p>
+<p>Here&#39;s another example. What will this return?</p>
 
 <pre><code>if(sqrt(-1) == 0i) {
    print(&#39;i&#39;)
@@ -830,7 +828,7 @@ for (i in seq_along(continents)) {
 
 <h1>Flow control: <code>next</code> and <code>break</code> statements (optional)</h1>
 
-<p><code>next</code> skips the current evaluation of the loop statements:</p>
+<p>&#39;next&#39; skips the current evaluation of the loop statements:</p>
 
 <pre><code class="r">continents &lt;- unique(gapminder2007$continent)
 continents[2] &lt;- &quot;Oceania&quot;; continents[5] &lt;- &quot;Europe&quot;  # reorder to illustrate points below
@@ -865,7 +863,7 @@ cat(&quot;We got to iteration &quot;, i, &quot; of &quot;, length(continents), &
 <pre><code>## NULL
 </code></pre>
 
-<p><code>break</code> immediately ends loop evaluation:</p>
+<p>&#39;break&#39; immediately ends loop evaluation:</p>
 
 <pre><code class="r">out &lt;- list(); length(out) &lt;- length(continents); names(out) &lt;- continents
 
@@ -936,15 +934,15 @@ talk</a></p></li>
 x[ , 2]
 </code></pre>
 
-<pre><code>##  [1] 0.02593738 0.02430033 0.08974216 0.57780594 0.09186860 0.72074232
-##  [7] 0.94757413 0.39807487 0.37361375 0.64733667
+<pre><code>##  [1] 0.8180790 0.7552074 0.6515242 0.7474064 0.4888648 0.2772108 0.1388223
+##  [8] 0.9673852 0.1100587 0.2639538
 </code></pre>
 
 <pre><code class="r">&#39;[&#39;(x , , 2)
 </code></pre>
 
-<pre><code>##  [1] 0.02593738 0.02430033 0.08974216 0.57780594 0.09186860 0.72074232
-##  [7] 0.94757413 0.39807487 0.37361375 0.64733667
+<pre><code>##  [1] 0.8180790 0.7552074 0.6515242 0.7474064 0.4888648 0.2772108 0.1388223
+##  [8] 0.9673852 0.1100587 0.2639538
 </code></pre>
 
 <p>Also yes!</p>
@@ -982,14 +980,14 @@ class(square)
 <h1>(Advanced) Modern Functional Programming in R (optional)</h1>
 
 <p>Now that we&#39;ve taken an extensive look at <code>for</code> loops and programming with
-functions, we can move on from base R to look at more modern and powerful tools
+functions, we can consider moving on from base R to look at more modern and powerful tools
 for programming provided by <a href="http://purrr.tidyverse.org/"><code>purrr</code></a>, a core
 package in the <a href="http://www.tidyverse.org/"><code>tidyverse</code></a>, a set of modern tools
 for &ldquo;doing data science&rdquo; in R. <code>purrr</code> provides facilities to manipulate data
 sets using functions in a &ldquo;tidy&rdquo; manner. Using <code>purrr</code> requires familiarity with
 several other core packages of the <code>tidyverse</code>, most notably <code>dplyr</code> and
 <code>magrittr</code>. We won&#39;t have time to cover details of how to use <code>purrr</code> here, but
-we highly recommend you look into these packages as you continuing exploring R.</p>
+you may want to look into these packages as you continuing exploring R.</p>
 
 <pre><code class="r">library(dplyr)
 library(purrr)
@@ -1116,7 +1114,7 @@ threshold to be the value of threshold. Optionally, the function should instead
 set values above a threshold to the value of the threshold.</p>
 
 <p>3) Augment your function so that it checks that the input is a numeric vector
-and return an error if not. (See the help information for <code>stop()</code>.)</p>
+and return an error if not. (See the help information for <code>stop()</code> (or <code>stopifnot()</code>.)</p>
 
 <p>4) Figure out what <code>invisible()</code> does and why it is useful when writing
 functions. Use <code>invisible()</code> in your function from just above or in the
