@@ -218,7 +218,7 @@ repeatable operations as an individual function call.</p>
 
 <pre><code>## function (x, na.rm = FALSE, ...) 
 ## UseMethod(&quot;median&quot;)
-## &lt;bytecode: 0x55945ff41b40&gt;
+## &lt;bytecode: 0x55e36c0ca408&gt;
 ## &lt;environment: namespace:stats&gt;
 </code></pre>
 
@@ -255,14 +255,15 @@ functionality.</li>
 
 <ul>
 <li>be fairly short,</li>
-<li>be focused and specific in what it does, and</li>
+<li>be focused and specific in what it does,</li>
 <li>be designed so that it can be used in combination with other functions to
-carry out more complicated operations.</li>
+carry out more complicated operations,</li>
+<li>generally make use only of arguments to the function and internal variables.</li>
 </ul>
 
 <h1>Writing functions</h1>
 
-<p>In module 4, we sorted the gapminder <code>data.frame</code>.</p>
+<p>In module 4, we sorted the gapminder dataframe.</p>
 
 <pre><code class="r">ord &lt;- order(gapminder$year, gapminder$lifeExp, decreasing = TRUE)
 ord[1:5]
@@ -275,13 +276,16 @@ ord[1:5]
 </code></pre>
 
 <p>How would we encapsulate that functionality generically so that
-we can apply it to other <code>data.frame</code>s (or matrices)?</p>
+we can apply it to other dataframes (or matrices)?</p>
+
+<p>The general approach is to take some code you wrote already (e.g., see above) and
+insert it as the body of the function.</p>
 
 <pre><code class="r">sortByCol &lt;- function(data, col1, col2) {
-    # Sorts a matrix or dataframe based on two  columns
+    # Sorts a matrix or dataframe based on two columns
     #
     # Args:
-    #     data: a dataframe or matrix with at least columns
+    #     data: a dataframe or matrix with at least two columns
     #                  and any number of rows
     #     col1: a reference to the column to sort on
     #     col2: a reference to the column to use for ties
@@ -412,14 +416,32 @@ pplot(gapminder$gdpPercap, gapminder$lifeExp,  xlab = &#39;gdpPercap (log $)&#39
 designed such that the only effect of the function is through the return value.</p>
 
 <p><strong>Side effects</strong> are when a function affects the state of the world in
-addition to its return value.  Can you think of any side effects that
-you saw an R function produce from earlier today?  What about:</p>
+addition to its return value.</p>
 
-<ul>
-<li><code>library()</code></li>
-<li><code>setwd()</code></li>
-<li><code>plot()</code></li>
-</ul>
+<p><strong>Question</strong>: Can you think of any side effects that
+you saw an R function produce from earlier today? </p>
+
+<h1>Important concepts with R functions - pass-by-value</h1>
+
+<pre><code class="r">x &lt;- rnorm(3)
+
+myfun &lt;- function(x) {
+      x &lt;- x + 100
+      return(x)
+}      
+
+new_x &lt;- myfun(x)
+print(new_x)
+</code></pre>
+
+<pre><code>## [1]  99.31712 100.82422 100.13347
+</code></pre>
+
+<pre><code class="r">print(x)
+</code></pre>
+
+<pre><code>## [1] -0.6828823  0.8242183  0.1334706
+</code></pre>
 
 <p>Functions in R are (roughly) <em>pass-by-value</em> and not <em>pass-by-reference</em>. This
 means that if you modify an argument inside the function it will not change the
@@ -440,7 +462,9 @@ this.) This provides modularity and reduces bugs and surprises.</p>
 
 <p>If R can&#39;t find a variable that is used in a function based on the function
 arguments and variables defined locally in the function, it goes and looks
-elsewhere following a set of rules called <em>lexical scoping</em>. (This type of
+elsewhere following a set of rules called <em>lexical scoping</em>.</p>
+
+<p>(This type of
 scoping has to do with R&#39;s roots (and explains why R is very similar to other
 languages for functional programming) - we won&#39;t go into details here but
 certainly worth looking into as you start using R more.)</p>
@@ -488,6 +512,25 @@ g(1)
 
 <p>Note that <code>x</code> is used as a global variable here, which in general is bad
 practice.</p>
+
+<h1>Why does scoping work that way?</h1>
+
+<p>Consider the <code>lm</code> function. It uses <code>lm.fit</code> for its actual computation.</p>
+
+<p>Suppose scoping depended on where the function (lm in this case) is called from?
+What would happen now:</p>
+
+<pre><code class="r">x &lt;- rnorm(5)
+y &lt;- rnorm(5)
+lm(y ~ x)
+
+lm.fit &lt;- function(...) print(&#39;Better luck next time, sucker.&#39;)
+
+lm.fit()
+lm(y~x)
+</code></pre>
+
+<p>R&#39;s scoping, in combination with package namespaces protects against this kind of problem.</p>
 
 <h1>Loops</h1>
 
@@ -663,7 +706,7 @@ implicit.</p>
 val
 </code></pre>
 
-<pre><code>## [1] 1.265302
+<pre><code>## [1] -0.01131348
 </code></pre>
 
 <pre><code class="r">if (val &lt; 0) {
@@ -673,7 +716,7 @@ val
 }
 </code></pre>
 
-<pre><code>## [1] &quot;val is positive&quot;
+<pre><code>## [1] &quot;val is negative&quot;
 </code></pre>
 
 <p>We can chain together <code>if</code> statements as follows.</p>
@@ -682,7 +725,7 @@ val
 val
 </code></pre>
 
-<pre><code>## [1] -1.187692
+<pre><code>## [1] 1.058921
 </code></pre>
 
 <pre><code class="r">if (val &lt; -1) {
@@ -694,7 +737,7 @@ val
 }
 </code></pre>
 
-<pre><code>## [1] &quot;val is more than one standard deviation below the mean.&quot;
+<pre><code>## [1] &quot;val is more than one standard deviation above the mean.&quot;
 </code></pre>
 
 <p>In general, the <code>{</code> brackets are only needed if you have multiple R expressions,
@@ -704,7 +747,7 @@ but R will complain when an <code>else</code> starts a line of code, so generall
 <pre><code class="r">if (val &lt; 0) print(&quot;val is negative&quot;) else print(&quot;val is positive&quot;)
 </code></pre>
 
-<pre><code>## [1] &quot;val is negative&quot;
+<pre><code>## [1] &quot;val is positive&quot;
 </code></pre>
 
 <h1>The condition in an if statement</h1>
@@ -893,15 +936,15 @@ talk</a></p></li>
 x[ , 2]
 </code></pre>
 
-<pre><code>##  [1] 0.31668518 0.09193411 0.81136630 0.46051853 0.49686569 0.61024090
-##  [7] 0.93737333 0.11794049 0.72570030 0.56017250
+<pre><code>##  [1] 0.02593738 0.02430033 0.08974216 0.57780594 0.09186860 0.72074232
+##  [7] 0.94757413 0.39807487 0.37361375 0.64733667
 </code></pre>
 
 <pre><code class="r">&#39;[&#39;(x , , 2)
 </code></pre>
 
-<pre><code>##  [1] 0.31668518 0.09193411 0.81136630 0.46051853 0.49686569 0.61024090
-##  [7] 0.93737333 0.11794049 0.72570030 0.56017250
+<pre><code>##  [1] 0.02593738 0.02430033 0.08974216 0.57780594 0.09186860 0.72074232
+##  [7] 0.94757413 0.39807487 0.37361375 0.64733667
 </code></pre>
 
 <p>Also yes!</p>

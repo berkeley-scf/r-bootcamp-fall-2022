@@ -43,13 +43,14 @@ A basic goal is writing functions is *modularity*.
 In general, a function should
 
 - be fairly short,
-- be focused and specific in what it does, and
+- be focused and specific in what it does,
 - be designed so that it can be used in combination with other functions to
-  carry out more complicated operations.
+  carry out more complicated operations,
+- generally make use only of arguments to the function and internal variables.
 
 # Writing functions
 
-In module 4, we sorted the gapminder `data.frame`.
+In module 4, we sorted the gapminder dataframe.
 
 ```{r, order}
 ord <- order(gapminder$year, gapminder$lifeExp, decreasing = TRUE)
@@ -58,14 +59,17 @@ gm_ord <- gapminder[ord, ]
 ```
 
 How would we encapsulate that functionality generically so that
-we can apply it to other `data.frame`s (or matrices)?
+we can apply it to other dataframes (or matrices)?
+
+The general approach is to take some code you wrote already (e.g., see above) and
+insert it as the body of the function.
 
 ```{r, function}
 sortByCol <- function(data, col1, col2) {
-    # Sorts a matrix or dataframe based on two  columns
+    # Sorts a matrix or dataframe based on two columns
     #
     # Args:
-    #     data: a dataframe or matrix with at least columns
+    #     data: a dataframe or matrix with at least two columns
     #                  and any number of rows
     #     col1: a reference to the column to sort on
     #     col2: a reference to the column to use for ties
@@ -145,12 +149,31 @@ Functions in R return an object. In general, R functions are and should be
 designed such that the only effect of the function is through the return value.
 
 **Side effects** are when a function affects the state of the world in
-addition to its return value.  Can you think of any side effects that
-you saw an R function produce from earlier today?  What about:
+addition to its return value.
 
-- `library()`
-- `setwd()`
-- `plot()`
+**Question**: Can you think of any side effects that
+you saw an R function produce from earlier today? 
+
+```{r, echo=FALSE, eval=FALSE}
+library()
+setwd()
+plot()
+```
+
+# Important concepts with R functions - pass-by-value
+
+```{r, pass-by-value}
+x <- rnorm(3)
+
+myfun <- function(x) {
+      x <- x + 100
+      return(x)
+}      
+
+new_x <- myfun(x)
+print(new_x)
+print(x)
+```
 
 Functions in R are (roughly) *pass-by-value* and not *pass-by-reference*. This
 means that if you modify an argument inside the function it will not change the
@@ -171,7 +194,9 @@ this.) This provides modularity and reduces bugs and surprises.
 
 If R can't find a variable that is used in a function based on the function
 arguments and variables defined locally in the function, it goes and looks
-elsewhere following a set of rules called *lexical scoping*. (This type of
+elsewhere following a set of rules called *lexical scoping*.
+
+(This type of
 scoping has to do with R's roots (and explains why R is very similar to other
 languages for functional programming) - we won't go into details here but
 certainly worth looking into as you start using R more.)
@@ -210,11 +235,31 @@ g(1)
 Note that `x` is used as a global variable here, which in general is bad
 practice.
 
+# Why does scoping work that way?
+
+Consider the `lm` function. It uses `lm.fit` for its actual computation.
+
+Suppose scoping depended on where the function (lm in this case) is called from?
+What would happen now:
+
+```{r, lm-scope, eval = FALSE}
+x <- rnorm(5)
+y <- rnorm(5)
+lm(y ~ x)
+
+lm.fit <- function(...) print('Better luck next time, sucker.')
+
+lm.fit()
+lm(y~x)
+```
+
+R's scoping, in combination with package namespaces protects against this kind of problem.
+
 # Loops
 
 In many languages, looping (for loops, while loops, etc.) is one of the main
 constructs used to carry out computation. Loops are not emphasized as much in R,
-both because they can be slow and because other syntax is often cleaner.
+both because they can be slow and because other syntax (vectorized calls, lapply, etc.) is often cleaner.
 
 But there are lots of times when using a loop does make sense.
 

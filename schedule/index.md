@@ -87,7 +87,7 @@ for discussion of solutions.
     * scripting, source(), batch jobs
     * good coding practices
     * reproducible research
-  - Break (fill out feedback forms) (20 minutes)
+  - Break (20 minutes)
   - [Module 10](../modules/module10_advanced): Advanced topics morsels (Chris presents) (60 minutes)
     * object-oriented programming (S3, S4, R6)
     * computing on the language (using R to write and evaluate R code)
