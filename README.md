@@ -47,7 +47,7 @@ If you have registered and realize you cannot attend, PLEASE [cancel your regist
 
 ## Logistics - when, where, how, and what
 
-Physical location: [UC Berkeley Law School, Room 105](https://www.google.com/maps/place/37%C2%B052'10.1%22N+122%C2%B015'14.5%22W). Enter at the southwest door (after going up the outdoor stairs) and turn left or enter at the northwest door and go up a flight of stairs and turn right.
+Physical location: [UC Berkeley Law School, Room 105](https://www.google.com/maps/place/37%C2%B052'10.1%22N+122%C2%B015'14.5%22W). Enter at the southwest door (after going up the outdoor stairs) and turn left or enter at the northwest door (after going up the outdoor stairs) and turn right. You might be able to enter through the center doors on the west side, but those go into the building a floor below the room for the bootcamp.
 
 Time: 
   - Saturday, August 20, 8:15 am - 5 pm

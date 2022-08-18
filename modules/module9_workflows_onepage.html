@@ -57,6 +57,9 @@ var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/<
 hljs.initHighlightingOnLoad();
 </script>
 
+<!-- MathJax scripts -->
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
 
 
 <style type="text/css">
@@ -301,9 +304,10 @@ colSums(mat)
 
 <h1>Debugging</h1>
 
-<p>As a scripting language, R essentially has a debugger working automatically.
-But there is an official debugger and other tools that greatly help in figuring
-out problems.</p>
+<p>As a scripting language, R essentially has a debugger working automatically by virtue of you often being able to easily run code line by line.</p>
+
+<p>But there is an official debugger and other tools that greatly help in figuring
+out problems, particularly for more complicated situations.</p>
 
 <p>Let&#39;s briefly see these in action. I&#39;ll demo this in a very basic way, but hopefully this
 will give you an idea of the power of these tools.</p>
@@ -397,28 +401,32 @@ benchmark(ifelse(x &lt; 0, x, 0),
 from <em>Rprof</em> can be hard to decipher, so you may want to use the <em>proftools</em> package functions,
 which make use of <em>Rprof</em> under the hood. </p>
 
-<p>Here&#39;s a function that does the linear algebra to implement a linear regression, assuming <code>x</code>
-is the matrix of predictors, including a column for the intercept.</p>
+<p>Here&#39;s a function that does the linear algebra to implement a linear regression, assuming <code>X</code>
+is the matrix of predictors, including a column for the intercept:</p>
 
-<pre><code class="r">lr_slow &lt;- function(y, x) {
-  xtx &lt;- t(x) %*% x
-  xty &lt;- t(x) %*% y
-  inv &lt;- solve(xtx)   ## explicit matrix inverse is slow and generally a bad idea numerically
-  return(inv %*% xty)
+<p>\[
+\hat{\beta} = (X^{\top}X )^{-1}X^{\top}y
+\]</p>
+
+<pre><code class="r">lr_slow &lt;- function(y, X) {
+  XtX &lt;- t(X) %*% X
+  Xty &lt;- t(X) %*% y
+  inv &lt;- solve(XtX)   ## explicit matrix inverse is slow and generally a bad idea numerically
+  return(inv %*% Xty)
 }                   
 
-lr_medium &lt;- function(y, x) {
-  xtx &lt;- crossprod(x)
-  xty &lt;- crossprod(x, y)
-  inv &lt;- solve(xtx)   ## explicit matrix inverse is slow and generally a bad idea numerically
-  return(inv %*% xty)
+lr_medium &lt;- function(y, X) {
+  XtX &lt;- crossprod(X)
+  Xty &lt;- crossprod(X, y)
+  inv &lt;- solve(XtX)   ## explicit matrix inverse is slow and generally a bad idea numerically
+  return(inv %*% Xty)
 }                   
 
-lr_fast &lt;- function(y, x) {
-  xtx &lt;- crossprod(x)
-  xty &lt;- crossprod(x, y)
-  U &lt;- chol(xtx)
-  tmp &lt;- backsolve(U, xty, transpose = TRUE)
+lr_fast &lt;- function(y, X) {
+  XtX &lt;- crossprod(X)
+  Xty &lt;- crossprod(X, y)
+  U &lt;- chol(XtX)
+  tmp &lt;- backsolve(U, Xty, transpose = TRUE)
   return(backsolve(U, tmp))
 }                   
 </code></pre>
@@ -437,125 +445,101 @@ hotPaths(pd1)
 
 <pre><code>##  path                  total.pct self.pct
 ##  lr_slow               100.00     0.00   
-##  . %*% (&lt;text&gt;:2)       49.02    49.02   
-##  . %*% (&lt;text&gt;:3)        0.98     0.98   
-##  . solve (&lt;text&gt;:4)     27.45     0.00   
-##  . . standardGeneric    27.45     0.00   
-##  . . . solve            27.45     0.00   
-##  . . . . solve.default  27.45    26.47   
-##  . . . . . diag          0.98     0.98   
-##  . t (&lt;text&gt;:2)          2.94     0.00   
-##  . . standardGeneric     2.94     0.00   
-##  . . . t                 2.94     0.00   
-##  . . . . t.default       2.94     2.94   
-##  . t (&lt;text&gt;:3)         19.61     0.00   
-##  . . standardGeneric    19.61     0.00   
-##  . . . t                19.61     0.00   
-##  . . . . t.default      19.61    19.61
+##  . %*% (&lt;text&gt;:2)       57.89    57.89   
+##  . %*% (&lt;text&gt;:3)        5.26     5.26   
+##  . solve (&lt;text&gt;:4)     21.05     0.00   
+##  . . standardGeneric    21.05     0.00   
+##  . . . solve            21.05     0.00   
+##  . . . . solve.default  21.05    21.05   
+##  . t (&lt;text&gt;:2)          5.26     0.00   
+##  . . standardGeneric     5.26     0.00   
+##  . . . t                 5.26     0.00   
+##  . . . . t.default       5.26     5.26   
+##  . t (&lt;text&gt;:3)         10.53     0.00   
+##  . . standardGeneric    10.53     0.00   
+##  . . . t                10.53     0.00   
+##  . . . . t.default      10.53    10.53
 </code></pre>
 
 <pre><code class="r">hotPaths(pd1, value = &#39;time&#39;)
 </code></pre>
 
 <pre><code>##  path                  total.time self.time
-##  lr_slow               2.04       0.00     
-##  . %*% (&lt;text&gt;:2)      1.00       1.00     
+##  lr_slow               0.38       0.00     
+##  . %*% (&lt;text&gt;:2)      0.22       0.22     
 ##  . %*% (&lt;text&gt;:3)      0.02       0.02     
-##  . solve (&lt;text&gt;:4)    0.56       0.00     
-##  . . standardGeneric   0.56       0.00     
-##  . . . solve           0.56       0.00     
-##  . . . . solve.default 0.56       0.54     
-##  . . . . . diag        0.02       0.02     
-##  . t (&lt;text&gt;:2)        0.06       0.00     
-##  . . standardGeneric   0.06       0.00     
-##  . . . t               0.06       0.00     
-##  . . . . t.default     0.06       0.06     
-##  . t (&lt;text&gt;:3)        0.40       0.00     
-##  . . standardGeneric   0.40       0.00     
-##  . . . t               0.40       0.00     
-##  . . . . t.default     0.40       0.40
+##  . solve (&lt;text&gt;:4)    0.08       0.00     
+##  . . standardGeneric   0.08       0.00     
+##  . . . solve           0.08       0.00     
+##  . . . . solve.default 0.08       0.08     
+##  . t (&lt;text&gt;:2)        0.02       0.00     
+##  . . standardGeneric   0.02       0.00     
+##  . . . t               0.02       0.00     
+##  . . . . t.default     0.02       0.02     
+##  . t (&lt;text&gt;:3)        0.04       0.00     
+##  . . standardGeneric   0.04       0.00     
+##  . . . t               0.04       0.00     
+##  . . . . t.default     0.04       0.04
 </code></pre>
 
-<pre><code class="r">pd1 &lt;- profileExpr(lr_medium(y, x))
-hotPaths(pd1)
+<pre><code class="r">pd2 &lt;- profileExpr(lr_medium(y, x))
+hotPaths(pd2)
 </code></pre>
 
-<pre><code>##  path                    total.pct self.pct
-##  lr_medium               100.00     0.00   
-##  . crossprod (&lt;text&gt;:10)   2.59     0.00   
-##  . . crossprod             2.59     0.00   
-##  . . . base::crossprod     2.59     2.59   
-##  . crossprod (&lt;text&gt;:9)   15.52     0.00   
-##  . . crossprod            15.52     0.00   
-##  . . . base::crossprod    15.52    15.52   
-##  . solve (&lt;text&gt;:11)      81.90     0.00   
-##  . . standardGeneric      81.90     0.00   
-##  . . . solve              81.90     0.00   
-##  . . . . solve.default    81.90    81.03   
-##  . . . . . diag            0.86     0.86
+<pre><code>##  path                   total.pct self.pct
+##  lr_medium              100.00     0.00   
+##  . %*% (&lt;text&gt;:12)        9.09     9.09   
+##  . crossprod (&lt;text&gt;:9)  54.55     0.00   
+##  . . crossprod           54.55     0.00   
+##  . . . base::crossprod   54.55    54.55   
+##  . solve (&lt;text&gt;:11)     36.36     0.00   
+##  . . standardGeneric     36.36     0.00   
+##  . . . solve             36.36     0.00   
+##  . . . . solve.default   36.36    36.36
 </code></pre>
 
-<pre><code class="r">hotPaths(pd1, value = &#39;time&#39;)
+<pre><code class="r">hotPaths(pd2, value = &#39;time&#39;)
 </code></pre>
 
-<pre><code>##  path                    total.time self.time
-##  lr_medium               2.32       0.00     
-##  . crossprod (&lt;text&gt;:10) 0.06       0.00     
-##  . . crossprod           0.06       0.00     
-##  . . . base::crossprod   0.06       0.06     
-##  . crossprod (&lt;text&gt;:9)  0.36       0.00     
-##  . . crossprod           0.36       0.00     
-##  . . . base::crossprod   0.36       0.36     
-##  . solve (&lt;text&gt;:11)     1.90       0.00     
-##  . . standardGeneric     1.90       0.00     
-##  . . . solve             1.90       0.00     
-##  . . . . solve.default   1.90       1.88     
-##  . . . . . diag          0.02       0.02
+<pre><code>##  path                   total.time self.time
+##  lr_medium              0.22       0.00     
+##  . %*% (&lt;text&gt;:12)      0.02       0.02     
+##  . crossprod (&lt;text&gt;:9) 0.12       0.00     
+##  . . crossprod          0.12       0.00     
+##  . . . base::crossprod  0.12       0.12     
+##  . solve (&lt;text&gt;:11)    0.08       0.00     
+##  . . standardGeneric    0.08       0.00     
+##  . . . solve            0.08       0.00     
+##  . . . . solve.default  0.08       0.08
 </code></pre>
 
 <pre><code class="r">pd3 &lt;- profileExpr(lr_fast(y, x))
 hotPaths(pd3)
 </code></pre>
 
-<pre><code>##  path                           total.pct self.pct
-##  lr_fast                        100.00     0.00   
-##  . backsolve (&lt;text&gt;:19)          2.94     0.00   
-##  . . &lt;Anonymous&gt;                  2.94     0.00   
-##  . . . .findInheritedMethods      2.94     0.00   
-##  . . . . .duplicateClassesExist   2.94     0.00   
-##  . . . . . get                    2.94     2.94   
-##  . chol (&lt;text&gt;:18)               8.82     0.00   
-##  . . standardGeneric              8.82     0.00   
-##  . . . chol                       8.82     0.00   
-##  . . . . chol.default             8.82     8.82   
-##  . crossprod (&lt;text&gt;:16)         82.35     0.00   
-##  . . crossprod                   82.35     0.00   
-##  . . . base::crossprod           82.35    82.35   
-##  . crossprod (&lt;text&gt;:17)          5.88     0.00   
-##  . . crossprod                    5.88     0.00   
-##  . . . base::crossprod            5.88     5.88
+<pre><code>##  path                    total.pct self.pct
+##  lr_fast                 100.00     0.00   
+##  . chol (&lt;text&gt;:18)       14.29     0.00   
+##  . . standardGeneric      14.29     0.00   
+##  . . . chol               14.29     0.00   
+##  . . . . chol.default     14.29    14.29   
+##  . crossprod (&lt;text&gt;:16)  85.71     0.00   
+##  . . crossprod            85.71     0.00   
+##  . . . base::crossprod    85.71    85.71
 </code></pre>
 
 <pre><code class="r">hotPaths(pd3, value = &#39;time&#39;)
 </code></pre>
 
-<pre><code>##  path                           total.time self.time
-##  lr_fast                        0.68       0.00     
-##  . backsolve (&lt;text&gt;:19)        0.02       0.00     
-##  . . &lt;Anonymous&gt;                0.02       0.00     
-##  . . . .findInheritedMethods    0.02       0.00     
-##  . . . . .duplicateClassesExist 0.02       0.00     
-##  . . . . . get                  0.02       0.02     
-##  . chol (&lt;text&gt;:18)             0.06       0.00     
-##  . . standardGeneric            0.06       0.00     
-##  . . . chol                     0.06       0.00     
-##  . . . . chol.default           0.06       0.06     
-##  . crossprod (&lt;text&gt;:16)        0.56       0.00     
-##  . . crossprod                  0.56       0.00     
-##  . . . base::crossprod          0.56       0.56     
-##  . crossprod (&lt;text&gt;:17)        0.04       0.00     
-##  . . crossprod                  0.04       0.00     
-##  . . . base::crossprod          0.04       0.04
+<pre><code>##  path                    total.time self.time
+##  lr_fast                 0.14       0.00     
+##  . chol (&lt;text&gt;:18)      0.02       0.00     
+##  . . standardGeneric     0.02       0.00     
+##  . . . chol              0.02       0.00     
+##  . . . . chol.default    0.02       0.02     
+##  . crossprod (&lt;text&gt;:16) 0.12       0.00     
+##  . . crossprod           0.12       0.00     
+##  . . . base::crossprod   0.12       0.12
 </code></pre>
 
 <p>You might also check out <em>profvis</em> for an alternative to displaying profiling information
@@ -565,7 +549,7 @@ generated by <em>Rprof</em>.</p>
 
 <p>You should know how much memory (RAM) the computer you are using has and keep in mind how big your objects are and how much memory you code might use. All objects in R are stored in RAM unlike, e.g., SAS or a database.</p>
 
-<p>If in total, the jobs on a machine approach the physical RAM, the machine will start to use the hard disk as &#39;virtual memory&#39;. This is called paging or swapping, and once this happens you&#39;re often toast (i.e., your code may take essentially forever to finish).</p>
+<p>If in total, the jobs on a machine approach the physical RAM, the machine may (depending on how it is set up) start to use the hard disk as &#39;virtual memory&#39;. This is called paging or swapping, and once this happens you&#39;re often toast (i.e., your code may take essentially forever to finish). And if paging doesn&#39;t happen, your job will die with an out-of-memory (OOM) error.</p>
 
 <p>You can assess memory use with <code>top</code> or <code>ps</code> in Linux/Mac or the Task Manager in Windows.</p>
 
@@ -595,8 +579,8 @@ gc()
 </code></pre>
 
 <pre><code>##             used  (Mb) gc trigger   (Mb)  max used  (Mb)
-## Ncells   2383065 127.3    4598718  245.6   3288884 175.7
-## Vcells 104070047 794.0  160261347 1222.7 114653665 874.8
+## Ncells   2382568 127.3    4596221  245.5   4119676 220.1
+## Vcells 104073737 794.1  160258200 1222.7 114124365 870.7
 </code></pre>
 
 <pre><code class="r">rm(x)
@@ -604,13 +588,15 @@ gc()
 </code></pre>
 
 <pre><code>##           used  (Mb) gc trigger  (Mb)  max used  (Mb)
-## Ncells 2382984 127.3    4598718 245.6   3288884 175.7
-## Vcells 4069924  31.1  128209078 978.2 114653665 874.8
+## Ncells 2382580 127.3    4596221 245.5   4119676 220.1
+## Vcells 4073769  31.1  128206560 978.2 114124365 870.7
 </code></pre>
 
 <h1>Memory use: quick quiz</h1>
 
-<p><strong>POLL 9A</strong>: Suppose you have a CSV file with one million rows and one thousand columns, filled with numbers. How much memory will this take up if you read the data into R?</p>
+<p><strong><a href="https://www.polleverywhere.com/multiple_choice_polls/uBi9jJwqk3A4YCMJx1UNb">P</a>OLL 9A</strong>: Suppose you have a CSV file with one million rows and one thousand columns, filled with numbers. How much memory will this take up if you read the data into R?</p>
+
+<p>(respond at <a href="https://pollev.com/chrispaciorek428">https://pollev.com/chrispaciorek428</a>)</p>
 
 <p>1) 800 MB
 2) 8 GB
@@ -627,9 +613,14 @@ gc()
 <li>Learn a powerful, general purpose text editor</li>
 </ul>
 
-<p>If you use a good editor (such as RStudio&#39;s built-in editor, emacs with ESS, Aquamacs), it&#39;s easier to write and understand your code.</p>
+<p>If you use a good editor that understands the syntax of the language you are using, it&#39;s easier to write and understand your code. Some editors to consider:</p>
 
-<p>With such editors, you can generally then execute lines or blocks of code easily.</p>
+<ul>
+<li>RStudio&#39;s built-in editor</li>
+<li>Mac: Aquamacs, TextMate, TextEdit</li>
+<li>Windows: WinEdt</li>
+<li>Linux: vim, Emacs with ESS, Atom</li>
+</ul>
 
 <p>To run all the code in an entire file, do <code>source(&#39;myCodeFile.R&#39;)</code>.</p>
 
@@ -768,9 +759,9 @@ complete set of instructions which generated the figures.</p>
 <li>If feasible, include your code for doing analyses and making figures in the relevant document reporting the work by using one of the following tools
 
 <ul>
-<li><em>R Markdown</em></li>
-<li><em>Latex</em> with <em>knitr</em> </li>
-<li><em>Jupyter</em> (formerly <em>IPython Notebook</em>)</li>
+<li><em>Quarto</em> and <em>R Markdown</em></li>
+<li><em>LaTeX</em> with <em>knitr</em> </li>
+<li><em>Jupyter</em> notebooks</li>
 </ul></li>
 <li>Always set the random number seed so someone else can duplicate your exact numbers.</li>
 <li>Use version control tools such as Git! </li>

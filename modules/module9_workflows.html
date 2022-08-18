@@ -188,8 +188,11 @@ additional optional argument that can avoid dropping dimensions.</li>
 <div id="debugging" class="slide section level1">
 <h1>Debugging</h1>
 <p>As a scripting language, R essentially has a debugger working
-automatically. But there is an official debugger and other tools that
-greatly help in figuring out problems.</p>
+automatically by virtue of you often being able to easily run code line
+by line.</p>
+<p>But there is an official debugger and other tools that greatly help
+in figuring out problems, particularly for more complicated
+situations.</p>
 <p>Let’s briefly see these in action. I’ll demo this in a very basic
 way, but hopefully this will give you an idea of the power of these
 tools.</p>
@@ -272,27 +275,32 @@ testing guidelines</a>.</p>
 hard to decipher, so you may want to use the <em>proftools</em> package
 functions, which make use of <em>Rprof</em> under the hood.</p>
 <p>Here’s a function that does the linear algebra to implement a linear
-regression, assuming <code>x</code> is the matrix of predictors,
-including a column for the intercept.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>lr_slow <span class="ot">&lt;-</span> <span class="cf">function</span>(y, x) {</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  xtx <span class="ot">&lt;-</span> <span class="fu">t</span>(x) <span class="sc">%*%</span> x</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  xty <span class="ot">&lt;-</span> <span class="fu">t</span>(x) <span class="sc">%*%</span> y</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  inv <span class="ot">&lt;-</span> <span class="fu">solve</span>(xtx)   <span class="do">## explicit matrix inverse is slow and generally a bad idea numerically</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(inv <span class="sc">%*%</span> xty)</span>
+regression, assuming <code>X</code> is the matrix of predictors,
+including a column for the intercept:</p>
+<p><img style="vertical-align:middle" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJIAAAAWBAMAAADZdNhzAAAAMFBMVEX///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAv3aB7AAAAD3RSTlMAELuZInZmVM1E76uJMt3ZEFQ5AAAACXBIWXMAAA7EAAAOxAGVKw4bAAACRElEQVQ4Ea1UPYjUQBh9szfJbm43a9hibRYvFnaCKyiWBgQRRFyxEEEwlZYGRK+8lF7ldiIoRBAbWdyzkrNJoRYacBHhzuq0sLE68FA4f/CbSSaZJHudH2S+99738jaZCQsAPYeW/1LHhnvFsOTd4cSrTfe7uTRInievFDPQV7DerXFdw3Koifc1XIVsVCh6kqFkHipEXUti1y9pA4JtgL395TR31wCZNHi2hpWnDlO7wEPNoSX10fLo/qIuEzR2wFzq6TNd9dAjcpsuUTykRTm0pBEa5c0QPvYbHWpZ0lKMmEgLuJIkr8FDIspRJPExFh2a5NX0BVyX92ZJ7UjGdoLUxEPRM0eRZALHxSCvhifg1i0Zn76d/fOC0KypWOntPos1c2hJ7RexGOS1KFH3sWz2WLZvnmyRXPHgiaCZ4xPBjSFuAqb10CWy8FJUTKhLF/Ed2bLlpCfBtq4VDhZMcAj4CJzQDTgj2b3vmmitDCV7pGkoHJa9jQngV/dpU9jtYF27a6MdSfZF03RHZ0pZImlVMwAHBDuNLRpkxX37h4SRUqjrju7YcEGHLY+i2Cex4yxGK6Se1gC4I1GUCdRKjiWnMYI9RG9WGAi1HOAsncQfpfIpcEN4uKukimMfzs/Q7C/Lb6XwGAE+7M6w+XeUavaRCey7X4mYfu4qOWC+eQ8086EC4hHmV8OZr5N6kX6nPjxYl1KF3nl+rYK+43P12am6lCpH9xpMF3wgqE+tOZpwmbO6N1WuVf7hcp+XoxLgJVYl/wCiSYar+qHmjgAAAABJRU5ErkJggg==" alt="
+\hat{\beta} = (X^{\top}X )^{-1}X^{\top}y
+" title="
+\hat{\beta} = (X^{\top}X )^{-1}X^{\top}y
+" class="math display" /></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>lr_slow <span class="ot">&lt;-</span> <span class="cf">function</span>(y, X) {</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  XtX <span class="ot">&lt;-</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> X</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  Xty <span class="ot">&lt;-</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> y</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  inv <span class="ot">&lt;-</span> <span class="fu">solve</span>(XtX)   <span class="do">## explicit matrix inverse is slow and generally a bad idea numerically</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(inv <span class="sc">%*%</span> Xty)</span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>}                   </span>
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>lr_medium <span class="ot">&lt;-</span> <span class="cf">function</span>(y, x) {</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  xtx <span class="ot">&lt;-</span> <span class="fu">crossprod</span>(x)</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  xty <span class="ot">&lt;-</span> <span class="fu">crossprod</span>(x, y)</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  inv <span class="ot">&lt;-</span> <span class="fu">solve</span>(xtx)   <span class="do">## explicit matrix inverse is slow and generally a bad idea numerically</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(inv <span class="sc">%*%</span> xty)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>lr_medium <span class="ot">&lt;-</span> <span class="cf">function</span>(y, X) {</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  XtX <span class="ot">&lt;-</span> <span class="fu">crossprod</span>(X)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  Xty <span class="ot">&lt;-</span> <span class="fu">crossprod</span>(X, y)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  inv <span class="ot">&lt;-</span> <span class="fu">solve</span>(XtX)   <span class="do">## explicit matrix inverse is slow and generally a bad idea numerically</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(inv <span class="sc">%*%</span> Xty)</span>
 <span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>}                   </span>
 <span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>lr_fast <span class="ot">&lt;-</span> <span class="cf">function</span>(y, x) {</span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  xtx <span class="ot">&lt;-</span> <span class="fu">crossprod</span>(x)</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  xty <span class="ot">&lt;-</span> <span class="fu">crossprod</span>(x, y)</span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  U <span class="ot">&lt;-</span> <span class="fu">chol</span>(xtx)</span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">&lt;-</span> <span class="fu">backsolve</span>(U, xty, <span class="at">transpose =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>lr_fast <span class="ot">&lt;-</span> <span class="cf">function</span>(y, X) {</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  XtX <span class="ot">&lt;-</span> <span class="fu">crossprod</span>(X)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  Xty <span class="ot">&lt;-</span> <span class="fu">crossprod</span>(X, y)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  U <span class="ot">&lt;-</span> <span class="fu">chol</span>(XtX)</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">&lt;-</span> <span class="fu">backsolve</span>(U, Xty, <span class="at">transpose =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">backsolve</span>(U, tmp))</span>
 <span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>}                   </span></code></pre></div>
 <p>Now let’s try these two functions with profiling turned on.</p>
@@ -306,105 +314,81 @@ including a column for the intercept.</p>
 <span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="fu">hotPaths</span>(pd1)</span></code></pre></div>
 <pre><code>##  path                  total.pct self.pct
 ##  lr_slow               100.00     0.00   
-##  . %*% (&lt;text&gt;:2)       49.02    49.02   
-##  . %*% (&lt;text&gt;:3)        0.98     0.98   
-##  . solve (&lt;text&gt;:4)     27.45     0.00   
-##  . . standardGeneric    27.45     0.00   
-##  . . . solve            27.45     0.00   
-##  . . . . solve.default  27.45    26.47   
-##  . . . . . diag          0.98     0.98   
-##  . t (&lt;text&gt;:2)          2.94     0.00   
-##  . . standardGeneric     2.94     0.00   
-##  . . . t                 2.94     0.00   
-##  . . . . t.default       2.94     2.94   
-##  . t (&lt;text&gt;:3)         19.61     0.00   
-##  . . standardGeneric    19.61     0.00   
-##  . . . t                19.61     0.00   
-##  . . . . t.default      19.61    19.61</code></pre>
+##  . %*% (&lt;text&gt;:2)       57.89    57.89   
+##  . %*% (&lt;text&gt;:3)        5.26     5.26   
+##  . solve (&lt;text&gt;:4)     21.05     0.00   
+##  . . standardGeneric    21.05     0.00   
+##  . . . solve            21.05     0.00   
+##  . . . . solve.default  21.05    21.05   
+##  . t (&lt;text&gt;:2)          5.26     0.00   
+##  . . standardGeneric     5.26     0.00   
+##  . . . t                 5.26     0.00   
+##  . . . . t.default       5.26     5.26   
+##  . t (&lt;text&gt;:3)         10.53     0.00   
+##  . . standardGeneric    10.53     0.00   
+##  . . . t                10.53     0.00   
+##  . . . . t.default      10.53    10.53</code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hotPaths</span>(pd1, <span class="at">value =</span> <span class="st">&#39;time&#39;</span>)</span></code></pre></div>
 <pre><code>##  path                  total.time self.time
-##  lr_slow               2.04       0.00     
-##  . %*% (&lt;text&gt;:2)      1.00       1.00     
+##  lr_slow               0.38       0.00     
+##  . %*% (&lt;text&gt;:2)      0.22       0.22     
 ##  . %*% (&lt;text&gt;:3)      0.02       0.02     
-##  . solve (&lt;text&gt;:4)    0.56       0.00     
-##  . . standardGeneric   0.56       0.00     
-##  . . . solve           0.56       0.00     
-##  . . . . solve.default 0.56       0.54     
-##  . . . . . diag        0.02       0.02     
-##  . t (&lt;text&gt;:2)        0.06       0.00     
-##  . . standardGeneric   0.06       0.00     
-##  . . . t               0.06       0.00     
-##  . . . . t.default     0.06       0.06     
-##  . t (&lt;text&gt;:3)        0.40       0.00     
-##  . . standardGeneric   0.40       0.00     
-##  . . . t               0.40       0.00     
-##  . . . . t.default     0.40       0.40</code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>pd1 <span class="ot">&lt;-</span> <span class="fu">profileExpr</span>(<span class="fu">lr_medium</span>(y, x))</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hotPaths</span>(pd1)</span></code></pre></div>
-<pre><code>##  path                    total.pct self.pct
-##  lr_medium               100.00     0.00   
-##  . crossprod (&lt;text&gt;:10)   2.59     0.00   
-##  . . crossprod             2.59     0.00   
-##  . . . base::crossprod     2.59     2.59   
-##  . crossprod (&lt;text&gt;:9)   15.52     0.00   
-##  . . crossprod            15.52     0.00   
-##  . . . base::crossprod    15.52    15.52   
-##  . solve (&lt;text&gt;:11)      81.90     0.00   
-##  . . standardGeneric      81.90     0.00   
-##  . . . solve              81.90     0.00   
-##  . . . . solve.default    81.90    81.03   
-##  . . . . . diag            0.86     0.86</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hotPaths</span>(pd1, <span class="at">value =</span> <span class="st">&#39;time&#39;</span>)</span></code></pre></div>
-<pre><code>##  path                    total.time self.time
-##  lr_medium               2.32       0.00     
-##  . crossprod (&lt;text&gt;:10) 0.06       0.00     
-##  . . crossprod           0.06       0.00     
-##  . . . base::crossprod   0.06       0.06     
-##  . crossprod (&lt;text&gt;:9)  0.36       0.00     
-##  . . crossprod           0.36       0.00     
-##  . . . base::crossprod   0.36       0.36     
-##  . solve (&lt;text&gt;:11)     1.90       0.00     
-##  . . standardGeneric     1.90       0.00     
-##  . . . solve             1.90       0.00     
-##  . . . . solve.default   1.90       1.88     
-##  . . . . . diag          0.02       0.02</code></pre>
+##  . solve (&lt;text&gt;:4)    0.08       0.00     
+##  . . standardGeneric   0.08       0.00     
+##  . . . solve           0.08       0.00     
+##  . . . . solve.default 0.08       0.08     
+##  . t (&lt;text&gt;:2)        0.02       0.00     
+##  . . standardGeneric   0.02       0.00     
+##  . . . t               0.02       0.00     
+##  . . . . t.default     0.02       0.02     
+##  . t (&lt;text&gt;:3)        0.04       0.00     
+##  . . standardGeneric   0.04       0.00     
+##  . . . t               0.04       0.00     
+##  . . . . t.default     0.04       0.04</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>pd2 <span class="ot">&lt;-</span> <span class="fu">profileExpr</span>(<span class="fu">lr_medium</span>(y, x))</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hotPaths</span>(pd2)</span></code></pre></div>
+<pre><code>##  path                   total.pct self.pct
+##  lr_medium              100.00     0.00   
+##  . %*% (&lt;text&gt;:12)        9.09     9.09   
+##  . crossprod (&lt;text&gt;:9)  54.55     0.00   
+##  . . crossprod           54.55     0.00   
+##  . . . base::crossprod   54.55    54.55   
+##  . solve (&lt;text&gt;:11)     36.36     0.00   
+##  . . standardGeneric     36.36     0.00   
+##  . . . solve             36.36     0.00   
+##  . . . . solve.default   36.36    36.36</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hotPaths</span>(pd2, <span class="at">value =</span> <span class="st">&#39;time&#39;</span>)</span></code></pre></div>
+<pre><code>##  path                   total.time self.time
+##  lr_medium              0.22       0.00     
+##  . %*% (&lt;text&gt;:12)      0.02       0.02     
+##  . crossprod (&lt;text&gt;:9) 0.12       0.00     
+##  . . crossprod          0.12       0.00     
+##  . . . base::crossprod  0.12       0.12     
+##  . solve (&lt;text&gt;:11)    0.08       0.00     
+##  . . standardGeneric    0.08       0.00     
+##  . . . solve            0.08       0.00     
+##  . . . . solve.default  0.08       0.08</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>pd3 <span class="ot">&lt;-</span> <span class="fu">profileExpr</span>(<span class="fu">lr_fast</span>(y, x))</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hotPaths</span>(pd3)</span></code></pre></div>
-<pre><code>##  path                           total.pct self.pct
-##  lr_fast                        100.00     0.00   
-##  . backsolve (&lt;text&gt;:19)          2.94     0.00   
-##  . . &lt;Anonymous&gt;                  2.94     0.00   
-##  . . . .findInheritedMethods      2.94     0.00   
-##  . . . . .duplicateClassesExist   2.94     0.00   
-##  . . . . . get                    2.94     2.94   
-##  . chol (&lt;text&gt;:18)               8.82     0.00   
-##  . . standardGeneric              8.82     0.00   
-##  . . . chol                       8.82     0.00   
-##  . . . . chol.default             8.82     8.82   
-##  . crossprod (&lt;text&gt;:16)         82.35     0.00   
-##  . . crossprod                   82.35     0.00   
-##  . . . base::crossprod           82.35    82.35   
-##  . crossprod (&lt;text&gt;:17)          5.88     0.00   
-##  . . crossprod                    5.88     0.00   
-##  . . . base::crossprod            5.88     5.88</code></pre>
+<pre><code>##  path                    total.pct self.pct
+##  lr_fast                 100.00     0.00   
+##  . chol (&lt;text&gt;:18)       14.29     0.00   
+##  . . standardGeneric      14.29     0.00   
+##  . . . chol               14.29     0.00   
+##  . . . . chol.default     14.29    14.29   
+##  . crossprod (&lt;text&gt;:16)  85.71     0.00   
+##  . . crossprod            85.71     0.00   
+##  . . . base::crossprod    85.71    85.71</code></pre>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hotPaths</span>(pd3, <span class="at">value =</span> <span class="st">&#39;time&#39;</span>)</span></code></pre></div>
-<pre><code>##  path                           total.time self.time
-##  lr_fast                        0.68       0.00     
-##  . backsolve (&lt;text&gt;:19)        0.02       0.00     
-##  . . &lt;Anonymous&gt;                0.02       0.00     
-##  . . . .findInheritedMethods    0.02       0.00     
-##  . . . . .duplicateClassesExist 0.02       0.00     
-##  . . . . . get                  0.02       0.02     
-##  . chol (&lt;text&gt;:18)             0.06       0.00     
-##  . . standardGeneric            0.06       0.00     
-##  . . . chol                     0.06       0.00     
-##  . . . . chol.default           0.06       0.06     
-##  . crossprod (&lt;text&gt;:16)        0.56       0.00     
-##  . . crossprod                  0.56       0.00     
-##  . . . base::crossprod          0.56       0.56     
-##  . crossprod (&lt;text&gt;:17)        0.04       0.00     
-##  . . crossprod                  0.04       0.00     
-##  . . . base::crossprod          0.04       0.04</code></pre>
+<pre><code>##  path                    total.time self.time
+##  lr_fast                 0.14       0.00     
+##  . chol (&lt;text&gt;:18)      0.02       0.00     
+##  . . standardGeneric     0.02       0.00     
+##  . . . chol              0.02       0.00     
+##  . . . . chol.default    0.02       0.02     
+##  . crossprod (&lt;text&gt;:16) 0.12       0.00     
+##  . . crossprod           0.12       0.00     
+##  . . . base::crossprod   0.12       0.12</code></pre>
 <p>You might also check out <em>profvis</em> for an alternative to
 displaying profiling information generated by <em>Rprof</em>.</p>
 </div>
@@ -415,9 +399,11 @@ and keep in mind how big your objects are and how much memory you code
 might use. All objects in R are stored in RAM unlike, e.g., SAS or a
 database.</p>
 <p>If in total, the jobs on a machine approach the physical RAM, the
-machine will start to use the hard disk as ‘virtual memory’. This is
-called paging or swapping, and once this happens you’re often toast
-(i.e., your code may take essentially forever to finish).</p>
+machine may (depending on how it is set up) start to use the hard disk
+as ‘virtual memory’. This is called paging or swapping, and once this
+happens you’re often toast (i.e., your code may take essentially forever
+to finish). And if paging doesn’t happen, your job will die with an
+out-of-memory (OOM) error.</p>
 <p>You can assess memory use with <code>top</code> or <code>ps</code> in
 Linux/Mac or the Task Manager in Windows.</p>
 <p>Often it’s a good idea to roughly estimate how much memory an object
@@ -436,19 +422,21 @@ roughly 8 * 1000000 * 10 bytes or 800 Mb.</p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e8</span>)</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code></pre></div>
 <pre><code>##             used  (Mb) gc trigger   (Mb)  max used  (Mb)
-## Ncells   2383065 127.3    4598718  245.6   3288884 175.7
-## Vcells 104070047 794.0  160261347 1222.7 114653665 874.8</code></pre>
+## Ncells   2382568 127.3    4596221  245.5   4119676 220.1
+## Vcells 104073737 794.1  160258200 1222.7 114124365 870.7</code></pre>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x)</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code></pre></div>
 <pre><code>##           used  (Mb) gc trigger  (Mb)  max used  (Mb)
-## Ncells 2382984 127.3    4598718 245.6   3288884 175.7
-## Vcells 4069924  31.1  128209078 978.2 114653665 874.8</code></pre>
+## Ncells 2382580 127.3    4596221 245.5   4119676 220.1
+## Vcells 4073769  31.1  128206560 978.2 114124365 870.7</code></pre>
 </div>
 <div id="memory-use-quick-quiz" class="slide section level1">
 <h1>Memory use: quick quiz</h1>
-<p><strong>POLL 9A</strong>: Suppose you have a CSV file with one
-million rows and one thousand columns, filled with numbers. How much
-memory will this take up if you read the data into R?</p>
+<p><strong><a href="https://www.polleverywhere.com/multiple_choice_polls/uBi9jJwqk3A4YCMJx1UNb">P</a>OLL
+9A</strong>: Suppose you have a CSV file with one million rows and one
+thousand columns, filled with numbers. How much memory will this take up
+if you read the data into R?</p>
+<p>(respond at <a href="https://pollev.com/chrispaciorek428">https://pollev.com/chrispaciorek428</a>)</p>
 <ol style="list-style-type: decimal">
 <li>800 MB</li>
 <li>8 GB</li>
@@ -465,10 +453,15 @@ memory will this take up if you read the data into R?</p>
 <li>Write functions to reuse code.</li>
 <li>Learn a powerful, general purpose text editor</li>
 </ul>
-<p>If you use a good editor (such as RStudio’s built-in editor, emacs
-with ESS, Aquamacs), it’s easier to write and understand your code.</p>
-<p>With such editors, you can generally then execute lines or blocks of
-code easily.</p>
+<p>If you use a good editor that understands the syntax of the language
+you are using, it’s easier to write and understand your code. Some
+editors to consider:</p>
+<ul>
+<li>RStudio’s built-in editor</li>
+<li>Mac: Aquamacs, TextMate, TextEdit</li>
+<li>Windows: WinEdt</li>
+<li>Linux: vim, Emacs with ESS, Atom</li>
+</ul>
 <p>To run all the code in an entire file, do
 <code>source(&#39;myCodeFile.R&#39;)</code>.</p>
 <p>RStudio projects help to organize your work. In many cases you may
@@ -609,9 +602,9 @@ figure, with the code for making the figure in a script file.</li>
 in the relevant document reporting the work by using one of the
 following tools
 <ul>
-<li><em>R Markdown</em></li>
-<li><em>Latex</em> with <em>knitr</em></li>
-<li><em>Jupyter</em> (formerly <em>IPython Notebook</em>)</li>
+<li><em>Quarto</em> and <em>R Markdown</em></li>
+<li><em>LaTeX</em> with <em>knitr</em></li>
+<li><em>Jupyter</em> notebooks</li>
 </ul></li>
 <li>Always set the random number seed so someone else can duplicate your
 exact numbers.</li>

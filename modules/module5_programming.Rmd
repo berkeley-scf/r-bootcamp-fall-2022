@@ -429,6 +429,26 @@ if(sqrt(-1) == 0i) {
 2) an error
 3) 'not i'
 
+# Boolean arithmetic
+
+R provides both `&&` and `&` as well as `||` and `|`.
+
+`&` and `|` are the vectorized AND and OR operators we've seen already.
+
+`&&` and `||` operate only on a single element and are generally used in the conditions of `if` statements (or `while` loops).
+
+For example:
+
+```r
+x <- rnorm(1)
+y <- rnorm(1)
+if(x > 0 && y < 0) {
+  # do something
+}
+```
+
+A nice thing about `&&` and `||` is that they evaluate left to right, so it can save some computation, e.g., if the first condition of `&&` is FALSE, the second condition is not evaluated.
+
 # Flow control: `next` and `break` statements (optional)
 
 'next' skips the current evaluation of the loop statements:

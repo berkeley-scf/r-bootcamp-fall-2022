@@ -41,7 +41,7 @@ For grad students and researchers in statistics, economics and biostatistics, Ch
 
 For researchers around campus, Berkeley Research Computing offers consulting via brc@berkeley.edu on accessing and using cluster and cloud resources on campus and beyond, including R.
 
-Various online tutorials/courses are offered by [DataCamp](https://www.datacamp.com/), [Software Carpentry](https://swcarpentry.github.io/r-novice-inflammation/), [Coursera](https://www.coursera.org/course/rprog), and [Leada](https://www.teamleada.com/courses).  The DataCamp Introduction to R and Intermediate R courses are free and look pretty good to me. Finally the [swirl package](https://swirlstats.com/students.html) provides interactive training.
+Various online tutorials/courses are offered by [DataCamp](https://www.datacamp.com/), [Software Carpentry](https://swcarpentry.github.io/r-novice-inflammation/), and [Coursera](https://www.coursera.org/course/rprog).  The DataCamp Introduction to R and Intermediate R courses are free and look pretty good to me. Finally the [swirl package](https://swirlstats.com/students.html) provides interactive training.
 
 # Some good books
  

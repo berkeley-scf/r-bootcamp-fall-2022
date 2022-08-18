@@ -218,7 +218,7 @@ repeatable operations as an individual function call.</p>
 
 <pre><code>## function (x, na.rm = FALSE, ...) 
 ## UseMethod(&quot;median&quot;)
-## &lt;bytecode: 0x5643c5fcf408&gt;
+## &lt;bytecode: 0x55e9bdfdb408&gt;
 ## &lt;environment: namespace:stats&gt;
 </code></pre>
 
@@ -434,13 +434,13 @@ new_x &lt;- myfun(x)
 print(new_x)
 </code></pre>
 
-<pre><code>## [1]  98.55649 100.08633 100.47514
+<pre><code>## [1]  99.76558 101.65655  99.54694
 </code></pre>
 
 <pre><code class="r">print(x)
 </code></pre>
 
-<pre><code>## [1] -1.44351132  0.08632782  0.47514057
+<pre><code>## [1] -0.2344203  1.6565473 -0.4530581
 </code></pre>
 
 <p>Functions in R are (roughly) <em>pass-by-value</em> and not <em>pass-by-reference</em>. This
@@ -706,7 +706,7 @@ implicit.</p>
 val
 </code></pre>
 
-<pre><code>## [1] -0.5749203
+<pre><code>## [1] 1.103457
 </code></pre>
 
 <pre><code class="r">if (val &lt; 0) {
@@ -716,7 +716,7 @@ val
 }
 </code></pre>
 
-<pre><code>## [1] &quot;val is negative&quot;
+<pre><code>## [1] &quot;val is positive&quot;
 </code></pre>
 
 <p>We can chain together <code>if</code> statements as follows.</p>
@@ -725,7 +725,7 @@ val
 val
 </code></pre>
 
-<pre><code>## [1] 2.164743
+<pre><code>## [1] -0.5262594
 </code></pre>
 
 <pre><code class="r">if (val &lt; -1) {
@@ -737,7 +737,7 @@ val
 }
 </code></pre>
 
-<pre><code>## [1] &quot;val is more than one standard deviation above the mean.&quot;
+<pre><code>## [1] &quot;val is within one standard deviation of the mean.&quot;
 </code></pre>
 
 <p>In general, the <code>{</code> brackets are only needed if you have multiple R expressions,
@@ -747,7 +747,7 @@ but R will complain when an <code>else</code> starts a line of code, so generall
 <pre><code class="r">if (val &lt; 0) print(&quot;val is negative&quot;) else print(&quot;val is positive&quot;)
 </code></pre>
 
-<pre><code>## [1] &quot;val is positive&quot;
+<pre><code>## [1] &quot;val is negative&quot;
 </code></pre>
 
 <h1>The condition in an if statement</h1>
@@ -825,6 +825,25 @@ for (i in seq_along(continents)) {
 <p>1) &#39;i&#39;
 2) an error
 3) &#39;not i&#39;</p>
+
+<h1>Boolean arithmetic</h1>
+
+<p>R provides both <code>&amp;&amp;</code> and <code>&amp;</code> as well as <code>||</code> and <code>|</code>.</p>
+
+<p><code>&amp;</code> and <code>|</code> are the vectorized AND and OR operators we&#39;ve seen already.</p>
+
+<p><code>&amp;&amp;</code> and <code>||</code> operate only on a single element and are generally used in the conditions of <code>if</code> statements (or <code>while</code> loops).</p>
+
+<p>For example:</p>
+
+<pre><code class="r">x &lt;- rnorm(1)
+y &lt;- rnorm(1)
+if(x &gt; 0 &amp;&amp; y &lt; 0) {
+  # do something
+}
+</code></pre>
+
+<p>A nice thing about <code>&amp;&amp;</code> and <code>||</code> is that they evaluate left to right, so it can save some computation, e.g., if the first condition of <code>&amp;&amp;</code> is FALSE, the second condition is not evaluated.</p>
 
 <h1>Flow control: <code>next</code> and <code>break</code> statements (optional)</h1>
 
@@ -934,15 +953,15 @@ talk</a></p></li>
 x[ , 2]
 </code></pre>
 
-<pre><code>##  [1] 0.8180790 0.7552074 0.6515242 0.7474064 0.4888648 0.2772108 0.1388223
-##  [8] 0.9673852 0.1100587 0.2639538
+<pre><code>##  [1] 0.6127328 0.2310099 0.2712592 0.1312509 0.4052205 0.9013784 0.6438640
+##  [8] 0.9918638 0.2840834 0.8795848
 </code></pre>
 
 <pre><code class="r">&#39;[&#39;(x , , 2)
 </code></pre>
 
-<pre><code>##  [1] 0.8180790 0.7552074 0.6515242 0.7474064 0.4888648 0.2772108 0.1388223
-##  [8] 0.9673852 0.1100587 0.2639538
+<pre><code>##  [1] 0.6127328 0.2310099 0.2712592 0.1312509 0.4052205 0.9013784 0.6438640
+##  [8] 0.9918638 0.2840834 0.8795848
 </code></pre>
 
 <p>Also yes!</p>

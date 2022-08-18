@@ -106,7 +106,7 @@ another function.</li>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>median</span></code></pre></div>
 <pre><code>## function (x, na.rm = FALSE, ...) 
 ## UseMethod(&quot;median&quot;)
-## &lt;bytecode: 0x5643c5fcf408&gt;
+## &lt;bytecode: 0x55e9bdfdb408&gt;
 ## &lt;environment: namespace:stats&gt;</code></pre>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(median)</span></code></pre></div>
 <pre><code>## function (x, na.rm = FALSE, ...) 
@@ -257,9 +257,9 @@ saw an R function produce from earlier today?</p>
 <span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>new_x <span class="ot">&lt;-</span> <span class="fu">myfun</span>(x)</span>
 <span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(new_x)</span></code></pre></div>
-<pre><code>## [1]  98.55649 100.08633 100.47514</code></pre>
+<pre><code>## [1]  99.76558 101.65655  99.54694</code></pre>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x)</span></code></pre></div>
-<pre><code>## [1] -1.44351132  0.08632782  0.47514057</code></pre>
+<pre><code>## [1] -0.2344203  1.6565473 -0.4530581</code></pre>
 <p>Functions in R are (roughly) <em>pass-by-value</em> and not
 <em>pass-by-reference</em>. This means that if you modify an argument
 inside the function it will not change the original value outside the
@@ -489,17 +489,17 @@ some condition is true or false.</p>
 <em>then</em> is implicit.</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>val <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>)</span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>val</span></code></pre></div>
-<pre><code>## [1] -0.5749203</code></pre>
+<pre><code>## [1] 1.103457</code></pre>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (val <span class="sc">&lt;</span> <span class="dv">0</span>) {</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;val is negative&quot;</span>)</span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
 <span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;val is positive&quot;</span>)</span>
 <span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<pre><code>## [1] &quot;val is negative&quot;</code></pre>
+<pre><code>## [1] &quot;val is positive&quot;</code></pre>
 <p>We can chain together <code>if</code> statements as follows.</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>val <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>)</span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>val</span></code></pre></div>
-<pre><code>## [1] 2.164743</code></pre>
+<pre><code>## [1] -0.5262594</code></pre>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (val <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">1</span>) {</span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;val is more than one standard deviation below the mean.&quot;</span>)</span>
 <span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (<span class="fu">abs</span>(val) <span class="sc">&lt;=</span> <span class="dv">1</span>) {</span>
@@ -507,13 +507,13 @@ some condition is true or false.</p>
 <span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
 <span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;val is more than one standard deviation above the mean.&quot;</span>)</span>
 <span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<pre><code>## [1] &quot;val is more than one standard deviation above the mean.&quot;</code></pre>
+<pre><code>## [1] &quot;val is within one standard deviation of the mean.&quot;</code></pre>
 <p>In general, the <code>{</code> brackets are only needed if you have
 multiple R expressions, but R will complain when an <code>else</code>
 starts a line of code, so generally using the <code>{</code> is good
 practice. That said, this <em>works just fine</em>:</p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (val <span class="sc">&lt;</span> <span class="dv">0</span>) <span class="fu">print</span>(<span class="st">&quot;val is negative&quot;</span>) <span class="cf">else</span> <span class="fu">print</span>(<span class="st">&quot;val is positive&quot;</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;val is positive&quot;</code></pre>
+<pre><code>## [1] &quot;val is negative&quot;</code></pre>
 </div>
 <div id="the-condition-in-an-if-statement" class="slide section level1">
 <h1>The condition in an if statement</h1>
@@ -563,46 +563,66 @@ logical values.</p>
 <li>‘not i’</li>
 </ol>
 </div>
+<div id="boolean-arithmetic" class="slide section level1">
+<h1>Boolean arithmetic</h1>
+<p>R provides both <code>&amp;&amp;</code> and <code>&amp;</code> as
+well as <code>||</code> and <code>|</code>.</p>
+<p><code>&amp;</code> and <code>|</code> are the vectorized AND and OR
+operators we’ve seen already.</p>
+<p><code>&amp;&amp;</code> and <code>||</code> operate only on a single
+element and are generally used in the conditions of <code>if</code>
+statements (or <code>while</code> loops).</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>)</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>)</span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(x <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;&amp;</span> y <span class="sc">&lt;</span> <span class="dv">0</span>) {</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># do something</span></span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>A nice thing about <code>&amp;&amp;</code> and <code>||</code> is
+that they evaluate left to right, so it can save some computation, e.g.,
+if the first condition of <code>&amp;&amp;</code> is FALSE, the second
+condition is not evaluated.</p>
+</div>
 <div id="flow-control-next-and-break-statements-optional" class="slide section level1">
 <h1>Flow control: <code>next</code> and <code>break</code> statements
 (optional)</h1>
 <p>‘next’ skips the current evaluation of the loop statements:</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>continents <span class="ot">&lt;-</span> <span class="fu">unique</span>(gapminder2007<span class="sc">$</span>continent)</span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>continents[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Oceania&quot;</span>; continents[<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Europe&quot;</span>  <span class="co"># reorder to illustrate points below</span></span>
-<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>continents</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>continents <span class="ot">&lt;-</span> <span class="fu">unique</span>(gapminder2007<span class="sc">$</span>continent)</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>continents[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Oceania&quot;</span>; continents[<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Europe&quot;</span>  <span class="co"># reorder to illustrate points below</span></span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>continents</span></code></pre></div>
 <pre><code>## [1] Asia     Oceania  Africa   Americas Europe  
 ## Levels: Africa Americas Asia Europe Oceania</code></pre>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">list</span>(); <span class="fu">length</span>(out) <span class="ot">&lt;-</span> <span class="fu">length</span>(continents); <span class="fu">names</span>(out) <span class="ot">&lt;-</span> continents</span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(continents)) {</span>
-<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>     <span class="co"># equivalently: for(i in 1:length(continents))</span></span>
-<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>     sub <span class="ot">&lt;-</span> <span class="fu">subset</span>(gapminder2007, gapminder2007<span class="sc">$</span>continent <span class="sc">==</span> continents[i])</span>
-<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>     <span class="cf">if</span>(<span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(sub<span class="sc">$</span>lifeExp)) <span class="sc">&gt;</span> <span class="dv">2</span>) { <span class="co"># don&#39;t regress if &lt;= 2 obs</span></span>
-<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a>     <span class="co"># fit regression</span></span>
-<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a>       out[[i]] <span class="ot">&lt;-</span> <span class="fu">lm</span>(lifeExp <span class="sc">~</span> <span class="fu">log</span>(gdpPercap), <span class="at">data =</span> sub)</span>
-<span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a>     } <span class="cf">else</span> {</span>
-<span id="cb75-10"><a href="#cb75-10" aria-hidden="true" tabindex="-1"></a>       <span class="cf">next</span></span>
-<span id="cb75-11"><a href="#cb75-11" aria-hidden="true" tabindex="-1"></a>     }</span>
-<span id="cb75-12"><a href="#cb75-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb75-13"><a href="#cb75-13" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;We got to iteration &quot;</span>, i, <span class="st">&quot; of &quot;</span>, <span class="fu">length</span>(continents), <span class="st">&quot; items.</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">list</span>(); <span class="fu">length</span>(out) <span class="ot">&lt;-</span> <span class="fu">length</span>(continents); <span class="fu">names</span>(out) <span class="ot">&lt;-</span> continents</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(continents)) {</span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>     <span class="co"># equivalently: for(i in 1:length(continents))</span></span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a>     sub <span class="ot">&lt;-</span> <span class="fu">subset</span>(gapminder2007, gapminder2007<span class="sc">$</span>continent <span class="sc">==</span> continents[i])</span>
+<span id="cb76-6"><a href="#cb76-6" aria-hidden="true" tabindex="-1"></a>     <span class="cf">if</span>(<span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(sub<span class="sc">$</span>lifeExp)) <span class="sc">&gt;</span> <span class="dv">2</span>) { <span class="co"># don&#39;t regress if &lt;= 2 obs</span></span>
+<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a>     <span class="co"># fit regression</span></span>
+<span id="cb76-8"><a href="#cb76-8" aria-hidden="true" tabindex="-1"></a>       out[[i]] <span class="ot">&lt;-</span> <span class="fu">lm</span>(lifeExp <span class="sc">~</span> <span class="fu">log</span>(gdpPercap), <span class="at">data =</span> sub)</span>
+<span id="cb76-9"><a href="#cb76-9" aria-hidden="true" tabindex="-1"></a>     } <span class="cf">else</span> {</span>
+<span id="cb76-10"><a href="#cb76-10" aria-hidden="true" tabindex="-1"></a>       <span class="cf">next</span></span>
+<span id="cb76-11"><a href="#cb76-11" aria-hidden="true" tabindex="-1"></a>     }</span>
+<span id="cb76-12"><a href="#cb76-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb76-13"><a href="#cb76-13" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;We got to iteration &quot;</span>, i, <span class="st">&quot; of &quot;</span>, <span class="fu">length</span>(continents), <span class="st">&quot; items.</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <pre><code>## We got to iteration 5 of 5 items.</code></pre>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>out[[<span class="st">&#39;Oceania&#39;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>out[[<span class="st">&#39;Oceania&#39;</span>]]</span></code></pre></div>
 <pre><code>## NULL</code></pre>
 <p>‘break’ immediately ends loop evaluation:</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">list</span>(); <span class="fu">length</span>(out) <span class="ot">&lt;-</span> <span class="fu">length</span>(continents); <span class="fu">names</span>(out) <span class="ot">&lt;-</span> continents</span>
-<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(continents)) {</span>
-<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a>     <span class="co"># equivalently: for(i in 1:length(continents))</span></span>
-<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>     sub <span class="ot">&lt;-</span> <span class="fu">subset</span>(gapminder2007, gapminder2007<span class="sc">$</span>continent <span class="sc">==</span> continents[i])</span>
-<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a>     <span class="cf">if</span>(<span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(sub<span class="sc">$</span>lifeExp)) <span class="sc">&gt;</span> <span class="dv">2</span>) { <span class="co"># don&#39;t regress if &lt;= 2 obs</span></span>
-<span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a>     <span class="co"># fit regression</span></span>
-<span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a>       out[[i]] <span class="ot">&lt;-</span> <span class="fu">lm</span>(lifeExp <span class="sc">~</span> <span class="fu">log</span>(gdpPercap), <span class="at">data =</span> sub)</span>
-<span id="cb79-9"><a href="#cb79-9" aria-hidden="true" tabindex="-1"></a>     } <span class="cf">else</span> {</span>
-<span id="cb79-10"><a href="#cb79-10" aria-hidden="true" tabindex="-1"></a>       <span class="cf">break</span></span>
-<span id="cb79-11"><a href="#cb79-11" aria-hidden="true" tabindex="-1"></a>     }</span>
-<span id="cb79-12"><a href="#cb79-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb79-13"><a href="#cb79-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb79-14"><a href="#cb79-14" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;We got to iteration &quot;</span>, i, <span class="st">&quot; of &quot;</span>, <span class="fu">length</span>(continents), <span class="st">&quot; items.</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">list</span>(); <span class="fu">length</span>(out) <span class="ot">&lt;-</span> <span class="fu">length</span>(continents); <span class="fu">names</span>(out) <span class="ot">&lt;-</span> continents</span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(continents)) {</span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>     <span class="co"># equivalently: for(i in 1:length(continents))</span></span>
+<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a>     sub <span class="ot">&lt;-</span> <span class="fu">subset</span>(gapminder2007, gapminder2007<span class="sc">$</span>continent <span class="sc">==</span> continents[i])</span>
+<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>     <span class="cf">if</span>(<span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(sub<span class="sc">$</span>lifeExp)) <span class="sc">&gt;</span> <span class="dv">2</span>) { <span class="co"># don&#39;t regress if &lt;= 2 obs</span></span>
+<span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a>     <span class="co"># fit regression</span></span>
+<span id="cb80-8"><a href="#cb80-8" aria-hidden="true" tabindex="-1"></a>       out[[i]] <span class="ot">&lt;-</span> <span class="fu">lm</span>(lifeExp <span class="sc">~</span> <span class="fu">log</span>(gdpPercap), <span class="at">data =</span> sub)</span>
+<span id="cb80-9"><a href="#cb80-9" aria-hidden="true" tabindex="-1"></a>     } <span class="cf">else</span> {</span>
+<span id="cb80-10"><a href="#cb80-10" aria-hidden="true" tabindex="-1"></a>       <span class="cf">break</span></span>
+<span id="cb80-11"><a href="#cb80-11" aria-hidden="true" tabindex="-1"></a>     }</span>
+<span id="cb80-12"><a href="#cb80-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb80-13"><a href="#cb80-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-14"><a href="#cb80-14" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;We got to iteration &quot;</span>, i, <span class="st">&quot; of &quot;</span>, <span class="fu">length</span>(continents), <span class="st">&quot; items.</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <pre><code>## We got to iteration 2 of 5 items.</code></pre>
 <p>Effective use of <code>next</code> and <code>break</code> can make
 your <code>for</code> (and other) loops both more robust and efficient
@@ -631,32 +651,32 @@ Chambers’ useR!2014 talk</a></p></li>
 <h3 id="what-does-the-2nd-principle-mean">What does the 2nd principle
 mean?</h3>
 <p>Are arithmetic operations really just functions?</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span><span class="sc">+</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span><span class="sc">+</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;+&#39;</span>(<span class="dv">3</span>,<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;+&#39;</span>(<span class="dv">3</span>,<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 <p>Yes!</p>
 <p>And what about indexing?</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(<span class="dv">100</span>), <span class="dv">10</span>)</span>
-<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>x[ , <span class="dv">2</span>]</span></code></pre></div>
-<pre><code>##  [1] 0.8180790 0.7552074 0.6515242 0.7474064 0.4888648 0.2772108 0.1388223
-##  [8] 0.9673852 0.1100587 0.2639538</code></pre>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;[&#39;</span>(x , , <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>##  [1] 0.8180790 0.7552074 0.6515242 0.7474064 0.4888648 0.2772108 0.1388223
-##  [8] 0.9673852 0.1100587 0.2639538</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(<span class="dv">100</span>), <span class="dv">10</span>)</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>x[ , <span class="dv">2</span>]</span></code></pre></div>
+<pre><code>##  [1] 0.6127328 0.2310099 0.2712592 0.1312509 0.4052205 0.9013784 0.6438640
+##  [8] 0.9918638 0.2840834 0.8795848</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;[&#39;</span>(x , , <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##  [1] 0.6127328 0.2310099 0.2712592 0.1312509 0.4052205 0.9013784 0.6438640
+##  [8] 0.9918638 0.2840834 0.8795848</code></pre>
 <p>Also yes!</p>
 <p>This holds more generally - one can investigate and see the same
 thing in terms of a <code>for</code> loop.</p>
 <h3 id="what-does-the-1st-principle-mean">What does the 1st principle
 mean?</h3>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(runif)</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(runif)</span></code></pre></div>
 <pre><code>## [1] &quot;function&quot;</code></pre>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="cf">function</span>(x) x<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="cf">function</span>(x) x<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;function&quot;</code></pre>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>square <span class="ot">&lt;-</span> <span class="cf">function</span>(x) x<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(square)</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>square <span class="ot">&lt;-</span> <span class="cf">function</span>(x) x<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(square)</span></code></pre></div>
 <pre><code>## [1] &quot;function&quot;</code></pre>
 </div>
 <div id="advanced-modern-functional-programming-in-r-optional" class="slide section level1">
@@ -672,8 +692,8 @@ packages of the <code>tidyverse</code>, most notably <code>dplyr</code>
 and <code>magrittr</code>. We won’t have time to cover details of how to
 use <code>purrr</code> here, but you may want to look into these
 packages as you continuing exploring R.</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span></code></pre></div>
 <p>We’ll leave you with a simple example of how to use
 <code>purrr</code> to deal with a task we already looked at with
 <code>for</code> loops. In fact, we’ll return to the logistic regression
@@ -683,13 +703,13 @@ exercise that we started with.</p>
 fit our models across each of the years separately, we’ll first need to
 put our data in “tidy” format. It’s <em>really easy</em> with some
 helpful verbs from <code>dplyr</code>…</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># let&#39;s clean up the data set first</span></span>
-<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>gm_tidy <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span></span>
-<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">split</span>(.<span class="sc">$</span>year)</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co"># let&#39;s clean up the data set first</span></span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>gm_tidy <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span></span>
+<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">split</span>(.<span class="sc">$</span>year)</span></code></pre></div>
 <p>Now, we can fit our regression models across each of the years using
 <code>purrr</code>’s <code>map</code>:</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>gm_lms <span class="ot">&lt;-</span> gm_tidy <span class="sc">%&gt;%</span></span>
-<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="sc">~</span><span class="fu">lm</span>(lifeExp <span class="sc">~</span> <span class="fu">log</span>(gdpPercap), <span class="at">data =</span> .))</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>gm_lms <span class="ot">&lt;-</span> gm_tidy <span class="sc">%&gt;%</span></span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="sc">~</span><span class="fu">lm</span>(lifeExp <span class="sc">~</span> <span class="fu">log</span>(gdpPercap), <span class="at">data =</span> .))</span></code></pre></div>
 <p>What about protecting ourselves against situations where there wasn’t
 enough variation in the outcome variable (fewer than two non-missing
 observations in a year). (It doesn’t happen here but can easily happen
@@ -698,8 +718,8 @@ in other situations.)</p>
 really easy. We can use a verb called <code>safely</code> to separate
 situations where the GLM succeeds from those where it doesn’t. Let’s try
 it out</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>gm_lms <span class="ot">&lt;-</span> gm_tidy <span class="sc">%&gt;%</span></span>
-<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="fu">safely</span>(<span class="sc">~</span><span class="fu">lm</span>(lifeExp <span class="sc">~</span> <span class="fu">log</span>(gdpPercap), <span class="at">data =</span> .)))</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>gm_lms <span class="ot">&lt;-</span> gm_tidy <span class="sc">%&gt;%</span></span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="fu">safely</span>(<span class="sc">~</span><span class="fu">lm</span>(lifeExp <span class="sc">~</span> <span class="fu">log</span>(gdpPercap), <span class="at">data =</span> .)))</span></code></pre></div>
 <p><em>Remark:</em> What we accomplish here with <code>purrr::map</code>
 is also easily done using tools from base R. In fact, using
 <code>lapply</code>, we can evaluate the very same <code>lm</code>
@@ -709,7 +729,7 @@ the <code>safely</code> convenience, afforded by <code>magrittr</code>
 and <code>purrr</code>, respectively.</p>
 <p>Ok. Now, we’ll look at the results for one destination, just to get a
 feel for the output</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>gm_lms<span class="sc">$</span><span class="st">`</span><span class="at">2007</span><span class="st">`</span></span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>gm_lms<span class="sc">$</span><span class="st">`</span><span class="at">2007</span><span class="st">`</span></span></code></pre></div>
 <pre><code>## $result
 ## 
 ## Call:
@@ -815,17 +835,17 @@ objects in R. This is an example of what is called a <em>closure</em> in
 R. Basically, the function contains object(s) enclosed with and
 accessible to the function.</p></li>
 </ol>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>funGenerator <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a>   x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a>   g <span class="ot">&lt;-</span> <span class="cf">function</span>(y) {</span>
-<span id="cb103-4"><a href="#cb103-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">return</span>(x <span class="sc">+</span> y)</span>
-<span id="cb103-5"><a href="#cb103-5" aria-hidden="true" tabindex="-1"></a>   }</span>
-<span id="cb103-6"><a href="#cb103-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">return</span>(g)</span>
-<span id="cb103-7"><a href="#cb103-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb103-8"><a href="#cb103-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb103-9"><a href="#cb103-9" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb103-10"><a href="#cb103-10" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">funGenerator</span>()</span>
-<span id="cb103-11"><a href="#cb103-11" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>funGenerator <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>   x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a>   g <span class="ot">&lt;-</span> <span class="cf">function</span>(y) {</span>
+<span id="cb104-4"><a href="#cb104-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">return</span>(x <span class="sc">+</span> y)</span>
+<span id="cb104-5"><a href="#cb104-5" aria-hidden="true" tabindex="-1"></a>   }</span>
+<span id="cb104-6"><a href="#cb104-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">return</span>(g)</span>
+<span id="cb104-7"><a href="#cb104-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb104-8"><a href="#cb104-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb104-9"><a href="#cb104-9" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb104-10"><a href="#cb104-10" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">funGenerator</span>()</span>
+<span id="cb104-11"><a href="#cb104-11" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 11</code></pre>
 </div>
 </body>
