@@ -327,7 +327,7 @@ principled way.</p>
 <pre><code>## [1] 7</code></pre>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(gapminder<span class="sc">$</span>lifeExp <span class="sc">~</span> gapminder<span class="sc">$</span>gdpPercap)</span></code></pre></div>
 <pre><code>## gapminder$lifeExp ~ gapminder$gdpPercap
-## &lt;environment: 0x5562bd487318&gt;</code></pre>
+## &lt;environment: 0x55b88e9f9dc8&gt;</code></pre>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>stats<span class="sc">::</span><span class="fu">lm</span>(gapminder<span class="sc">$</span>lifeExp <span class="sc">~</span> gapminder<span class="sc">$</span>gdpPercap)</span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -395,12 +395,12 @@ the computer’s filesystem you are reading and writing from.</p>
 <span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&#39;r-bootcamp-fall-2022/modules&#39;</span>) <span class="co"># relative path</span></span>
 <span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&#39;../tmp&#39;</span>) <span class="co"># relative path, up and back down the tree</span></span>
 <span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Changing the working directory (Windows specific)</span></span>
+<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Changing the working directory (Windows specific)</span></span>
 <span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Windows - use either \\ or / to indicate directories</span></span>
 <span id="cb57-13"><a href="#cb57-13" aria-hidden="true" tabindex="-1"></a><span class="co"># setwd(&#39;C:\\Users\\Your_username\\Desktop\\r-bootcamp-fall-2022&#39;)</span></span>
 <span id="cb57-14"><a href="#cb57-14" aria-hidden="true" tabindex="-1"></a><span class="co"># setwd(&#39;..\\r-bootcamp-fall-2022&#39;)</span></span>
 <span id="cb57-15"><a href="#cb57-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-16"><a href="#cb57-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Changing the working directory (platform-agnostic)</span></span>
+<span id="cb57-16"><a href="#cb57-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Changing the working directory (platform-agnostic)</span></span>
 <span id="cb57-17"><a href="#cb57-17" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">file.path</span>(<span class="st">&#39;~&#39;</span>, <span class="st">&#39;Desktop&#39;</span>, <span class="st">&#39;r-bootcamp-fall-2022&#39;</span>, <span class="st">&#39;modules&#39;</span>)) <span class="co"># change the working directory</span></span>
 <span id="cb57-18"><a href="#cb57-18" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">file.path</span>(<span class="st">&#39;/&#39;</span>, <span class="st">&#39;Users&#39;</span>, <span class="st">&#39;paciorek&#39;</span>, <span class="st">&#39;Desktop&#39;</span>, <span class="st">&#39;r-bootcamp-fall-2022&#39;</span>, <span class="st">&#39;modules&#39;</span>)) <span class="co"># absolute path</span></span>
 <span id="cb57-19"><a href="#cb57-19" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
@@ -599,7 +599,7 @@ default).</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xtable)</span>
 <span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">xtable</span>(<span class="fu">table</span>(gapminder<span class="sc">$</span>year, gapminder<span class="sc">$</span>continent)), <span class="at">type =</span> <span class="st">&quot;html&quot;</span>)</span></code></pre></div>
 <pre><code>## &lt;!-- html table generated in R 4.2.0 by xtable 1.8-4 package --&gt;
-## &lt;!-- Mon Aug 15 17:44:15 2022 --&gt;
+## &lt;!-- Fri Aug 19 11:16:27 2022 --&gt;
 ## &lt;table border=1&gt;
 ## &lt;tr&gt; &lt;th&gt;  &lt;/th&gt; &lt;th&gt; Africa &lt;/th&gt; &lt;th&gt; Americas &lt;/th&gt; &lt;th&gt; Asia &lt;/th&gt; &lt;th&gt; Europe &lt;/th&gt; &lt;th&gt; Oceania &lt;/th&gt;  &lt;/tr&gt;
 ##   &lt;tr&gt; &lt;td align=&quot;right&quot;&gt; 1952 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  52 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  25 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  33 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  30 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;   2 &lt;/td&gt; &lt;/tr&gt;

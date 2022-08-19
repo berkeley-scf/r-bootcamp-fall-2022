@@ -218,7 +218,7 @@ repeatable operations as an individual function call.</p>
 
 <pre><code>## function (x, na.rm = FALSE, ...) 
 ## UseMethod(&quot;median&quot;)
-## &lt;bytecode: 0x55e9bdfdb408&gt;
+## &lt;bytecode: 0x55963eaa7408&gt;
 ## &lt;environment: namespace:stats&gt;
 </code></pre>
 
@@ -434,13 +434,13 @@ new_x &lt;- myfun(x)
 print(new_x)
 </code></pre>
 
-<pre><code>## [1]  99.76558 101.65655  99.54694
+<pre><code>## [1] 100.2904 100.2134 100.2444
 </code></pre>
 
 <pre><code class="r">print(x)
 </code></pre>
 
-<pre><code>## [1] -0.2344203  1.6565473 -0.4530581
+<pre><code>## [1] 0.2903942 0.2134274 0.2443608
 </code></pre>
 
 <p>Functions in R are (roughly) <em>pass-by-value</em> and not <em>pass-by-reference</em>. This
@@ -706,7 +706,7 @@ implicit.</p>
 val
 </code></pre>
 
-<pre><code>## [1] 1.103457
+<pre><code>## [1] 0.786164
 </code></pre>
 
 <pre><code class="r">if (val &lt; 0) {
@@ -725,7 +725,7 @@ val
 val
 </code></pre>
 
-<pre><code>## [1] -0.5262594
+<pre><code>## [1] -0.1062454
 </code></pre>
 
 <pre><code class="r">if (val &lt; -1) {
@@ -953,15 +953,15 @@ talk</a></p></li>
 x[ , 2]
 </code></pre>
 
-<pre><code>##  [1] 0.6127328 0.2310099 0.2712592 0.1312509 0.4052205 0.9013784 0.6438640
-##  [8] 0.9918638 0.2840834 0.8795848
+<pre><code>##  [1] 0.3736735 0.2301198 0.3279895 0.9573521 0.1122490 0.1379409 0.5371405
+##  [8] 0.1900901 0.2598349 0.7517959
 </code></pre>
 
 <pre><code class="r">&#39;[&#39;(x , , 2)
 </code></pre>
 
-<pre><code>##  [1] 0.6127328 0.2310099 0.2712592 0.1312509 0.4052205 0.9013784 0.6438640
-##  [8] 0.9918638 0.2840834 0.8795848
+<pre><code>##  [1] 0.3736735 0.2301198 0.3279895 0.9573521 0.1122490 0.1379409 0.5371405
+##  [8] 0.1900901 0.2598349 0.7517959
 </code></pre>
 
 <p>Also yes!</p>

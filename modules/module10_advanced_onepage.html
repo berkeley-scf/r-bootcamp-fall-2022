@@ -207,13 +207,17 @@ hr {
 
 <h1>Object-oriented programming (OOP) in R</h1>
 
-<p>Confusingly, R has three (well, four) different systems for OOP, and none of them are as elegant and powerful as in Python or other languages more focused on OOP. That said, they get the job done for a lot of tasks.</p>
+<p>Confusingly, R has three (well, actually five) different systems for OOP. This can be confusing, but they get the job done for a lot of tasks.</p>
 
 <ul>
 <li>S3: informal system used for <code>lm()</code>, <code>glm()</code>, and many other core features in R in the <em>stats</em> package</li>
-<li>S4: more formal system, used with <em>lme4</em> </li>
+<li>S4 (and R7): more formal system, used with <em>lme4</em> </li>
 <li>R6 (and Reference Classes): new systems allowing for passing objects by reference, with R6 similar to OOP in other languages</li>
 </ul>
+
+<p>To understand how base R works, it&#39;s helpful to understand S3.</p>
+
+<p>To use OOP in a fashion similar to Python and C++, I suggest using R6.</p>
 
 <h1>Basics of object-oriented programming (OOP)</h1>
 
@@ -225,9 +229,7 @@ hr {
 
 <h1>Working with S3 classes and methods</h1>
 
-<p>R has several approaches to object-oriented programming.  These are widely used, albeit a bit klunky. </p>
-
-<p>The most basic is &#39;S3&#39; objects. These objects are generally built upon lists.</p>
+<p>S3 objects are generally built upon lists.</p>
 
 <pre><code class="r">mod &lt;- lm(gapminder$lifeExp ~ log(gapminder$gdpPercap))
 class(mod)
@@ -271,7 +273,7 @@ class(mod)
 ##                -9.100889                 8.405085
 </code></pre>
 
-<p>The magic of OOP here is that methods (i.e., functions) can be tailored to work specifically with specific kinds of objects.</p>
+<p>The magic of the S3 OOP approach here is that &#39;generic&#39; methods (i.e., functions) can be tailored to work specifically with specific kinds of objects. This has been called &ldquo;functional OOP&rdquo; because the generic methods look like regular functions.</p>
 
 <pre><code class="r">summary(gapminder$lifeExp)
 </code></pre>
@@ -375,29 +377,30 @@ mod2$residuals[1:20] # access field with list-like syntax
 </code></pre>
 
 <pre><code>##  [1] predict.ar*                predict.Arima*            
-##  [3] predict.arima0*            predict.bs*               
-##  [5] predict.bSpline*           predict.fastTps           
-##  [7] predict.glm                predict.glmmPQL*          
-##  [9] predict.gls*               predict.gnls*             
-## [11] predict.HoltWinters*       predict.interp.surface    
-## [13] predict.Krig               predict.lda*              
-## [15] predict.lm                 predict.lme*              
-## [17] predict.lmList*            predict.lmList4*          
-## [19] predict.loess*             predict.lqs*              
-## [21] predict.mca*               predict.merMod*           
-## [23] predict.mKrig              predict.mlm*              
-## [25] predict.nbSpline*          predict.nlme*             
-## [27] predict.nls*               predict.npolySpline*      
-## [29] predict.ns*                predict.pbSpline*         
-## [31] predict.polr*              predict.poly*             
-## [33] predict.polySpline*        predict.ppolySpline*      
-## [35] predict.ppr*               predict.prcomp*           
-## [37] predict.princomp*          predict.qda*              
-## [39] predict.qsreg              predict.rlm*              
-## [41] predict.smooth.spline*     predict.smooth.spline.fit*
-## [43] predict.sreg               predict.StructTS*         
-## [45] predict.surface            predict.surface.default   
-## [47] predict.Tps               
+##  [3] predict.arima0*            predict.bam               
+##  [5] predict.bs*                predict.bSpline*          
+##  [7] predict.fastTps            predict.gam               
+##  [9] predict.glm                predict.glmmPQL*          
+## [11] predict.gls*               predict.gnls*             
+## [13] predict.HoltWinters*       predict.interp.surface    
+## [15] predict.jam*               predict.Krig              
+## [17] predict.lda*               predict.lm                
+## [19] predict.lme*               predict.lmList*           
+## [21] predict.lmList4*           predict.loess*            
+## [23] predict.lqs*               predict.mca*              
+## [25] predict.merMod*            predict.mKrig             
+## [27] predict.mlm*               predict.nbSpline*         
+## [29] predict.nlme*              predict.nls*              
+## [31] predict.npolySpline*       predict.ns*               
+## [33] predict.pbSpline*          predict.polr*             
+## [35] predict.poly*              predict.polySpline*       
+## [37] predict.ppolySpline*       predict.ppr*              
+## [39] predict.prcomp*            predict.princomp*         
+## [41] predict.qda*               predict.qsreg             
+## [43] predict.rlm*               predict.smooth.spline*    
+## [45] predict.smooth.spline.fit* predict.sreg              
+## [47] predict.StructTS*          predict.surface           
+## [49] predict.surface.default    predict.Tps               
 ## see &#39;?methods&#39; for accessing help and source code
 </code></pre>
 
@@ -406,7 +409,7 @@ mod2$residuals[1:20] # access field with list-like syntax
 
 <pre><code>## function (object, ...) 
 ## UseMethod(&quot;predict&quot;)
-## &lt;bytecode: 0x56132e817878&gt;
+## &lt;bytecode: 0x55e1588c7140&gt;
 ## &lt;environment: namespace:stats&gt;
 </code></pre>
 
@@ -513,7 +516,7 @@ class(fm1)
 <pre><code>## [1] 0.96674177 0.01516906 0.23090995
 </code></pre>
 
-<h1>A brief mention of R6 Classes</h1>
+<h1>Brief introduction to R6 Classes</h1>
 
 <p>R6 classes are a somewhat new feature in R that provides object-oriented programming with behavior more like in other languages.</p>
 
@@ -534,7 +537,7 @@ tsSimClass &lt;- R6Class(&quot;tsSimClass&quot;,
             private$corParam &lt;- corParam
             private$currentU &lt;- FALSE
             private$calcMats()
-        },
+        },          
 
         changeTimes = function(newTimes){
             # modifies a private member field (i.e., a &#39;setter&#39;) and recalculates
@@ -543,7 +546,7 @@ tsSimClass &lt;- R6Class(&quot;tsSimClass&quot;,
         },
 
         getTimes = function(){
-            # a &#39;getter&#39;
+            # a &#39;getter&#39; method
             return(private$times)
         },
 
@@ -599,7 +602,20 @@ my_ts &lt;- tsSimClass$new(1:100, 2, 1)
 y &lt;- my_ts$simulate()   # generate a time series
 plot(my_ts$getTimes(), y, type = &#39;l&#39;, xlab = &#39;time&#39;,
       ylab = &#39;process values&#39;)
-my_ts &lt;- tsSimClass$new(1:100, 2, 3)
+## We can&#39;t directly access private fields or methods
+my_ts$times
+</code></pre>
+
+<pre><code>## NULL
+</code></pre>
+
+<pre><code class="r">my_ts$calcMats()
+</code></pre>
+
+<pre><code>## Error in eval(expr, envir, enclos): attempt to apply non-function
+</code></pre>
+
+<pre><code class="r">my_ts &lt;- tsSimClass$new(1:100, 2, 3)
 </code></pre>
 
 <pre><code>## Done updating correlation matrix and Cholesky factor.
@@ -776,6 +792,19 @@ for(cont in c(&#39;Asia&#39;, &#39;Oceania&#39;, &#39;Europe&#39;, &#39;Americas
 <p>When you send some code to R to execute, it has to &#39;parse&#39; the input; i.e., to process it so that it know how to evaluate it. The parsed input can then be evaluated in the proper context (i.e., the right frame, holding the objects to be operated on and created). </p>
 
 <p>We can capture parsed code before it is evaluated, manipulate it, and execute the modified result.</p>
+
+<p>Here&#39;s a teaser:</p>
+
+<pre><code class="r">x7 &lt;- 3
+
+idx &lt;- 7
+varName &lt;- paste0(&#39;x&#39;, idx)
+x &lt;- eval(as.name(varName))
+print(x)
+</code></pre>
+
+<pre><code>## [1] 3
+</code></pre>
 
 <h1>(Advanced) Capturing and evaluating parsed code (optional)</h1>
 
@@ -994,39 +1023,34 @@ db &lt;- dbConnect(SQLite(), dbname = &quot;../data/stackoverflow-2016.db&quot;)
 dbListTables(db)
 </code></pre>
 
-<pre><code>## character(0)
+<pre><code>## [1] &quot;answers&quot;          &quot;maxRepByQuestion&quot; &quot;questions&quot;        &quot;questionsAugment&quot;
+## [5] &quot;questions_tags&quot;   &quot;users&quot;
 </code></pre>
 
 <pre><code class="r">dbListFields(db, &quot;questions&quot;)
 </code></pre>
 
-<pre><code>## Error: no such table: questions
+<pre><code>## [1] &quot;questionid&quot;   &quot;creationdate&quot; &quot;score&quot;        &quot;viewcount&quot;    &quot;title&quot;       
+## [6] &quot;ownerid&quot;
 </code></pre>
 
 <pre><code class="r">## simple filter operation
 popular &lt;- dbGetQuery(db, &quot;select * from questions 
    where viewcount &gt; 10000&quot;)
-</code></pre>
-
-<pre><code>## Error: no such table: questions
-</code></pre>
-
-<pre><code class="r">## a join followed by a filter operation
+## a join followed by a filter operation
 popularR &lt;- dbGetQuery(db, &quot;select * from questions join questions_tags
    on questions.questionid = questions_tags.questionid
    where viewcount &gt; 10000 and
    tag = &#39;r&#39;&quot;)
+
+dbDisconnect(db)
 </code></pre>
 
-<pre><code>## Error: no such table: questions
-</code></pre>
-
-<pre><code class="r">dbDisconnect(db)
-</code></pre>
-
-<p><strong>POLL 10A</strong>:</p>
+<p><strong><a href="https://www.polleverywhere.com/multiple_choice_polls/2vkJnF6GHR8sBUy8UwRiy">P</a>OLL 10A</strong>:</p>
 
 <p>What kind of R object do you think is returned when you query a database using dbGetQuery?</p>
+
+<p>(respond at <a href="https://pollev.com/chrispaciorek428">https://pollev.com/chrispaciorek428</a>)</p>
 
 <p>1) a list of dataframes
 2) a matrix
@@ -1072,7 +1096,7 @@ popularR &lt;- dbGetQuery(db, &quot;select * from questions join questions_tags
 
 <ul>
 <li><em>for</em> loops with independent calculations</li>
-<li>parallelizing <code>apply()</code> and its variants</li>
+<li>parallelizing <code>lapply()</code> and its variants</li>
 </ul></li>
 </ul>
 
@@ -1085,7 +1109,7 @@ popularR &lt;- dbGetQuery(db, &quot;select * from questions join questions_tags
 <ul>
 <li>For Linux, <em>openBLAS</em>, Intel&#39;s <em>MKL</em> and AMD&#39;s <em>ACML</em> are both fast and threaded. On the SCF we have openBLAS on the compute servers and ACML on the Linux cluster and R uses these for linear algebra.</li>
 <li>For Mac, Apple&#39;s <em>vecLib</em> (in a library called <em>libRblas.vecLib.dylib</em>) is fast and threaded.</li>
-<li>For Windows, you&#39;re probably out of luck.</li>
+<li>For Windows, you may be out of luck.</li>
 </ul>
 
 <p>We&#39;ll show by demonstration that my desktop in my office is using multiple cores for linear algebra operations.</p>
@@ -1098,7 +1122,7 @@ U &lt;- chol(crossprod(x))
 
 <p>You should see that your R process is using more than 100% of CPU. Inconceivable!</p>
 
-<h1>More details on the BLAS</h1>
+<h1>More details on the BLAS (optional)</h1>
 
 <p>You can talk with your systems administrator about linking R to a fast BLAS or you can look into it yourself for your personal machine; see the <a href="http://www.cran.r-project.org/manuals.html">R Installation and Administration manual</a>.</p>
 
@@ -1112,14 +1136,14 @@ U &lt;- chol(crossprod(x))
 
 <p>An EP problem is one that can be solved by doing independent computations as separate processes without communication between the processes. You can get the answer by doing separate tasks and then collecting the results. </p>
 
-<p>Examples in statistics include</p>
+<p>Examples in statistics / data science / machine learning include</p>
 
 <ol>
 <li>stratified analyses</li>
 <li>cross-validation</li>
 <li>simulations with many independent replicates</li>
 <li>bootstrapping</li>
-<li>random forests models</li>
+<li>random forest models</li>
 </ol>
 
 <p>Can you think of others in your work?</p>
@@ -1127,11 +1151,13 @@ U &lt;- chol(crossprod(x))
 <p>Some things that are not EP (at least not in a basic formulation):</p>
 
 <ol>
-<li>Markov chain Monte Carlo for fitting Bayesian models</li>
 <li>optimization</li>
+<li>Markov chain Monte Carlo for fitting Bayesian models</li>
 </ol>
 
-<p><strong>POLL 10B</strong>: Have you used R&#39;s parallel processing capabilities?</p>
+<p><strong><a href="https://www.polleverywhere.com/multiple_choice_polls/ixNKbM36rU3WzaFM0TTyT">P</a>OLL 10B</strong>: Have you used R&#39;s parallel processing capabilities?</p>
+
+<p>(respond at <a href="https://pollev.com/chrispaciorek428">https://pollev.com/chrispaciorek428</a>)</p>
 
 <p>1) No
 2) Yes, I&#39;ve used foreach
@@ -1145,6 +1171,8 @@ U &lt;- chol(crossprod(x))
 <p>The <code>future</code> package provides a lot of nice features for parallelization. We&#39;ll just scratch the surface here to parallelize operations over the elements of a list (note that this is essentially equivalent to <code>parLapply</code> and <code>mclapply</code>).</p>
 
 <p>First, make sure your computations on the elements are independent of each other and don&#39;t involve sequential calculations!</p>
+
+<p>We&#39;ll use a new dataset here, which is a dataset of airline departure times (in particular delays) for all flights from SFO over a period of several years. We&#39;ll do a stratified analysis, fitting a GAM (see Unit 8) for each of the destination airports.</p>
 
 <pre><code class="r">fitFun &lt;- function(curDest) {
             library(mgcv)
@@ -1161,63 +1189,20 @@ library(future.apply)
 nCores &lt;- 4
 plan(multisession, workers = nCores)  
 out &lt;- future_lapply(unique(air$Dest), fitFun)
-</code></pre>
-
-<pre><code>## Loading required package: nlme
-</code></pre>
-
-<pre><code>## This is mgcv 1.8-40. For overview type &#39;help(&quot;mgcv-package&quot;)&#39;.
-</code></pre>
-
-<pre><code>## Loading required package: nlme
-</code></pre>
-
-<pre><code>## This is mgcv 1.8-40. For overview type &#39;help(&quot;mgcv-package&quot;)&#39;.
-</code></pre>
-
-<pre><code>## Loading required package: nlme
-</code></pre>
-
-<pre><code>## This is mgcv 1.8-40. For overview type &#39;help(&quot;mgcv-package&quot;)&#39;.
-</code></pre>
-
-<pre><code>## Loading required package: nlme
-</code></pre>
-
-<pre><code>## This is mgcv 1.8-40. For overview type &#39;help(&quot;mgcv-package&quot;)&#39;.
-</code></pre>
-
-<pre><code class="r">out[[1]]
+out[[1]]
 </code></pre>
 
 <pre><code>## 
-## Call:  gam(formula = DepDelay ~ Year + s(Month) + s(Hour) + as.factor(DayOfWeek), 
-##     data = tmp)
+## Family: gaussian 
+## Link function: identity 
 ## 
-## Coefficients:
-##           (Intercept)                   Year  as.factor(DayOfWeek)2  
-##            -3497.3038                 1.7490                -2.1810  
-## as.factor(DayOfWeek)3  as.factor(DayOfWeek)4  as.factor(DayOfWeek)5  
-##               -3.6045                -1.6800                 2.9982  
-## as.factor(DayOfWeek)6  as.factor(DayOfWeek)7             s(Month).1  
-##               -2.4173                 0.7169                -8.6549  
-##            s(Month).2             s(Month).3             s(Month).4  
-##               32.1570               -12.0160                10.7049  
-##            s(Month).5             s(Month).6             s(Month).7  
-##                8.2426               -13.9618                -4.9777  
-##            s(Month).8             s(Month).9              s(Hour).1  
-##              -46.2121                14.8763                 6.7659  
-##             s(Hour).2              s(Hour).3              s(Hour).4  
-##                4.4530                 6.9343                 8.5259  
-##             s(Hour).5              s(Hour).6              s(Hour).7  
-##               -0.2337                 6.1335                 1.8340  
-##             s(Hour).8              s(Hour).9  
-##               -6.9439                 2.2963  
+## Formula:
+## DepDelay ~ Year + s(Month) + s(Hour) + as.factor(DayOfWeek)
 ## 
-## Degrees of Freedom: 15782 Total (i.e. Null);  15760 Residual
-##   (142 observations deleted due to missingness)
-## Null Deviance:       17480000 
-## Residual Deviance: 16550000  AIC: 154600
+## Estimated degrees of freedom:
+## 7.51 7.49  total = 23 
+## 
+## GCV score: 1051.858
 </code></pre>
 
 <pre><code class="r">out[[81]]
@@ -1240,13 +1225,14 @@ out &lt;- future_lapply(unique(air$Dest), fitFun)
 
 <p>The <em>foreach</em> package provides a way to do a for loop using multiple cores. It can use a variety of &#39;back-ends&#39; that handle the nitty-gritty of the parallelization. Happily it integrates with the <code>future</code> package nicely. </p>
 
-<p>To use multiple cores on a single machine, use the <em>parallel</em> back-end from the <em>doParallel</em> package.</p>
-
-<p>We&#39;ll use a new dataset here, which is a dataset of airline departure times (in particular delays) for all flights from SFO over a period of several years. We&#39;ll do a stratified analysis, fitting a GAM (see Unit 7) for each of the destination airports.</p>
-
 <pre><code class="r">library(parallel)
 library(doFuture)
-library(foreach)
+</code></pre>
+
+<pre><code>## Loading required package: foreach
+</code></pre>
+
+<pre><code class="r">library(foreach)
 
 nCores &lt;- 4  # actually only 2 on my laptop, but appears hyperthreaded
 registerDoFuture()

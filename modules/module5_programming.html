@@ -106,7 +106,7 @@ another function.</li>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>median</span></code></pre></div>
 <pre><code>## function (x, na.rm = FALSE, ...) 
 ## UseMethod(&quot;median&quot;)
-## &lt;bytecode: 0x55e9bdfdb408&gt;
+## &lt;bytecode: 0x55963eaa7408&gt;
 ## &lt;environment: namespace:stats&gt;</code></pre>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(median)</span></code></pre></div>
 <pre><code>## function (x, na.rm = FALSE, ...) 
@@ -257,9 +257,9 @@ saw an R function produce from earlier today?</p>
 <span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>new_x <span class="ot">&lt;-</span> <span class="fu">myfun</span>(x)</span>
 <span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(new_x)</span></code></pre></div>
-<pre><code>## [1]  99.76558 101.65655  99.54694</code></pre>
+<pre><code>## [1] 100.2904 100.2134 100.2444</code></pre>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x)</span></code></pre></div>
-<pre><code>## [1] -0.2344203  1.6565473 -0.4530581</code></pre>
+<pre><code>## [1] 0.2903942 0.2134274 0.2443608</code></pre>
 <p>Functions in R are (roughly) <em>pass-by-value</em> and not
 <em>pass-by-reference</em>. This means that if you modify an argument
 inside the function it will not change the original value outside the
@@ -489,7 +489,7 @@ some condition is true or false.</p>
 <em>then</em> is implicit.</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>val <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>)</span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>val</span></code></pre></div>
-<pre><code>## [1] 1.103457</code></pre>
+<pre><code>## [1] 0.786164</code></pre>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (val <span class="sc">&lt;</span> <span class="dv">0</span>) {</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;val is negative&quot;</span>)</span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
@@ -499,7 +499,7 @@ some condition is true or false.</p>
 <p>We can chain together <code>if</code> statements as follows.</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>val <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>)</span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>val</span></code></pre></div>
-<pre><code>## [1] -0.5262594</code></pre>
+<pre><code>## [1] -0.1062454</code></pre>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (val <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">1</span>) {</span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;val is more than one standard deviation below the mean.&quot;</span>)</span>
 <span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (<span class="fu">abs</span>(val) <span class="sc">&lt;=</span> <span class="dv">1</span>) {</span>
@@ -659,11 +659,11 @@ mean?</h3>
 <p>And what about indexing?</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(<span class="dv">100</span>), <span class="dv">10</span>)</span>
 <span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>x[ , <span class="dv">2</span>]</span></code></pre></div>
-<pre><code>##  [1] 0.6127328 0.2310099 0.2712592 0.1312509 0.4052205 0.9013784 0.6438640
-##  [8] 0.9918638 0.2840834 0.8795848</code></pre>
+<pre><code>##  [1] 0.3736735 0.2301198 0.3279895 0.9573521 0.1122490 0.1379409 0.5371405
+##  [8] 0.1900901 0.2598349 0.7517959</code></pre>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;[&#39;</span>(x , , <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>##  [1] 0.6127328 0.2310099 0.2712592 0.1312509 0.4052205 0.9013784 0.6438640
-##  [8] 0.9918638 0.2840834 0.8795848</code></pre>
+<pre><code>##  [1] 0.3736735 0.2301198 0.3279895 0.9573521 0.1122490 0.1379409 0.5371405
+##  [8] 0.1900901 0.2598349 0.7517959</code></pre>
 <p>Also yes!</p>
 <p>This holds more generally - one can investigate and see the same
 thing in terms of a <code>for</code> loop.</p>

@@ -524,7 +524,7 @@ lm(7)
 </code></pre>
 
 <pre><code>## gapminder$lifeExp ~ gapminder$gdpPercap
-## &lt;environment: 0x5562bd487318&gt;
+## &lt;environment: 0x55b88e9f9dc8&gt;
 </code></pre>
 
 <pre><code class="r">stats::lm(gapminder$lifeExp ~ gapminder$gdpPercap)
@@ -592,12 +592,12 @@ getwd()
 setwd(&#39;r-bootcamp-fall-2022/modules&#39;) # relative path
 setwd(&#39;../tmp&#39;) # relative path, up and back down the tree
 
-# Changing the working directory (Windows specific)
+## Changing the working directory (Windows specific)
 ## Windows - use either \\ or / to indicate directories
 # setwd(&#39;C:\\Users\\Your_username\\Desktop\\r-bootcamp-fall-2022&#39;)
 # setwd(&#39;..\\r-bootcamp-fall-2022&#39;)
 
-# Changing the working directory (platform-agnostic)
+## Changing the working directory (platform-agnostic)
 setwd(file.path(&#39;~&#39;, &#39;Desktop&#39;, &#39;r-bootcamp-fall-2022&#39;, &#39;modules&#39;)) # change the working directory
 setwd(file.path(&#39;/&#39;, &#39;Users&#39;, &#39;paciorek&#39;, &#39;Desktop&#39;, &#39;r-bootcamp-fall-2022&#39;, &#39;modules&#39;)) # absolute path
 getwd()
@@ -836,7 +836,7 @@ print(xtable(table(gapminder$year, gapminder$continent)), type = &quot;html&quot
 </code></pre>
 
 <pre><code>## &lt;!-- html table generated in R 4.2.0 by xtable 1.8-4 package --&gt;
-## &lt;!-- Mon Aug 15 17:44:15 2022 --&gt;
+## &lt;!-- Fri Aug 19 11:16:27 2022 --&gt;
 ## &lt;table border=1&gt;
 ## &lt;tr&gt; &lt;th&gt;  &lt;/th&gt; &lt;th&gt; Africa &lt;/th&gt; &lt;th&gt; Americas &lt;/th&gt; &lt;th&gt; Asia &lt;/th&gt; &lt;th&gt; Europe &lt;/th&gt; &lt;th&gt; Oceania &lt;/th&gt;  &lt;/tr&gt;
 ##   &lt;tr&gt; &lt;td align=&quot;right&quot;&gt; 1952 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  52 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  25 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  33 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;  30 &lt;/td&gt; &lt;td align=&quot;right&quot;&gt;   2 &lt;/td&gt; &lt;/tr&gt;

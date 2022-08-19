@@ -16,11 +16,15 @@ For some of the topics here, my goal is not to teach you how to fish, but merely
 # Object-oriented programming (OOP) in R
 
 
-Confusingly, R has three (well, four) different systems for OOP, and none of them are as elegant and powerful as in Python or other languages more focused on OOP. That said, they get the job done for a lot of tasks.
+Confusingly, R has three (well, actually five) different systems for OOP. This can be confusing, but they get the job done for a lot of tasks.
 
 * S3: informal system used for `lm()`, `glm()`, and many other core features in R in the *stats* package
-* S4: more formal system, used with *lme4* 
+* S4 (and R7): more formal system, used with *lme4* 
 * R6 (and Reference Classes): new systems allowing for passing objects by reference, with R6 similar to OOP in other languages
+
+To understand how base R works, it's helpful to understand S3.
+
+To use OOP in a fashion similar to Python and C++, I suggest using R6.
 
 # Basics of object-oriented programming (OOP)
 
@@ -32,9 +36,7 @@ Objects have fields, analogous to the components of a list. For S4 and reference
 
 # Working with S3 classes and methods
 
-R has several approaches to object-oriented programming.  These are widely used, albeit a bit klunky. 
-
-The most basic is 'S3' objects. These objects are generally built upon lists.
+S3 objects are generally built upon lists.
 
 ```{r}
 mod <- lm(gapminder$lifeExp ~ log(gapminder$gdpPercap))
@@ -46,7 +48,7 @@ mod[['coefficients']]
 mod[[1]]
 ```
 
-The magic of OOP here is that methods (i.e., functions) can be tailored to work specifically with specific kinds of objects.
+The magic of the S3 OOP approach here is that 'generic' methods (i.e., functions) can be tailored to work specifically with specific kinds of objects. This has been called "functional OOP" because the generic methods look like regular functions.
 
 ```{r}
 summary(gapminder$lifeExp)
@@ -130,7 +132,7 @@ fm1$theta
 fm1@theta
 ```
 
-# A brief mention of R6 Classes
+# Brief introduction to R6 Classes
 
 R6 classes are a somewhat new feature in R that provides object-oriented programming with behavior more like in other languages.
 
@@ -152,7 +154,7 @@ tsSimClass <- R6Class("tsSimClass",
             private$corParam <- corParam
             private$currentU <- FALSE
             private$calcMats()
-        },
+        },          
         
         changeTimes = function(newTimes){
             # modifies a private member field (i.e., a 'setter') and recalculates
@@ -161,7 +163,7 @@ tsSimClass <- R6Class("tsSimClass",
         },
         
         getTimes = function(){
-            # a 'getter'
+            # a 'getter' method
             return(private$times)
         },
 
@@ -207,6 +209,10 @@ set.seed(1)
 y <- my_ts$simulate()   # generate a time series
 plot(my_ts$getTimes(), y, type = 'l', xlab = 'time',
       ylab = 'process values')
+## We can't directly access private fields or methods
+my_ts$times
+my_ts$calcMats()
+
 my_ts <- tsSimClass$new(1:100, 2, 3)
 set.seed(1)
 y <- my_ts$simulate()   # generate a second time series
@@ -308,6 +314,17 @@ First we need to understand a bit about how R code is stored and manipulated whe
 When you send some code to R to execute, it has to 'parse' the input; i.e., to process it so that it know how to evaluate it. The parsed input can then be evaluated in the proper context (i.e., the right frame, holding the objects to be operated on and created). 
 
 We can capture parsed code before it is evaluated, manipulate it, and execute the modified result.
+
+Here's a teaser:
+
+```{r}
+x7 <- 3
+
+idx <- 7
+varName <- paste0('x', idx)
+x <- eval(as.name(varName))
+print(x)
+```
 
 # (Advanced) Capturing and evaluating parsed code (optional)
 
@@ -455,9 +472,11 @@ popularR <- dbGetQuery(db, "select * from questions join questions_tags
 dbDisconnect(db)
 ```
 
-**POLL 10A**:
+**[P](https://www.polleverywhere.com/multiple_choice_polls/2vkJnF6GHR8sBUy8UwRiy)OLL 10A**:
 
 What kind of R object do you think is returned when you query a database using dbGetQuery?
+
+(respond at [https://pollev.com/chrispaciorek428](https://pollev.com/chrispaciorek428))
 
 1) a list of dataframes
 2) a matrix
@@ -494,7 +513,7 @@ Some basic approaches are:
 * Use a linear algebra package that distributes computations across 'threads'
 * Spread independent calculations (embarrassingly parallel problems) across multiple cores
     - *for* loops with independent calculations
-    - parallelizing `apply()` and its variants
+    - parallelizing `lapply()` and its variants
 
 
 # Threaded linear algebra
@@ -505,7 +524,7 @@ A 'thread' is a lightweight process, and the operating system sees multiple thre
 
 * For Linux, *openBLAS*, Intel's *MKL* and AMD's *ACML* are both fast and threaded. On the SCF we have openBLAS on the compute servers and ACML on the Linux cluster and R uses these for linear algebra.
 * For Mac, Apple's *vecLib* (in a library called *libRblas.vecLib.dylib*) is fast and threaded.
-* For Windows, you're probably out of luck.
+* For Windows, you may be out of luck.
 
 We'll show by demonstration that my desktop in my office is using multiple cores for linear algebra operations.
 
@@ -518,7 +537,7 @@ U <- chol(crossprod(x))
 
 You should see that your R process is using more than 100% of CPU. Inconceivable!
 
-# More details on the BLAS
+# More details on the BLAS (optional)
 
 You can talk with your systems administrator about linking R to a fast BLAS or you can look into it yourself for your personal machine; see the [R Installation and Administration manual](http://www.cran.r-project.org/manuals.html).
 
@@ -532,22 +551,25 @@ Do you think you should be asking?
 
 An EP problem is one that can be solved by doing independent computations as separate processes without communication between the processes. You can get the answer by doing separate tasks and then collecting the results. 
 
-Examples in statistics include
+Examples in statistics / data science / machine learning include
 
 1. stratified analyses
 2. cross-validation
 4. simulations with many independent replicates
 5. bootstrapping
-3. random forests models
+3. random forest models
 
 Can you think of others in your work?
 
 Some things that are not EP (at least not in a basic formulation):
 
-1. Markov chain Monte Carlo for fitting Bayesian models
-2. optimization
+1. optimization
+2. Markov chain Monte Carlo for fitting Bayesian models
 
-**POLL 10B**: Have you used R's parallel processing capabilities?
+
+**[P](https://www.polleverywhere.com/multiple_choice_polls/ixNKbM36rU3WzaFM0TTyT)OLL 10B**: Have you used R's parallel processing capabilities?
+
+(respond at [https://pollev.com/chrispaciorek428](https://pollev.com/chrispaciorek428))
 
 1) No
 2) Yes, I've used foreach
@@ -562,6 +584,7 @@ The `future` package provides a lot of nice features for parallelization. We'll 
 
 First, make sure your computations on the elements are independent of each other and don't involve sequential calculations!
 
+We'll use a new dataset here, which is a dataset of airline departure times (in particular delays) for all flights from SFO over a period of several years. We'll do a stratified analysis, fitting a GAM (see Unit 8) for each of the destination airports.
 
 ```{r}
 fitFun <- function(curDest) {
@@ -592,10 +615,6 @@ One thing to keep in mind is whether the different tasks all take about the same
 First, make sure your iterations are independent and don't involve sequential calculations!
 
 The *foreach* package provides a way to do a for loop using multiple cores. It can use a variety of 'back-ends' that handle the nitty-gritty of the parallelization. Happily it integrates with the `future` package nicely. 
-
-To use multiple cores on a single machine, use the *parallel* back-end from the *doParallel* package.
-
-We'll use a new dataset here, which is a dataset of airline departure times (in particular delays) for all flights from SFO over a period of several years. We'll do a stratified analysis, fitting a GAM (see Unit 7) for each of the destination airports.
 
 ```{r cache=TRUE}
 library(parallel)
